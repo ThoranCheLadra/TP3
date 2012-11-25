@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 public class Rect {
 
 		private Rectangle rec;
-		private String label;
+		private String label;									// this is where the actual value of the element will be stored. We could change it to some other type, like Object, but right now String is more than enough.
 		private Color color;
 
 		public Rect(int x,int y,int w,int h, String label){
@@ -34,13 +34,13 @@ public class Rect {
 			this.color = c;
 		}
 		
+		/* separate method to enable color change during animation */
 		public void setColorDraw(Color c){
 			this.color = c;
 			Main.panel.repaint();
 		}
 
 		public Color getColor() {
-			// TODO Auto-generated method stub
 			return color;
 		}
 		

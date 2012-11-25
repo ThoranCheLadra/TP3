@@ -33,22 +33,17 @@ public class Change {
 		this.old = c;
 	}
 	
+	/* getters only. We don't want any setters */
+	
 	public String getType() {
 		return type;
-	}
-	
-	public void setType(String t) {
-		this.type = t;
 	}
 	
 	public Rect getReference() {
 		return reference;
 	}
 	
-	public void setReference(Rect reference) {
-		this.reference = reference;
-	}
-	
+	/* getters with type casts. If you're using one of these, you be aware of what you'll get */
 	public Point getPoint() {
 		return (Point) old;
 	}

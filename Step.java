@@ -11,9 +11,10 @@ import javax.swing.JButton;
 
 public class Step {
 	
-	private LinkedList<Animator> list;
-	private List<Change> changes = new ArrayList<Change>();
-	private String stepInfo;
+	private LinkedList<Animator> list;										// list of Animators. We don't really need to store all Animators related to the Step here. I think we could only store the ones we need to Trigger
+																			// later on, but that's something I just thought about and might be worth thinking about when optimising.
+	private List<Change> changes = new ArrayList<Change>();					// list of Changes
+	private String stepInfo;												// what change is being made. Could be a list or array of strings, but right now one String is enough.
 	
 	public Step() {
 		this.list = new LinkedList<Animator>();
@@ -44,7 +45,10 @@ public class Step {
 		changes.add(r);
 	}
 
-	/* after is supposed to be either instanceof JButton or Step or Animator */
+	/* this function adds the Animator to the list of changes
+	 * and automatically adds triggers for certain cases we need
+	 * according to what the second variable (after) is instance of
+	 */
 	public void addAnimator(Animator item, Object after) {
 		if (after == null) {
 			// animation will be triggered in a different way

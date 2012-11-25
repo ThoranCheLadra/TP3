@@ -1,7 +1,7 @@
 import org.jdesktop.core.animation.timing.Animator;
 import org.jdesktop.core.animation.timing.TimingTarget;
 
-
+/* used this to change the label. Couldn't really find any other smart and easy to use way to do it while attaching it to Triggers */
 public final class TimingTargetChangeLabel implements TimingTarget{
 	private Object reference;
 	private String labelTo;
