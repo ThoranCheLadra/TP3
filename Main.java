@@ -171,14 +171,17 @@ public final class Main extends JPanel {
 		            setRectColor(i, iMin, Color.BLUE);
 		            iMin = i;
 		        } else {
-		            setRectColor(i, iMin, Color.BLUE);
+		            setRectColor(i, Color.BLUE);
 		        }
 		    }
+		    setRectColor(iMin, Color.BLUE);
 		 
 		    /* iMin is the index of the minimum element. Swap it with the current position */
 		    if ( iMin != j ) {
 		        swapRect(j, iMin, t);
 		    }
+		    iMin = j;
+		    setRectColor(iMin, Color.GREEN);
 		}
 		
 		// END OF API COMMANDS
