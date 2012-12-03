@@ -1,8 +1,10 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -27,8 +29,10 @@ import org.jdesktop.swing.animation.timing.triggers.TriggerUtility;
 
 
 public final class Main extends JPanel {
+	
 
 	public static void main(String[] args) {
+		
 		System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 		Animator.setDefaultTimingSource(ani_timer);
 
@@ -48,15 +52,20 @@ public final class Main extends JPanel {
 	private static Step s;																			// same as above
 	private static List<Rect> rect_list = new ArrayList<Rect>();									// this is where all the rectangles which will be drawn are stored
 	private final static LinkedList<Step> steps = new LinkedList<Step>();							// this is where all the steps of animation will be stored
-	static JButton nextBtn;																		// getting reference to the button
+	static JButton nextBtn;																			// getting reference to the button
  	static JButton prevBtn;																			// same as above
 	static JPanel panel;																			// we need to to have the reference to the drawing area to repaint it
 	static int currentStep;																			// the currentStep
 	static int t;																					// could just REMOVE. Though keeping it with important variables might be a good idea as well. I don't like the fact that the minimum value is 1 second of each animation.
 	private static String info = ""; 																// a string to display information at each step
+	private static Dimension Fullscreen;
 
 
 	public static void setupGUI() {
+		
+		Toolkit toolkit =  Toolkit.getDefaultToolkit ();
+		Fullscreen = toolkit.getScreenSize();
+		  
 		JFrame frame = new JFrame("Algorithm Animator");
 		final JButton pauseBtn = new JButton("Pause");
 		nextBtn = new JButton("Next Step");
@@ -127,25 +136,29 @@ public final class Main extends JPanel {
 			}
 		});
 
-		frame.setSize(800, 500);
+		frame.setSize(Fullscreen.width, Fullscreen.height);
 		frame.validate();
 		frame.setVisible(true);
 	}
 
 	public Main(){
-		int x=30,y=30,w=40,h=40;
+		arrayLeft = 20;
+		int rs = rectSize();
+		int h = rs;
+		int w = rs;
+		int x= rs;
+		int y= 2*rs;
 		t = 1;
 		currentStep = 0;
-		arrayLeft = 20;
 		setOpaque(true);
 		
 		s = new Step();																	// create a new step to store initial values and all. We wouldn't really need it if 
 		setInfo("");																	// it wasn't for the "Info" field
 		s.setInfo(info);
 		for(int i = 0;i<arrayLeft+1;i++){
-			r = new Rect(x, y, w, h, (i*2%20)+"");								// create all the Rectangle and add them to rect_list
+			r = new Rect(x, y, w, h, (i)+"");								// create all the Rectangle and add them to rect_list
 			rect_list.add(r);
-			x += 50;
+			x += rectSpace();
 		}
 		steps.add(s);
 		
@@ -159,7 +172,8 @@ public final class Main extends JPanel {
 		/*   (could do j < n-1 because single element is also min element) */
 		for (j = 0; j < rect_list.size()-1; j++) {
 		    /* find the min element in the unsorted a[j .. n-1] */
-		 
+	        swapRect(4, 2, t);
+
 		    /* assume the min is the first element */
 		    iMin = j;
 		    /* test against elements after j to find the smallest */
@@ -195,6 +209,16 @@ public final class Main extends JPanel {
 		}
 	}
 	
+	private int rectSpace() {
+		// TODO Auto-generated method stub
+		return (int) rectSize()/arrayLeft + rectSize();
+
+	}
+
+	private int rectSize() {
+		return (int) ((Fullscreen.getWidth())/(arrayLeft+4));
+	}
+
 	public void swapRect(int a, int b, long t){
 		currentStep++;																																					// increment currentStep
 		s = new Step();																																					// create a new step
@@ -205,17 +229,17 @@ public final class Main extends JPanel {
 		s.getLastAnimator().addTarget(new TimingTargetChangeLabel(this, information));																					// create a timing target to change the label when the animation starts
 		// Create the Animators and PropertySetters (what should the animation change the property from what to what) for swapping rects
 		s.addAnimator(new Animator.Builder().setDuration(t, TimeUnit.SECONDS).build(), s.getFirstAnimator());															// we want this Animator to start the same time the first Animator in the step does															
-		s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(a), "currentY", rect_list.get(a).getRec().y, rect_list.get(a).getRec().y+50));
+		s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(a), "currentY", rect_list.get(a).getRec().y, rect_list.get(a).getRec().y+rectSpace()));
 		s.addAnimator(new Animator.Builder().setDuration(t, TimeUnit.SECONDS).build(), nextBtn);																		// we want this Animator to start straight after the last Animator finishes. This is how it's done just now
 		s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(a), "currentX", rect_list.get(a).getRec().x, rect_list.get(b).getRec().x)); 
 		s.addAnimator(new Animator.Builder().setDuration(t, TimeUnit.SECONDS).build(), nextBtn);
-		s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(a), "currentY", rect_list.get(a).getRec().y+50, rect_list.get(a).getRec().y));
+		s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(a), "currentY", rect_list.get(a).getRec().y+rectSpace(), rect_list.get(a).getRec().y));
 		s.addAnimator(new Animator.Builder().setDuration(t, TimeUnit.SECONDS).build(), s.getFirstAnimator());															// we want this Animator to start the same time the first Animator in the step does
-		s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(b), "currentY", rect_list.get(b).getRec().y, rect_list.get(b).getRec().y-50));
+		s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(b), "currentY", rect_list.get(b).getRec().y, rect_list.get(b).getRec().y-rectSpace()));
 		s.addAnimator(new Animator.Builder().setDuration(t, TimeUnit.SECONDS).build(), nextBtn);
 		s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(b), "currentX", rect_list.get(b).getRec().x, rect_list.get(a).getRec().x));
 		s.addAnimator(new Animator.Builder().setDuration(t, TimeUnit.SECONDS).build(), nextBtn);
-		s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(b), "currentY", rect_list.get(b).getRec().y-50, rect_list.get(b).getRec().y));
+		s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(b), "currentY", rect_list.get(b).getRec().y-rectSpace(), rect_list.get(b).getRec().y));
 		// Change the information back to empty string ""
 		s.addAnimator(new Animator.Builder().setDuration(t, TimeUnit.SECONDS).build(), nextBtn);																		// do this after the last Animator in the Step finishes
 		//s.getLastAnimator().addTarget(new TimingTargetChangeLabel(this, ""));
@@ -353,7 +377,7 @@ public final class Main extends JPanel {
 		}
 		/* draw the information */
 		g2g.setColor(Color.BLUE);
-		g2g.drawString(info,300,300);
+		g2g.drawString(info,(int)(Fullscreen.width/4),(int)(Fullscreen.height/2));
 
 	} 
 
