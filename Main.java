@@ -143,7 +143,7 @@ public final class Main extends JPanel {
 		setInfo("");																	// it wasn't for the "Info" field
 		s.setInfo(info);
 		for(int i = 0;i<arrayLeft+1;i++){
-			r = new Rect(x, y, w, h, Integer.toString(i));								// create all the Rectangle and add them to rect_list
+			r = new Rect(x, y, w, h, (i*2%20)+"");								// create all the Rectangle and add them to rect_list
 			rect_list.add(r);
 			x += 50;
 		}
@@ -151,12 +151,35 @@ public final class Main extends JPanel {
 		
 		// THIS IS WHERE WE ADD API COMMANDS
 		
-		swapRect(1,0,t);
-		setRectColor(3, Color.RED);
-		modifyLabel(2, "asd");
-		modifyLabel(2, "500");
-		swapRect(0,4,t);
-		swapRect(1,3,t);
+		/* a[0] to a[n-1] is the array to sort */
+		int i,j;
+		int iMin;
+		 
+		/* advance the position through the entire array */
+		/*   (could do j < n-1 because single element is also min element) */
+		for (j = 0; j < rect_list.size()-1; j++) {
+		    /* find the min element in the unsorted a[j .. n-1] */
+		 
+		    /* assume the min is the first element */
+		    iMin = j;
+		    /* test against elements after j to find the smallest */
+		    for ( i = j+1; i < rect_list.size(); i++) {
+		        /* if this element is less, then it is the new minimum */  
+		        setRectColor(i, iMin, Color.RED);
+		        if ( Integer.parseInt(rect_list.get(i).getLabel()) < Integer.parseInt(rect_list.get(iMin).getLabel()) ) {
+		            /* found new minimum; remember its index */
+		            setRectColor(i, iMin, Color.BLUE);
+		            iMin = i;
+		        } else {
+		            setRectColor(i, iMin, Color.BLUE);
+		        }
+		    }
+		 
+		    /* iMin is the index of the minimum element. Swap it with the current position */
+		    if ( iMin != j ) {
+		        swapRect(j, iMin, t);
+		    }
+		}
 		
 		// END OF API COMMANDS
 		
@@ -250,6 +273,40 @@ public final class Main extends JPanel {
 		steps.add(s);
 	}
 	 
+	 public void setRectColor(int index, int index1, Color c){
+			currentStep++;
+			s = new Step();
+			// Animate information
+			String information = "Changing index " + index + " color from " + rect_list.get(index).getColor() + " to " + c;
+			s.setInfo(information);
+			s.addAnimator(new Animator.Builder().setDuration(t, TimeUnit.SECONDS).build(), nextBtn);
+			s.getLastAnimator().addTarget(new TimingTargetChangeLabel(this, information));
+			// Animate change of color
+			s.addAnimator(new Animator.Builder().setDuration(t, TimeUnit.SECONDS).build(), s.getFirstAnimator());
+			s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(index), "colorDraw", rect_list.get(index).getColor(), c));
+			// Change the information back to empty string ""
+			s.addAnimator(new Animator.Builder().setDuration(t, TimeUnit.SECONDS).build(), nextBtn);
+			//s.getLastAnimator().addTarget(new TimingTargetChangeLabel(this, ""));
+			// Log the Changes in Step
+			s.addChanges(new Change("color", rect_list.get(index), rect_list.get(index).getColor()));
+			// Apply the changes to rect_list
+			rect_list.get(index).setColor(c);
+			
+			s.addAnimator(new Animator.Builder().setDuration(t, TimeUnit.SECONDS).build(), nextBtn);
+			s.getLastAnimator().addTarget(new TimingTargetChangeLabel(this, information));
+			// Animate change of color
+			s.addAnimator(new Animator.Builder().setDuration(t, TimeUnit.SECONDS).build(), s.getFirstAnimator());
+			s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(index1), "colorDraw", rect_list.get(index1).getColor(), c));
+			// Change the information back to empty string ""
+			s.addAnimator(new Animator.Builder().setDuration(t, TimeUnit.SECONDS).build(), nextBtn);
+			//s.getLastAnimator().addTarget(new TimingTargetChangeLabel(this, ""));
+			// Log the Changes in Step
+			s.addChanges(new Change("color", rect_list.get(index1), rect_list.get(index1).getColor()));
+			// Apply the changes to rect_list
+			rect_list.get(index1).setColor(c);
+			steps.add(s);
+		}
+	 
 	 
 	/* function to stepBack from one step to a previous one.
 	 * Will have to be extended whenever we add another API command
@@ -293,7 +350,7 @@ public final class Main extends JPanel {
 		}
 		/* draw the information */
 		g2g.setColor(Color.BLUE);
-		g2g.drawString(info,300,60);
+		g2g.drawString(info,300,300);
 
 	} 
 
