@@ -27,7 +27,7 @@ import org.jdesktop.core.animation.timing.triggers.TimingTriggerEvent;
 import org.jdesktop.swing.animation.timing.sources.SwingTimerTimingSource;
 import org.jdesktop.swing.animation.timing.triggers.TriggerUtility;
 
-
+// just added to make git happy
 public final class Main extends JPanel {
 
 	public static void main(String[] args) {
