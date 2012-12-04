@@ -48,7 +48,7 @@ public final class Main extends JPanel {
 	private static int arrayLeft;																	// we could just REMOVE this
 	private static Rect r;																			// we could make this local in functions
 	private static Step s;																			// same as above
-	private static List<Rect> rect_list = new ArrayList<Rect>();									// this is where all the rectangles which will be drawn are stored
+	private static List<Rect> rect_list;															// this is where all the rectangles which will be drawn are stored
 	private final static LinkedList<Step> steps = new LinkedList<Step>();							// this is where all the steps of animation will be stored
 	static JButton nextBtn;																		// getting reference to the button
  	static JButton prevBtn;																			// same as above
@@ -146,6 +146,7 @@ public final class Main extends JPanel {
 
 	public Main(){
 		arrayLeft = 50;	//MAX = 85
+		rect_list = new ArrayList<Rect>(arrayLeft);
 		int rs = rectSize();
 		int h = rs;
 		int w = rs;
@@ -390,16 +391,12 @@ public final class Main extends JPanel {
 		/*
 		 * would take a screenshot here, the counter value really should depend on the speed of a continuous animation
 		 * 
-		 * 
+		 *
 		if(counter == 100){
 			screenShot.takeScreenShot(panel);
-			counter =0;
+			counter = 0;
 		}
-		
-		System.out.println(counter);
-		
 		*/
-		
 	} 
 
 }
