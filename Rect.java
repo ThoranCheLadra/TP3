@@ -37,7 +37,7 @@ public class Rect {
 		/* separate method to enable color change during animation */
 		public void setColorDraw(Color c){
 			this.color = c;
-			Main.panel.repaint();
+			AnimatedArray.panel.repaint();
 		}
 
 		public Color getColor() {
@@ -46,13 +46,13 @@ public class Rect {
 		
 		public void setCurrentX(int currentX) {
 			this.rec.x = currentX;
-			Main.panel.repaint();
+			AnimatedArray.panel.repaint();
 		}
 		
 
 		public void setCurrentY(int currentY) {
 			this.rec.y = currentY;
-			Main.panel.repaint();
+			AnimatedArray.panel.repaint();
 		}
 
 	}

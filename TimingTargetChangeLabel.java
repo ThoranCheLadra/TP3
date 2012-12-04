@@ -29,10 +29,10 @@ public final class TimingTargetChangeLabel implements TimingTarget{
         // TODO Auto-generated method stub
     	if (reference instanceof Rect) {
     		((Rect)reference).setLabel(labelTo);
-    	} else if (reference instanceof Main) {
-    		Main.setInfo(labelTo);
+    	} else if (reference instanceof AnimatedArray) {
+    		AnimatedArray.setInfo(labelTo);
     	}
-        Main.panel.repaint();
+        AnimatedArray.panel.repaint();
     }
 
     @Override
