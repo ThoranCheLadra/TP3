@@ -48,7 +48,7 @@ public final class Main extends JPanel {
 	private static int arrayLeft;																	// we could just REMOVE this
 	private static Rect r;																			// we could make this local in functions
 	private static Step s;																			// same as above
-	private static List<Rect> rect_list = new ArrayList<Rect>();									// this is where all the rectangles which will be drawn are stored
+	private static List<Rect> rect_list;									// this is where all the rectangles which will be drawn are stored
 	private final static LinkedList<Step> steps = new LinkedList<Step>();							// this is where all the steps of animation will be stored
 	static JButton nextBtn;																		// getting reference to the button
  	static JButton prevBtn;																			// same as above
@@ -144,7 +144,8 @@ public final class Main extends JPanel {
 	}
 
 	public Main(){
-		arrayLeft = 5;
+		arrayLeft = 10;
+		rect_list = new ArrayList<Rect>(arrayLeft);
 		int rs = rectSize();
 		int h = rs;
 		int w = rs;
@@ -158,7 +159,7 @@ public final class Main extends JPanel {
 		setInfo("");																	// it wasn't for the "Info" field
 		s.setInfo(info);
 		for(int i = 0;i<arrayLeft+1;i++){
-			r = new Rect(x, y, w, h, (i*7%20)+"");								// create all the Rectangle and add them to rect_list
+			r = new Rect(x, y, w, h, (i*7%10)+"");								// create all the Rectangle and add them to rect_list
 			rect_list.add(r);
 			x += rectSpace();
 		}
@@ -211,7 +212,7 @@ public final class Main extends JPanel {
 	}
 	
 	private int rectSpace() {	  	
-		return (int) rectSize()/arrayLeft + rectSize();
+		return (int) rectSize()/arrayLeft + rectSize() + 1;
 	}
 		
 	private int rectSize() {	  	
@@ -362,7 +363,7 @@ public final class Main extends JPanel {
 	/*an overriden method from JFrame: paints the actual rectangle on the screen. It is called each time timingEvent calls repaint() */
 	protected void paintComponent(Graphics g){
 		
-		//counter++;
+		counter++;
 		
 		Graphics g2g = (Graphics2D) g;
 		((Graphics2D) g2g).setBackground(Color.WHITE);
@@ -388,15 +389,11 @@ public final class Main extends JPanel {
 		/*
 		 * would take a screenshot here, the counter value really should depend on the speed of a continuous animation
 		 * 
-		 * 
+		 */ 
 		if(counter == 100){
 			screenShot.takeScreenShot(panel);
-			counter =0;
+			counter=0;
 		}
-		
-		System.out.println(counter);
-		
-		*/
 		
 	} 
 
