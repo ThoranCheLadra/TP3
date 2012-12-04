@@ -156,7 +156,7 @@ public final class Main extends JPanel {
 		setInfo("");																	// it wasn't for the "Info" field
 		s.setInfo(info);
 		for(int i = 0;i<arrayLeft+1;i++){
-			r = new Rect(x, y, w, h, (i)+"");								// create all the Rectangle and add them to rect_list
+			r = new Rect(x, y, w, h, (i*7%20)+"");								// create all the Rectangle and add them to rect_list
 			rect_list.add(r);
 			x += rectSpace();
 		}
@@ -172,7 +172,6 @@ public final class Main extends JPanel {
 		/*   (could do j < n-1 because single element is also min element) */
 		for (j = 0; j < rect_list.size()-1; j++) {
 		    /* find the min element in the unsorted a[j .. n-1] */
-	        swapRect(4, 2, t);
 
 		    /* assume the min is the first element */
 		    iMin = j;
@@ -182,13 +181,12 @@ public final class Main extends JPanel {
 		        setRectColor(i, iMin, Color.RED);
 		        if ( Integer.parseInt(rect_list.get(i).getLabel()) < Integer.parseInt(rect_list.get(iMin).getLabel()) ) {
 		            /* found new minimum; remember its index */
-		            setRectColor(i, iMin, Color.BLUE);
+		            setRectColor(iMin, Color.BLUE);
 		            iMin = i;
 		        } else {
 		            setRectColor(i, Color.BLUE);
 		        }
 		    }
-		    setRectColor(iMin, Color.BLUE);
 		 
 		    /* iMin is the index of the minimum element. Swap it with the current position */
 		    if ( iMin != j ) {
