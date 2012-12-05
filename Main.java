@@ -1,4 +1,4 @@
-
+import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
@@ -109,7 +109,7 @@ public class Main {
 	}
     
 	public static void main(String[] args) {
-		int[] arr = {1,3,4,8,1,2,34,5};
+		int[] arr = {4,3,4,8,1,2,12,5};
                 anim = new AnimatedArray(arr);
 		/*setup thread for creating GUI */
 		SwingUtilities.invokeLater(new Runnable() {
@@ -118,7 +118,46 @@ public class Main {
 				setupGUI();
 			}
 		});
-                
-                anim.endAnimation();
+        
+		/* a[0] to a[n-1] is the array to sort */
+		int i,j;
+		int iMin;
+		/* advance the position through the entire array */
+		/*   (could do j < n-1 because single element is also min element) */
+		for (j = 0; j < anim.getRectList().size()-1; j++) {
+		    /* find the min element in the unsorted a[j .. n-1] */
+
+		    /* assume the min is the first element */
+		    iMin = j;
+		    /* test against elements after j to find the smallest */
+		    for ( i = j+1; i < anim.getRectList().size(); i++) {
+
+		        /* if this element is less, then it is the new minimum */  
+		    	anim.setRectColor(i, iMin, Color.RED);
+		    	System.out.println("next step");
+		        if ( Integer.parseInt(anim.getRectList().get(i).getLabel()) < Integer.parseInt(anim.getRectList().get(iMin).getLabel()) ) {
+		            /* found new minimum; remember its index */
+		        	anim.setRectColor(iMin, Color.BLUE);
+		        	System.out.println("next step");
+		            iMin = i;
+		        } else {
+		        	anim.setRectColor(i, Color.BLUE);
+		        	System.out.println("next step");
+		        }
+		    }
+
+
+		    /* iMin is the index of the minimum element. Swap it with the current position */
+		    if ( iMin != j ) {
+		    	anim.swapRect(j, iMin, 500);
+		    	System.out.println("next step");
+		    }
+		    iMin = j;
+		    anim.setRectColor(iMin, Color.GREEN);
+		    System.out.println("next step");
+		}
+		anim.setRectColor(anim.getRectList().size()-1, Color.GREEN);
+		
+        anim.endAnimation();
 	}
 }

@@ -102,6 +102,10 @@ public final class AnimatedArray extends JPanel {
 			return (int) ((Fullscreen.getWidth()-(arrayLeft))/(arrayLeft+4)); 	
 	}
 	
+	public List<Rect> getRectList() {
+		return rect_list;
+	}
+	
 	public void swapRect(int a, int b, long t){
 		currentStep++;																																					// increment currentStep
 		s = new Step();																																					// create a new step
