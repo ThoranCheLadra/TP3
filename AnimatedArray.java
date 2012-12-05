@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -256,17 +257,18 @@ public final class AnimatedArray extends JPanel {
 		}
 
 		//g2g.setColor(Color.BLUE);
-		
+		g2g.setColor(Color.BLUE);
+		g2g.drawString(info,(int)(Fullscreen.width/4),(int)(Fullscreen.height*3/4));
+		Font font = new Font("Arial", Font.PLAIN, (int) 20 * rectSize() / 72);
+		g2g.setFont(font);
 		/* fill the rectangles and draw a tag next to each one */
 		for(Rect r : rect_list){
 			g2g.setColor(r.getColor());
 			g2g.fillRect(r.getRec().x, r.getRec().y,r.getRec().width,r.getRec().height);
 			g2g.setColor(Color.WHITE);
-			g2g.drawString(r.getLabel(), r.getRec().x, r.getRec().y+10);
+			g2g.drawString(r.getLabel(), r.getRec().x+(rectSize()/2)-10, r.getRec().y+(rectSize()/2));
 		}
 		/* draw the information */
-		g2g.setColor(Color.BLUE);
-		g2g.drawString(info,(int)(Fullscreen.width/4),(int)(Fullscreen.height*3/4));
 		
 		
 		/*

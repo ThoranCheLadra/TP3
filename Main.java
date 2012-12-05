@@ -135,6 +135,12 @@ public class Main {
 				setupGUI();
 			}
 		});
+		// anim.setRectColor(j, j-1, Color.RED, 500);
+		// anim.swapRect(j, j-1, 500);
+		// anim.setRectColor(j, j-1, Color.BLUE, 500);
+		// anim.setRectColor(j-1, Color.DARK_GRAY, 500);
+		
+		
         
 		/* a[0] to a[n-1] is the array to sort */
 		int i,j;
@@ -150,25 +156,25 @@ public class Main {
 		    for ( i = j+1; i < anim.getRectList().size(); i++) {
 
 		        /* if this element is less, then it is the new minimum */  
-		    	anim.setRectColor(i, iMin, Color.RED, 500);
+		    	anim.setRectColor(i, iMin, Color.RED, 300);
 		        if ( Integer.parseInt(anim.getRectList().get(i).getLabel()) < Integer.parseInt(anim.getRectList().get(iMin).getLabel()) ) {
 		            /* found new minimum; remember its index */
-		        	anim.setRectColor(iMin, Color.BLUE, 500);
+		        	anim.setRectColor(iMin, Color.BLUE, 300);
 		            iMin = i;
 		        } else {
-		        	anim.setRectColor(i, Color.BLUE, 500);
+		        	anim.setRectColor(i, Color.BLUE, 300);
 		        }
 		    }
 
 
 		    /* iMin is the index of the minimum element. Swap it with the current position */
 		    if ( iMin != j ) {
-		    	anim.swapRect(j, iMin, 500);
+		    	anim.swapRect(j, iMin, 300);
 		    }
 		    iMin = j;
-		    anim.setRectColor(iMin, Color.GREEN, 500);
+		    anim.setRectColor(iMin, Color.DARK_GRAY, 300);
 		}
-		anim.setRectColor(anim.getRectList().size()-1, Color.GREEN, 500);
+		anim.setRectColor(anim.getRectList().size()-1, Color.DARK_GRAY, 300);
 		
         anim.endAnimation();
 	}
