@@ -27,6 +27,13 @@ public final class ContinuousAnimation implements TimingTarget{
     	if ((AnimatedArray.continuousAnimation)&&(step < AnimatedArray.steps.size())) {
     		AnimatedArray.steps.get(step).getList().get(0).start();
     		AnimatedArray.currentStep++;
+    		if (AnimatedArray.currentStep == AnimatedArray.steps.size() - 1) {
+    			AnimatedArray.pauseBtn.setText("Play");
+    			AnimatedArray.pauseBtn.setEnabled(false);
+    			AnimatedArray.continuousAnimation = false;
+    			AnimatedArray.nextBtn.setEnabled(false);
+				AnimatedArray.prevBtn.setEnabled(true);
+    		}
     	}
     }
 

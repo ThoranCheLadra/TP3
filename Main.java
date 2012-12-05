@@ -126,7 +126,7 @@ public class Main {
 	}
     
 	public static void main(String[] args) {
-		int[] arr = {4,3,4,8,1,2,12,5};
+		int[] arr = {4,3,8,1,2,12,5,20};
                 anim = new AnimatedArray(arr);
 		/*setup thread for creating GUI */
 		SwingUtilities.invokeLater(new Runnable() {
