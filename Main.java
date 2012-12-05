@@ -31,19 +31,19 @@ public class Main {
 	//	Fullscreen = new Dimension(100,100);
 		
 		JFrame frame = new JFrame("Algorithm Animator");
-		final JButton pauseBtn = new JButton("Pause");
 		anim.nextBtn = new JButton("Next Step");
 		anim.prevBtn = new JButton("Prev step");
+		anim.pauseBtn = new JButton("Play");
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
 		JPanel buttonPanel = new JPanel(new GridLayout(1,3));
 	
 		buttonPanel.add(anim.nextBtn);
-		buttonPanel.add(pauseBtn);
+		buttonPanel.add(anim.pauseBtn);
 		buttonPanel.add(anim.prevBtn);
 		
-		pauseBtn.setEnabled(true);
+		anim.pauseBtn.setEnabled(true);
 		anim.nextBtn.setEnabled(true);
 		anim.prevBtn.setEnabled(false);
 		
@@ -55,9 +55,24 @@ public class Main {
 		anim.ani_timer.init(); /*start animation timer */
 	
 
-		pauseBtn.addActionListener(new ActionListener(){
+		anim.pauseBtn.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				// does nothing just now					
+				if (!anim.continuousAnimation) {
+					anim.nextBtn.setEnabled(false);
+					anim.prevBtn.setEnabled(false);
+					anim.pauseBtn.setText("Pause");
+					anim.continuousAnimation = true;
+					anim.currentStep++;
+					anim.steps.get(anim.currentStep).getList().get(0).start();
+				} else {
+					anim.pauseBtn.setText("Play");
+					anim.continuousAnimation = false;
+					anim.nextBtn.setEnabled(true);
+					if (anim.currentStep == anim.steps.size() - 1) {
+						anim.nextBtn.setEnabled(false);
+					}
+					anim.prevBtn.setEnabled(true);
+				}
 			}
 		});
 
@@ -71,6 +86,7 @@ public class Main {
 				}
 				if (anim.currentStep == anim.steps.size() - 1) {												// if we're at the last step, disable nextBtn
 					anim.nextBtn.setEnabled(false);
+					anim.pauseBtn.setEnabled(false);
 				}
 				anim.prevBtn.setEnabled(true);															// we're definitely not at the first step anymore, so enable prevBtn
 			}
@@ -90,6 +106,7 @@ public class Main {
 					anim.prevBtn.setEnabled(false);
 				}
 				anim.nextBtn.setEnabled(true);															// we're definitely not at the last step anymore, so enable nextBtn
+				anim.pauseBtn.setEnabled(true);
 			}
 		});
 
@@ -133,16 +150,13 @@ public class Main {
 		    for ( i = j+1; i < anim.getRectList().size(); i++) {
 
 		        /* if this element is less, then it is the new minimum */  
-		    	anim.setRectColor(i, iMin, Color.RED);
-		    	System.out.println("next step");
+		    	anim.setRectColor(i, iMin, Color.RED, 500);
 		        if ( Integer.parseInt(anim.getRectList().get(i).getLabel()) < Integer.parseInt(anim.getRectList().get(iMin).getLabel()) ) {
 		            /* found new minimum; remember its index */
-		        	anim.setRectColor(iMin, Color.BLUE);
-		        	System.out.println("next step");
+		        	anim.setRectColor(iMin, Color.BLUE, 500);
 		            iMin = i;
 		        } else {
-		        	anim.setRectColor(i, Color.BLUE);
-		        	System.out.println("next step");
+		        	anim.setRectColor(i, Color.BLUE, 500);
 		        }
 		    }
 
@@ -150,13 +164,11 @@ public class Main {
 		    /* iMin is the index of the minimum element. Swap it with the current position */
 		    if ( iMin != j ) {
 		    	anim.swapRect(j, iMin, 500);
-		    	System.out.println("next step");
 		    }
 		    iMin = j;
-		    anim.setRectColor(iMin, Color.GREEN);
-		    System.out.println("next step");
+		    anim.setRectColor(iMin, Color.GREEN, 500);
 		}
-		anim.setRectColor(anim.getRectList().size()-1, Color.GREEN);
+		anim.setRectColor(anim.getRectList().size()-1, Color.GREEN, 500);
 		
         anim.endAnimation();
 	}
