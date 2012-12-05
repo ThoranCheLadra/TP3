@@ -51,18 +51,12 @@ public class Step {
 	 */
 	public void addAnimator(Animator item, Object after) {
 		if (this.list.peekLast() == null) {
-			System.out.println("Should be working #2");
-			//TriggerUtility.addActionTrigger(after, item);
+			// do nothing
 		} else if (after == null) {
 			TriggerUtility.addTimingTrigger(this.list.peekLast(), item, TimingTriggerEvent.STOP);
-		} else if (after instanceof Step) {
-			System.out.println("Should be working #3");
-			// nothing yet
 		} else if (after instanceof Animator) {
-			System.out.println("Should be working #4");
 			TriggerUtility.addTimingTrigger((Animator)after, item, TimingTriggerEvent.START);
 		} else if (after instanceof JButton) {
-			System.out.println("Should be working #5");
 			TriggerUtility.addTimingTrigger(this.list.peekLast(), item, TimingTriggerEvent.STOP);
 		}
 		this.list.addLast(item);
