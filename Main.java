@@ -142,39 +142,21 @@ public class Main {
 		
 		
         
-		/* a[0] to a[n-1] is the array to sort */
-		int i,j;
-		int iMin;
-		/* advance the position through the entire array */
-		/*   (could do j < n-1 because single element is also min element) */
-		for (j = 0; j < anim.getRectList().size()-1; j++) {
-		    /* find the min element in the unsorted a[j .. n-1] */
+		int i, j,t=0;
+		  for(i = 0; i < arr.length; i++){
+		  for(j = 1; j < (arr.length-i); j++){
+			  anim.setRectColor(j, j-1, Color.RED, 500);
+		  if(arr[j-1] > arr[j]){
+		  t = arr[j-1];
+		  arr[j-1]=arr[j];
+		  arr[j]=t;
+		  anim.swapRect(j, j-1, 500);
+		  }
+		  anim.setRectColor(j, j-1, Color.BLUE, 500);
+		  }
+		  anim.setRectColor(j-1, Color.DARK_GRAY, 500);
+		  }
 
-		    /* assume the min is the first element */
-		    iMin = j;
-		    /* test against elements after j to find the smallest */
-		    for ( i = j+1; i < anim.getRectList().size(); i++) {
-
-		        /* if this element is less, then it is the new minimum */  
-		    	anim.setRectColor(i, iMin, Color.RED, 300);
-		        if ( Integer.parseInt(anim.getRectList().get(i).getLabel()) < Integer.parseInt(anim.getRectList().get(iMin).getLabel()) ) {
-		            /* found new minimum; remember its index */
-		        	anim.setRectColor(iMin, Color.BLUE, 300);
-		            iMin = i;
-		        } else {
-		        	anim.setRectColor(i, Color.BLUE, 300);
-		        }
-		    }
-
-
-		    /* iMin is the index of the minimum element. Swap it with the current position */
-		    if ( iMin != j ) {
-		    	anim.swapRect(j, iMin, 300);
-		    }
-		    iMin = j;
-		    anim.setRectColor(iMin, Color.DARK_GRAY, 300);
-		}
-		anim.setRectColor(anim.getRectList().size()-1, Color.DARK_GRAY, 300);
 		
         anim.endAnimation();
 	}
