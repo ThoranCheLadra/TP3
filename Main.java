@@ -84,11 +84,9 @@ public class Main {
 				if (anim.steps.get(anim.currentStep).getList().size() != 0) {									// if there are any Animators inside the step, trigger the first one
 					anim.steps.get(anim.currentStep).getList().get(0).start();
 				}
-				if (anim.currentStep == anim.steps.size() - 1) {												// if we're at the last step, disable nextBtn
-					anim.nextBtn.setEnabled(false);
-					anim.pauseBtn.setEnabled(false);
-				}
-				anim.prevBtn.setEnabled(true);															// we're definitely not at the first step anymore, so enable prevBtn
+				anim.nextBtn.setEnabled(false);
+				anim.pauseBtn.setEnabled(false);
+				anim.prevBtn.setEnabled(false);															// we're definitely not at the first step anymore, so enable prevBtn
 			}
 		});
 
@@ -140,21 +138,20 @@ public class Main {
 		// anim.setRectColor(j, j-1, Color.BLUE, 500);
 		// anim.setRectColor(j-1, Color.DARK_GRAY, 500);
 		
-		
-        
+        int time = 200;
 		int i, j,t=0;
 		  for(i = 0; i < arr.length; i++){
 		  for(j = 1; j < (arr.length-i); j++){
-			  anim.setRectColor(j, j-1, Color.RED, 500);
+			  anim.setRectColor(j, j-1, Color.RED, time);
 		  if(arr[j-1] > arr[j]){
 		  t = arr[j-1];
 		  arr[j-1]=arr[j];
 		  arr[j]=t;
 		  anim.swapRect(j, j-1, 500);
 		  }
-		  anim.setRectColor(j, j-1, Color.BLUE, 500);
+		  anim.setRectColor(j, j-1, Color.BLUE, time);
 		  }
-		  anim.setRectColor(j-1, Color.DARK_GRAY, 500);
+		  anim.setRectColor(j-1, Color.DARK_GRAY, time);
 		  }
 
 		

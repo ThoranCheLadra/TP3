@@ -109,7 +109,7 @@ public final class AnimatedArray extends JPanel {
 		return rect_list;
 	}
 	
-	public void swapRect(int a, int b, long t){
+	public void swapRect(int a, int b, long t) {
 		currentStep++;																																					// increment currentStep
 		s = new Step();																																					// create a new step
 		// Create animation for showing information on what's happening
@@ -132,6 +132,9 @@ public final class AnimatedArray extends JPanel {
 		s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(b), "currentX", rect_list.get(b).getRec().x, rect_list.get(a).getRec().x));
 		s.addAnimator(new Animator.Builder().setDuration(t, TimeUnit.MILLISECONDS).build(), nextBtn);
 		s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(b), "currentY", rect_list.get(b).getRec().y-rectSpace(), rect_list.get(b).getRec().y));
+		// Enable buttons animation
+		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
+		s.getLastAnimator().addTarget(new EnableButtons());
 		// Trigger for a continuous animation
 		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
 		s.getLastAnimator().addTarget(new ContinuousAnimation(currentStep+1));
@@ -150,7 +153,7 @@ public final class AnimatedArray extends JPanel {
 		steps.add(s);																																					// add the new step to steps
 	}
 	
-	 public void modifyLabel(int n, String d, int t){
+	 public void modifyLabel(int n, String d, int t) {
 		currentStep++;
 		s = new Step();
 		// Animate information
@@ -161,6 +164,9 @@ public final class AnimatedArray extends JPanel {
 		// Animate change of label
 		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), s.getFirstAnimator());
 		s.getLastAnimator().addTarget(new ChangeLabel(rect_list.get(n), d));
+		// Enable buttons animation
+		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
+		s.getLastAnimator().addTarget(new EnableButtons());
 		// Trigger for a continuous animation
 		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
 		s.getLastAnimator().addTarget(new ContinuousAnimation(currentStep+1));
@@ -171,7 +177,7 @@ public final class AnimatedArray extends JPanel {
 		steps.add(s);	  
 	 } 
 	 
-	 public void setRectColor(int index, Color c, int t){
+	 public void setRectColor(int index, Color c, int t) {
 		currentStep++;
 		s = new Step();
 		// Animate information
@@ -182,6 +188,9 @@ public final class AnimatedArray extends JPanel {
 		// Animate change of color
 		s.addAnimator(new Animator.Builder().setDuration(t, TimeUnit.MILLISECONDS).build(), s.getFirstAnimator());
 		s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(index), "colorDraw", rect_list.get(index).getColor(), c));
+		// Enable buttons animation
+		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
+		s.getLastAnimator().addTarget(new EnableButtons());
 		// Trigger for a continuous animation
 		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
 		s.getLastAnimator().addTarget(new ContinuousAnimation(currentStep+1));
@@ -192,7 +201,7 @@ public final class AnimatedArray extends JPanel {
 		steps.add(s);
 	}
 	 
-	 public void setRectColor(int index, int index1, Color c, int t){
+	 public void setRectColor(int index, int index1, Color c, int t) {
 			currentStep++;
 			s = new Step();
 			// Animate information
@@ -211,6 +220,9 @@ public final class AnimatedArray extends JPanel {
 			// Animate change of color
 			s.addAnimator(new Animator.Builder().setDuration(t, TimeUnit.MILLISECONDS).build(), s.getFirstAnimator());
 			s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(index1), "colorDraw", rect_list.get(index1).getColor(), c));
+			// Enable buttons animation
+			s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
+			s.getLastAnimator().addTarget(new EnableButtons());
 			// Trigger for a continuous animation
 			s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
 			s.getLastAnimator().addTarget(new ContinuousAnimation(currentStep+1));
