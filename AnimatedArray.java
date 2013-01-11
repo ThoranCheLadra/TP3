@@ -132,9 +132,6 @@ public final class AnimatedArray extends JPanel {
 		s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(b), "currentX", rect_list.get(b).getRec().x, rect_list.get(a).getRec().x));
 		s.addAnimator(new Animator.Builder().setDuration(t, TimeUnit.MILLISECONDS).build(), nextBtn);
 		s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(b), "currentY", rect_list.get(b).getRec().y-rectSpace(), rect_list.get(b).getRec().y));
-		// Enable buttons animation
-		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
-		s.getLastAnimator().addTarget(new EnableButtons());
 		// Trigger for a continuous animation
 		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
 		s.getLastAnimator().addTarget(new ContinuousAnimation(currentStep+1));
@@ -164,9 +161,6 @@ public final class AnimatedArray extends JPanel {
 		// Animate change of label
 		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), s.getFirstAnimator());
 		s.getLastAnimator().addTarget(new ChangeLabel(rect_list.get(n), d));
-		// Enable buttons animation
-		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
-		s.getLastAnimator().addTarget(new EnableButtons());
 		// Trigger for a continuous animation
 		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
 		s.getLastAnimator().addTarget(new ContinuousAnimation(currentStep+1));
@@ -188,9 +182,6 @@ public final class AnimatedArray extends JPanel {
 		// Animate change of color
 		s.addAnimator(new Animator.Builder().setDuration(t, TimeUnit.MILLISECONDS).build(), s.getFirstAnimator());
 		s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(index), "colorDraw", rect_list.get(index).getColor(), c));
-		// Enable buttons animation
-		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
-		s.getLastAnimator().addTarget(new EnableButtons());
 		// Trigger for a continuous animation
 		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
 		s.getLastAnimator().addTarget(new ContinuousAnimation(currentStep+1));
@@ -220,9 +211,6 @@ public final class AnimatedArray extends JPanel {
 			// Animate change of color
 			s.addAnimator(new Animator.Builder().setDuration(t, TimeUnit.MILLISECONDS).build(), s.getFirstAnimator());
 			s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(index1), "colorDraw", rect_list.get(index1).getColor(), c));
-			// Enable buttons animation
-			s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
-			s.getLastAnimator().addTarget(new EnableButtons());
 			// Trigger for a continuous animation
 			s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
 			s.getLastAnimator().addTarget(new ContinuousAnimation(currentStep+1));

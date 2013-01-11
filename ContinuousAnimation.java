@@ -24,6 +24,15 @@ public final class ContinuousAnimation implements TimingTarget{
 
     @Override
     public void begin(Animator source) {
+    	if ((!AnimatedArray.continuousAnimation)&&(step < AnimatedArray.steps.size())) {
+        	AnimatedArray.pauseBtn.setEnabled(true);
+        	if (AnimatedArray.currentStep > 0) {
+        		AnimatedArray.prevBtn.setEnabled(true);
+        	}
+        	if (AnimatedArray.currentStep < AnimatedArray.steps.size()) {
+        		AnimatedArray.nextBtn.setEnabled(true);
+        	}
+    	}
     	if ((AnimatedArray.continuousAnimation)&&(step < AnimatedArray.steps.size())) {
     		AnimatedArray.steps.get(step).getList().get(0).start();
     		AnimatedArray.currentStep++;
