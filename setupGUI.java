@@ -32,12 +32,10 @@ public class setupGUI {
 		buttonPanel.add(anim.prevBtn);
 		buttonPanel.add(anim.pauseBtn);
 		buttonPanel.add(anim.nextBtn);
-		buttonPanel.add(addBtn);
 		
 		anim.pauseBtn.setEnabled(true);
 		anim.nextBtn.setEnabled(true);
 		anim.prevBtn.setEnabled(false);
-		addBtn.setEnabled(true);
 		
 
 		anim.panel = new AnimatedArray(); /*main is represented as a component (extends JPanel) , and added to the frame */
@@ -67,21 +65,6 @@ public class setupGUI {
 				}
 			}
 		});
-		
-		addBtn.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				anim.swapRect(0, 5, 200);
-				for(Change tempChange: anim.steps.get(anim.currentStep).getChanges()) {						// in each Step we are storing the values before the animation, so we
-					anim.changeBack(tempChange);															// restore it all like it was before this step and then decrement the
-				}	
-				anim.currentStep--;
-				anim.panel.repaint();
-				
-				
-				anim.nextBtn.setEnabled(true);
-			}
-		});
-
 
 		anim.nextBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
