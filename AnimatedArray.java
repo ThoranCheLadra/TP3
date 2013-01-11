@@ -91,7 +91,7 @@ public final class AnimatedArray extends JPanel {
             while (currentStep != 0) {														// because of a few slight reasons, when we construct the animation, we end up at
 			//setInfo(steps.get(currentStep).getInfo());								// the last step, so we need to return to the initial state
 			for(Change tempChange: steps.get(currentStep).getChanges()) {
-				stepBack(tempChange);
+				changeBack(tempChange);
 			}
 			currentStep--;
             }
@@ -225,7 +225,7 @@ public final class AnimatedArray extends JPanel {
 	/* function to stepBack from one step to a previous one.
 	 * Will have to be extended whenever we add another API command
 	 */
-	public static void stepBack(Change tempChange) {
+	public static void changeBack(Change tempChange) {
 		if (tempChange.getType() == "swap") {
 			// just restore coordinates
 			tempChange.getReference().getRec().x = tempChange.getPoint().x;
@@ -236,6 +236,13 @@ public final class AnimatedArray extends JPanel {
 		} else if (tempChange.getType() == "modifyLabel") {
 			// just restore the label
 			tempChange.getReference().setLabel(tempChange.getLabel());
+		}
+	}
+	
+	public static void stepForward() {
+		currentStep++;																		// increment the currentStep (because we're moving to the next one)
+		if (steps.get(currentStep).getList().size() != 0) {									// if there are any Animators inside the step, trigger the first one
+			steps.get(currentStep).getList().get(0).start();
 		}
 	}
 	

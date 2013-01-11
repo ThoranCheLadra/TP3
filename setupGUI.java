@@ -70,8 +70,15 @@ public class setupGUI {
 		
 		addBtn.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				//anim.swapRect(0, 5, 200);
-				System.out.println("Add button clicked");
+				anim.swapRect(0, 5, 200);
+				for(Change tempChange: anim.steps.get(anim.currentStep).getChanges()) {						// in each Step we are storing the values before the animation, so we
+					anim.changeBack(tempChange);															// restore it all like it was before this step and then decrement the
+				}	
+				anim.currentStep--;
+				anim.panel.repaint();
+				
+				
+				anim.nextBtn.setEnabled(true);
 			}
 		});
 
@@ -79,13 +86,10 @@ public class setupGUI {
 		anim.nextBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Main.panel.repaint();
-				anim.currentStep++;																		// increment the currentStep (because we're moving to the next one)
-				if (anim.steps.get(anim.currentStep).getList().size() != 0) {									// if there are any Animators inside the step, trigger the first one
-					anim.steps.get(anim.currentStep).getList().get(0).start();
-				}
+				anim.stepForward();
 				anim.nextBtn.setEnabled(false);
 				anim.pauseBtn.setEnabled(false);
-				anim.prevBtn.setEnabled(false);															// we're definitely not at the first step anymore, so enable prevBtn
+				anim.prevBtn.setEnabled(true);															// we're definitely not at the first step anymore, so enable prevBtn
 			}
 		});
 
@@ -95,7 +99,7 @@ public class setupGUI {
 				//setInfo(steps.get(currentStep).getInfo());
 				anim.setInfo("");
 				for(Change tempChange: anim.steps.get(anim.currentStep).getChanges()) {						// in each Step we are storing the values before the animation, so we
-					anim.stepBack(tempChange);															// restore it all like it was before this step and then decrement the
+					anim.changeBack(tempChange);															// restore it all like it was before this step and then decrement the
 				}																					// currentStep value, as well as call Main.panel.repaint() to redraw
 				AnimatedArray.panel.repaint();																// the panel in order to show these changes
 				anim.currentStep--;
