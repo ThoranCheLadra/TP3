@@ -70,4 +70,9 @@ public class Step {
 	public Animator getLastAnimator() {
 		return this.list.peekLast();
 	}
+        
+    @Override
+        public String toString(){
+            return stepInfo;
+        }
 }

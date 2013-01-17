@@ -239,12 +239,17 @@ public final class AnimatedArray extends JPanel {
 		}
 	}
 	
+	
+	/* function to stepForward from one step to the next one.
+	 * Will have to be extended whenever we add another API command
+	 */
 	public static void stepForward() {
-		currentStep++;																		// increment the currentStep (because we're moving to the next one)
-		if (steps.get(currentStep).getList().size() != 0) {									// if there are any Animators inside the step, trigger the first one
+		currentStep++; // increment the currentStep (because we're moving to the next one)
+		if (steps.get(currentStep).getList().size() != 0) { // if there are any Animators inside the step, trigger the first one
 			steps.get(currentStep).getList().get(0).start();
 		}
 	}
+
 	
 	/* function for changing the information on what's happening */
 	public static void setInfo(String info) {

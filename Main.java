@@ -29,12 +29,7 @@ public class Main {
 		int[] arr = {4,3,8,1,2,12};
                 anim = new AnimatedArray(arr);
 		/*setup thread for creating GUI */
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				setupGUI.setupGUI();
-			}
-		});
+		
 		
 		int time = 2;
 		int i, j,t=0;
@@ -51,7 +46,13 @@ public class Main {
 			}
 			anim.setRectColor(j-1, Color.DARK_GRAY, time);
 		}
-
+                
+                SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				setupGUI.setupGUI();
+			}
+		});
 		
         anim.endAnimation();
 	}
