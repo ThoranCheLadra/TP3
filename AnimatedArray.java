@@ -1,3 +1,4 @@
+import java.awt.AWTException;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -5,17 +6,23 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.Rectangle;
+import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -47,10 +54,9 @@ public final class AnimatedArray extends JPanel {
 	static int t;																					// could just REMOVE. Though keeping it with important variables might be a good idea as well. I don't like the fact that the minimum value is 1 second of each animation.
 	private static String info = ""; 																// a string to display information at each step
 	public static Dimension Fullscreen;
-	private int counter = 0; //counter for paintComponent
 	public static boolean continuousAnimation = false; // variable to determine whether to run a continuous animation or not.
-	
-	
+	static boolean screenshot = true;
+
 	public AnimatedArray(){
             
         }
@@ -58,6 +64,7 @@ public final class AnimatedArray extends JPanel {
 	public AnimatedArray(int[] arrInt){
                 Toolkit toolkit =  Toolkit.getDefaultToolkit ();
                 Fullscreen = toolkit.getScreenSize();
+
                 System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 		Animator.setDefaultTimingSource(ani_timer);
 
@@ -253,13 +260,17 @@ public final class AnimatedArray extends JPanel {
 	
 	/* function for changing the information on what's happening */
 	public static void setInfo(String info) {
+		if(screenshot)
+		screenShot.takeScreenShot();
 		AnimatedArray.info = info;
 	} 
 
+
+
+	
 	/*an overriden method from JFrame: paints the actual rectangle on the screen. It is called each time timingEvent calls repaint() */
 	protected void paintComponent(Graphics g){
 		
-		//counter++;
 		
 		Graphics g2g = (Graphics2D) g;
 		((Graphics2D) g2g).setBackground(Color.WHITE);
@@ -283,15 +294,8 @@ public final class AnimatedArray extends JPanel {
 		/* draw the information */
 		
 		
-		/*
-		 * would take a screenshot here, the counter value really should depend on the speed of a continuous animation
-		 * 
-		 *
-		if(counter == 100){
-			screenShot.takeScreenShot(panel);
-			counter = 0;
-		}
-		*/
+	
+		
 	} 
 
 }
