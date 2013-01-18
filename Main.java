@@ -33,7 +33,8 @@ public class Main {
 		/*setup thread for creating GUI */
 		
 		
-		quicksort(arr, 0, arr.length-1, time);
+		//quicksort(arr, 0, arr.length-1, time);
+		bubblesort(arr);
                 
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
@@ -55,14 +56,14 @@ public class Main {
 	    int temp = array[pivotIndex];
 	    array[pivotIndex] = array[right];
 	    array[right] = temp;
-	    anim.swapRect(pivotIndex, right, time);
+	    anim.swapRect(pivotIndex, right, time, "");
 	    int storeIndex = left;
 	    for(int i = left; i < right; i++) { // left <= i <= right
 	    	if (array[i] < pivotValue) {
 	    		temp = array[i];
 	    		array[i] = array[storeIndex];
 	    		array[storeIndex] = temp;
-	    		anim.swapRect(i, storeIndex, time);
+	    		anim.swapRect(i, storeIndex, time, "");
 	    		storeIndex = storeIndex + 1;
 	    	}
 	    }
@@ -70,7 +71,7 @@ public class Main {
 	    temp = array[storeIndex];
 	    array[storeIndex] = array[right];
 	    array[right] = temp;
-	    anim.swapRect(storeIndex, right, time);
+	    anim.swapRect(storeIndex, right, time, "");
 	    return storeIndex;
 	}
 	
@@ -87,6 +88,23 @@ public class Main {
 			quicksort(array, pivotNewIndex+1, right, time);
 		}
 		
+	}
+	
+	public static void bubblesort(int[] arr) {
+		int i, j,t=0;
+		for(i = 0; i < arr.length; i++){
+			for(j = 1; j < (arr.length-i); j++){
+				anim.setRectColor(j, j-1, Color.RED, time, "");
+					if(arr[j-1] > arr[j]){
+					t = arr[j-1];
+					arr[j-1]=arr[j];
+					arr[j]=t;
+					anim.swapRect(j, j-1, time, "");
+				}
+				anim.setRectColor(j, j-1, Color.BLUE, time, "");
+			}
+			anim.setRectColor(j-1, Color.DARK_GRAY, time, "Gray out an element that's in it's place already.");
+		}
 	}
 	
 }

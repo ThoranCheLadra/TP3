@@ -93,7 +93,7 @@ public class testAnimatedLinkedList {
 				for(Change tempChange: anim.steps.get(anim.currentStep).getChanges()) {						// in each Step we are storing the values before the animation, so we
 					anim.stepBack(tempChange);															// restore it all like it was before this step and then decrement the
 				}																					// currentStep value, as well as call Main.panel.repaint() to redraw
-				Animated_Temp.panel.repaint();																// the panel in order to show these changes
+				AnimatedLinkedList.panel.repaint();																// the panel in order to show these changes
 				anim.currentStep--;
 				if (anim.currentStep == 0) {																// if we're at the first step, disable prevBtn
 					anim.prevBtn.setEnabled(false);

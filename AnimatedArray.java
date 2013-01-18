@@ -116,11 +116,16 @@ public final class AnimatedArray extends JPanel {
 		return rect_list;
 	}
 	
-	public void swapRect(int a, int b, long t) {
+	public void swapRect(int a, int b, long t, String info) {
 		currentStep++;																																					// increment currentStep
 		s = new Step();																																					// create a new step
 		// Create animation for showing information on what's happening
-		String information = "Swapping index " + a + " (" + rect_list.get(a).getLabel() + ") " + " with index " + b + " (" + rect_list.get(b).getLabel() + ")";			// create the string
+		String information;
+		if (info == "") {
+			information = "Swapping index " + a + " (" + rect_list.get(a).getLabel() + ") " + " with index " + b + " (" + rect_list.get(b).getLabel() + ")";			// create the string
+		} else {
+			information = info;
+		}
 		s.setInfo(information);																																			// add it to the step
 		// Change information
 		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), s.getFirstAnimator());																		// create an animator for this, which we could use to trigger this change
@@ -157,11 +162,16 @@ public final class AnimatedArray extends JPanel {
 		steps.add(s);																																					// add the new step to steps
 	}
 	
-	 public void modifyLabel(int n, String d, int t) {
+	 public void modifyLabel(int n, String d, int t, String info) {
 		currentStep++;
 		s = new Step();
 		// Animate information
-		String information = "Changing index " + n + " label from " + rect_list.get(n).getLabel() + " to " + d;
+		String information;
+		if (info == "") {
+			information = "Changing index " + n + " label from " + rect_list.get(n).getLabel() + " to " + d;
+		} else {
+			information = info;
+		}
 		s.setInfo(information);
 		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
 		s.getLastAnimator().addTarget(new ChangeLabel(this, information));
@@ -178,11 +188,16 @@ public final class AnimatedArray extends JPanel {
 		steps.add(s);	  
 	 } 
 	 
-	 public void setRectColor(int index, Color c, int t) {
+	 public void setRectColor(int index, Color c, int t, String info) {
 		currentStep++;
 		s = new Step();
 		// Animate information
-		String information = "Changing index " + index + " color from " + rect_list.get(index).getColor() + " to " + c;
+		String information;
+		if (info == "") {
+			information = "Changing index " + index + " color from " + rect_list.get(index).getColor() + " to " + c;
+		} else {
+			information = info;
+		}
 		s.setInfo(information);
 		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
 		s.getLastAnimator().addTarget(new ChangeLabel(this, information));
@@ -199,11 +214,16 @@ public final class AnimatedArray extends JPanel {
 		steps.add(s);
 	}
 	 
-	 public void setRectColor(int index, int index1, Color c, int t) {
+	 public void setRectColor(int index, int index1, Color c, int t, String info) {
 			currentStep++;
 			s = new Step();
 			// Animate information
-			String information = "Changing index " + index + " color from " + rect_list.get(index).getColor() + " to " + c;
+			String information;
+			if (info == "") {
+				information = "Changing index " + index + " color from " + rect_list.get(index).getColor() + " to " + c;
+			} else {
+				information = info;
+			}
 			s.setInfo(information);
 			s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
 			s.getLastAnimator().addTarget(new ChangeLabel(this, information));
@@ -260,8 +280,9 @@ public final class AnimatedArray extends JPanel {
 	
 	/* function for changing the information on what's happening */
 	public static void setInfo(String info) {
-		if(screenshot)
-		screenShot.takeScreenShot();
+		if(screenshot) {
+			screenShot.takeScreenShot();
+		}
 		AnimatedArray.info = info;
 	} 
 

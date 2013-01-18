@@ -31,8 +31,10 @@ public class screenShot {
 			Rectangle screenRectangle = new Rectangle(screenSize);				//yw.
 			Robot robot = new Robot();
 			BufferedImage image = robot.createScreenCapture(screenRectangle);
+			File file = new File("images/shot"+shotNumber+".png");
+			file.mkdirs();
 			ImageIO.write(image, "png", new File("images/shot"+shotNumber+".png"));
-
+			
 //		    File imageFile = new File("images/shot"+shotNumber+".png");  
 //	        imageFile.createNewFile();  
 //	        ImageIO.write(bufImage, "png", imageFile);  
