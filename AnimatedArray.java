@@ -33,8 +33,9 @@ public final class AnimatedArray extends JPanel {
 
 
 
-	public static final SwingTimerTimingSource ani_timer = new SwingTimerTimingSource();			// no idea what this is for
-	private static int arrayLeft;																	// we could just REMOVE this
+	public static final SwingTimerTimingSource ani_timer = new SwingTimerTimingSource();// no idea what this is for
+
+        private static int arrayLeft;																	// we could just REMOVE this
 	private static Rect r;																			// we could make this local in functions
 	private static Step s;																			// same as above
 	private static List<Rect> rect_list;															// this is where all the rectangles which will be drawn are stored
@@ -45,8 +46,11 @@ public final class AnimatedArray extends JPanel {
  	static JPanel panel;																			// we need to to have the reference to the drawing area to repaint it
 	static int currentStep;																			// the currentStep
 	static int t;																					// could just REMOVE. Though keeping it with important variables might be a good idea as well. I don't like the fact that the minimum value is 1 second of each animation.
-	private static String info = ""; 																// a string to display information at each step
-	public static Dimension Fullscreen;
+	private static String info = ""; // a string to display information at each step
+        private static Toolkit toolkit =  Toolkit.getDefaultToolkit ();
+	public static Dimension Fullscreen = toolkit.getScreenSize();
+        	public static int windowWidth = (int) Fullscreen.getWidth();
+                public static int windowHeight = (int) Fullscreen.getHeight();
 	private int counter = 0; //counter for paintComponent
 	public static boolean continuousAnimation = false; // variable to determine whether to run a continuous animation or not.
 	
@@ -56,8 +60,10 @@ public final class AnimatedArray extends JPanel {
         }
 
 	public AnimatedArray(int[] arrInt){
-                Toolkit toolkit =  Toolkit.getDefaultToolkit ();
-                Fullscreen = toolkit.getScreenSize();
+                
+
+                
+                
                 System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 		Animator.setDefaultTimingSource(ani_timer);
 
@@ -86,6 +92,42 @@ public final class AnimatedArray extends JPanel {
 		
 		
 	}
+        
+        public AnimatedArray(int[] arrInt, int width, int height){
+                windowWidth = width;
+                windowHeight = height;
+
+                
+                
+                System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+		Animator.setDefaultTimingSource(ani_timer);
+
+		arrayLeft = arrInt.length;	//MAX = 85
+		rect_list = new ArrayList<Rect>(arrayLeft);
+		int rs = rectSize(width);
+		int h = rs;
+		int w = rs;
+		int x= rs;
+		int y= 2*rs;
+		t = 1;
+		currentStep = 0;
+		setOpaque(true);
+		
+		s = new Step();																	// create a new step to store initial values and all. We wouldn't really need it if 
+		setInfo("");																	// it wasn't for the "Info" field
+		s.setInfo(info);
+		for(int i = 0;i<arrayLeft;i++){
+			r = new Rect(x, y, w, h, arrInt[i]+"");								// create all the Rectangle and add them to rect_list
+			rect_list.add(r);
+			x += rectSpace(rectSize(width));
+                        System.out.println(x);
+		}
+		steps.add(s);
+		
+		
+		
+		
+	}
 	
         public void endAnimation(){
             while (currentStep != 0) {														// because of a few slight reasons, when we construct the animation, we end up at
@@ -100,10 +142,18 @@ public final class AnimatedArray extends JPanel {
 	private int rectSpace() {	  	
 		return (int) rectSize()/arrayLeft + rectSize()+1;
 	}
+        
+        private int rectSpace(int rectSize) {	  	
+		return (int) rectSize/arrayLeft + rectSize+1;
+	}
 		
 	private int rectSize() {	  	
 			return (int) ((Fullscreen.getWidth()-(arrayLeft))/(arrayLeft+4)); 	
 	}
+        
+        private int rectSize(int width){
+            return (int) ((width-(arrayLeft))/(arrayLeft+4)); 	
+        }
 	
 	public List<Rect> getRectList() {
 		return rect_list;
@@ -271,14 +321,14 @@ public final class AnimatedArray extends JPanel {
 		//g2g.setColor(Color.BLUE);
 		g2g.setColor(Color.BLUE);
 		g2g.drawString(info,(int)(Fullscreen.width/4),(int)(Fullscreen.height*3/4));
-		Font font = new Font("Arial", Font.PLAIN, (int) 20 * rectSize() / 72);
+		Font font = new Font("Arial", Font.PLAIN, (int) 20 * rectSize(windowWidth) / 72);
 		g2g.setFont(font);
 		/* fill the rectangles and draw a tag next to each one */
 		for(Rect r : rect_list){
 			g2g.setColor(r.getColor());
 			g2g.fillRect(r.getRec().x, r.getRec().y,r.getRec().width,r.getRec().height);
 			g2g.setColor(Color.WHITE);
-			g2g.drawString(r.getLabel(), r.getRec().x+(rectSize()/2)-10, r.getRec().y+(rectSize()/2));
+			g2g.drawString(r.getLabel(), r.getRec().x+(rectSize(windowWidth)/2)-10, r.getRec().y+(rectSize(windowWidth)/2));
 		}
 		/* draw the information */
 		
@@ -293,6 +343,19 @@ public final class AnimatedArray extends JPanel {
 		}
 		*/
 	} 
+        
+     /*   public void resize(int height, int width){
+            windowWidth = width;
+            windowHeight = height;
+            int rs = rectSize(width);
+            System.out.println(rs+" "+height+" "+width);
+            int x = rs;
+            for(Rect r : rect_list){
+                r.getRec().setLocation(x, windowHeight/2-rs);
+                r.getRec().setSize(rs, rs);
+                x += rectSpace(rs);
+            }
+        }*/
 
 }
 

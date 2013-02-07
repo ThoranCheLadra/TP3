@@ -54,7 +54,6 @@ public class Step {
 			// do nothing
 		} else if (after == null) {
 			TriggerUtility.addTimingTrigger(this.list.peekLast(), item, TimingTriggerEvent.STOP);
-			System.out.println("i'm here");
 		} else if (after instanceof Animator) {
 			TriggerUtility.addTimingTrigger((Animator)after, item, TimingTriggerEvent.START);
 		} else if (after instanceof JButton) {

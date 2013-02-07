@@ -27,7 +27,7 @@ public class Main {
     
 	public static void main(String[] args) {
 		int[] arr = {4,3,8,1,2,12};
-                anim = new AnimatedArray(arr);
+                anim = new AnimatedArray(arr, 600, 600);
 		/*setup thread for creating GUI */
 		
 		

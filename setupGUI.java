@@ -4,6 +4,9 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -18,13 +21,15 @@ import javax.swing.ListSelectionModel;
 
 public class setupGUI {
 	private static AnimatedArray anim = Main.anim;
+
 	public static void setupGUI() {
 		
 		Toolkit toolkit =  Toolkit.getDefaultToolkit ();
 		anim.Fullscreen = toolkit.getScreenSize();
 	//	Fullscreen = new Dimension(100,100);
-		
-		JFrame frame = new JFrame("Algorithm Animator");
+
+		final JFrame frame = new JFrame("Algorithm Animator");
+                
 		anim.nextBtn = new JButton("Next Step");
 		anim.prevBtn = new JButton("Prev step");
 		anim.pauseBtn = new JButton("Play");
@@ -63,7 +68,30 @@ public class setupGUI {
 		stepListFrame.add(listPanel, BorderLayout.CENTER);
 		
 		anim.ani_timer.init(); /*start animation timer */
-	
+                
+                
+         /*       frame.addComponentListener(new ComponentListener() {
+                    @Override
+                    public void componentResized(ComponentEvent e) {
+                      //  anim.resize(frame.getHeight(), frame.getWidth());
+                    }
+
+                    @Override
+                    public void componentMoved(ComponentEvent e) {
+                      //  throw new UnsupportedOperationException("Not supported yet.");
+                    }
+
+                    @Override
+                    public void componentShown(ComponentEvent e) {
+                      //  throw new UnsupportedOperationException("Not supported yet.");
+                    }
+
+                    @Override
+                    public void componentHidden(ComponentEvent e) {
+                      //  throw new UnsupportedOperationException("Not supported yet.");
+                    }
+                });
+                */
 		selectStep.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
                                 if(stepList.getSelectedIndex() < anim.currentStep){
@@ -155,7 +183,7 @@ public class setupGUI {
 			}
 		});
 
-		frame.setSize(anim.Fullscreen.width, anim.Fullscreen.height);
+		frame.setSize(anim.windowWidth, anim.windowHeight);
 		frame.validate();
 		frame.setVisible(true);
                 
