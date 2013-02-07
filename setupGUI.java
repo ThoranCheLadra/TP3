@@ -68,6 +68,7 @@ public class setupGUI {
 		stepListFrame.add(listPanel, BorderLayout.CENTER);
 		
 		anim.ani_timer.init(); /*start animation timer */
+<<<<<<< HEAD
                 
                 
          /*       frame.addComponentListener(new ComponentListener() {
@@ -92,6 +93,9 @@ public class setupGUI {
                     }
                 });
                 */
+=======
+		
+>>>>>>> 207e372eed143e3b8be90c1b45291985b990b12f
 		selectStep.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
                                 if(stepList.getSelectedIndex() < anim.currentStep){
@@ -100,6 +104,7 @@ public class setupGUI {
                                         for(Change tempChange: anim.steps.get(i).getChanges()) {						// in each Step we are storing the values before the animation, so we
                                                 anim.changeBack(tempChange);															// restore it all like it was before this step and then decrement the
                                         }	
+                                        anim.currentStep--;
                                     }
                                     // currentStep value, as well as call Main.panel.repaint() to redraw
                                     AnimatedArray.panel.repaint();																// the panel in order to show these changes
@@ -109,7 +114,7 @@ public class setupGUI {
                                     }
                                     anim.nextBtn.setEnabled(true);															// we're definitely not at the last step anymore, so enable nextBtn
                                     anim.pauseBtn.setEnabled(true);
-                                    anim.currentStep = stepList.getSelectedIndex();
+                                    //anim.currentStep = stepList.getSelectedIndex();
                                     }
                                 else{
                                     																		// increment the currentStep (because we're moving to the next one)

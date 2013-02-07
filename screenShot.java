@@ -1,3 +1,7 @@
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -20,14 +24,21 @@ public class screenShot {
 	
 	private static int shotNumber;
 	
-	public static void takeScreenShot(JPanel j){
-		 BufferedImage bufImage = new BufferedImage(j.getSize().width, j.getSize().height,BufferedImage.TYPE_INT_RGB);  
-	       j.paint(bufImage.createGraphics());  
+	public static void takeScreenShot(){
 
 	    try{  
-		    File imageFile = new File("images/shot"+shotNumber+".png");  
-	        imageFile.createNewFile();  
-	        ImageIO.write(bufImage, "png", imageFile);  
+			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); //stolen from online and pasted over andy's code
+			Rectangle screenRectangle = new Rectangle(screenSize);				//yw.
+			Robot robot = new Robot();
+			BufferedImage image = robot.createScreenCapture(screenRectangle);
+			File file = new File("images/shot"+shotNumber+".png");
+			file.mkdirs();
+			ImageIO.write(image, "png", new File("images/shot"+shotNumber+".png"));
+			
+//		    File imageFile = new File("images/shot"+shotNumber+".png");  
+//	        imageFile.createNewFile();  
+//	        ImageIO.write(bufImage, "png", imageFile);  
+			
 	        shotNumber++;
 	    }catch(Exception ex){  
 	    	System.out.println("Could not write to file");
@@ -44,4 +55,9 @@ public class screenShot {
 		screenShot.shotNumber = shotNumber;
 	}
 
+	
+	public static void captureScreen(String fileName) throws Exception {
+		
+		
+		}
 }

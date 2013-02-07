@@ -1,3 +1,4 @@
+import java.awt.AWTException;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -5,17 +6,23 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.Rectangle;
+import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -46,24 +53,25 @@ public final class AnimatedArray extends JPanel {
  	static JPanel panel;																			// we need to to have the reference to the drawing area to repaint it
 	static int currentStep;																			// the currentStep
 	static int t;																					// could just REMOVE. Though keeping it with important variables might be a good idea as well. I don't like the fact that the minimum value is 1 second of each animation.
+
 	private static String info = ""; // a string to display information at each step
         private static Toolkit toolkit =  Toolkit.getDefaultToolkit ();
 	public static Dimension Fullscreen = toolkit.getScreenSize();
         	public static int windowWidth = (int) Fullscreen.getWidth();
                 public static int windowHeight = (int) Fullscreen.getHeight();
 	private int counter = 0; //counter for paintComponent
+
+	private static String info = ""; 																// a string to display information at each step
+
 	public static boolean continuousAnimation = false; // variable to determine whether to run a continuous animation or not.
-	
-	
+	static boolean screenshot = true;
+
 	public AnimatedArray(){
             
         }
 
 	public AnimatedArray(int[] arrInt){
-                
 
-                
-                
                 System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 		Animator.setDefaultTimingSource(ani_timer);
 
@@ -159,11 +167,16 @@ public final class AnimatedArray extends JPanel {
 		return rect_list;
 	}
 	
-	public void swapRect(int a, int b, long t) {
+	public void swapRect(int a, int b, long t, String info) {
 		currentStep++;																																					// increment currentStep
 		s = new Step();																																					// create a new step
 		// Create animation for showing information on what's happening
-		String information = "Swapping index " + a + " (" + rect_list.get(a).getLabel() + ") " + " with index " + b + " (" + rect_list.get(b).getLabel() + ")";			// create the string
+		String information;
+		if (info == "") {
+			information = "Swapping index " + a + " (" + rect_list.get(a).getLabel() + ") " + " with index " + b + " (" + rect_list.get(b).getLabel() + ")";			// create the string
+		} else {
+			information = info;
+		}
 		s.setInfo(information);																																			// add it to the step
 		// Change information
 		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), s.getFirstAnimator());																		// create an animator for this, which we could use to trigger this change
@@ -200,11 +213,16 @@ public final class AnimatedArray extends JPanel {
 		steps.add(s);																																					// add the new step to steps
 	}
 	
-	 public void modifyLabel(int n, String d, int t) {
+	 public void modifyLabel(int n, String d, int t, String info) {
 		currentStep++;
 		s = new Step();
 		// Animate information
-		String information = "Changing index " + n + " label from " + rect_list.get(n).getLabel() + " to " + d;
+		String information;
+		if (info == "") {
+			information = "Changing index " + n + " label from " + rect_list.get(n).getLabel() + " to " + d;
+		} else {
+			information = info;
+		}
 		s.setInfo(information);
 		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
 		s.getLastAnimator().addTarget(new ChangeLabel(this, information));
@@ -221,11 +239,16 @@ public final class AnimatedArray extends JPanel {
 		steps.add(s);	  
 	 } 
 	 
-	 public void setRectColor(int index, Color c, int t) {
+	 public void setRectColor(int index, Color c, int t, String info) {
 		currentStep++;
 		s = new Step();
 		// Animate information
-		String information = "Changing index " + index + " color from " + rect_list.get(index).getColor() + " to " + c;
+		String information;
+		if (info == "") {
+			information = "Changing index " + index + " color from " + rect_list.get(index).getColor() + " to " + c;
+		} else {
+			information = info;
+		}
 		s.setInfo(information);
 		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
 		s.getLastAnimator().addTarget(new ChangeLabel(this, information));
@@ -242,11 +265,16 @@ public final class AnimatedArray extends JPanel {
 		steps.add(s);
 	}
 	 
-	 public void setRectColor(int index, int index1, Color c, int t) {
+	 public void setRectColor(int index, int index1, Color c, int t, String info) {
 			currentStep++;
 			s = new Step();
 			// Animate information
-			String information = "Changing index " + index + " color from " + rect_list.get(index).getColor() + " to " + c;
+			String information;
+			if (info == "") {
+				information = "Changing index " + index + " color from " + rect_list.get(index).getColor() + " to " + c;
+			} else {
+				information = info;
+			}
 			s.setInfo(information);
 			s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
 			s.getLastAnimator().addTarget(new ChangeLabel(this, information));
@@ -303,13 +331,18 @@ public final class AnimatedArray extends JPanel {
 	
 	/* function for changing the information on what's happening */
 	public static void setInfo(String info) {
+		if(screenshot) {
+			screenShot.takeScreenShot();
+		}
 		AnimatedArray.info = info;
 	} 
 
+
+
+	
 	/*an overriden method from JFrame: paints the actual rectangle on the screen. It is called each time timingEvent calls repaint() */
 	protected void paintComponent(Graphics g){
 		
-		//counter++;
 		
 		Graphics g2g = (Graphics2D) g;
 		((Graphics2D) g2g).setBackground(Color.WHITE);
@@ -333,15 +366,8 @@ public final class AnimatedArray extends JPanel {
 		/* draw the information */
 		
 		
-		/*
-		 * would take a screenshot here, the counter value really should depend on the speed of a continuous animation
-		 * 
-		 *
-		if(counter == 100){
-			screenShot.takeScreenShot(panel);
-			counter = 0;
-		}
-		*/
+	
+		
 	} 
         
      /*   public void resize(int height, int width){
