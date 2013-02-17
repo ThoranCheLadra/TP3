@@ -1,3 +1,4 @@
+package AnimatedDataStructure;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.Robot;
@@ -17,7 +18,7 @@ import javax.swing.JPanel;
  * 
  * our class want to modify shotNumber to overwrite a particular file etc
  * 
- * could make png, jpeg etc, all depends on storage requirements and desired quality
+ * could make png, jpeg etc, all dep	ends on storage requirements and desired quality
  * 
  */
 public class screenShot {
@@ -26,7 +27,7 @@ public class screenShot {
 	
 	public static void takeScreenShot(){
 
-	    try{  
+	    try {  
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); //stolen from online and pasted over andy's code
 			Rectangle screenRectangle = new Rectangle(screenSize);				//yw.
 			Robot robot = new Robot();
@@ -40,12 +41,10 @@ public class screenShot {
 //	        ImageIO.write(bufImage, "png", imageFile);  
 			
 	        shotNumber++;
-	    }catch(Exception ex){  
+	    } catch(Exception ex) {  
 	    	System.out.println("Could not write to file");
 	    }  
-	}
-	
-	
+	}	
 	
 	public static int getShotNumber() {
 		return shotNumber;
@@ -55,9 +54,5 @@ public class screenShot {
 		screenShot.shotNumber = shotNumber;
 	}
 
-	
-	public static void captureScreen(String fileName) throws Exception {
-		
-		
-		}
+	public static void captureScreen(String fileName) throws Exception {}
 }

@@ -1,4 +1,7 @@
+package AnimatedLinkedList;
 import java.util.ArrayList;
+
+import AnimatedDataStructure.Rect;
 
 
 //a simple class to represent a LIFO linked-List stack of Rect objects 
@@ -27,6 +30,25 @@ public class linkedList {
 			return false;
 	}
 	
+	public void remove(Rect target){
+		Node<Rect> pos = head;
+		Node<Rect> posOld = null;
+		Rect posData;
+		
+		while(pos != null) {
+			posData = pos.getData();
+			if(posData.equals(target))
+				if (posOld == null) {
+					head = pos.getNext();
+				} else {
+					posOld.setNext(pos.getNext());
+				}
+			posOld = pos;
+			pos = pos.getNext();
+		}
+	}
+	
+	
 	public Node<Rect> find(Rect target){
 		Node<Rect> pos = head;
 		Rect posData;
@@ -38,6 +60,26 @@ public class linkedList {
 			pos = pos.getNext();
 		}
 		return null;
+	}
+	
+	public Rect get(int a) {
+		Node<Rect> pos = head;
+		int i = 0;
+		while (i < a) {
+			pos = pos.getNext();
+			i++;
+		}
+		return pos.getData();
+	}
+	
+	public void set(int a, Rect newRect) {
+		Node<Rect> pos = head;
+		int i = 0;
+		while (i < a) {
+			pos = pos.getNext();
+			i++;
+		}
+		pos.setData(newRect);
 	}
 
 	
@@ -74,6 +116,10 @@ public class linkedList {
 
 	public int getCount() {
 		return count;
+	}
+
+	public Node<Rect> getHead() {
+		return head;
 	}
 
 

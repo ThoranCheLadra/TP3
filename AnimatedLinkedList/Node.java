@@ -1,3 +1,4 @@
+package AnimatedLinkedList;
 
 
 //a class to represent an individual Rect node in a linked list

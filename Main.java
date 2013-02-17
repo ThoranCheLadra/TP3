@@ -1,52 +1,28 @@
+
+
 import java.awt.Color;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import org.jdesktop.core.animation.timing.Animator;
+
+import AnimatedDataStructure.AnimatedDataStructure;
+import AnimatedLinkedList.AnimatedLinkedList;
+import AnimatedArray.AnimatedArray;
 
 import java.util.Random;
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author Arthur Bigeard
- */
 public class Main {
     
-    public static AnimatedArray anim;
+    private static AnimatedLinkedList anim;
     public static int time = 200;
     
 	public static void main(String[] args) {
 		int[] arr = {4,3,8,1,2,12};
-<<<<<<< HEAD
-                anim = new AnimatedArray(arr, 600, 600);
-=======
-		anim = new AnimatedArray(arr);
->>>>>>> 207e372eed143e3b8be90c1b45291985b990b12f
+		anim = new AnimatedLinkedList(arr);
 		/*setup thread for creating GUI */
-		
 		
 		//quicksort(arr, 0, arr.length-1, time);
 		bubblesort(arr);
-                
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				setupGUI.setupGUI();
-			}
-		});
-		
+		//anim.addToHead(20);
+		//anim.swap(0, 1, "");
+		//anim.findAndRemove("20", anim); //remove nodes with label = 20
         anim.endAnimation();
 	}
 	// taken from http://en.wikipedia.org/wiki/Quicksort , translated to Java and our API applied
@@ -60,14 +36,14 @@ public class Main {
 	    int temp = array[pivotIndex];
 	    array[pivotIndex] = array[right];
 	    array[right] = temp;
-	    anim.swapRect(pivotIndex, right, time, "");
+	    anim.swap(pivotIndex, right, "");
 	    int storeIndex = left;
 	    for(int i = left; i < right; i++) { // left <= i <= right
 	    	if (array[i] < pivotValue) {
 	    		temp = array[i];
 	    		array[i] = array[storeIndex];
 	    		array[storeIndex] = temp;
-	    		anim.swapRect(i, storeIndex, time, "");
+	    		anim.swap(i, storeIndex, "");
 	    		storeIndex = storeIndex + 1;
 	    	}
 	    }
@@ -75,7 +51,7 @@ public class Main {
 	    temp = array[storeIndex];
 	    array[storeIndex] = array[right];
 	    array[right] = temp;
-	    anim.swapRect(storeIndex, right, time, "");
+	    anim.swap(storeIndex, right, "");
 	    return storeIndex;
 	}
 	
@@ -98,16 +74,18 @@ public class Main {
 		int i, j,t=0;
 		for(i = 0; i < arr.length; i++){
 			for(j = 1; j < (arr.length-i); j++){
-				anim.setRectColor(j, j-1, Color.RED, time, "");
+				anim.setColor(j, Color.RED, "");
+				anim.setColor(j-1, Color.RED, "");
 					if(arr[j-1] > arr[j]){
 					t = arr[j-1];
 					arr[j-1]=arr[j];
 					arr[j]=t;
-					anim.swapRect(j, j-1, time, "");
+					anim.swap(j, j-1, "Swapping");
 				}
-				anim.setRectColor(j, j-1, Color.BLUE, time, "");
+				anim.setColor(j, Color.BLUE, "");
+				anim.setColor(j-1, Color.BLUE, "");
 			}
-			anim.setRectColor(j-1, Color.DARK_GRAY, time, "Gray out an element that's in it's place already.");
+			anim.setColor(j-1, Color.DARK_GRAY, "Gray out an element that's in it's place already.");
 		}
 	}
 	
