@@ -15,7 +15,7 @@ public class Main {
     
 	public static void main(String[] args) {
 		int[] arr = {4,3,8,1,2,12};
-		anim = new AnimatedLinkedList(arr);
+		anim = new AnimatedLinkedList(arr, 600 ,600);
 		/*setup thread for creating GUI */
 		
 		//quicksort(arr, 0, arr.length-1, time);

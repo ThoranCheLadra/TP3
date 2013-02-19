@@ -31,7 +31,10 @@ import AnimatedDataStructure.setupGUI;
 
 public final class AnimatedArray extends JPanel implements AnimatedDataStructure {
 	
-	private Dimension Fullscreen;
+	private static Toolkit toolkit =  Toolkit.getDefaultToolkit ();
+	public static Dimension Fullscreen = toolkit.getScreenSize();
+	public static int windowWidth = (int) Fullscreen.getWidth();
+	public static int windowHeight = (int) Fullscreen.getHeight();
 	private JButton nextBtn;																			// getting reference to the button
  	private JButton prevBtn;																			// same as above
 	private JButton pauseBtn;
@@ -73,13 +76,58 @@ public final class AnimatedArray extends JPanel implements AnimatedDataStructure
 		}
 		steps.add(s);	
 	}
-        
+    
+	
+	 public AnimatedArray(int[] arrInt, int width, int height){
+		windowWidth = width;
+		windowHeight = height;
+
+                
+                
+		System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+		Animator.setDefaultTimingSource(ani_timer);
+
+		arrayLeft = arrInt.length;	//MAX = 85
+		rect_list = new ArrayList<Rect>(arrayLeft);
+		int rs = rectSize(width);
+		int h = rs;
+		int w = rs;
+		int x= rs;
+		int y= 2*rs;
+
+		currentStep = 0;
+		setOpaque(true);
+		
+		Step s = new Step();																	// create a new step to store initial values and all. We wouldn't really need it if 
+		setInfo("");																	// it wasn't for the "Info" field
+		s.setInfo(info);
+		for(int i = 0;i<arrayLeft;i++){
+			Rect r = new Rect(x, y, w, h, arrInt[i]+"", this);								// create all the Rectangle and add them to rect_list
+			rect_list.add(r);
+			x += rectSpace(rectSize(width));
+                        System.out.println(x);
+		}
+		steps.add(s);
+		
+		
+		
+		
+	}
+	
 	private int rectSpace() {	  	
 		return (int) rectSize()/arrayLeft + rectSize()+1;
+	}
+	
+	private int rectSpace(int rectSize) {	  	
+		return (int) rectSize/arrayLeft + rectSize+1;
 	}
 		
 	private int rectSize() {	  	
 			return (int) ((Fullscreen.getWidth()-(arrayLeft))/(arrayLeft+4)); 	
+	}
+	
+	private int rectSize(int width){
+            return (int) ((width-(arrayLeft))/(arrayLeft+4)); 	
 	}
 	
 	public void swap(int a, int b, String info) {
@@ -270,6 +318,7 @@ public final class AnimatedArray extends JPanel implements AnimatedDataStructure
 	/*an overriden method from JFrame: paints the actual rectangle on the screen. It is called each time timingEvent calls repaint() */
 	protected void paintComponent(Graphics g){
 		
+		//counter++;
 		
 		Graphics g2g = (Graphics2D) g;
 		((Graphics2D) g2g).setBackground(Color.WHITE);
@@ -281,20 +330,15 @@ public final class AnimatedArray extends JPanel implements AnimatedDataStructure
 		//g2g.setColor(Color.BLUE);
 		g2g.setColor(Color.BLUE);
 		g2g.drawString(info,(int)(Fullscreen.width/4),(int)(Fullscreen.height*3/4));
-		Font font = new Font("Arial", Font.PLAIN, (int) 20 * rectSize() / 72);
+		Font font = new Font("Arial", Font.PLAIN, (int) 20 * rectSize(windowWidth) / 72);
 		g2g.setFont(font);
 		/* fill the rectangles and draw a tag next to each one */
 		for(Rect r : rect_list){
 			g2g.setColor(r.getColor());
 			g2g.fillRect(r.getRec().x, r.getRec().y,r.getRec().width,r.getRec().height);
 			g2g.setColor(Color.WHITE);
-			g2g.drawString(r.getLabel(), r.getRec().x+(rectSize()/2)-10, r.getRec().y+(rectSize()/2));
+			g2g.drawString(r.getLabel(), r.getRec().x+(rectSize(windowWidth)/2)-10, r.getRec().y+(rectSize(windowWidth)/2));
 		}
-		/* draw the information */
-		
-		
-	
-		
 	} 
 
 	/* Getters/Setters */
@@ -370,5 +414,15 @@ public final class AnimatedArray extends JPanel implements AnimatedDataStructure
 	public void setScreenshot(boolean value) {
 		this.screenshot = value;
 	}
+        
+         @Override
+        public int getWindowWidth() {
+            return windowWidth;
+        }
+
+        @Override
+        public int getWindowHeight() {
+            return windowHeight;
+        }
 }
 

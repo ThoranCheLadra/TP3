@@ -32,10 +32,13 @@ import AnimatedDataStructure.setupGUI;
 
 public final class AnimatedLinkedList extends JPanel implements AnimatedDataStructure {
 	//private int counter = 0; //counter for paintComponent
-	private Dimension Fullscreen;
+	private static Toolkit toolkit =  Toolkit.getDefaultToolkit ();
+	public static Dimension Fullscreen = toolkit.getScreenSize();
 	private JButton nextBtn;																			// getting reference to the button
  	private JButton prevBtn;																			// same as above
 	private JButton pauseBtn;
+        public static int windowWidth = (int) Fullscreen.getWidth();
+	public static int windowHeight = (int) Fullscreen.getHeight();
 	private LinkedList<Step> steps = new LinkedList<Step>();							// this is where all the steps of animation will be stored																			// we need to to have the reference to the drawing area to repaint it																		// could just REMOVE. Though keeping it with important variables might be a good idea as well. I don't like the fact that the minimum value is 1 second of each animation.
  	private final SwingTimerTimingSource ani_timer = new SwingTimerTimingSource(); // this is for starting the animation
 	private int currentStep;																			// the currentStep
@@ -49,8 +52,6 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 	private int arrayLeft;
 
 	public AnimatedLinkedList(int[] arr){
-		Toolkit toolkit =  Toolkit.getDefaultToolkit ();
-		Fullscreen = toolkit.getScreenSize();
 		System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 		Animator.setDefaultTimingSource(ani_timer);
 
@@ -82,15 +83,60 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 		}
 		steps.add(s);
 	}
+        
+        
+        public AnimatedLinkedList(int[] arr, int width, int height){
+                windowWidth = width;
+                windowHeight = height;
+		System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+		Animator.setDefaultTimingSource(ani_timer);
+
+		arrayLeft = arr.length;	//MAX = 85
+		
+		rect_list = new linkedList(); //a linked list of rectangles
+
+		//the scaling/resizing code is not working currently
+		int rs = rectSize(windowWidth);
+		int h = rs;
+		int w = rs;
+		int x= arrayLeft*rs+rectSpace(rs);
+		int y= 2*rs;
+		time = 100;
+		currentStep = 0;
+		setOpaque(true);
+
+		Step s = new Step();																	// create a new step to store initial values and all. We wouldn't really need it if 
+		setInfo("Start of the animation");																	// it wasn't for the "Info" field
+		s.setInfo(info);
+
+
+		//as its a stack, items need to be added in reverse to begin with to replicate its appearance
+
+		for(int i = 0;i<arrayLeft;i++){
+			Rect r = new Rect(x, y, w, h, arr[i]+"", this);								// create all the Rectangle and add them to rect_list
+			rect_list.addFirst(r);
+			x -= rectSpace(rs);
+		}
+		steps.add(s);
+	}
 
 	private int rectSpace() {	  	
 		return (int) rectSize()/arrayLeft + rectSize()+1;
 	}
+        
+        private int rectSpace(int rectSize) {	  	
+		return (int) rectSize/arrayLeft + rectSize+1;
+	}
+	
 
 	private int rectSize() {	  	
 		return (int) ((Fullscreen.getWidth()-(arrayLeft))/(arrayLeft+4)); 	
 	}
 	
+        private int rectSize(int width){
+            return (int) ((width-(arrayLeft))/(arrayLeft+4)); 	
+	}
+        
 	//locates, identifies and removes the linked list element with String S
 	public void findAndRemove(String i, AnimatedLinkedList anim){
 		currentStep++;
@@ -322,7 +368,7 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 		//g2g.setColor(Color.BLUE);
 		g2g.setColor(Color.BLUE);
 		g2g.drawString(info,(int)(Fullscreen.width/4),(int)(Fullscreen.height*3/4));
-		Font font = new Font("Arial", Font.PLAIN, (int) 20 * rectSize() / 72);
+		Font font = new Font("Arial", Font.PLAIN, (int) 20 * rectSize(windowWidth) / 72);
 		g2g.setFont(font);
 		
 		
@@ -336,7 +382,7 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 			g2g.setColor(r.getColor());
 			g2g.fillRect(r.getRec().x, r.getRec().y,r.getRec().width,r.getRec().height);
 			g2g.setColor(Color.WHITE);
-			g2g.drawString(r.getLabel(), r.getRec().x+(rectSize()/2)-10, r.getRec().y+(rectSize()/2));
+			g2g.drawString(r.getLabel(), r.getRec().x+(rectSize(windowWidth)/2)-10, r.getRec().y+(rectSize(windowWidth)/2));
 		}
 
 		//draw pointers, including final NULL pointer
@@ -346,14 +392,14 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 			g2g.fillOval(arr.get(i+1).getRec().x-40 + arr.get(i+1).getRec().width/2, arr.get(i+1).getRec().y+15+arr.get(i+1).getRec().height/2, 10, 10);
 		}
 
-		g2g.drawLine((arr.get(arr.size()-1).getRec().x+40)+arr.get(arr.size()-1).getRec().width/2, arr.get(arr.size()-1).getRec().y+20+arr.get(arr.size()-1).getRec().height/2,      arr.get(arr.size()-1).getRec().x+rectSpace()+30,arr.get(arr.size()-1).getRec().y+20+arr.get(arr.size()-1).getRec().height/2);
+		g2g.drawLine((arr.get(arr.size()-1).getRec().x+40)+arr.get(arr.size()-1).getRec().width/2, arr.get(arr.size()-1).getRec().y+20+arr.get(arr.size()-1).getRec().height/2,      arr.get(arr.size()-1).getRec().x+rectSpace(rectSize(windowWidth))+30,arr.get(arr.size()-1).getRec().y+20+arr.get(arr.size()-1).getRec().height/2);
 		g2g.setColor(Color.RED);
-		g2g.fillOval(arr.get(arr.size()-1).getRec().x+rectSpace()+30,arr.get(arr.size()-1).getRec().y+20+arr.get(arr.size()-1).getRec().height/2-5, 10, 10);
+		g2g.fillOval(arr.get(arr.size()-1).getRec().x+rectSpace(rectSize(windowWidth))+30,arr.get(arr.size()-1).getRec().y+20+arr.get(arr.size()-1).getRec().height/2-5, 10, 10);
 
-		/* draw the information */
+		/* draw the information 
 		g2g.setColor(Color.BLUE);
 		g2g.drawString(info,(int)(Fullscreen.width/4),(int)(Fullscreen.height*3/4));
-
+                * */
 	}
 	
 	/* Getters/Setters */
@@ -429,5 +475,15 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 	public void setScreenshot(boolean value) {
 		this.screenshot = value;
 	}
+
+    @Override
+    public int getWindowWidth() {
+        return windowWidth;
+    }
+
+    @Override
+    public int getWindowHeight() {
+        return windowHeight;
+    }
 }
 

@@ -142,7 +142,7 @@ public class setupGUI {
 			}
 		});
 
-		frame.setSize(anim.getFullscreen().width, anim.getFullscreen().height);
+		frame.setSize(anim.getWindowWidth(), anim.getWindowHeight());
 		frame.validate();
 		frame.setVisible(true);
                 

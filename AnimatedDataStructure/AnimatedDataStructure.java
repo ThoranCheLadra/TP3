@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import org.jdesktop.swing.animation.timing.sources.SwingTimerTimingSource;
 
 public abstract interface AnimatedDataStructure {
-	
+    
 	void swap(int index1, int index2, String info);
 	
 	void modifyLabel(int index, String dataValue, String info);
@@ -49,6 +49,10 @@ public abstract interface AnimatedDataStructure {
 	SwingTimerTimingSource getAniTimer();
 	// Current Step
 	int getCurrentStep();
+        
+        int getWindowWidth();
+        
+        int getWindowHeight();
 	
 	void setCurrentStep(int currentStep);
 	// ContinuousAnimation
