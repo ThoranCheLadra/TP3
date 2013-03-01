@@ -44,7 +44,7 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 	private int currentStep;																			// the currentStep
  	private boolean continuousAnimation = false; // variable to determine whether to run a continuous animation or not.
  	private int time;
- 	private boolean screenshot = true;
+ 	private boolean screenshot = false;
  	
  	private linkedList rect_list;																// we could just REMOVE this																	// same as above															// this is where all the rectangles which will be drawn are stored
 	private String info = ""; 																// a string to display information at each step
@@ -169,7 +169,6 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 			anim.setColor(count,Color.WHITE,"Changing color to white");
 			//prev.setNext(node.getNext());   //joins the pointer for the prev element after the to be deleted node
 			//rect_list.removeNode(node); //removes this node
-			
 	
 			//here I want to add the changes associated with the above commented lines, respectively.
 			//if the above lines are not commented out, they will not be represented as a step and 
@@ -179,13 +178,15 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 			//to get stepForward() to retrieve them
 			
 			// Trigger for a continuous animation
-			s.addChanges(new Change("pointerSwitch", prev.getData(), "Assigning pointer from previous element"));
-			s.addChanges(new Change("deleteNode", prev.getNext().getData(), "Removing node"));
+			s.addChanges(new Change("pointerSwitch", prev, "Assigning pointer from previous element"));
+			//s.addChanges(new Change("deleteNode", prev.getNext().getData(), "Removing node"));
+
 		}
 		currentStep++;
 		// Trigger for a continuous animation
 		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
 		s.getLastAnimator().addTarget(new ContinuousAnimation(currentStep+1, this));
+		
 		steps.add(s);
 	}
 	
@@ -298,13 +299,15 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 		//System.out.println("Next step: " + steps.get(currentStep+1).getChanges().get(0).getType());
 		if (steps.get(currentStep).getChanges().get(0).getType() == "pointerSwitch") {
 			System.out.println("found pointer switch");
+			Node<Rect> p = steps.get(currentStep).getChanges().get(0).getNodeReference();
+			rect_list.removeNode(p, p.getNext(),rectSpace(rectSize()));
+			this.repaint();
+
 		}
 
-		
 		//here i'm printing out all changes, but "pointerSwitch" or "deleteNode" aren't listed
 		//System.out.println(steps.get(currentStep).getChanges().get(0).getType());
 
-		
 		
 		if (steps.get(currentStep).getList().size() != 0) { // if there are any Animators inside the step, trigger the first one
 			steps.get(currentStep).getList().get(0).start();
@@ -375,7 +378,7 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 		//the linked list is converted into an array so that it can be worked with
 		ArrayList<Rect> arr = new ArrayList<Rect>();
 		arr = rect_list.toArray();
-
+		
 		/* fill the rectangles and draw a tag next to each one */
 		
 		for(Rect r : arr){

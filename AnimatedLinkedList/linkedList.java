@@ -1,4 +1,5 @@
 package AnimatedLinkedList;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import AnimatedDataStructure.Rect;
@@ -46,6 +47,23 @@ public class linkedList {
 			posOld = pos;
 			pos = pos.getNext();
 		}
+	}
+	
+	
+	//removes a specific node
+	public void removeNode(Node<Rect> prev, Node<Rect> target, int spacing){
+		
+		Node<Rect> after = target.getNext();
+		prev.setNext(after);
+		target.setNext(null);
+		target = null;
+		
+		while(after != null){
+			Rectangle r = after.getData().getRec();
+			r.x -= spacing;
+			after = after.getNext();
+		}
+			
 	}
 	
 	
@@ -121,7 +139,5 @@ public class linkedList {
 	public Node<Rect> getHead() {
 		return head;
 	}
-
-
 
 }

@@ -2,9 +2,12 @@ package AnimatedDataStructure;
 import java.awt.Point;
 import java.awt.Color;
 
+import AnimatedLinkedList.Node;
+
 public class Change {
 	private String type; // type of change
 	private Rect reference; // index of the object that was changed
+	private Node<Rect> nodeReference;
 	private Object old; // position before the change
 	
 	/* Constructors for creating changes with position changes */
@@ -34,6 +37,13 @@ public class Change {
 		this.old = c;
 	}
 	
+	/* Constructors for creating changes with label changes, and NODE references */
+	public Change(String type, Node<Rect> reference, String label) {
+		this.type = type;
+		this.nodeReference = reference;
+		this.old = label;
+	}
+	
 	/* getters only. We don't want any setters */
 	
 	public String getType() {
@@ -44,6 +54,14 @@ public class Change {
 		return reference;
 	}
 	
+	public Node<Rect> getNodeReference() {
+		return nodeReference;
+	}
+
+	public void setNodeReference(Node<Rect> nodeReference) {
+		this.nodeReference = nodeReference;
+	}
+
 	/* getters with type casts. If you're using one of these, you be aware of what you'll get */
 	public Point getPoint() {
 		return (Point) old;
