@@ -139,7 +139,6 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
         
 	//locates, identifies and removes the linked list element with String S
 	public void findAndRemove(String i, AnimatedLinkedList anim){
-		currentStep++;
 		Step s = new Step();
 		// Create animation for showing information on what's happening
 		String information = "findAndRemove ";
@@ -161,22 +160,13 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 		} else {
 			while(node.getNext() != null && !(node.getData().getLabel().equals(i))){
 				prev = node; //pointer to previous node
-				//setColor(count,Color.RED,"Changing color to red");
-				// Animate change of color
-				s.addAnimator(new Animator.Builder().setDuration(time, TimeUnit.MILLISECONDS).build(), nextBtn);
-				s.getLastAnimator().addTarget(PropertySetter.getTarget(node.getData(), "colorDraw", node.getData().getColor(), Color.RED));
-				//setColor(count,Color.BLUE,"Changing color to blue");
-				s.addAnimator(new Animator.Builder().setDuration(time, TimeUnit.MILLISECONDS).build(), nextBtn);
-				s.getLastAnimator().addTarget(PropertySetter.getTarget(node.getData(), "colorDraw", node.getData().getColor(), Color.BLUE));
+				setColor(count,Color.RED,"Changing color to red");
+				setColor(count,Color.BLUE,"Changing color to blue");
 				node = node.getNext();
 				count++;
 			}
-			//anim.setColor(count,Color.GREEN,"Changing color to green");
-			s.addAnimator(new Animator.Builder().setDuration(time, TimeUnit.MILLISECONDS).build(), nextBtn);
-			s.getLastAnimator().addTarget(PropertySetter.getTarget(node.getData(), "colorDraw", node.getData().getColor(), Color.GREEN));
-			//anim.setColor(count,Color.WHITE,"Changing color to white");
-			s.addAnimator(new Animator.Builder().setDuration(time, TimeUnit.MILLISECONDS).build(), nextBtn);
-			s.getLastAnimator().addTarget(PropertySetter.getTarget(node.getData(), "colorDraw", node.getData().getColor(), Color.WHITE));
+			anim.setColor(count,Color.GREEN,"Changing color to green");
+			anim.setColor(count,Color.WHITE,"Changing color to white");
 			//prev.setNext(node.getNext());   //joins the pointer for the prev element after the to be deleted node
 			//rect_list.removeNode(node); //removes this node
 			
@@ -192,6 +182,7 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 			s.addChanges(new Change("pointerSwitch", prev.getData(), "Assigning pointer from previous element"));
 			s.addChanges(new Change("deleteNode", prev.getNext().getData(), "Removing node"));
 		}
+		currentStep++;
 		// Trigger for a continuous animation
 		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
 		s.getLastAnimator().addTarget(new ContinuousAnimation(currentStep+1, this));

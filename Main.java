@@ -19,10 +19,10 @@ public class Main {
 		/*setup thread for creating GUI */
 		
 		//quicksort(arr, 0, arr.length-1, time);
-		bubblesort(arr);
+		//bubblesort(arr);
 		anim.addToHead(20);
 		//anim.swap(0, 1, "");
-		anim.findAndRemove("20", anim); //remove nodes with label = 20
+		anim.findAndRemove("8", anim); //remove nodes with label = 20
         anim.endAnimation();
 	}
 	// taken from http://en.wikipedia.org/wiki/Quicksort , translated to Java and our API applied
