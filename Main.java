@@ -15,14 +15,14 @@ public class Main {
     
 	public static void main(String[] args) {
 		int[] arr = {4,3,8,1,2,12};
-		anim = new AnimatedLinkedList(arr, 600 ,600);
+		anim = new AnimatedLinkedList(arr);
 		/*setup thread for creating GUI */
 		
 		//quicksort(arr, 0, arr.length-1, time);
 		bubblesort(arr);
-		//anim.addToHead(20);
+		anim.addToHead(20);
 		//anim.swap(0, 1, "");
-		//anim.findAndRemove("20", anim); //remove nodes with label = 20
+		anim.findAndRemove("20", anim); //remove nodes with label = 20
         anim.endAnimation();
 	}
 	// taken from http://en.wikipedia.org/wiki/Quicksort , translated to Java and our API applied

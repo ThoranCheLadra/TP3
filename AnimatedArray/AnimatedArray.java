@@ -94,6 +94,7 @@ public final class AnimatedArray extends JPanel implements AnimatedDataStructure
 		int w = rs;
 		int x= rs;
 		int y= 2*rs;
+		time = 100;
 
 		currentStep = 0;
 		setOpaque(true);
@@ -105,7 +106,7 @@ public final class AnimatedArray extends JPanel implements AnimatedDataStructure
 			Rect r = new Rect(x, y, w, h, arrInt[i]+"", this);								// create all the Rectangle and add them to rect_list
 			rect_list.add(r);
 			x += rectSpace(rectSize(width));
-                        System.out.println(x);
+                        //System.out.println(x);
 		}
 		steps.add(s);
 		

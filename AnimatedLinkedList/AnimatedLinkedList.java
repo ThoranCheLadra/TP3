@@ -161,13 +161,22 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 		} else {
 			while(node.getNext() != null && !(node.getData().getLabel().equals(i))){
 				prev = node; //pointer to previous node
-				setColor(count,Color.RED,"Changing color to red");
-				setColor(count,Color.BLUE,"Changing color to blue");
+				//setColor(count,Color.RED,"Changing color to red");
+				// Animate change of color
+				s.addAnimator(new Animator.Builder().setDuration(time, TimeUnit.MILLISECONDS).build(), nextBtn);
+				s.getLastAnimator().addTarget(PropertySetter.getTarget(node.getData(), "colorDraw", node.getData().getColor(), Color.RED));
+				//setColor(count,Color.BLUE,"Changing color to blue");
+				s.addAnimator(new Animator.Builder().setDuration(time, TimeUnit.MILLISECONDS).build(), nextBtn);
+				s.getLastAnimator().addTarget(PropertySetter.getTarget(node.getData(), "colorDraw", node.getData().getColor(), Color.BLUE));
 				node = node.getNext();
 				count++;
 			}
-			anim.setColor(count,Color.GREEN,"Changing color to green");
-			anim.setColor(count,Color.WHITE,"Changing color to white");
+			//anim.setColor(count,Color.GREEN,"Changing color to green");
+			s.addAnimator(new Animator.Builder().setDuration(time, TimeUnit.MILLISECONDS).build(), nextBtn);
+			s.getLastAnimator().addTarget(PropertySetter.getTarget(node.getData(), "colorDraw", node.getData().getColor(), Color.GREEN));
+			//anim.setColor(count,Color.WHITE,"Changing color to white");
+			s.addAnimator(new Animator.Builder().setDuration(time, TimeUnit.MILLISECONDS).build(), nextBtn);
+			s.getLastAnimator().addTarget(PropertySetter.getTarget(node.getData(), "colorDraw", node.getData().getColor(), Color.WHITE));
 			//prev.setNext(node.getNext());   //joins the pointer for the prev element after the to be deleted node
 			//rect_list.removeNode(node); //removes this node
 			
