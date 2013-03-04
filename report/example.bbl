@@ -1,8 +1,16 @@
 \begin{thebibliography}{1}
 
-\bibitem{alice}
-L.~Carroll.
-\newblock {\em Alice's Adventures in Wonderland}.
-\newblock Macmillan, 1865.
+\bibitem{website:TimingFramework}
+Timing Framework.
+\newblock Official website.
+\newblock \url{http://java.net/projects/timingframework}, 2013.
+\newblock [Online; accessed 4-March-2013].
+
+\bibitem{website:TimingFrameworkDemo}
+Timing Framework.
+\newblock Official website, demos page.
+\newblock \url{http://java.net/projects/timingframework/pages/Demos#Triggers},
+  2013.
+\newblock [Online; accessed 4-March-2013].
 
 \end{thebibliography}

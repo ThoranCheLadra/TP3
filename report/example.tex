@@ -29,7 +29,7 @@ capture the animation in a form that can be viewed independently of your system,
 \chapter{Introduction}
 \label{intro}
 
-Alice \cite{alice} was beginning to get very tired of sitting by her sister
+Alice was beginning to get very tired of sitting by her sister
 on the bank and of having nothing to do: once or twice she had peeped into
 the book her sister was reading, but it had no pictures or conversations in
 it.
@@ -44,7 +44,7 @@ the loveliest garden you ever saw.
 \chapter{Design}
 \label{design}
 
-The following diagrams (especially figure \ref{fig:alice}) illustrate the
+The following diagrams (especially figure) illustrate the
 process...
 
 %==============================================================================
@@ -67,6 +67,65 @@ Blah blah blah
 \subsection{Alexander Ferguson}
 \subsection{Andrew Gibson}
 \subsection{Gediminas Leikus}
+\subsubsection{Separating animations into steps and making continuous animations}
+
+The group decided to use Java for our project, because we were all familiar with it and because it was the language our client suggested us to use. We had left the decision of choosing the animation tools to Andrew Gibson and Alexander Ferguson. For the reasons stated in this document (reference), they decided to choose the Timing Framework \cite{website:TimingFramework}.
+
+Andrew had an example (\ref{fig:firstPrototype}) ready, which had multiple rectangles created from an array moving back and forth, had buttons allowing us to stop the animation, resume it or delete one of the rectangles. He also added comments into the sample code, just so it would be easier for us to familiarize with the tool.
+
+\input{figures/firstPrototype}
+
+While this was a good initial step, we did not have any obvious way to implement Steps, in a sense where multiple Animations could be assigned to one step and we could navigate through these steps back and forth. Therefore both Andrew and Arthur Bigeard started looking into it. \\
+
+\input{figures/arthurPrototype}
+
+Andrew had no real suggestions and Arthur’s prototype implementation seemed: 
+\begin{itemize}
+	\item too complex (a swap of 2 rectangles was over 50 lines long \ref{fig:arthurPrototype})
+	\item impractical to use (it didn’t have any way to step back and forth through the animation) 
+	\item it had a performance overhead (all Animator objects were running continuously, until the whole animation was stopped)
+\end{itemize}
+It had a few good points though: 
+\begin{itemize}
+	\item it was done on a low level (so the how-to part was obvious if you understood the code) 
+	\item it was not storing too much information (thus it did not really have a memory overhead). 
+\end{itemize}
+But this was not what we wanted – the most important thing for us was the stepping back and forth functionality.  Therefore I started looking into it as well.\\
+
+During my research of the Timing Framework I found out that we could add triggers, which would start an animation, to a button or to another animation, which would start another animation when it stops or starts running \cite{website:TimingFrameworkDemo}. Thus, triggers seemed like a great tool for linking multiple animations into one Step, linking steps and making a continuous animation.\\
+
+\input{figures/gPrototype}
+
+I still wanted to find a way to make a change of a rectangle (or any other object) property easy to manage. Looking through the Demos I also found that I could use Targets and PropertySetters to do this in just a few lines of code \ref{fig:gPrototype}, which seemed great. But it only allowed us to change a property, which was numerical (like coordinates or colors) – it didn’t allow us to change all the properties of the object, like the labels of rectangles. To solve this issue, I researched further and found that we can create a class, which would implement a TimingTarget interface and its begin(), end(), repeat() and reverse() methods. Therefore, to solve the issue of changing the labels of rectangles I created a new class called ChangeLabel, which implemented a TimingTarget interface, its begin(), end(), repeat() and reverse() methods, and added a change of String variable just inside its begin method. This approach seemed great, because:
+\begin{itemize}
+	\item we can change any property of an object or do pretty much anything when that TimingTarget is called
+	\item it is attached to each Animator object, so we do not have to worry about storing the TimingTargets anywhere
+	\item it is efficient performance wise, because these TimingTargets are only executed, when the Animator object is
+	\item it is easy to use, implement and understand
+\end{itemize}
+
+Therefore, the end result of my prototype was:
+\begin{itemize}
+	\item a list of steps
+	\item an array of rectangles and their coordinates at each step
+	\item an ability to either step back and forth through the animation by using buttons or see a continuous animation (and it was either that or that)
+\end{itemize}
+
+After looking through both my and Arthurs prototypes, we decided to merge the good parts of each: we kept most of my prototype, but reduced the amount of data stored for each Step, in particular, we made it so it would only store the details of the changed object before the change, rather than the details of all the objects.\\
+
+The only issue left then, was the ability to have both step-by-step and continuous animations and allow the user to switch between them at any point of time, but this was not a big issue, since I just used a similar approach I used with ChangeLabel class:
+\begin{enumerate}
+	\item I created a new class, called ContinuousAnimation, which was also implementing the TimingTarget interface
+	\item introduced a boolean variable called continuousAnimation, which was keeping record of whether the animation was in step-by-step or continuous mode
+	\item made it so that the begin method in ContinuousAnimation would execute different actions according to the boolean continuousAnimation variable value:
+	\begin{itemize}
+		\item If true, Trigger the next Step
+		\item If false, do nothing
+	\end{itemize}
+\end{enumerate}
+
+
+
 \subsection{Liam Bell}
 
 %==============================================================================

@@ -7,12 +7,13 @@
 \contentsline {subsection}{\numberline {3.2.2}Alexander Ferguson}{6}{subsection.3.2.2}
 \contentsline {subsection}{\numberline {3.2.3}Andrew Gibson}{6}{subsection.3.2.3}
 \contentsline {subsection}{\numberline {3.2.4}Gediminas Leikus}{6}{subsection.3.2.4}
-\contentsline {subsection}{\numberline {3.2.5}Liam Bell}{6}{subsection.3.2.5}
-\contentsline {chapter}{\numberline {4}Evaluation}{7}{chapter.4}
-\contentsline {chapter}{\numberline {5}Conclusion}{8}{chapter.5}
-\contentsline {section}{\numberline {5.1}Contributions}{8}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}Arthur Bigeard}{8}{subsection.5.1.1}
-\contentsline {subsection}{\numberline {5.1.2}Alexander Ferguson}{8}{subsection.5.1.2}
-\contentsline {subsection}{\numberline {5.1.3}Andrew Gibson}{8}{subsection.5.1.3}
-\contentsline {subsection}{\numberline {5.1.4}Gediminas Leikus}{8}{subsection.5.1.4}
-\contentsline {subsection}{\numberline {5.1.5}Liam Bell}{8}{subsection.5.1.5}
+\contentsline {subsubsection}{Separating animations into steps and making continuous animations}{6}{section*.3}
+\contentsline {subsection}{\numberline {3.2.5}Liam Bell}{10}{subsection.3.2.5}
+\contentsline {chapter}{\numberline {4}Evaluation}{11}{chapter.4}
+\contentsline {chapter}{\numberline {5}Conclusion}{12}{chapter.5}
+\contentsline {section}{\numberline {5.1}Contributions}{12}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Arthur Bigeard}{12}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}Alexander Ferguson}{12}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.3}Andrew Gibson}{12}{subsection.5.1.3}
+\contentsline {subsection}{\numberline {5.1.4}Gediminas Leikus}{12}{subsection.5.1.4}
+\contentsline {subsection}{\numberline {5.1.5}Liam Bell}{12}{subsection.5.1.5}
