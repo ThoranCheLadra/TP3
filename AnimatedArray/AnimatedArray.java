@@ -46,7 +46,7 @@ public final class AnimatedArray extends JPanel implements AnimatedDataStructure
  	private boolean screenshot = true;
  	private List<Rect> rect_list;																// we could just REMOVE this																	// same as above															// this is where all the rectangles which will be drawn are stored
 	private String info = ""; 																// a string to display information at each step
-	private String flashList = "";
+	private String flashList = "";															// string for creating flash animation
 	
 	private int arrayLeft;
 
@@ -73,7 +73,7 @@ public final class AnimatedArray extends JPanel implements AnimatedDataStructure
 			Rect r = new Rect(x, y, w, h, arrInt[i]+"", this);								// create all the Rectangle and add them to rect_list
 			rect_list.add(r);
 			x += rectSpace();
-			flashList+=arrInt[i]+",";
+			flashList+=arrInt[i]+","; // adds initial variable to flashlist string
 		}
 		steps.add(s);	
 		flashList = flashList.substring(0, flashList.length() - 1) + ':'; 	//	end of the init part of the flashlist
