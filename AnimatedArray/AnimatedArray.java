@@ -44,9 +44,9 @@ public final class AnimatedArray extends JPanel implements AnimatedDataStructure
  	private boolean continuousAnimation = false; // variable to determine whether to run a continuous animation or not.
  	private int time;
  	private boolean screenshot = true;
- 	
  	private List<Rect> rect_list;																// we could just REMOVE this																	// same as above															// this is where all the rectangles which will be drawn are stored
 	private String info = ""; 																// a string to display information at each step
+	private String flashList = "";
 	
 	private int arrayLeft;
 
@@ -73,8 +73,10 @@ public final class AnimatedArray extends JPanel implements AnimatedDataStructure
 			Rect r = new Rect(x, y, w, h, arrInt[i]+"", this);								// create all the Rectangle and add them to rect_list
 			rect_list.add(r);
 			x += rectSpace();
+			flashList+=arrInt[i]+",";
 		}
 		steps.add(s);	
+		flashList = flashList.substring(0, flashList.length() - 1) + ':'; 	//	end of the init part of the flashlist
 	}
     
 	
@@ -174,7 +176,9 @@ public final class AnimatedArray extends JPanel implements AnimatedDataStructure
 		Rect tempRect = rect_list.get(b);
 		rect_list.set(b, rect_list.get(a));
 		rect_list.set(a, tempRect);
+		flashList +="-"+a+","+b;
 		steps.add(s);																																					// add the new step to steps
+
 	}
 	
 	 public void modifyLabel(int n, String d, String info) {
@@ -226,8 +230,9 @@ public final class AnimatedArray extends JPanel implements AnimatedDataStructure
 		s.addChanges(new Change("color", rect_list.get(index), rect_list.get(index).getColor()));
 		// Apply the changes to rect_list
 		rect_list.get(index).setColor(c);
+		flashList+="-"+index+","+c.getRed()+","+c.getGreen()+","+c.getBlue();	//i,R,G,B
 		steps.add(s);
-	}
+	 }
 	 
 	 public void setColor(int index, int index1, Color c, String info) {
 			currentStep++;
@@ -260,6 +265,7 @@ public final class AnimatedArray extends JPanel implements AnimatedDataStructure
 			s.addChanges(new Change("color", rect_list.get(index1), rect_list.get(index1).getColor()));
 			// Apply the changes to rect_list
 			rect_list.get(index1).setColor(c);
+			flashList+="-"+index+","+c.getRed()+","+c.getGreen()+","+c.getBlue();	//i,R,G,B
 			steps.add(s);
 		}
 	 
@@ -313,6 +319,7 @@ public final class AnimatedArray extends JPanel implements AnimatedDataStructure
 			}
 			currentStep--;
         }
+        System.out.println(flashList);
         new setupGUI(this);
     } 
 	

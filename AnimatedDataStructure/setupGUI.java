@@ -26,7 +26,7 @@ public class setupGUI {
 		
 		Toolkit toolkit =  Toolkit.getDefaultToolkit ();
 		anim.setFullscreen(toolkit.getScreenSize());
-		//	Fullscreen = new Dimension(100,100);
+		//	Fullscreen = new Dimension(100,100); // for debugging size
 		
 		final JFrame frame = new JFrame("Algorithm Animator");
 		anim.setNextButton(new JButton("Next Step"));
