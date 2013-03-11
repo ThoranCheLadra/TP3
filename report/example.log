@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  4 MAR 2013 10:09
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  11 MAR 2013 00:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -408,12 +408,7 @@ File: images/firstPrototype.png Graphic file (type png)
 <use images/firstPrototype.png>
 Package pdftex.def Info: images/firstPrototype.png used on input line 3.
 (pdftex.def)             Requested size: 432.26999pt x 270.71408pt.
-)
-Underfull \hbox (badness 10000) in paragraph at lines 78--79
-
- []
-
-[6
+) [6
 
 ] (./figures/arthurPrototype.tex
 LaTeX Font Info:    Try loading font information for OT1+pcr on input line 3.
@@ -488,16 +483,7 @@ Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no “ in font ptmr7t!
 
-Underfull \hbox (badness 10000) in paragraph at lines 93--94
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 95--96
-
- []
-
-[7 <./images/firstPrototype.png>] [8] (./figures/gPrototype.tex
+(./figures/gPrototype.tex
 Overfull \hbox (73.6194pt too wide) in paragraph at lines 9--9
 []\OT1/pcr/m/n/10.95 s.addAnimator(new Animator.Builder().setDuration(time, Tim
 eUnit.MILLISECONDS)[] 
@@ -522,18 +508,28 @@ Missing character: There is no “ in font ptmr7t!
 Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
+ [7 <./images/firstPrototype.png>] [8] [9] (./figures/coupling.tex
+<images/coupling.png, id=171, 471.7625pt x 173.64874pt>
+File: images/coupling.png Graphic file (type png)
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--115
+<use images/coupling.png>
+Package pdftex.def Info: images/coupling.png used on input line 3.
+(pdftex.def)             Requested size: 432.26999pt x 159.1149pt.
+) [10 <./images/coupling.png>]
+(./figures/changeStructure.tex
+<images/changeStructure.png, id=181, 410.53375pt x 166.6225pt>
+File: images/changeStructure.png Graphic file (type png)
 
- []
-
-[9] [10]
+<use images/changeStructure.png>
+Package pdftex.def Info: images/changeStructure.png used on input line 3.
+(pdftex.def)             Requested size: 432.26999pt x 175.44438pt.
+) [11 <./images/changeStructure.png>]
 Chapter 4.
-[11
+[12
 
 ]
 Chapter 5.
-(./example.bbl [12
+(./example.bbl [13
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 4--8
@@ -542,35 +538,35 @@ n/10.95 http : / / java . net / projects /
  []
 
 )
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 152.
- [13
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 175.
+ [14
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 152.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 175.
  (./example.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 152.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 152.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 175.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 175.
 Package rerunfilecheck Info: File `example.out' has not changed.
 (rerunfilecheck)             Checksum: FD38EFB97D19948ADC8A729BA2D624D0;1091.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 152.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 175.
  ) 
 Here is how much of TeX's memory you used:
- 6156 strings out of 493488
- 94041 string characters out of 3141326
- 209833 words of memory out of 3000000
- 9313 multiletter control sequences out of 15000+200000
+ 6176 strings out of 493488
+ 94460 string characters out of 3141326
+ 210997 words of memory out of 3000000
+ 9323 multiletter control sequences out of 15000+200000
  23291 words of font info for 48 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 36i,7n,28p,988b,377s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,7n,28p,1146b,398s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/te
 xlive/2012/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/20
 12/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2012/texmf-d
 ist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on example.pdf (15 pages, 122109 bytes).
+Output written on example.pdf (16 pages, 153083 bytes).
 PDF statistics:
- 224 PDF objects out of 1000 (max. 8388607)
- 196 compressed objects within 2 object streams
- 45 named destinations out of 1000 (max. 500000)
- 160 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 237 PDF objects out of 1000 (max. 8388607)
+ 205 compressed objects within 3 object streams
+ 49 named destinations out of 1000 (max. 500000)
+ 170 words of extra memory for PDF output out of 10000 (max. 10000000)
 
