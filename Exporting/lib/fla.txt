@@ -1,0 +1,262 @@
+
+	import flash.utils.getTimer;
+ 
+    import flash.utils.Timer;
+    import flash.events.MouseEvent;
+    import flash.events.Event;
+    import flash.display.Sprite;
+    import fl.motion.Color;
+    import flash.geom.Rectangle;
+
+var orderArray:Array = new Array(10);
+var shapeArray:Array = new Array(10);
+var labelArray:Array = new Array(10);
+
+/*
+
+var shapeArray:Vector.<Sprite> = new Vector.<Sprite>();
+//
+
+//var shapeArray:Array = new Array();
+
+var s:stepList;
+
+
+printSprites();
+
+function printSprites(){
+	var i:Number;
+	for(i = 0;i<shapeArray.length;i++){
+		trace("ShapeArray["+i+"]: " + shapeArray[i].x + " shapeArray[i].x " + shapeArray[i].x);
+	}
+}
+*/
+	
+		
+		for(var i=0; i<10; i++){
+    		var sprite:Sprite=new Sprite(); 
+			var image:Sprite = new Sprite();
+   		 	sprite.graphics.lineStyle(1);
+			sprite.graphics.beginFill(0x0000FF);
+  		    sprite.graphics.drawRect(0,0, 40, 40);
+  			sprite.graphics.endFill();
+    		addChild(sprite);
+
+	
+			sprite.x = 50+(i*50);
+			sprite.y = 200;
+			sprite.width = 40;
+			sprite.height = 40;
+	
+    		shapeArray[i] = ( sprite );
+			var t:TextField = new TextField();
+			t.textColor = 0xffffff;
+ 			t.text = i;
+			t.x = 15;
+ 			t.y = 10;
+ 			t.width = sprite.width;
+ 			t.height = sprite.height;
+ 			sprite.addChild(t);
+	
+			orderArray[i] = i;	
+			orderText.text = orderArray.toString();
+		}
+
+
+
+function swap(a:Number,b:Number){
+	nextStep.text = "Swapping "+a+" and "+b;
+
+	//var finished:Boolean = false;
+	
+	var tempA:Number = a;
+	var tempB:Number = b;
+	
+	if(a>b){
+		 a = b;
+		 b = tempA;
+	}
+	
+	var delta:Number = (b-a);
+	var timer:Timer =  new Timer( 10,50 );
+	var timer2:Timer = new Timer( 10,50 );
+	var timer3:Timer = new Timer( 10,50 );
+
+	timer.addEventListener( TimerEvent.TIMER,moveUp);
+	timer.addEventListener(TimerEvent.TIMER_COMPLETE,oneDone);
+	timer2.addEventListener( TimerEvent.TIMER,moveSide);
+	timer2.addEventListener(TimerEvent.TIMER_COMPLETE,twoDone);
+	timer3.addEventListener( TimerEvent.TIMER,moveDown);
+	timer3.addEventListener(TimerEvent.TIMER_COMPLETE,threeDone);
+
+	timer.start();
+
+	function oneDone(e:TimerEvent):void{
+		timer2.start();
+		
+		}
+		
+	function twoDone(e:TimerEvent):void{
+		timer3.start();
+		}
+		
+	function threeDone(e:TimerEvent):void{ // need to swap shape and order arrays to match the visuals
+	
+		//orderArray[a] = b;
+		//orderArray[b] = a; //weird, but it works
+		
+		trace("\n --------------------------------\n");
+		trace("i\t\tOrder[i]\tshapeArray[i].x");
+		for(var i=0; i<10; i++){
+			trace(i+"\t\t"+orderArray[i]+"\t\t\t\t\t"+shapeArray[i].x  );
+		}
+		trace("\n --------------------------------\n");
+
+		
+		trace("now need to swap OrderArray["+a+"] - "+orderArray[a]+" and OrderArray["+b+"] - "+orderArray[b]); 
+				
+				
+		trace("Before: ["+orderArray.toString()+"]");
+		
+		var tempSwitch:Number = orderArray[a];
+		orderArray[a] = orderArray[b];
+		orderArray[b] = tempSwitch;
+		trace("After : ["+orderArray.toString()+"]");
+		orderText.text = orderArray.toString();
+
+		nextS();
+	}
+
+
+	
+
+function moveUp(){
+			shapeArray[orderArray[a]].y++;
+			shapeArray[orderArray[b]].y--;
+		}
+function moveSide(){
+
+			shapeArray[orderArray[a]].x = shapeArray[orderArray[a]].x + delta;
+			shapeArray[orderArray[b]].x = shapeArray[orderArray[b]].x - delta;
+		}
+function moveDown(){
+			shapeArray[orderArray[b]].y++;
+			shapeArray[orderArray[a]].y--;
+		}
+}
+
+//nextStep();
+//stage.addEventListener(MouseEvent.CLICK,nextStep);
+
+
+
+var stepCount:Number = 0;
+var stepList:Array = [[3,2],[3,2],[5,4]];
+
+function rgb2hex(r:int, g:int, b:int) : uint{
+		var redChannel = r << 16;
+		var greenChannel = g << 8;
+		var blueChannel = b;
+	return redChannel | greenChannel | blueChannel;
+	}
+
+//function nextStep(e:Event){
+nextS();
+//}
+function nextS(){
+	if(stepCount == stepList.length){
+		nextStep.text = ("Finished animation");
+		stop();
+			  
+	}
+	if (stepList[stepCount].length==2){ //- swap commands have 2 arguments
+		swap(stepList[stepCount][0],stepList[stepCount][1]);
+	}
+	else {
+		highlight(stepList[stepCount][0],stepList[stepCount][1],stepList[stepCount][2],stepList[stepCount][3]);
+	}
+	
+	stepCount++;
+
+	
+}
+
+function highlight(i:Number,R:int,G:int,B:int){
+	nextStep.text = ("Changing colour of "+i);
+
+	
+	var OldR:Number = 0;
+	var OldG:Number = 0;
+	var OldB:Number = 255; // would take this from current sprite colour
+
+		//red	:0xff0000 
+		//green	:0x00ff00 
+		//yellow:0xffff00
+		//blue	:0x0000ff
+		//black :0x000000
+		//white :0xffffff
+	
+	var fromColor:	uint=rgb2hex(OldR,OldG,OldB);
+	var toColor:	uint=rgb2hex(R,G,B);
+		//trace(fromColor.toString(16)+"  -to->  "+toColor.toString(16));
+
+
+
+	var stepLength:Number = 10; // frame speed
+	var steps:Number 	= 	50; // number of frames
+	var progress:Number = 	0;
+
+	var hTimer:Timer =  new Timer( stepLength,steps ); 
+	hTimer.start();
+	hTimer.addEventListener( TimerEvent.TIMER,ChangeCol);
+	hTimer.addEventListener( TimerEvent.TIMER_COMPLETE,finishCol);
+	
+	var colorTransform:ColorTransform = new ColorTransform();
+	
+	function ChangeCol(e:Event){
+		progress++;
+		colorTransform.color=Color.interpolateColor(fromColor,toColor,(progress/steps));
+		shapeArray[i].transform.colorTransform = colorTransform;
+	}
+	function finishCol(e:Event){ //this function is just to make sure that the finished colour is requested
+		colorTransform.color=toColor;
+		shapeArray[i].transform.colorTransform = colorTransform;
+	nextS();
+		
+	}
+	
+
+
+}
+
+
+		for(i =0; i<SIZE; i++){		//SETUP BOXES
+				var sprite:Sprite=new Sprite(); 
+				var text:Sprite = new Sprite();
+				sprite.graphics.lineStyle(1);
+				sprite.graphics.beginFill(0x0000FF);
+				sprite.graphics.drawRect(0,0, 40, 40);
+				sprite.graphics.endFill();
+				addChild(sprite);
+
+		
+				sprite.x = 50+(i*50);
+				sprite.y = 200;
+				sprite.width = 40;
+				sprite.height = 40;
+		
+				shapeArray[i] = ( sprite );
+				trace("shapearray =" + shapeArray.toString());
+
+				var t:TextField = new TextField();
+				t.textColor = 0xffffff;
+				t.text = i.toString();
+				t.x = 15;
+				t.y = 10;
+				t.width = sprite.width;
+				t.height = sprite.height;
+				sprite.addChild(t);
+		
+				orderArray[i] = i;
+				
+		}
