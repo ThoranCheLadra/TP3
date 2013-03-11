@@ -2,6 +2,9 @@ package AnimatedArray;
 
 import AnimatedDataStructure.screenShot;
 
+
+import java.io.*;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Dimension;
@@ -319,7 +322,18 @@ public final class AnimatedArray extends JPanel implements AnimatedDataStructure
 			}
 			currentStep--;
         }
-        System.out.println(flashList);
+   //     System.out.println(flashList); // at this point, flashlist is completed, just put it in a file
+        try{
+        	  // Create file 
+        	  FileWriter fstream = new FileWriter("Exporting/output.txt");
+        	  BufferedWriter out = new BufferedWriter(fstream);
+        	  out.write(flashList);
+        	  //Close the output stream
+        	  out.close();
+        	  }catch (Exception e){//Catch exception if any
+        	  System.err.println("Error: Could not write code to file");
+        	  System.err.println(flashList);
+        	  }
         new setupGUI(this);
     } 
 	
