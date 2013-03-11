@@ -1,16 +1,32 @@
 \begin{thebibliography}{1}
 
-\bibitem{website:TimingFramework}
-Timing Framework.
-\newblock Official website.
-\newblock \url{http://java.net/projects/timingframework}, 2013.
-\newblock [Online; accessed 4-March-2013].
-
 \bibitem{website:TimingFrameworkDemo}
-Timing Framework.
-\newblock Official website, demos page.
+Java.net.
+\newblock Timing framework official demos page.
 \newblock \url{http://java.net/projects/timingframework/pages/Demos#Triggers},
   2013.
 \newblock [Online; accessed 4-March-2013].
+
+\bibitem{website:TimingFramework}
+Java.net.
+\newblock Timing framework official website.
+\newblock \url{http://java.net/projects/timingframework}, 2013.
+\newblock [Online; accessed 4-March-2013].
+
+\bibitem{website:JavaFX}
+Oracle.com.
+\newblock Java-fx website.
+\newblock
+  \url{http://www.oracle.com/technetwork/java/javafx/overview/index.html},
+  2013.
+\newblock [Online; accessed 11-March-2013].
+
+\bibitem{website:Trident}
+weblogs.java.com.
+\newblock Trident website.
+\newblock
+  \url{http://weblogs.java.net/blog/kirillcool/archive/2009/06/trident_animati.html},
+  2013.
+\newblock [Online; accessed 11-March-2013].
 
 \end{thebibliography}

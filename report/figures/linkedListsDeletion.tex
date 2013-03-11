@@ -1,0 +1,12 @@
+\begin{figure}
+\begin{center}
+\begin{verbatim}
+if (steps.get(currentStep).getChanges().get(0).getType() == "deleteNode") {
+    Node<Rect> p = steps.get(currentStep).getChanges().get(0).getNodeReference();
+    rect_list.removeNode(p, p.getNext(),rectSpace(rectSize()));
+} 
+\end{verbatim}
+\end{center}
+\caption{Make a description up, Andrew}
+\label{fig:linkedListsDeletion}
+\end{figure}

@@ -1,0 +1,19 @@
+\begin{figure}
+\begin{center}
+\begin{verbatim}
+        synchronized (this.circles) {
+            circles.add(circle);
+        }
+        scenario.addScenarioActor(timeline);
+    }
+return scenario;
+}...
+public void paint(Graphics g) {
+    synchronized (this.circles) {
+        for (SingleExplosion circle : this.circles) {
+            circle.paint(g);...
+\end{verbatim}
+\end{center}
+\caption{Make a description up, Andrew}
+\label{fig:frameworkExamples}
+\end{figure}

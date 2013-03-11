@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  11 MAR 2013 00:16
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  11 MAR 2013 09:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -401,21 +401,93 @@ Chapter 2.
 Chapter 3.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 66.
-(./figures/firstPrototype.tex
-<images/firstPrototype.png, id=141, 803.0pt x 502.87875pt>
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 75.
+(/usr/local/texlive/2012/texmf-dist/tex/latex/psnfss/omsptm.fd
+File: omsptm.fd 
+)
+LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 75.
+ [6
+
+] [7]
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ô in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ô in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ô in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ô in font ptmr7t!
+
+(./figures/frameworkExamples.tex
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 3.
+
+(/usr/local/texlive/2012/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)) [8]
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ô in font ptmr7t!
+
+(./figures/linkedListsExample.tex
+Overfull \hbox (40.76944pt too wide) in paragraph at lines 15--15
+[]\OT1/pcr/m/n/10.95 while(node.getNext() != null && !(node.getData().getLabel(
+).equals(i))){[] 
+ []
+
+
+Overfull \hbox (264.14917pt too wide) in paragraph at lines 15--15
+[]\OT1/pcr/m/n/10.95 (**) prev.setNext(node.getNext());   //joins the pointer f
+or the prev element after the to be deleted node[] 
+ []
+
+)
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ô in font ptmr7t!
+ [9] (./figures/linkedListsDeletion.tex
+Overfull \hbox (60.47942pt too wide) in paragraph at lines 8--8
+[]\OT1/pcr/m/n/10.95 if (steps.get(currentStep).getChanges().get(0).getType() =
+= "deleteNode") {[] 
+ []
+
+
+Overfull \hbox (99.89937pt too wide) in paragraph at lines 8--8
+[]    \OT1/pcr/m/n/10.95 Node<Rect> p = steps.get(currentStep).getChanges().get
+(0).getNodeReference();[] 
+ []
+
+)
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ú in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ù in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ò in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ô in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ú in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ù in font ptmr7t!
+ [10] (./figures/firstPrototype.tex
+<images/firstPrototype.png, id=180, 803.0pt x 502.87875pt>
 File: images/firstPrototype.png Graphic file (type png)
 
 <use images/firstPrototype.png>
 Package pdftex.def Info: images/firstPrototype.png used on input line 3.
 (pdftex.def)             Requested size: 432.26999pt x 270.71408pt.
-) [6
-
-] (./figures/arthurPrototype.tex
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 3.
-
-(/usr/local/texlive/2012/texmf-dist/tex/latex/psnfss/ot1pcr.fd
-File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
-)
+) (./figures/arthurPrototype.tex
 Overfull \hbox (67.04941pt too wide) in paragraph at lines 52--52
 []        \OT1/pcr/m/n/10.95 System.arraycopy(anArr.getToDo().peek(), 0, steps,
  0, steps.length);[] 
@@ -470,20 +542,13 @@ LaTeX Warning: Float too large for page by 16.3604pt on input line 56.
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ô in font ptmr7t!
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 84.
- (/usr/local/texlive/2012/texmf-dist/tex/latex/psnfss/omsptm.fd
-File: omsptm.fd 
-)
-LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 84.
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ô in font ptmr7t!
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ì in font ptmr7t!
-
-(./figures/gPrototype.tex
+ [11] (./figures/gPrototype.tex
 Overfull \hbox (73.6194pt too wide) in paragraph at lines 9--9
 []\OT1/pcr/m/n/10.95 s.addAnimator(new Animator.Builder().setDuration(time, Tim
 eUnit.MILLISECONDS)[] 
@@ -508,65 +573,77 @@ Missing character: There is no ì in font ptmr7t!
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ô in font ptmr7t!
- [7 <./images/firstPrototype.png>] [8] [9] (./figures/coupling.tex
-<images/coupling.png, id=171, 471.7625pt x 173.64874pt>
+ [12 <./images/firstPrototype.png>] [13] (./figures/coupling.tex
+<images/coupling.png, id=203, 471.7625pt x 173.64874pt>
 File: images/coupling.png Graphic file (type png)
 
 <use images/coupling.png>
 Package pdftex.def Info: images/coupling.png used on input line 3.
 (pdftex.def)             Requested size: 432.26999pt x 159.1149pt.
-) [10 <./images/coupling.png>]
-(./figures/changeStructure.tex
-<images/changeStructure.png, id=181, 410.53375pt x 166.6225pt>
+) [14] (./figures/changeStructure.tex
+<images/changeStructure.png, id=213, 410.53375pt x 166.6225pt>
 File: images/changeStructure.png Graphic file (type png)
 
 <use images/changeStructure.png>
 Package pdftex.def Info: images/changeStructure.png used on input line 3.
 (pdftex.def)             Requested size: 432.26999pt x 175.44438pt.
-) [11 <./images/changeStructure.png>]
+) [15 <./images/coupling.png>] [16 <./images/changeStructure.png>]
 Chapter 4.
-[12
+[17
 
 ]
 Chapter 5.
-(./example.bbl [13
+(./example.bbl [18
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 4--8
-[]\OT1/ptm/m/n/10.95 Timing Frame-work.  Of-fi-cial web-site.  [][]$\OT1/pcr/m/
-n/10.95 http : / / java . net / projects /
+Underfull \hbox (badness 3271) in paragraph at lines 11--15
+[]\OT1/ptm/m/n/10.95 Java.net.  Tim-ing frame-work of-fi-cial web-site.  [][]$\
+OT1/pcr/m/n/10.95 http : / / java . net / projects /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--31
+[]\OT1/ptm/m/n/10.95 weblogs.java.com.  Tri-dent web-site.  [][]$\OT1/pcr/m/n/1
+0.95 http : / / weblogs . java . net / blog /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 25--31
+\OT1/pcr/m/n/10.95 kirillcool / archive / 2009 / 06 / trident _ animati . html$
+[][]\OT1/ptm/m/n/10.95 , 2013.  [On-line;
  []
 
 )
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 175.
- [14
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 276.
+ [19
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 175.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 276.
  (./example.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 175.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 175.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 276.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 276.
 Package rerunfilecheck Info: File `example.out' has not changed.
 (rerunfilecheck)             Checksum: FD38EFB97D19948ADC8A729BA2D624D0;1091.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 175.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 276.
  ) 
 Here is how much of TeX's memory you used:
- 6176 strings out of 493488
- 94460 string characters out of 3141326
- 210997 words of memory out of 3000000
- 9323 multiletter control sequences out of 15000+200000
- 23291 words of font info for 48 fonts, out of 3000000 for 9000
+ 6205 strings out of 493488
+ 94961 string characters out of 3141326
+ 210243 words of memory out of 3000000
+ 9329 multiletter control sequences out of 15000+200000
+ 24975 words of font info for 50 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 36i,7n,28p,1146b,398s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,7n,28p,1146b,377s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/te
 xlive/2012/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/20
 12/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2012/texmf-d
-ist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on example.pdf (16 pages, 153083 bytes).
+ist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/
+type1/urw/times/utmri8a.pfb>
+Output written on example.pdf (21 pages, 175879 bytes).
 PDF statistics:
- 237 PDF objects out of 1000 (max. 8388607)
- 205 compressed objects within 3 object streams
- 49 named destinations out of 1000 (max. 500000)
+ 282 PDF objects out of 1000 (max. 8388607)
+ 244 compressed objects within 3 object streams
+ 61 named destinations out of 1000 (max. 500000)
  170 words of extra memory for PDF output out of 10000 (max. 10000000)
 

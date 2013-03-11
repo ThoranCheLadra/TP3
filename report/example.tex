@@ -66,6 +66,107 @@ Blah blah blah
 \subsection{Arthur Bigeard}
 \subsection{Alexander Ferguson}
 \subsection{Andrew Gibson}
+\subsubsection{The selection of a suitable animation framework}
+
+During the beginning of the project, I was assigned to the research area where I was to examine a suitable graphics framework that could assist the team in building a solid animation API for our end users. During my research, I found there were several popular graphics frameworks for assisting with animation alongside Java applications, typically integrated through the use of compiled classes within a Java archive (.jar).
+
+The range of frameworks proved problematic, given that it was most suitable to select a single framework to build with, otherwise there would be serious inconsistencies between developed applications (as they differ in their functionality) We established a simple set of fundamental criteria for selection as follows:
+\begin{itemize}
+	\item The framework should offer a fully functional API, of which can be accessed by our code in order to build animation.
+	\item It should provide some degree of control, so that our own API can display dynamic movement and precision.
+	\item It should be able to be in-cooperated into an integrated development environment (IDE) for group production during the implementation stage.
+\end{itemize}
+
+After careful research, I found three separate candidates for animation production with Java. In order to justify a suitable approach, each framework was considered separately to assess desirable characteristics and identify potential flaws. 
+
+\underline{\textbf{Timing-Framework:}}
+
+The Timing Framework was found on Java.net, a place for Java based libraries and extensions (\cite{website:TimingFramework}). It features controlled timing and ease of animation.
+
+\textit{Advantages:}
+\begin{itemize}
+	\item The library is multi-threaded and concurrently safe. This prevents us from having to worry about complex synchronization issues between multiple application threads (as our animation software will utilise several threads for handling graphical changes independently)
+	\item Uses less memory, putting a smaller load on systems with limited memory, allowing more applications to execute at once. 
+	\item Offers an extensive API, giving us the ability of more control and functionality over our animations.
+	\item Supportive of Swing and SWT development, for flexibility over a suitable distribution
+	\item Its functionality can produce smooth, complex and controlled animation, useful for providing sufficient detail to our users in an orderly fashion.
+	\item Can be in-cooperated easily into an existing Eclipse project (a solid Java development IDE, which all the team have good knowledge of)
+\end{itemize}
+
+\textit{Disadvantages:}
+\begin{itemize}
+	\item The API is detailed and complex in areas, which may invoke a steep learning curve.
+	\item Swing examples documented are rather vague, and information given in a relevant PDF chapter is out dated.
+\end{itemize}
+
+\underline{\textbf{Java-FX:}}
+
+Java-FX was found on the Oracle technology website (\cite{website:JavaFX}) it features UI based accelerated graphics. Its control is timeline based.
+
+\textit{Advantages:}
+\begin{itemize}
+	\item Like the Timing-Framework, it also uses concurrently safe libraries.
+	\item Potentially less complex to learn, given that Oracle have provided a more comprehensive set of documentation, including video tutorials.
+\end{itemize}
+
+\textit{Disadvantages:}
+\begin{itemize}
+	\item Newer libraries are not supported within Eclipse. This isn’t useful to us as a team as our preferred development environment is Eclipse. It is more suited to the Netbeans IDE, which we aren’t familiar with.
+	\item It is more oriented towards web-based user interface development, typically within business. The goal of our application does not support this business approach, and focuses on the aspects of animation rather than an interactive interface with less emphasis on complex animation techniques.
+\end{itemize}
+
+\underline{\textbf{Trident:}}
+
+Like the Timing-Framework, this was also found as part of a Java.net library development (\cite{website:Trident}) it’s focused entirely on timelines, namely duration and object changes across such durations represented by keyframes.
+
+\textit{Advantages:}
+\begin{itemize}
+	\item Supports Swing and SWT development
+	\item Allows multiple timeline events to be run and scheduled at any one time (multiple animations)
+	\item Conceptually, it is straight forward and approachable; timelines represent the course of the animation and the keyframes the alterations to animation objects.
+\end{itemize}
+
+\textit{Disadvantages:}
+\begin{itemize}
+	\item Little documentation and not completely approachable as a result.
+	\item It doesn’t seem to fully support concurrency as part of its API. To give an example, the code below taken from the documentation section on timelines demonstrates parallel timeline objects competing for shares properties(http://www.pushing-pixels.org/2009/06/25/trident-part-8-timeline-scenarios.html)
+\end{itemize}
+
+\input{figures/frameworkExamples}
+
+In both examples \ref{fig:frameworkExamples} it can be seen that intrinsic locking is needed because of shared properties between objects. This adds a considerable degree of complexity to the framework, and would inevitably increase development time through the bugs and issues raised from concurrent access. For instance, if two objects were competing for shared animation data, and writing to it simultaneously, this would create unexpected behaviour. We would have to consider thread safe concepts alongside our own application complexity.
+
+To conclude, we felt that the Timing-Framework offered the best and most approachable set of features. It provides multiple, dynamic animation techniques; with an emphasis on the animation itself as supposed to client designed web applications. It is also concurrent, which is hugely important as it draws a significant amount of complexity out the project. The animations we create will have their own threads delegated to tasks within the framework. The precision of control it offers is also an attractive trait, allowing us to build highly tweaked and well performing animations to our end users. 
+
+Of course, the Timing-Framework is probably the most complex, but the positives most certainly outweigh the negative aspects. The analysis of these separate frameworks proved to be very useful in that sense, standing out as an important design choice that most likely would of saved us more development time in comparison to the other frameworks.
+
+\subsubsection{Development of Animated Linked Lists}
+
+For part of the project I worked on the development of linked lists. I utilised the trigger design that Gediminas created for scheduling animations in a step based fashion, such that the user can step through each part individually. To begin with, I created a linked list class with generic nodes, which would eventually function as objects associated with animations (class of type Rect). I represented the linked list as an array of these generic node objects. There were several problems I encountered when attempting to in-cooperate the step-based animation classes into my own code. It became apparent that some of the step-based algorithms involved with the successfully built Animated-Array class didn’t directly translate to my own Animated-Linked-List structure. A step in this sense is represented as a series of animations, as noted before.
+
+The intention of my Animated-Linked-List class was to offer specific algorithmic operations associated with linked list data structures. The issue I encountered was attempting to implement a suitable algorithm to locate and remove all instances of a specific node in the list. Addressing the step-based approach for this algorithm, it was required that the deletion of each found copy of the node was represented as a step. Initially, I developed the algorithm which directly removed the found occurrence from the list of objects.
+
+\input{figures/linkedListsExample}
+
+This proved to be problematic. Once executed, the animation would display the deleted node to the user, before they have even stepped through the animation and eventually reached the deletion of the found node. The early implementation of the problem highlights this issue (\ref{fig:linkedListsExample}).
+
+This section of code (\ref{fig:linkedListsExample}) represents a linear scan across each of the list’s pointers, until the required node is found. When a node is found, it is highlighted, and subsequently deleted. The last two lines indicated by (**) in this piece of code highlight the issue. Although the overall method for locating and removing a node is represented as a step, the changes made directly to the linked list object (represented here as rectlist) are not stored in any structures that allow the user to step through. Hence, when the application is executed, these adjustments are already displayed to the user. 
+
+To solve this issue, Gediminas and I proposed a solution that represented the main deletion operation as a single change within the method. In this way, the method would still be represented as a step (with its collection of animations) but the change class would allow us to log the deletion, so that we can obtain it and handle the deletion where necessary.
+
+\input{figures/linkedListsDeletion}
+
+It simply involved omitting the problematic lines above (**), and substituting a change to represent a deletion, with a reference to the object that is requested to be deleted. Once these changes were logged, the stepForward method allowed us to catch the corresponding change log at the appropriate time during the animation. A string comparison is done on the change log list and once it is found, the operations are then done on the linked list in order to display the deletion to the user. The code below shows part of the stepForward() method. The change “deleteNode” is added after a node is requested to be deleted in the removal method, and I implemented a separate method in the linked list class to handle the deletion of the specific node with reference ‘p’. The string “deleteNode” is caught at the appropriate time, given that the ordering of the steps is consistent in the application (\ref{fig:linkedListsDeletion}).
+
+Another issue encountered involved the sequencing of steps, where the deletion of the node was not shown when cycling through steps. Gediminas successfully provided a solution to this rather complex problem, which involved maintaining the correct ordering in the animation:
+
+Our application calls methods when executed, and generates a list of steps (each of which has their own set of animations). To ensure the correct ordering of steps, a counter is incremented whenever a step is created in the program, so that when the user is stepping through, the correct step is executed next in the list sequence. The step is created when a method is called (removal in this case), and is to be represented as an animated sequence of some form. A step is then added to the list of steps once the method returns.
+
+Originally when called the removal method would increment this currentStep value, change the colour of the current node to indicate it is to be deleted, and finally change its colour to match the background to indicate deletion. Other methods were called inside of the removal method where they themselves incremented this counter. This caused inconsistencies in the ordering.
+
+The step list is designed to execute the (currentStep+1) element in the list, by triggering it and causing it to run. 
+In the current system, here is how the execution would have affected the ordering:
+
 \subsection{Gediminas Leikus}
 \subsubsection{Separating animations into steps and making continuous animations}
 
