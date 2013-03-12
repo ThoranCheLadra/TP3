@@ -1,4 +1,4 @@
-﻿% This example An LaTeX document showing how to use the l3proj class to
+% This example An LaTeX document showing how to use the l3proj class to
 % write your report. Use pdflatex and bibtex to process the file, creating 
 % a PDF file as output (there is no need to use dvips when using pdflatex).
 
@@ -131,32 +131,18 @@ To illustrate better the challenges involved in implementing dynamic features, h
 Attempting to implement dynamic speed changing of the animation demonstrates very well the limits of the TimingFramework and our implementation:
 \input{figures/swap}
 
-As you can see on this sample piece of code, the "core" of the animation, the Animator objects, are passed a static time value. We're keeping track
-of the Animators in a LinkedList stored in the corresponding step of the animation. A basic approach to the feature would be to simply browse every single
-Animator objects in our Step and modify the time value stored in the trigger using a simple speed ratio going from 0.25 to 4 for example. However, and this
-is where the TimingFramework failed to our expectations, once created, the Animator objects cannot be modified. Hence, it is not possible from this approach
-to implement dynamic speed change to the system.
+As you can see on this sample piece of code, the "core" of the animation, the Animator objects, are passed a static time value. We're keeping track of the Animators in a LinkedList stored in the corresponding step of the animation. A basic approach to the feature would be to simply browse every single Animator objects in our Step and modify the time value stored in the trigger using a simple speed ratio going from 0.25 to 4 for example. However, and this is where the TimingFramework failed to our expectations, once created, the Animator objects cannot be modified. Hence, it is not possible from this approach to implement dynamic speed change to the system.
 
-At this stage, it was still possible to implement dynamic speed change to the animation. If we cannot modify our Animators, the logical next step to the solution
-is the re-create the Animators instead of modifying them. This alternate solution is extremely constraining:
+At this stage, it was still possible to implement dynamic speed change to the animation. If we cannot modify our Animators, the logical next step to the solution is the re-create the Animators instead of modifying them. This alternate solution is extremely constraining:
 \begin{itemize}
 \item performance-wise : Re-creating the Animators involve 3 steps: browsing steps, destroying animators, re-creating them.
-\item algorithm-wise : This solution requires heavy coding. While the first solution would only require to modify a time field, this solution requires to look up the type of
-Step we're currently modifying and the type of data structure we're animating in order to re-create the Animators properly
-\item requirements-wise : Destroying the Animators object would obviously require us to restart the animation from the beginning; not only this is not the expected behaviour from
-a speed change button, this solution might also cause the application to hang due to the heavy object manipulation overhead
+\item algorithm-wise : This solution requires heavy coding. While the first solution would only require to modify a time field, this solution requires to look up the type of Step we're currently modifying and the type of data structure we're animating in order to re-create the Animators properly
+\item requirements-wise : Destroying the Animators object would obviously require us to restart the animation from the beginning; not only this is not the expected behaviour from a speed change button, this solution might also cause the application to hang due to the heavy object manipulation overhead
 \end{itemize}
 
-Due to too heavy constraints this solution was quickly dropped. With the current analysis of the implementation requirements for this feature, only one solution could reasonably be infered:
-static speed changing. As you've seen on (\ref{fig:swap}), we can specify the duration of the animation when creating the Animators; the solution adopted was that the user can specify his own time unit
-when making calls to create an algorithm animation. 
+Due to too heavy constraints this solution was quickly dropped. With the current analysis of the implementation requirements for this feature, only one solution could reasonably be infered: static speed changing. As you've seen on (\ref{fig:swap}), we can specify the duration of the animation when creating the Animators; the solution adopted was that the user can specify his own time unit when making calls to create an algorithm animation. 
 
-
-Attempting to implement dynamic window resizing also showed the limits of our own implementation and especially of the Step management system.
-Although this solution was almost fully coded and working on a first and long attempt, we decided to give up on it for a cleaner, easier static resizing 
-solution.
-Implementing this feature was very challenging regarding to the consistency of the Step data stored by the system. To get a better idea of the issues involved
-in dynamic resizing, here's a reminder of the potential data involved in resizing:
+Attempting to implement dynamic window resizing also showed the limits of our own implementation and especially of the Step management system. Although this solution was almost fully coded and working on a first and long attempt, we decided to give up on it for a cleaner, easier static resizing solution. Implementing this feature was very challenging regarding to the consistency of the Step data stored by the system. To get a better idea of the issues involved in dynamic resizing, here's a reminder of the potential data involved in resizing:
 \begin{itemize}
 \item Steps
 \item Rects and Rectangles
@@ -166,12 +152,8 @@ in dynamic resizing, here's a reminder of the potential data involved in resizin
 
 Two implementations can be suggested for this feature; they both have their own perks and withdraws:
 \begin{itemize}
-\item Keeping a window width/height ratio relative to a fullscreen size from which the original x,y coordinates and size of the elements
-are calculated. The window width/height ratio would simply be used to adapt those x,y coordinates and element size. While this solution is very simple
-to code, it may lead to severe data inconsistency: using has a strong impact on the data precision, therefore, an expectable consequence from this implementation
-is unaligned elements. However, it is important to notice that the performance overhead is neglectable.
-\item Re-creating the data involved in window resizing. Practically, this solution requires a lot more coding. It is extremely unefficient for the same reasons explained
-on the dynamic animation speed changing. It would also require to restart the entire animation each time the window is resized.
+\item Keeping a window width/height ratio relative to a fullscreen size from which the original x,y coordinates and size of the elements are calculated. The window width/height ratio would simply be used to adapt those x,y coordinates and element size. While this solution is very simple to code, it may lead to severe data inconsistency: using has a strong impact on the data precision, therefore, an expectableconsequence from this implementation is unaligned elements. However, it is important to notice that the performance overhead is neglectable.
+\item Re-creating the data involved in window resizing. Practically, this solution requires a lot more coding. It is extremely unefficient for the same reasons explained on the dynamic animation speed changing. It would also require to restart the entire animation each time the window is resize.
 \end{itemize}
 
 The second solution can clearly be dropped due to its obvious disadvantages. In the process of coding, this is how I went about defining how I may implement dynamic window resizing.
@@ -189,6 +171,7 @@ We've decided to drop dynamic resizing for static resizing on the following assu
 \item The user aims to demonstrate algorithms graphically. Where demonstration is involved, preparation is involved too. We can reasonably suppose that our end-users
 will choose a fixed window size for their demonstration, if not fullscreen size, and keep the window to that size until the end of the animation. Therefore, determining the window
 size statically will satisfy the need for users to determine a custom animation window size. 
+\end{itemize}
 \subsection{Alexander Ferguson}
 \subsection{Andrew Gibson}
 \subsubsection{The selection of a suitable animation framework}
@@ -294,22 +277,21 @@ In the current system, here is how the execution would have affected the orderin
 
 Say to begin with this counter was currently equal to 6 (assume the counter is the variable currentStep = 6). Assume the step list is ‘S’ = […6] initially, and has 5 step elements prior to it.
 \begin{itemize}
- 
-/item The removal method findAndRemove(..) is called, a step is instantiated
-/item currentStep is incremented (currentStep = 7)
-/item setColor(..) is called to change the colour initially, this creates another step and increments the counter (currentStep = 8)
-/item Once setColor(..) returns 8 is added to the steplist (S = […6,8]) 
-/item setColor(..) is called a second time, returns, and the list is now (S = […6,8,9], currentStep = 10) 
-/item Finally findAndRemove(..) is returned to, and is finally added to the step list prior to exiting the method. (S = […6,8,9,7])
-/item When the user requests to step through the animation and requests the last element 7, the application will attempt to trigger the 10th element, as its relative position is 9. This will cause the application to crash as it attempts to access an out of bounds array index. The other steps will be inconsistent in their operation as well.
+\item The removal method findAndRemove(..) is called, a step is instantiated
+\item currentStep is incremented (currentStep = 7)
+\item setColor(..) is called to change the colour initially, this creates another step and increments the counter (currentStep = 8)
+\item Once setColor(..) returns 8 is added to the steplist (S = […6,8]) 
+\item setColor(..) is called a second time, returns, and the list is now (S = […6,8,9], currentStep = 10) 
+\item Finally findAndRemove(..) is returned to, and is finally added to the step list prior to exiting the method. (S = […6,8,9,7])
+\item When the user requests to step through the animation and requests the last element 7, the application will attempt to trigger the 10th element, as its relative position is 9. This will cause the application to crash as it attempts to access an out of bounds array index. The other steps will be inconsistent in their operation as well.
 \end{itemize}
 
 
 The desired ordering is therefore S  = [...6,7,8,9]. To achieve this, currentStep was incremented after the method calls for both the colour adjustments. To explain:
 \begin{itemize}
-/item The removal method findAndRemove(..) is called, a step is instantiated
-/item Both setcolor(..) methods are called, they both increment independently and append to the step list ( S = […6,7,8]
-/item Once they return, currentStep is incremented in findAndRemove(..) and the 9th step is added ( S = […6,7,8,9])
+\item The removal method findAndRemove(..) is called, a step is instantiated
+\item Both setcolor(..) methods are called, they both increment independently and append to the step list ( S = […6,7,8]
+\item Once they return, currentStep is incremented in findAndRemove(..) and the 9th step is added ( S = […6,7,8,9])
 \end{itemize}
 
 When the user steps through, step 6 will trigger the 7th  element in the step list, the 8th will trigger the 9th and so on. Hence, the ordering is maintained and the application performs successfully.
