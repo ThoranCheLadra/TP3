@@ -1,4 +1,4 @@
-% This example An LaTeX document showing how to use the l3proj class to
+﻿% This example An LaTeX document showing how to use the l3proj class to
 % write your report. Use pdflatex and bibtex to process the file, creating 
 % a PDF file as output (there is no need to use dvips when using pdflatex).
 
@@ -291,6 +291,28 @@ Originally when called the removal method would increment this currentStep value
 
 The step list is designed to execute the (currentStep+1) element in the list, by triggering it and causing it to run. 
 In the current system, here is how the execution would have affected the ordering:
+
+Say to begin with this counter was currently equal to 6 (assume the counter is the variable currentStep = 6). Assume the step list is ‘S’ = […6] initially, and has 5 step elements prior to it.
+\begin{itemize}
+ 
+/item The removal method findAndRemove(..) is called, a step is instantiated
+/item currentStep is incremented (currentStep = 7)
+/item setColor(..) is called to change the colour initially, this creates another step and increments the counter (currentStep = 8)
+/item Once setColor(..) returns 8 is added to the steplist (S = […6,8]) 
+/item setColor(..) is called a second time, returns, and the list is now (S = […6,8,9], currentStep = 10) 
+/item Finally findAndRemove(..) is returned to, and is finally added to the step list prior to exiting the method. (S = […6,8,9,7])
+/item When the user requests to step through the animation and requests the last element 7, the application will attempt to trigger the 10th element, as its relative position is 9. This will cause the application to crash as it attempts to access an out of bounds array index. The other steps will be inconsistent in their operation as well.
+\end{itemize}
+
+
+The desired ordering is therefore S  = [...6,7,8,9]. To achieve this, currentStep was incremented after the method calls for both the colour adjustments. To explain:
+\begin{itemize}
+/item The removal method findAndRemove(..) is called, a step is instantiated
+/item Both setcolor(..) methods are called, they both increment independently and append to the step list ( S = […6,7,8]
+/item Once they return, currentStep is incremented in findAndRemove(..) and the 9th step is added ( S = […6,7,8,9])
+\end{itemize}
+
+When the user steps through, step 6 will trigger the 7th  element in the step list, the 8th will trigger the 9th and so on. Hence, the ordering is maintained and the application performs successfully.
 
 \subsection{Gediminas Leikus}
 \subsubsection{Separating animations into steps and making continuous animations}
