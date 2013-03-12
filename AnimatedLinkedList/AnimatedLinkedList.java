@@ -302,7 +302,6 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 			Node<Rect> p = steps.get(currentStep).getChanges().get(0).getNodeReference();
 			rect_list.removeNode(p, p.getNext(),rectSpace(rectSize()));
 			this.repaint();
-
 		}
 
 		//here i'm printing out all changes, but "pointerSwitch" or "deleteNode" aren't listed
