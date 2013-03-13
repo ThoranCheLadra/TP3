@@ -1,466 +1,429 @@
-{\rtf1\ansi\ansicpg1252\deff0\deflang2057{\fonttbl{\f0\fswiss\fcharset0 Arial;}}
-{\*\generator Msftedit 5.41.21.2508;}\viewkind4\uc1\pard\f0\fs20 % This example An LaTeX document showing how to use the l3proj class to\par
-% write your report. Use pdflatex and bibtex to process the file, creating \par
-% a PDF file as output (there is no need to use dvips when using pdflatex).\par
-\par
-% Modified \par
-\par
-\\documentclass\{l3proj\}\par
-\\usepackage\{datetime\}\par
-\\usepackage\{graphicx\}\par
-\par
-\\begin\{document\}\par
-\\title\{Algorithm Animator\}\par
-\\author\{Arthur Bigeard \\\\\par
-\tab\tab Alexander Ferguson \\\\\par
-\tab\tab Andrew Gibson \\\\\par
-\tab\tab Gediminas Leikus \\\\\par
-\tab\tab Liam Bell\}\par
-\\usdate\par
-\\date\{\\today\}\par
-\\maketitle\par
-\\begin\{abstract\}\par
-\par
-For teaching purposes it is useful to be able to animate algorithms and produce a visual representation of how they work. The basic idea is to use a diagrammatic representation of a data structure, for example an array or a tree, and illustrate the algorithm step by step, showing how the data structure is accessed and changed. The aim of this project is to design and implement a system for animating algorithms. There are at least two possible approaches. One is to design and implement a simple programming language in such a way that all programs are animated while being executed. Another is to design and implement an API for animations, so that an existing program (in Java, for example) can be animated by inserting calls to your library. The system should be as general as possible in the sense of supporting a range of styles of algorithm, and should be demonstrated by producing a range of animations of standard algorithms. It would also be useful to be able to \par
-capture the animation in a form that can be viewed independently of your system, for example as a sequence of HTML pages or a Flash animation.\par
-\par
-\\end\{abstract\}\par
-\\educationalconsent\par
-\\tableofcontents\par
-%==============================================================================\par
-\\chapter\{Introduction\}\par
-\\label\{intro\}\par
-\par
-Alice was beginning to get very tired of sitting by her sister\par
-on the bank and of having nothing to do: once or twice she had peeped into\par
-the book her sister was reading, but it had no pictures or conversations in\par
-it.\par
-\par
-\\input\{figures/alice\}\par
-\par
-Alice opened the door and found that it led into a small passage, not much\par
-larger than a rat-hole: she knelt down and looked along the passage into\par
-the loveliest garden you ever saw.\par
-\par
-%==============================================================================\par
-\\chapter\{Design\}\par
-\\label\{design\}\par
-\par
-\\section\{Use cases\}\par
-\\includegraphics[width=115mm]\{images/useCases.png\}\par
-\par
-Our use cases are meant to illustrate the main functionalities of our system. Using our API's, users will\par
-be able to:\par
-\\begin\{itemize\}\par
-\\item Create custom algorithm animations on Linked Lists, Arrays and Heaps data structures\par
-\\item Display descriptions of the various steps of the animation as it processes\par
-\\item Navigate freely between the different steps of the animation backwards or forwards\par
-\\item Export animations in an executable format\par
-\\end\{itemize\}\par
-\\section\{Components\}\par
-\\includegraphics[width=115mm]\{images/componentDiagram.png\}\par
-\par
-\\section\{Classes\}\par
-\\subsection\{AnimatedDataStructure Component\}\par
-\\includegraphics[width=115mm]\{images/animatedDataStructureDiagram.png\}\par
-\par
-This diagram shows the component design of the system and their dependencies. The core of the system is the DataAnimation component,\par
-which is relying on the Animation creating TimingFramework API, provided by a component labeled AnimationCreator.\par
-The DataAnimation component is an aggregate of the components required to create a complete data animation, AnimatedDataStructure and MetaDataManager, and the data structure animation components\par
-resulting from the use of the first two components. Our animations are called by the UI component to enable displaying them.\par
-We can infer from this diagram the system architecture is a facade architecture, where the UI component is the facade component.\par
-\par
-\\subsection\{AnimatedArray Component\}\par
-\\includegraphics[width=115mm]\{images/arrayDiagram.png\}\par
-\\subsection\{AnimatedLinkedList Component\}\par
-\par
-\\includegraphics[width=115mm]\{images/linkedListDiagram.png\}\par
-The AnimatedLinkedList data structure requires additional classes to store the Rect objects in a way that is coherent to the data structure.\par
-The Rect's are stored in a custom linked list data structure implemented such that manipulating the data stored in the list will also update the display of\par
-the linked list.\par
-\\subsection\{AnimatedHeap Component\}\par
-\\includegraphics[width=115mm]\{images/heapDiagram.png\}\par
-\\subsection\{MetaDataManager Component\}\par
-\\includegraphics[width=115mm]\{images/metaDataDiagram.png\}\par
-The MetaDataManager component provides a set of classes and functions meant to store the steps and step informations of the animations. The user manipulates\par
-those data through the public animating calls made in the different data structures' classes.\par
-\\subsection\{UI Component\}\par
-\\includegraphics[width=115mm]\{images/UIDiagram.png\}\par
-%==============================================================================\par
-\\chapter\{Implementation\}\par
-\\label\{impl\}\par
-\par
-In this chapter, we describe how the implemented the system.\par
-\par
-%------------------------------------------------------------------------------\par
-\\section\{User Interface\}\par
-\par
-TODO\par
-\par
-% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\par
-\\section\{Problems Encountered\}\par
-\\subsection\{Arthur Bigeard\}\par
-Once our team got familiar with the TimingFramework, the application started rapidly growing and quickly our first animated algorithms were produced. \par
-On early stages of the animation display, we figured several features should be added to the display to increase the potential of our animations, features including:\par
-\\begin\{itemize\}\par
-\\item Labelling the steps of the animation\par
-\\item Navigating through steps from a list\par
-\\item Resizing dynamically the window to fit several animation demonstrations on a screen\par
-\\item Dynamically changing the speed of the animation using simple Speed Up/Speed Down JButtons\par
-\\end\{itemize\}\par
-\par
-Introducing dynamic features to the animation constituted a challenge on several levels:\par
-\\begin\{itemize\}\par
-\\item performance-wise : the animation approach taken with the TimingFramework requires creating several objects per step; our approach of algorithm animation is such that animation are splitted\par
-in a multitude of atomic steps and therefore consume a lot of memory\par
-\\item algorithm-wise : dynamic features require to look up and modify crucial data to the animation, where corruption of those data would lead to display inconsistencies or program termination\par
-\\item boundary-wise : our animations are limited by the animation framework we're using, the TimingFramework; we cannot implement what the TimingFramework cannot do\par
-\\end\{itemize\}\par
-\par
-To illustrate better the challenges involved in implementing dynamic features, here is a list of data potentially subject to changes:\par
-\\begin\{itemize\}\par
-\\item Rect's and Rectangle's x/y coordinates and edge size\par
-\\item Step's Change Linked List \par
-\\item Change's changed Object reference\par
-\\item Animation triggers, the Animator objects provided by the TimingFramework\par
-\\item setupGUI\par
-\\end\{itemize\}\par
-\par
-Attempting to implement dynamic speed changing of the animation demonstrates very well the limits of the TimingFramework and our implementation:\par
-\\input\{figures/swap\}\par
-\par
-As you can see on this sample piece of code, the "core" of the animation, the Animator objects, are passed a static time value. We're keeping track of the Animators in a LinkedList stored in the corresponding step of the animation. A basic approach to the feature would be to simply browse every single Animator objects in our Step and modify the time value stored in the trigger using a simple speed ratio going from 0.25 to 4 for example. However, and this is where the TimingFramework failed to our expectations, once created, the Animator objects cannot be modified. Hence, it is not possible from this approach to implement dynamic speed change to the system.\par
-\par
-At this stage, it was still possible to implement dynamic speed change to the animation. If we cannot modify our Animators, the logical next step to the solution is the re-create the Animators instead of modifying them. This alternate solution is extremely constraining:\par
-\\begin\{itemize\}\par
-\\item performance-wise : Re-creating the Animators involve 3 steps: browsing steps, destroying animators, re-creating them.\par
-\\item algorithm-wise : This solution requires heavy coding. While the first solution would only require to modify a time field, this solution requires to look up the type of Step we're currently modifying and the type of data structure we're animating in order to re-create the Animators properly\par
-\\item requirements-wise : Destroying the Animators object would obviously require us to restart the animation from the beginning; not only this is not the expected behaviour from a speed change button, this solution might also cause the application to hang due to the heavy object manipulation overhead\par
-\\end\{itemize\}\par
-\par
-Due to too heavy constraints this solution was quickly dropped. With the current analysis of the implementation requirements for this feature, only one solution could reasonably be infered: static speed changing. As you've seen on (\\ref\{fig:swap\}), we can specify the duration of the animation when creating the Animators; the solution adopted was that the user can specify his own time unit when making calls to create an algorithm animation. \par
-\par
-Attempting to implement dynamic window resizing also showed the limits of our own implementation and especially of the Step management system. Although this solution was almost fully coded and working on a first and long attempt, we decided to give up on it for a cleaner, easier static resizing solution. Implementing this feature was very challenging regarding to the consistency of the Step data stored by the system. To get a better idea of the issues involved in dynamic resizing, here's a reminder of the potential data involved in resizing:\par
-\\begin\{itemize\}\par
-\\item Steps\par
-\\item Rects and Rectangles\par
-\\item Changes\par
-\\item setupGUI\par
-\\end\{itemize\}\par
-\par
-Two implementations can be suggested for this feature; they both have their own perks and withdraws:\par
-\\begin\{itemize\}\par
-\\item Keeping a window width/height ratio relative to a fullscreen size from which the original x,y coordinates and size of the elements are calculated. The window width/height ratio would simply be used to adapt those x,y coordinates and element size. While this solution is very simple to code, it may lead to severe data inconsistency: using has a strong impact on the data precision, therefore, an expectableconsequence from this implementation is unaligned elements. However, it is important to notice that the performance overhead is neglectable.\par
-\\item Re-creating the data involved in window resizing. Practically, this solution requires a lot more coding. It is extremely unefficient for the same reasons explained on the dynamic animation speed changing. It would also require to restart the entire animation each time the window is resize.\par
-\\end\{itemize\}\par
-\par
-The second solution can clearly be dropped due to its obvious disadvantages. In the process of coding, this is how I went about defining how I may implement dynamic window resizing.\par
-\par
-The first solution was implemented; as expected, resizing resulted in unaligned elements. Usually, the scaling of the elements would be inconsistent from a range of 5 to 20 pixels.\par
-I have considered the eventuality of adding a scaling function to align the elements after the resizing process and after each step. Again, this fix has huge disadvantages: scaling elements would be done\par
-regardless to the position of the elements on the window, and multiple resizing may result in elements gradually moving up and down the window, and in the worst cases litterally working all their way up or down the window.\par
-Why? Simply because scaling the elements would require to move them all up or down the window. Elements would no longer be centered. \par
-Again, performance-wise, this solution increases a lot the operations required to run steps on the animation.\par
-\par
-Our team discussed the need for dynamic resizing, to either justify dropping this feature or keeping it and improving it so that it works perfectly.\par
-We've decided to drop dynamic resizing for static resizing on the following assumptions:\par
-\\begin\{itemize\}\par
-\\item The user is unlikely to resize his window on a regular basis.\par
-\\item The user aims to demonstrate algorithms graphically. Where demonstration is involved, preparation is involved too. We can reasonably suppose that our end-users\par
-will choose a fixed window size for their demonstration, if not fullscreen size, and keep the window to that size until the end of the animation. Therefore, determining the window\par
-size statically will satisfy the need for users to determine a custom animation window size. \par
-\\end\{itemize\}\par
-\\subsection\{Alexander Ferguson\}\par
-\par
-Flash exporting: Compiling versus file reading.\par
-\tab This particular problem is one that could not be fully solved, and caused a lot of frustration over the course of the creation of the Flash project. Initially working from a trial version of Flash Professional CS6, I was able to compile and run flash animations I had written. However when it came to using a command line compiler that could be called by the java program, I ran into a few problems. The main complication is that there are multiple different compilers, and the only free compiler I had found that seemed suitable to work on different operating systems - \ldblquote Adobe FLEX\rdblquote  - was unable to compile .fla files - the file format of Flash Professional CS6. This left me confused for a while, until I found a free, open source IDE called FlashDevelop, which used a collection of actionscript 3 files, instead of compiling through the project. This seemed like the perfect solution, until I ran into another problem that again ground my workflow to a halt: The free FLEX compiler now worked, but was a subset of the professional version, missing the vitally important file IO systems. I then had the following choice between development platforms:\par
-\\begin\{itemize\}\par
-\par
-\\item Adobe Flash Professional CS6\tab\par
-\par
-\\textit\{Advantages:\}\par
-\\begin\{itemize\}\par
-\\item\tab\tab This program is adobe\rquote s high power flash flagship, and is a very good platform to learn to write flash applications on. Since it is the standard for creating flash applications, there are many tutorials and sites dedicated to helping create relevant code. The WYSIWYG editor generates code behind the scenes to help, which allows quicker implementation and more efficient debugging.\par
-\\end\{itemize\}\par
-\par
-\\textit\{Disadvantages:\}\par
-\\begin\{itemize\}\par
-\\item\tab To compile the files that are created, the user is required to have the official Adobe Flash program, version CS3 or greater. This requires that the user either spends a large amount of money for a license, or signs up for a free trial, both of which require downloading gigabytes of official Adobe software.\par
-\\item\tab Adobe flash professional has a strong focus on creating actual animations, using distinct, predefined frames of animation. This was a nuisance to manage the different frames of animation, and caused a lot of problems.\par
-\\end\{itemize\}\par
-\par
-\\itemFlashDevelop\par
-\\textit\{Advantages:\}\par
-\\begin\{itemize\}\par
-\\item\tab The free software has the feeling of a real programming IDE. Using just a set of distinct actionscript class files, it is possible to create entire animations similarly to how it is done in java. By using a system of packages, include statements and method calls, you can link files together, which get compiled and grouped appropriately. There is no \lquote hidden code\rquote  in the animations, unlike Adobe Flash Professional, where it is possible to create objects in a frame, without being able to see the code for instantiating them. Although this increases time taken to implement the user interface, it is much more pleasant to maintain.\par
-\\end\{itemize\}\par
-\par
-\\textit\{Disadvantages:\}\par
-\\begin\{itemize\}\par
-\\item\tab The compiler used has only a subset of the functionality, lacking most importantly the ability to read or write from files before or after compilation. Without the ability to read the code from the user automatically, this tarnishes the very reasoning behind  the exporting component in the first place.\par
-\\end\{itemize\}\par
-\par
-\\textit\{Solution:\}\par
-\tab At this point, an impasse occurs: either the program doesn\rquote t compile, or it cannot receive any animation information. After getting frustrated, I decided that the only solution was to completely reinvent the component to an alternate form of exporting. Currently, the most suitable solution requires a small part of activity from the user that would have been unnecessary otherwise, where they now have a flash platform that can animate the objects from a user input, similar to the java program, from a string that is put into the pre-compiled .swf file.\par
-\tab Before the java application has run once, The array objects are instantiated and the steps to be produced are recorded. There is a static String field in the AnimatedArray.java class that is appended to with the relevant information: first the array objects are instantiated, then the required swap and colour methods are called. At all of these stages, the code string is updated, and is then output to the file output.txt in the Exporting folder.\par
-\tab The .swf file has two main classes: Steplist.as and Main.as. The Steplist class contains an object that holds the array values and operations, and contains a method to parse the input code from the user into a steplist object, which passes the information to main. The main class sets up the GUI and iterates over the operations. Because of inherent ability to resize flash animations, and have the objects automatically scale, The movement of the boxes is very simple: using a standard 50 pixels between the top corners of each box, it is possible to mimic the java program\rquote s automatic box horizontal velocity by changing the x increment value. This is possible because of the functionality of actionscript timers: alongside the length of the timing window, is an additional variable to specify number of times to be invoked before finishing. This means that using a small timing window and a timer repeating count of 50, it is trivial to adjust the horizontal speed of the box. incrementing by 1 pixel allows a swap of adjacent components, and this increment value is simply increased to the value of the difference in array position.\par
-\tab This solution completely erases all of the complexities in flash compiling, most notably getting it nullifies the project-affecting problems with releasing different software for each different operating system. The requirements for the user are also dramatically reduced, as the compiler alone requires 300+ megabytes of space for Adobe\rquote s free flash compiler. This also reduces CPU usage for the java program. Assuming the .swf file would be compiled in the background once the steplist was finished, this could cause stuttering on older systems. \par
-\\end\{itemize\}\par
-\par
-\par
-\par
-\\subsection\{Andrew Gibson\}\par
-\\subsubsection\{The selection of a suitable animation framework\}\par
-\par
-During the beginning of the project, I was assigned to the research area where I was to examine a suitable graphics framework that could assist the team in building a solid animation API for our end users. During my research, I found there were several popular graphics frameworks for assisting with animation alongside Java applications, typically integrated through the use of compiled classes within a Java archive (.jar).\par
-\par
-The range of frameworks proved problematic, given that it was most suitable to select a single framework to build with, otherwise there would be serious inconsistencies between developed applications (as they differ in their functionality) We established a simple set of fundamental criteria for selection as follows:\par
-\\begin\{itemize\}\par
-\tab\\item The framework should offer a fully functional API, of which can be accessed by our code in order to build animation.\par
-\tab\\item It should provide some degree of control, so that our own API can display dynamic movement and precision.\par
-\tab\\item It should be able to be in-cooperated into an integrated development environment (IDE) for group production during the implementation stage.\par
-\\end\{itemize\}\par
-\par
-After careful research, I found three separate candidates for animation production with Java. In order to justify a suitable approach, each framework was considered separately to assess desirable characteristics and identify potential flaws. \par
-\par
-\\underline\{\\textbf\{Timing-Framework:\}\}\par
-\par
-The Timing Framework was found on Java.net, a place for Java based libraries and extensions (\\cite\{website:TimingFramework\}). It features controlled timing and ease of animation.\par
-\par
-\\textit\{Advantages:\}\par
-\\begin\{itemize\}\par
-\tab\\item The library is multi-threaded and concurrently safe. This prevents us from having to worry about complex synchronization issues between multiple application threads (as our animation software will utilise several threads for handling graphical changes independently)\par
-\tab\\item Uses less memory, putting a smaller load on systems with limited memory, allowing more applications to execute at once. \par
-\tab\\item Offers an extensive API, giving us the ability of more control and functionality over our animations.\par
-\tab\\item Supportive of Swing and SWT development, for flexibility over a suitable distribution\par
-\tab\\item Its functionality can produce smooth, complex and controlled animation, useful for providing sufficient detail to our users in an orderly fashion.\par
-\tab\\item Can be in-cooperated easily into an existing Eclipse project (a solid Java development IDE, which all the team have good knowledge of)\par
-\\end\{itemize\}\par
-\par
-\\textit\{Disadvantages:\}\par
-\\begin\{itemize\}\par
-\tab\\item The API is detailed and complex in areas, which may invoke a steep learning curve.\par
-\tab\\item Swing examples documented are rather vague, and information given in a relevant PDF chapter is out dated.\par
-\\end\{itemize\}\par
-\par
-\\underline\{\\textbf\{Java-FX:\}\}\par
-\par
-Java-FX was found on the Oracle technology website (\\cite\{website:JavaFX\}) it features UI based accelerated graphics. Its control is timeline based.\par
-\par
-\\textit\{Advantages:\}\par
-\\begin\{itemize\}\par
-\tab\\item Like the Timing-Framework, it also uses concurrently safe libraries.\par
-\tab\\item Potentially less complex to learn, given that Oracle have provided a more comprehensive set of documentation, including video tutorials.\par
-\\end\{itemize\}\par
-\par
-\\textit\{Disadvantages:\}\par
-\\begin\{itemize\}\par
-\tab\\item Newer libraries are not supported within Eclipse. This isn\rquote t useful to us as a team as our preferred development environment is Eclipse. It is more suited to the Netbeans IDE, which we aren\rquote t familiar with.\par
-\tab\\item It is more oriented towards web-based user interface development, typically within business. The goal of our application does not support this business approach, and focuses on the aspects of animation rather than an interactive interface with less emphasis on complex animation techniques.\par
-\\end\{itemize\}\par
-\par
-\\underline\{\\textbf\{Trident:\}\}\par
-\par
-Like the Timing-Framework, this was also found as part of a Java.net library development (\\cite\{website:Trident\}) it\rquote s focused entirely on timelines, namely duration and object changes across such durations represented by keyframes.\par
-\par
-\\textit\{Advantages:\}\par
-\\begin\{itemize\}\par
-\tab\\item Supports Swing and SWT development\par
-\tab\\item Allows multiple timeline events to be run and scheduled at any one time (multiple animations)\par
-\tab\\item Conceptually, it is straight forward and approachable; timelines represent the course of the animation and the keyframes the alterations to animation objects.\par
-\\end\{itemize\}\par
-\par
-\\textit\{Disadvantages:\}\par
-\\begin\{itemize\}\par
-\tab\\item Little documentation and not completely approachable as a result.\par
-\tab\\item It doesn\rquote t seem to fully support concurrency as part of its API. To give an example, the code below taken from the documentation section on timelines demonstrates parallel timeline objects competing for shares properties(http://www.pushing-pixels.org/2009/06/25/trident-part-8-timeline-scenarios.html)\par
-\\end\{itemize\}\par
-\par
-\\input\{figures/frameworkExamples\}\par
-\par
-In both examples \\ref\{fig:frameworkExamples\} it can be seen that intrinsic locking is needed because of shared properties between objects. This adds a considerable degree of complexity to the framework, and would inevitably increase development time through the bugs and issues raised from concurrent access. For instance, if two objects were competing for shared animation data, and writing to it simultaneously, this would create unexpected behaviour. We would have to consider thread safe concepts alongside our own application complexity.\par
-\par
-To conclude, we felt that the Timing-Framework offered the best and most approachable set of features. It provides multiple, dynamic animation techniques; with an emphasis on the animation itself as supposed to client designed web applications. It is also concurrent, which is hugely important as it draws a significant amount of complexity out the project. The animations we create will have their own threads delegated to tasks within the framework. The precision of control it offers is also an attractive trait, allowing us to build highly tweaked and well performing animations to our end users. \par
-\par
-Of course, the Timing-Framework is probably the most complex, but the positives most certainly outweigh the negative aspects. The analysis of these separate frameworks proved to be very useful in that sense, standing out as an important design choice that most likely would of saved us more development time in comparison to the other frameworks.\par
-\par
-\\subsubsection\{Development of Animated Linked Lists\}\par
-\par
-For part of the project I worked on the development of linked lists. I utilised the trigger design that Gediminas created for scheduling animations in a step based fashion, such that the user can step through each part individually. To begin with, I created a linked list class with generic nodes, which would eventually function as objects associated with animations (class of type Rect). I represented the linked list as an array of these generic node objects. There were several problems I encountered when attempting to in-cooperate the step-based animation classes into my own code. It became apparent that some of the step-based algorithms involved with the successfully built Animated-Array class didn\rquote t directly translate to my own Animated-Linked-List structure. A step in this sense is represented as a series of animations, as noted before.\par
-\par
-The intention of my Animated-Linked-List class was to offer specific algorithmic operations associated with linked list data structures. The issue I encountered was attempting to implement a suitable algorithm to locate and remove all instances of a specific node in the list. Addressing the step-based approach for this algorithm, it was required that the deletion of each found copy of the node was represented as a step. Initially, I developed the algorithm which directly removed the found occurrence from the list of objects.\par
-\par
-\\input\{figures/linkedListsExample\}\par
-\par
-This proved to be problematic. Once executed, the animation would display the deleted node to the user, before they have even stepped through the animation and eventually reached the deletion of the found node. The early implementation of the problem highlights this issue (\\ref\{fig:linkedListsExample\}).\par
-\par
-This section of code (\\ref\{fig:linkedListsExample\}) represents a linear scan across each of the list\rquote s pointers, until the required node is found. When a node is found, it is highlighted, and subsequently deleted. The last two lines indicated by (**) in this piece of code highlight the issue. Although the overall method for locating and removing a node is represented as a step, the changes made directly to the linked list object (represented here as rectlist) are not stored in any structures that allow the user to step through. Hence, when the application is executed, these adjustments are already displayed to the user. \par
-\par
-To solve this issue, Gediminas and I proposed a solution that represented the main deletion operation as a single change within the method. In this way, the method would still be represented as a step (with its collection of animations) but the change class would allow us to log the deletion, so that we can obtain it and handle the deletion where necessary.\par
-\par
-\\input\{figures/linkedListsDeletion\}\par
-\par
-It simply involved omitting the problematic lines above (**), and substituting a change to represent a deletion, with a reference to the object that is requested to be deleted. Once these changes were logged, the stepForward method allowed us to catch the corresponding change log at the appropriate time during the animation. A string comparison is done on the change log list and once it is found, the operations are then done on the linked list in order to display the deletion to the user. The code below shows part of the stepForward() method. The change \ldblquote deleteNode\rdblquote  is added after a node is requested to be deleted in the removal method, and I implemented a separate method in the linked list class to handle the deletion of the specific node with reference \lquote p\rquote . The string \ldblquote deleteNode\rdblquote  is caught at the appropriate time, given that the ordering of the steps is consistent in the application (\\ref\{fig:linkedListsDeletion\}).\par
-\par
-Another issue encountered involved the sequencing of steps, where the deletion of the node was not shown when cycling through steps. Gediminas successfully provided a solution to this rather complex problem, which involved maintaining the correct ordering in the animation:\par
-\par
-Our application calls methods when executed, and generates a list of steps (each of which has their own set of animations). To ensure the correct ordering of steps, a counter is incremented whenever a step is created in the program, so that when the user is stepping through, the correct step is executed next in the list sequence. The step is created when a method is called (removal in this case), and is to be represented as an animated sequence of some form. A step is then added to the list of steps once the method returns.\par
-\par
-Originally when called the removal method would increment this currentStep value, change the colour of the current node to indicate it is to be deleted, and finally change its colour to match the background to indicate deletion. Other methods were called inside of the removal method where they themselves incremented this counter. This caused inconsistencies in the ordering.\par
-\par
-The step list is designed to execute the (currentStep+1) element in the list, by triggering it and causing it to run. \par
-In the current system, here is how the execution would have affected the ordering:\par
-\par
-Say to begin with this counter was currently equal to 6 (assume the counter is the variable currentStep = 6). Assume the step list is \lquote S\rquote  = [\'856] initially, and has 5 step elements prior to it.\par
-\\begin\{itemize\}\par
-\\item The removal method findAndRemove(..) is called, a step is instantiated\par
-\\item currentStep is incremented (currentStep = 7)\par
-\\item setColor(..) is called to change the colour initially, this creates another step and increments the counter (currentStep = 8)\par
-\\item Once setColor(..) returns 8 is added to the steplist (S = [\'856,8]) \par
-\\item setColor(..) is called a second time, returns, and the list is now (S = [\'856,8,9], currentStep = 10) \par
-\\item Finally findAndRemove(..) is returned to, and is finally added to the step list prior to exiting the method. (S = [\'856,8,9,7])\par
-\\item When the user requests to step through the animation and requests the last element 7, the application will attempt to trigger the 10th element, as its relative position is 9. This will cause the application to crash as it attempts to access an out of bounds array index. The other steps will be inconsistent in their operation as well.\par
-\\end\{itemize\}\par
-\par
-\par
-The desired ordering is therefore S  = [...6,7,8,9]. To achieve this, currentStep was incremented after the method calls for both the colour adjustments. To explain:\par
-\\begin\{itemize\}\par
-\\item The removal method findAndRemove(..) is called, a step is instantiated\par
-\\item Both setcolor(..) methods are called, they both increment independently and append to the step list ( S = [\'856,7,8]\par
-\\item Once they return, currentStep is incremented in findAndRemove(..) and the 9th step is added ( S = [\'856,7,8,9])\par
-\\end\{itemize\}\par
-\par
-When the user steps through, step 6 will trigger the 7th  element in the step list, the 8th will trigger the 9th and so on. Hence, the ordering is maintained and the application performs successfully.\par
-\par
-\\subsection\{Gediminas Leikus\}\par
-\\subsubsection\{Separating animations into steps and making continuous animations\}\par
-\par
-The group decided to use Java for our project, because we were all familiar with it and because it was the language our client suggested us to use. We had left the decision of choosing the animation tools to Andrew Gibson and Alexander Ferguson. For the reasons stated in this document (reference), they decided to choose the Timing Framework \\cite\{website:TimingFramework\}.\par
-\par
-Andrew had an example (\\ref\{fig:firstPrototype\}) ready, which had multiple rectangles created from an array moving back and forth, had buttons allowing us to stop the animation, resume it or delete one of the rectangles. He also added comments into the sample code, just so it would be easier for us to familiarize with the tool.\par
-\par
-\\input\{figures/firstPrototype\}\par
-\par
-While this was a good initial step, we did not have any obvious way to implement Steps, in a sense where multiple Animations could be assigned to one step and we could navigate through these steps back and forth. Therefore both Andrew and Arthur Bigeard started looking into it.\par
-\par
-\\input\{figures/arthurPrototype\}\par
-\par
-Andrew had no real suggestions and Arthur\rquote s prototype implementation seemed: \par
-\\begin\{itemize\}\par
-\tab\\item too complex (a swap of 2 rectangles was over 50 lines long \\ref\{fig:arthurPrototype\})\par
-\tab\\item impractical to use (it didn\rquote t have any way to step back and forth through the animation) \par
-\tab\\item it had a performance overhead (all Animator objects were running continuously, until the whole animation was stopped)\par
-\\end\{itemize\}\par
-It had a few good points though: \par
-\\begin\{itemize\}\par
-\tab\\item it was done on a low level (so the how-to part was obvious if you understood the code) \par
-\tab\\item it was not storing too much information (thus it did not really have a memory overhead). \par
-\\end\{itemize\}\par
-But this was not what we wanted \endash  the most important thing for us was the stepping back and forth functionality.  Therefore I started looking into it as well.\par
-\par
-During my research of the Timing Framework I found out that we could add triggers, which would start an animation, to a button or to another animation, which would start another animation when it stops or starts running \\cite\{website:TimingFrameworkDemo\}. Thus, triggers seemed like a great tool for linking multiple animations into one Step, linking steps and making a continuous animation.\par
-\par
-\\input\{figures/gPrototype\}\par
-\par
-I still wanted to find a way to make a change of a rectangle (or any other object) property easy to manage. Looking through the Demos I also found that I could use Targets and PropertySetters to do this in just a few lines of code \\ref\{fig:gPrototype\}, which seemed great. But it only allowed us to change a property, which was numerical (like coordinates or colors) \endash  it didn\rquote t allow us to change all the properties of the object, like the labels of rectangles. To solve this issue, I researched further and found that we can create a class, which would implement a TimingTarget interface and its begin(), end(), repeat() and reverse() methods. Therefore, to solve the issue of changing the labels of rectangles I created a new class called ChangeLabel, which implemented a TimingTarget interface, its begin(), end(), repeat() and reverse() methods, and added a change of String variable just inside its begin method. This approach seemed great, because:\par
-\\begin\{itemize\}\par
-\tab\\item we can change any property of an object or do pretty much anything when that TimingTarget is called\par
-\tab\\item it is attached to each Animator object, so we do not have to worry about storing the TimingTargets anywhere\par
-\tab\\item it is efficient performance wise, because these TimingTargets are only executed, when the Animator object is\par
-\tab\\item it is easy to use, implement and understand\par
-\\end\{itemize\}\par
-\par
-Therefore, the end result of my prototype was:\par
-\\begin\{itemize\}\par
-\tab\\item a list of steps\par
-\tab\\item an array of rectangles and their coordinates at each step\par
-\tab\\item an ability to either step back and forth through the animation by using buttons or see a continuous animation (and it was either that or that)\par
-\\end\{itemize\}\par
-\par
-After looking through both my and Arthurs prototypes, we decided to merge the good parts of each: we kept most of my prototype, but reduced the amount of data stored for each Step, in particular, we made it so it would only store the details of the changed object before the change, rather than the details of all the objects.\par
-\par
-The only issue left then, was the ability to have both step-by-step and continuous animations and allow the user to switch between them at any point of time, but this was not a big issue, since I just used a similar approach I used with ChangeLabel class:\par
-\\begin\{enumerate\}\par
-\tab\\item I created a new class, called ContinuousAnimation, which was also implementing the TimingTarget interface\par
-\tab\\item introduced a boolean variable called continuousAnimation, which was keeping record of whether the animation was in step-by-step or continuous mode\par
-\tab\\item made it so that the begin method in ContinuousAnimation would execute different actions according to the boolean continuousAnimation variable value:\par
-\tab\\begin\{itemize\}\par
-\tab\tab\\item If true, Trigger the next Step\par
-\tab\tab\\item If false, do nothing\par
-\tab\\end\{itemize\}\par
-\\end\{enumerate\}\par
-\par
-\\subsubsection\{Refactoring\}\par
-\par
-Our first common implementation that we were using for development was coupled too much with AnimatedArray data structure and was not flexible at all. This became obvious, when we started implementing our AnimatedLinkedList. When we wanted to make our API to animate an AnimatedLinkedList instead of AnimatedArray, we had to change multiple classes, including Rect, ContinuousAnimation and ChangeLabel \\ref\{fig:coupling\}. This was due to no polymorphism in our design.\par
-\par
-\\input\{figures/coupling\}\par
-\par
-After doing our Professional Software Development 3 (PSD3) D7 deliverable (which was implementation of an Internship Management System we were designing the entire first semester), I have learned how to structure software better and how we can split code into components in Java. Therefore it was time for refactoring.\par
-\par
-One of the first things I did was to create a separate package for each data structure. This lead to 4 additional packages being created:\par
-\\begin\{itemize\} \par
-\tab\\item AnimatedArray\par
-\tab\\item AnimatedBinaryTree\par
-\tab\\item AnimatedDataStructure\par
-\tab\\item AnimatedLinkedList\par
-\\end\{itemize\}\par
-Each package is supposed to keep classes relevant only to its data structure, apart from AnimatedDataStructure package, which keeps classes that are relevant to all data structures.\par
-\par
-I also completely separated the GUI from the rest of the code and created a class called setupGUI.\par
-\par
-\\input\{figures/changeStructure\}\par
-\par
-The next thing I did was to create a public interface AnimatedDataStructure, which is how we solved the issue I mentioned in the first paragraph. Rect, ContinuousAnimation, ChangeLabel and setupGUI are all expecting an AnimatedDataStructure variable now and all data structures are just implementing this interface. Therefore it does not matter which data structure we use, the common classes (which are in AnimatedDataStructure package) work for all of them. The interface itself also brought common method names and some structure. Another good thing is that now, we only need to change 2 things in the Main class if we want to work with a different data structure: the data structure class name and then the constructor method call \\ref\{fig:changeStructure\}. This did bring in some repetitive methods, like getNextButton(), which are being repeated in all data structures, but could be solved by introducing another abstract class, which would be implementing the AnimatedDataStructure interface and have all of these repetitive methods and then making all data structure classes extend this new abstract class.\par
-\par
-All of the above solutions introduced basic polymorphism to our software and solved quite a lot of development issues as well as made it easier to develop and manage the code for future developers (if there are going to be any). While doing all of the above, parts of unneccessary code were removed or changed as well.\par
-\par
-\\subsection\{Liam Bell\}\par
-\par
-%==============================================================================\par
-\\chapter\{Evaluation\}\par
-\par
-We evaluated the project by...\par
-\par
-%==============================================================================\par
-\\chapter\{Conclusion\}\par
-\par
-ASD\par
-\par
-%==============================================================================\par
-\\section\{Contributions\}\par
-\\subsection\{Arthur Bigeard\}\par
-\\subsection\{Alexander Ferguson\}\par
-\\begin\{itemize\} \par
-\\item Array positioning\par
-\tab Once we had managed to successfully create an array of objects on the screen, I contributed with the basic display. Having created some early wireframes, I recreated them in java, with a simple formula to write 10 objects onto the screen to a window of fixed resolution. This was obviously suboptimal, since we required a way of displaying an array of any size, on any resolution. Looking at the different possibilities online, I found that the simplest way to be able to use the entire resolution of the screen was using a method I came across called getScreenSize() using java\rquote s own java.awt.Toolkit. Using the screen width found, along with the number of array objects to be displayed, there was enough independent variables in the equation to determine the position and size attributes of the objects on screen. The size of the boxes, the size of the space between boxes and positioning of the array was determined by a short algorithm using the found screen size, number of objects and a fixed minimum spacing between objects of one pixel. This allows the user to enter an array of over 100 values, much more than would be required or useful. At this size, the text label on each object becomes unreadable on normal resolution screens, but is still fully functional as an animated array. \par
-\par
-\\item\tab Screenshot system for exporting as slides.\par
-\tab One of the early permutations for exporting was to use a call to an external toolkit to save screen images that could be used in a slide show. Andrew had already started to add the functionality, but by separating it into its own class and using the java.awt.Robot toolkit, it was possible to create a new screenshot upon completion of every swap and colour change, store it in a folder and name it accordingly so that it can be iterated over and used as a slideshow if required. Andrew attempted to use the frame of the window to be the borders of the screenshot, but ran into problems with different screen sizes. To get around this, we reused the default toolkit that we had previously use to get the user\rquote s screen resolution. This allowed us to capture the screen size of any system that the user is running the program on. Then, using another toolkit called Robot, we could call a method that would capture an image of the specified size:\par
-robot.createScreenCapture(Rectangle screen) . This had the downside of also capturing the edges of the screen, and the top bar of the java window, but we agreed that since it was not going to be our long term solution to exporting animations, we could cope with the extra pixels.\par
-\par
-\\item\tab Flash Exporting \par
-\tab Once the main program was nearing completion, I volunteered to take responsibility for the Flash exportation. None of us had any real experience with creating Flash files, except Andrew who was still in the process of implementing linked lists. Although the language had been largely modified in the update from Actionscript 2.0 to Actionscript 3.0 since he last used it, he gave valuable help with learning the language.\par
-The initial plan was to incorporate an external compiler to trigger once the main java animation was created, compiling a .swf of the most recent animation that can be saved and reused as the java animation being displayed to the user. This plan was unanimously decided to be beyond the scope of the project, increasing the total complexity and requiring a lot of system redesign. The plan was scrapped when we discovered the difficulties in getting the data sharing between the programs, and automatic compilation of the .swf consistent between operating systems.\par
-\tab The final version of the Exporting component is as follows. The java application, upon completing its steplist, concurrently creates a code string then outputs it to a file. The code string is a descriptor of the array created, and the operations performed on them. This string has a specific syntax that I created to be easy to parse in actionscript, and is described as follows:\par
-\ldblquote [instantiated values of AnimatedArray object]:[-operation]*\rdblquote\par
-Operations are either a swap - two index arguments - or a colour change: an index value followed by three arguments for the object\rquote s desired colour\rquote s red, green and blue channels. For example, the following code creates an array of five objects, swaps the objects at index 1 and 3, then changes the colour of the middle element to Black: \par
-0,1,2,3,4:-1,3-2,0,0,0\par
-\par
-The final state of the animation is shown below.\par
-\par
-\\includegraphics[width=115mm]\{images/flash1.png\}\par
-\par
-\par
-Although it was an unfamiliar language to us, it became apparent that it would be possible to create an identical system, given enough time. The flash exporting component however was never intended to repeat the algorithmic functionality of the main program, so to prevent duplicating code and to save time, we decided to only implement a subset of the system. There is no functionality for a user to create their own algorithms in its current version, and there is only the ability to visualise AnimatedArray structures. Flash has its own built in resizing of the animation frame, but cannot scale as well as the java version of the implementation. Being a .swf file however, it comes with the added benefits of being able to be run on all current web browsers, embedded it in slide shows and applications, and can be referenced in html to be used in web pages.\par
-\\end\{itemize\}\par
-\\subsection\{Andrew Gibson\}\par
-\\subsection\{Gediminas Leikus\}\par
-\\subsection\{Liam Bell\}\par
-\par
-%==============================================================================\par
-\\bibliographystyle\{plain\}\par
-\\bibliography\{example\}\par
-\\end\{document\}\par
-}
- 
+% This example An LaTeX document showing how to use the l3proj class to
+% write your report. Use pdflatex and bibtex to process the file, creating 
+% a PDF file as output (there is no need to use dvips when using pdflatex).
+
+% Modified 
+
+\documentclass{l3proj}
+\usepackage{datetime}
+\usepackage{graphicx}
+
+\begin{document}
+\title{Algorithm Animator}
+\author{Arthur Bigeard \\
+		Alexander Ferguson \\
+		Andrew Gibson \\
+		Gediminas Leikus \\
+		Liam Bell}
+\usdate
+\date{\today}
+\maketitle
+\begin{abstract}
+
+For teaching purposes it is useful to be able to animate algorithms and produce a visual representation of how they work. The basic idea is to use a diagrammatic representation of a data structure, for example an array or a tree, and illustrate the algorithm step by step, showing how the data structure is accessed and changed. The aim of this project is to design and implement a system for animating algorithms. There are at least two possible approaches. One is to design and implement a simple programming language in such a way that all programs are animated while being executed. Another is to design and implement an API for animations, so that an existing program (in Java, for example) can be animated by inserting calls to your library. The system should be as general as possible in the sense of supporting a range of styles of algorithm, and should be demonstrated by producing a range of animations of standard algorithms. It would also be useful to be able to 
+capture the animation in a form that can be viewed independently of your system, for example as a sequence of HTML pages or a Flash animation.
+
+\end{abstract}
+\educationalconsent
+\tableofcontents
+%==============================================================================
+\chapter{Introduction}
+\label{intro}
+
+TODO
+
+%==============================================================================
+\chapter{Design}
+\label{design}
+
+\section{Use cases}
+\includegraphics[width=115mm]{images/useCases.png}
+
+Our use cases are meant to illustrate the main functionalities of our system. Using our API's, users will
+be able to:
+\begin{itemize}
+\item Create custom algorithm animations on Linked Lists, Arrays and Heaps data structures
+\item Display descriptions of the various steps of the animation as it processes
+\item Navigate freely between the different steps of the animation backwards or forwards
+\item Export animations in an executable format
+\end{itemize}
+\section{Components}
+\includegraphics[width=115mm]{images/componentDiagram.png}
+
+\section{Classes}
+\subsection{AnimatedDataStructure Component}
+\includegraphics[width=115mm]{images/animatedDataStructureDiagram.png}
+
+This diagram shows the component design of the system and their dependencies. The core of the system is the DataAnimation component,
+which is relying on the Animation creating TimingFramework API, provided by a component labeled AnimationCreator.
+The DataAnimation component is an aggregate of the components required to create a complete data animation, AnimatedDataStructure and MetaDataManager, and the data structure animation components
+resulting from the use of the first two components. Our animations are called by the UI component to enable displaying them.
+We can infer from this diagram the system architecture is a facade architecture, where the UI component is the facade component.
+
+\subsection{AnimatedArray Component}
+\includegraphics[width=115mm]{images/arrayDiagram.png}
+\subsection{AnimatedLinkedList Component}
+
+\includegraphics[width=115mm]{images/linkedListDiagram.png}
+The AnimatedLinkedList data structure requires additional classes to store the Rect objects in a way that is coherent to the data structure.
+The Rect's are stored in a custom linked list data structure implemented such that manipulating the data stored in the list will also update the display of
+the linked list.
+\subsection{AnimatedHeap Component}
+\includegraphics[width=115mm]{images/heapDiagram.png}
+\subsection{MetaDataManager Component}
+\includegraphics[width=115mm]{images/metaDataDiagram.png}
+The MetaDataManager component provides a set of classes and functions meant to store the steps and step informations of the animations. The user manipulates
+those data through the public animating calls made in the different data structures' classes.
+\subsection{UI Component}
+\includegraphics[width=115mm]{images/UIDiagram.png}
+%==============================================================================
+\chapter{Implementation}
+\label{impl}
+
+In this chapter, we describe how the implemented the system.
+
+%------------------------------------------------------------------------------
+\section{User Interface}
+
+TODO
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\section{Problems Encountered}
+\subsection{Arthur Bigeard}
+Once our team got familiar with the TimingFramework, the application started rapidly growing and quickly our first animated algorithms were produced. 
+On early stages of the animation display, we figured several features should be added to the display to increase the potential of our animations, features including:
+\begin{itemize}
+\item Labelling the steps of the animation
+\item Navigating through steps from a list
+\item Resizing dynamically the window to fit several animation demonstrations on a screen
+\item Dynamically changing the speed of the animation using simple Speed Up/Speed Down JButtons
+\end{itemize}
+
+Introducing dynamic features to the animation constituted a challenge on several levels:
+\begin{itemize}
+\item performance-wise : the animation approach taken with the TimingFramework requires creating several objects per step; our approach of algorithm animation is such that animation are splitted
+in a multitude of atomic steps and therefore consume a lot of memory
+\item algorithm-wise : dynamic features require to look up and modify crucial data to the animation, where corruption of those data would lead to display inconsistencies or program termination
+\item boundary-wise : our animations are limited by the animation framework we're using, the TimingFramework; we cannot implement what the TimingFramework cannot do
+\end{itemize}
+
+To illustrate better the challenges involved in implementing dynamic features, here is a list of data potentially subject to changes:
+\begin{itemize}
+\item Rect's and Rectangle's x/y coordinates and edge size
+\item Step's Change Linked List 
+\item Change's changed Object reference
+\item Animation triggers, the Animator objects provided by the TimingFramework
+\item setupGUI
+\end{itemize}
+
+Attempting to implement dynamic speed changing of the animation demonstrates very well the limits of the TimingFramework and our implementation:
+\input{figures/swap}
+
+As you can see on this sample piece of code, the "core" of the animation, the Animator objects, are passed a static time value. We're keeping track of the Animators in a LinkedList stored in the corresponding step of the animation. A basic approach to the feature would be to simply browse every single Animator objects in our Step and modify the time value stored in the trigger using a simple speed ratio going from 0.25 to 4 for example. However, and this is where the TimingFramework failed to our expectations, once created, the Animator objects cannot be modified. Hence, it is not possible from this approach to implement dynamic speed change to the system.
+
+At this stage, it was still possible to implement dynamic speed change to the animation. If we cannot modify our Animators, the logical next step to the solution is the re-create the Animators instead of modifying them. This alternate solution is extremely constraining:
+\begin{itemize}
+\item performance-wise : Re-creating the Animators involve 3 steps: browsing steps, destroying animators, re-creating them.
+\item algorithm-wise : This solution requires heavy coding. While the first solution would only require to modify a time field, this solution requires to look up the type of Step we're currently modifying and the type of data structure we're animating in order to re-create the Animators properly
+\item requirements-wise : Destroying the Animators object would obviously require us to restart the animation from the beginning; not only this is not the expected behaviour from a speed change button, this solution might also cause the application to hang due to the heavy object manipulation overhead
+\end{itemize}
+
+Due to too heavy constraints this solution was quickly dropped. With the current analysis of the implementation requirements for this feature, only one solution could reasonably be infered: static speed changing. As you've seen on (\ref{fig:swap}), we can specify the duration of the animation when creating the Animators; the solution adopted was that the user can specify his own time unit when making calls to create an algorithm animation. 
+
+Attempting to implement dynamic window resizing also showed the limits of our own implementation and especially of the Step management system. Although this solution was almost fully coded and working on a first and long attempt, we decided to give up on it for a cleaner, easier static resizing solution. Implementing this feature was very challenging regarding to the consistency of the Step data stored by the system. To get a better idea of the issues involved in dynamic resizing, here's a reminder of the potential data involved in resizing:
+\begin{itemize}
+\item Steps
+\item Rects and Rectangles
+\item Changes
+\item setupGUI
+\end{itemize}
+
+Two implementations can be suggested for this feature; they both have their own perks and withdraws:
+\begin{itemize}
+\item Keeping a window width/height ratio relative to a fullscreen size from which the original x,y coordinates and size of the elements are calculated. The window width/height ratio would simply be used to adapt those x,y coordinates and element size. While this solution is very simple to code, it may lead to severe data inconsistency: using has a strong impact on the data precision, therefore, an expectableconsequence from this implementation is unaligned elements. However, it is important to notice that the performance overhead is neglectable.
+\item Re-creating the data involved in window resizing. Practically, this solution requires a lot more coding. It is extremely unefficient for the same reasons explained on the dynamic animation speed changing. It would also require to restart the entire animation each time the window is resize.
+\end{itemize}
+
+The second solution can clearly be dropped due to its obvious disadvantages. In the process of coding, this is how I went about defining how I may implement dynamic window resizing.
+
+The first solution was implemented; as expected, resizing resulted in unaligned elements. Usually, the scaling of the elements would be inconsistent from a range of 5 to 20 pixels.
+I have considered the eventuality of adding a scaling function to align the elements after the resizing process and after each step. Again, this fix has huge disadvantages: scaling elements would be done
+regardless to the position of the elements on the window, and multiple resizing may result in elements gradually moving up and down the window, and in the worst cases litterally working all their way up or down the window.
+Why? Simply because scaling the elements would require to move them all up or down the window. Elements would no longer be centered. 
+Again, performance-wise, this solution increases a lot the operations required to run steps on the animation.
+
+Our team discussed the need for dynamic resizing, to either justify dropping this feature or keeping it and improving it so that it works perfectly.
+We've decided to drop dynamic resizing for static resizing on the following assumptions:
+\begin{itemize}
+\item The user is unlikely to resize his window on a regular basis.
+\item The user aims to demonstrate algorithms graphically. Where demonstration is involved, preparation is involved too. We can reasonably suppose that our end-users
+will choose a fixed window size for their demonstration, if not fullscreen size, and keep the window to that size until the end of the animation. Therefore, determining the window
+size statically will satisfy the need for users to determine a custom animation window size. 
+\end{itemize}
+\subsection{Alexander Ferguson}
+
+Flash exporting: Compiling versus file reading.
+	This particular problem is one that could not be fully solved, and caused a lot of frustration over the course of the creation of the Flash project. Initially working from a trial version of Flash Professional CS6, I was able to compile and run flash animations I had written. However when it came to using a command line compiler that could be called by the java program, I ran into a few problems. The main complication is that there are multiple different compilers, and the only free compiler I had found that seemed suitable to work on different operating systems - “Adobe FLEX” - was unable to compile .fla files - the file format of Flash Professional CS6. This left me confused for a while, until I found a free, open source IDE called FlashDevelop, which used a collection of actionscript 3 files, instead of compiling through the project. This seemed like the perfect solution, until I ran into another problem that again ground my workflow to a halt: The free FLEX compiler now worked, but was a subset of the professional version, missing the vitally important file IO systems. I then had the following choice between development platforms:
+\begin{itemize}
+
+\item Adobe Flash Professional CS6	
+
+\textit{Advantages:}
+\begin{itemize}
+\item		This program is adobe’s high power flash flagship, and is a very good platform to learn to write flash applications on. Since it is the standard for creating flash applications, there are many tutorials and sites dedicated to helping create relevant code. The WYSIWYG editor generates code behind the scenes to help, which allows quicker implementation and more efficient debugging.
+\end{itemize}
+
+\textit{Disadvantages:}
+\begin{itemize}
+\item	To compile the files that are created, the user is required to have the official Adobe Flash program, version CS3 or greater. This requires that the user either spends a large amount of money for a license, or signs up for a free trial, both of which require downloading gigabytes of official Adobe software.
+\item	Adobe flash professional has a strong focus on creating actual animations, using distinct, predefined frames of animation. This was a nuisance to manage the different frames of animation, and caused a lot of problems.
+\end{itemize}
+
+\item FlashDevelop
+\textit{Advantages:}
+\begin{itemize}
+\item	The free software has the feeling of a real programming IDE. Using just a set of distinct actionscript class files, it is possible to create entire animations similarly to how it is done in java. By using a system of packages, include statements and method calls, you can link files together, which get compiled and grouped appropriately. There is no ‘hidden code’ in the animations, unlike Adobe Flash Professional, where it is possible to create objects in a frame, without being able to see the code for instantiating them. Although this increases time taken to implement the user interface, it is much more pleasant to maintain.
+\end{itemize}
+
+\textit{Disadvantages:}
+\begin{itemize}
+\item	The compiler used has only a subset of the functionality, lacking most importantly the ability to read or write from files before or after compilation. Without the ability to read the code from the user automatically, this tarnishes the very reasoning behind  the exporting component in the first place.
+\end{itemize}
+
+\textit{Solution:}
+	At this point, an impasse occurs: either the program doesn’t compile, or it cannot receive any animation information. After getting frustrated, I decided that the only solution was to completely reinvent the component to an alternate form of exporting. Currently, the most suitable solution requires a small part of activity from the user that would have been unnecessary otherwise, where they now have a flash platform that can animate the objects from a user input, similar to the java program, from a string that is put into the pre-compiled .swf file.
+	Before the java application has run once, The array objects are instantiated and the steps to be produced are recorded. There is a static String field in the AnimatedArray.java class that is appended to with the relevant information: first the array objects are instantiated, then the required swap and colour methods are called. At all of these stages, the code string is updated, and is then output to the file output.txt in the Exporting folder.
+	The .swf file has two main classes: Steplist.as and Main.as. The Steplist class contains an object that holds the array values and operations, and contains a method to parse the input code from the user into a steplist object, which passes the information to main. The main class sets up the GUI and iterates over the operations. Because of inherent ability to resize flash animations, and have the objects automatically scale, The movement of the boxes is very simple: using a standard 50 pixels between the top corners of each box, it is possible to mimic the java program’s automatic box horizontal velocity by changing the x increment value. This is possible because of the functionality of actionscript timers: alongside the length of the timing window, is an additional variable to specify number of times to be invoked before finishing. This means that using a small timing window and a timer repeating count of 50, it is trivial to adjust the horizontal speed of the box. incrementing by 1 pixel allows a swap of adjacent components, and this increment value is simply increased to the value of the difference in array position.
+	This solution completely erases all of the complexities in flash compiling, most notably getting it nullifies the project-affecting problems with releasing different software for each different operating system. The requirements for the user are also dramatically reduced, as the compiler alone requires 300+ megabytes of space for Adobe’s free flash compiler. This also reduces CPU usage for the java program. Assuming the .swf file would be compiled in the background once the steplist was finished, this could cause stuttering on older systems. 
+\end{itemize}
+
+\subsection{Andrew Gibson}
+\subsubsection{The selection of a suitable animation framework}
+
+During the beginning of the project, I was assigned to the research area where I was to examine a suitable graphics framework that could assist the team in building a solid animation API for our end users. During my research, I found there were several popular graphics frameworks for assisting with animation alongside Java applications, typically integrated through the use of compiled classes within a Java archive (.jar).
+
+The range of frameworks proved problematic, given that it was most suitable to select a single framework to build with, otherwise there would be serious inconsistencies between developed applications (as they differ in their functionality) We established a simple set of fundamental criteria for selection as follows:
+\begin{itemize}
+	\item The framework should offer a fully functional API, of which can be accessed by our code in order to build animation.
+	\item It should provide some degree of control, so that our own API can display dynamic movement and precision.
+	\item It should be able to be in-cooperated into an integrated development environment (IDE) for group production during the implementation stage.
+\end{itemize}
+
+After careful research, I found three separate candidates for animation production with Java. In order to justify a suitable approach, each framework was considered separately to assess desirable characteristics and identify potential flaws. 
+
+\underline{\textbf{Timing-Framework:}}
+
+The Timing Framework was found on Java.net, a place for Java based libraries and extensions (\cite{website:TimingFramework}). It features controlled timing and ease of animation.
+
+\textit{Advantages:}
+\begin{itemize}
+	\item The library is multi-threaded and concurrently safe. This prevents us from having to worry about complex synchronization issues between multiple application threads (as our animation software will utilise several threads for handling graphical changes independently)
+	\item Uses less memory, putting a smaller load on systems with limited memory, allowing more applications to execute at once. 
+	\item Offers an extensive API, giving us the ability of more control and functionality over our animations.
+	\item Supportive of Swing and SWT development, for flexibility over a suitable distribution
+	\item Its functionality can produce smooth, complex and controlled animation, useful for providing sufficient detail to our users in an orderly fashion.
+	\item Can be in-cooperated easily into an existing Eclipse project (a solid Java development IDE, which all the team have good knowledge of)
+\end{itemize}
+
+\textit{Disadvantages:}
+\begin{itemize}
+	\item The API is detailed and complex in areas, which may invoke a steep learning curve.
+	\item Swing examples documented are rather vague, and information given in a relevant PDF chapter is out dated.
+\end{itemize}
+
+\underline{\textbf{Java-FX:}}
+
+Java-FX was found on the Oracle technology website (\cite{website:JavaFX}) it features UI based accelerated graphics. Its control is timeline based.
+
+\textit{Advantages:}
+\begin{itemize}
+	\item Like the Timing-Framework, it also uses concurrently safe libraries.
+	\item Potentially less complex to learn, given that Oracle have provided a more comprehensive set of documentation, including video tutorials.
+\end{itemize}
+
+\textit{Disadvantages:}
+\begin{itemize}
+	\item Newer libraries are not supported within Eclipse. This isn’t useful to us as a team as our preferred development environment is Eclipse. It is more suited to the Netbeans IDE, which we aren’t familiar with.
+	\item It is more oriented towards web-based user interface development, typically within business. The goal of our application does not support this business approach, and focuses on the aspects of animation rather than an interactive interface with less emphasis on complex animation techniques.
+\end{itemize}
+
+\underline{\textbf{Trident:}}
+
+Like the Timing-Framework, this was also found as part of a Java.net library development (\cite{website:Trident}) it’s focused entirely on timelines, namely duration and object changes across such durations represented by keyframes.
+
+\textit{Advantages:}
+\begin{itemize}
+	\item Supports Swing and SWT development
+	\item Allows multiple timeline events to be run and scheduled at any one time (multiple animations)
+	\item Conceptually, it is straight forward and approachable; timelines represent the course of the animation and the keyframes the alterations to animation objects.
+\end{itemize}
+
+\textit{Disadvantages:}
+\begin{itemize}
+	\item Little documentation and not completely approachable as a result.
+	\item It doesn’t seem to fully support concurrency as part of its API. To give an example, the code below taken from the documentation section on timelines demonstrates parallel timeline objects competing for shares properties(http://www.pushing-pixels.org/2009/06/25/trident-part-8-timeline-scenarios.html)
+\end{itemize}
+
+\input{figures/frameworkExamples}
+
+In both examples \ref{fig:frameworkExamples} it can be seen that intrinsic locking is needed because of shared properties between objects. This adds a considerable degree of complexity to the framework, and would inevitably increase development time through the bugs and issues raised from concurrent access. For instance, if two objects were competing for shared animation data, and writing to it simultaneously, this would create unexpected behaviour. We would have to consider thread safe concepts alongside our own application complexity.
+
+To conclude, we felt that the Timing-Framework offered the best and most approachable set of features. It provides multiple, dynamic animation techniques; with an emphasis on the animation itself as supposed to client designed web applications. It is also concurrent, which is hugely important as it draws a significant amount of complexity out the project. The animations we create will have their own threads delegated to tasks within the framework. The precision of control it offers is also an attractive trait, allowing us to build highly tweaked and well performing animations to our end users. 
+
+Of course, the Timing-Framework is probably the most complex, but the positives most certainly outweigh the negative aspects. The analysis of these separate frameworks proved to be very useful in that sense, standing out as an important design choice that most likely would of saved us more development time in comparison to the other frameworks.
+
+\subsubsection{Development of Animated Linked Lists}
+
+For part of the project I worked on the development of linked lists. I utilised the trigger design that Gediminas created for scheduling animations in a step based fashion, such that the user can step through each part individually. To begin with, I created a linked list class with generic nodes, which would eventually function as objects associated with animations (class of type Rect). I represented the linked list as an array of these generic node objects. There were several problems I encountered when attempting to in-cooperate the step-based animation classes into my own code. It became apparent that some of the step-based algorithms involved with the successfully built Animated-Array class didn’t directly translate to my own Animated-Linked-List structure. A step in this sense is represented as a series of animations, as noted before.
+
+The intention of my Animated-Linked-List class was to offer specific algorithmic operations associated with linked list data structures. The issue I encountered was attempting to implement a suitable algorithm to locate and remove all instances of a specific node in the list. Addressing the step-based approach for this algorithm, it was required that the deletion of each found copy of the node was represented as a step. Initially, I developed the algorithm which directly removed the found occurrence from the list of objects.
+
+\input{figures/linkedListsExample}
+
+This proved to be problematic. Once executed, the animation would display the deleted node to the user, before they have even stepped through the animation and eventually reached the deletion of the found node. The early implementation of the problem highlights this issue (\ref{fig:linkedListsExample}).
+
+This section of code (\ref{fig:linkedListsExample}) represents a linear scan across each of the list’s pointers, until the required node is found. When a node is found, it is highlighted, and subsequently deleted. The last two lines indicated by (**) in this piece of code highlight the issue. Although the overall method for locating and removing a node is represented as a step, the changes made directly to the linked list object (represented here as rectlist) are not stored in any structures that allow the user to step through. Hence, when the application is executed, these adjustments are already displayed to the user. 
+
+To solve this issue, Gediminas and I proposed a solution that represented the main deletion operation as a single change within the method. In this way, the method would still be represented as a step (with its collection of animations) but the change class would allow us to log the deletion, so that we can obtain it and handle the deletion where necessary.
+
+\input{figures/linkedListsDeletion}
+
+It simply involved omitting the problematic lines above (**), and substituting a change to represent a deletion, with a reference to the object that is requested to be deleted. Once these changes were logged, the stepForward method allowed us to catch the corresponding change log at the appropriate time during the animation. A string comparison is done on the change log list and once it is found, the operations are then done on the linked list in order to display the deletion to the user. The code below shows part of the stepForward() method. The change “deleteNode” is added after a node is requested to be deleted in the removal method, and I implemented a separate method in the linked list class to handle the deletion of the specific node with reference ‘p’. The string “deleteNode” is caught at the appropriate time, given that the ordering of the steps is consistent in the application (\ref{fig:linkedListsDeletion}).
+
+Another issue encountered involved the sequencing of steps, where the deletion of the node was not shown when cycling through steps. Gediminas successfully provided a solution to this rather complex problem, which involved maintaining the correct ordering in the animation:
+
+Our application calls methods when executed, and generates a list of steps (each of which has their own set of animations). To ensure the correct ordering of steps, a counter is incremented whenever a step is created in the program, so that when the user is stepping through, the correct step is executed next in the list sequence. The step is created when a method is called (removal in this case), and is to be represented as an animated sequence of some form. A step is then added to the list of steps once the method returns.
+
+Originally when called the removal method would increment this currentStep value, change the colour of the current node to indicate it is to be deleted, and finally change its colour to match the background to indicate deletion. Other methods were called inside of the removal method where they themselves incremented this counter. This caused inconsistencies in the ordering.
+
+The step list is designed to execute the (currentStep+1) element in the list, by triggering it and causing it to run. 
+In the current system, here is how the execution would have affected the ordering:
+
+Say to begin with this counter was currently equal to 6 (assume the counter is the variable currentStep = 6). Assume the step list is ‘S’ = […6] initially, and has 5 step elements prior to it.
+\begin{itemize}
+\item The removal method findAndRemove(..) is called, a step is instantiated
+\item currentStep is incremented (currentStep = 7)
+\item setColor(..) is called to change the colour initially, this creates another step and increments the counter (currentStep = 8)
+\item Once setColor(..) returns 8 is added to the steplist (S = […6,8]) 
+\item setColor(..) is called a second time, returns, and the list is now (S = […6,8,9], currentStep = 10) 
+\item Finally findAndRemove(..) is returned to, and is finally added to the step list prior to exiting the method. (S = […6,8,9,7])
+\item When the user requests to step through the animation and requests the last element 7, the application will attempt to trigger the 10th element, as its relative position is 9. This will cause the application to crash as it attempts to access an out of bounds array index. The other steps will be inconsistent in their operation as well.
+\end{itemize}
+
+
+The desired ordering is therefore S  = [...6,7,8,9]. To achieve this, currentStep was incremented after the method calls for both the colour adjustments. To explain:
+\begin{itemize}
+\item The removal method findAndRemove(..) is called, a step is instantiated
+\item Both setcolor(..) methods are called, they both increment independently and append to the step list ( S = […6,7,8]
+\item Once they return, currentStep is incremented in findAndRemove(..) and the 9th step is added ( S = […6,7,8,9])
+\end{itemize}
+
+When the user steps through, step 6 will trigger the 7th  element in the step list, the 8th will trigger the 9th and so on. Hence, the ordering is maintained and the application performs successfully.
+
+\subsection{Gediminas Leikus}
+\subsubsection{Separating animations into steps and making continuous animations}
+
+The group decided to use Java for our project, because we were all familiar with it and because it was the language our client suggested us to use. We had left the decision of choosing the animation tools to Andrew Gibson and Alexander Ferguson. For the reasons stated in this document (reference), they decided to choose the Timing Framework \cite{website:TimingFramework}.
+
+Andrew had an example (\ref{fig:firstPrototype}) ready, which had multiple rectangles created from an array moving back and forth, had buttons allowing us to stop the animation, resume it or delete one of the rectangles. He also added comments into the sample code, just so it would be easier for us to familiarize with the tool.
+
+\input{figures/firstPrototype}
+
+While this was a good initial step, we did not have any obvious way to implement Steps, in a sense where multiple Animations could be assigned to one step and we could navigate through these steps back and forth. Therefore both Andrew and Arthur Bigeard started looking into it.
+
+\input{figures/arthurPrototype}
+
+Andrew had no real suggestions and Arthur’s prototype implementation seemed: 
+\begin{itemize}
+	\item too complex (a swap of 2 rectangles was over 50 lines long \ref{fig:arthurPrototype})
+	\item impractical to use (it didn’t have any way to step back and forth through the animation) 
+	\item it had a performance overhead (all Animator objects were running continuously, until the whole animation was stopped)
+\end{itemize}
+It had a few good points though: 
+\begin{itemize}
+	\item it was done on a low level (so the how-to part was obvious if you understood the code) 
+	\item it was not storing too much information (thus it did not really have a memory overhead). 
+\end{itemize}
+But this was not what we wanted – the most important thing for us was the stepping back and forth functionality.  Therefore I started looking into it as well.
+
+During my research of the Timing Framework I found out that we could add triggers, which would start an animation, to a button or to another animation, which would start another animation when it stops or starts running \cite{website:TimingFrameworkDemo}. Thus, triggers seemed like a great tool for linking multiple animations into one Step, linking steps and making a continuous animation.
+
+\input{figures/gPrototype}
+
+I still wanted to find a way to make a change of a rectangle (or any other object) property easy to manage. Looking through the Demos I also found that I could use Targets and PropertySetters to do this in just a few lines of code \ref{fig:gPrototype}, which seemed great. But it only allowed us to change a property, which was numerical (like coordinates or colors) – it didn’t allow us to change all the properties of the object, like the labels of rectangles. To solve this issue, I researched further and found that we can create a class, which would implement a TimingTarget interface and its begin(), end(), repeat() and reverse() methods. Therefore, to solve the issue of changing the labels of rectangles I created a new class called ChangeLabel, which implemented a TimingTarget interface, its begin(), end(), repeat() and reverse() methods, and added a change of String variable just inside its begin method. This approach seemed great, because:
+\begin{itemize}
+	\item we can change any property of an object or do pretty much anything when that TimingTarget is called
+	\item it is attached to each Animator object, so we do not have to worry about storing the TimingTargets anywhere
+	\item it is efficient performance wise, because these TimingTargets are only executed, when the Animator object is
+	\item it is easy to use, implement and understand
+\end{itemize}
+
+Therefore, the end result of my prototype was:
+\begin{itemize}
+	\item a list of steps
+	\item an array of rectangles and their coordinates at each step
+	\item an ability to either step back and forth through the animation by using buttons or see a continuous animation (and it was either that or that)
+\end{itemize}
+
+After looking through both my and Arthurs prototypes, we decided to merge the good parts of each: we kept most of my prototype, but reduced the amount of data stored for each Step, in particular, we made it so it would only store the details of the changed object before the change, rather than the details of all the objects.
+
+The only issue left then, was the ability to have both step-by-step and continuous animations and allow the user to switch between them at any point of time, but this was not a big issue, since I just used a similar approach I used with ChangeLabel class:
+\begin{enumerate}
+	\item I created a new class, called ContinuousAnimation, which was also implementing the TimingTarget interface
+	\item introduced a boolean variable called continuousAnimation, which was keeping record of whether the animation was in step-by-step or continuous mode
+	\item made it so that the begin method in ContinuousAnimation would execute different actions according to the boolean continuousAnimation variable value:
+	\begin{itemize}
+		\item If true, Trigger the next Step
+		\item If false, do nothing
+	\end{itemize}
+\end{enumerate}
+
+\subsubsection{Refactoring}
+
+Our first common implementation that we were using for development was coupled too much with AnimatedArray data structure and was not flexible at all. This became obvious, when we started implementing our AnimatedLinkedList. When we wanted to make our API to animate an AnimatedLinkedList instead of AnimatedArray, we had to change multiple classes, including Rect, ContinuousAnimation and ChangeLabel \ref{fig:coupling}. This was due to no polymorphism in our design.
+
+\input{figures/coupling}
+
+After doing our Professional Software Development 3 (PSD3) D7 deliverable (which was implementation of an Internship Management System we were designing the entire first semester), I have learned how to structure software better and how we can split code into components in Java. Therefore it was time for refactoring.
+
+One of the first things I did was to create a separate package for each data structure. This lead to 4 additional packages being created:
+\begin{itemize} 
+	\item AnimatedArray
+	\item AnimatedBinaryTree
+	\item AnimatedDataStructure
+	\item AnimatedLinkedList
+\end{itemize}
+Each package is supposed to keep classes relevant only to its data structure, apart from AnimatedDataStructure package, which keeps classes that are relevant to all data structures.
+
+I also completely separated the GUI from the rest of the code and created a class called setupGUI.
+
+\input{figures/changeStructure}
+
+The next thing I did was to create a public interface AnimatedDataStructure, which is how we solved the issue I mentioned in the first paragraph. Rect, ContinuousAnimation, ChangeLabel and setupGUI are all expecting an AnimatedDataStructure variable now and all data structures are just implementing this interface. Therefore it does not matter which data structure we use, the common classes (which are in AnimatedDataStructure package) work for all of them. The interface itself also brought common method names and some structure. Another good thing is that now, we only need to change 2 things in the Main class if we want to work with a different data structure: the data structure class name and then the constructor method call \ref{fig:changeStructure}. This did bring in some repetitive methods, like getNextButton(), which are being repeated in all data structures, but could be solved by introducing another abstract class, which would be implementing the AnimatedDataStructure interface and have all of these repetitive methods and then making all data structure classes extend this new abstract class.
+
+All of the above solutions introduced basic polymorphism to our software and solved quite a lot of development issues as well as made it easier to develop and manage the code for future developers (if there are going to be any). While doing all of the above, parts of unneccessary code were removed or changed as well.
+
+\subsection{Liam Bell}
+
+%==============================================================================
+\chapter{Evaluation}
+
+TODO
+
+%==============================================================================
+\chapter{Conclusion}
+
+TODO
+
+%==============================================================================
+\section{Contributions}
+\subsection{Arthur Bigeard}
+\subsection{Alexander Ferguson}
+\subsection{Andrew Gibson}
+\subsection{Gediminas Leikus}
+\subsection{Liam Bell}
+
+%==============================================================================
+\bibliographystyle{plain}
+\bibliography{example}
+\end{document}

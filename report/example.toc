@@ -1,4 +1,4 @@
-\contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.1}
+\contentsline {chapter}{\numberline {1}Introduction}{4}{chapter.1}
 \contentsline {chapter}{\numberline {2}Design}{5}{chapter.2}
 \contentsline {section}{\numberline {2.1}Use cases}{5}{section.2.1}
 \contentsline {section}{\numberline {2.2}Components}{6}{section.2.2}
@@ -14,18 +14,18 @@
 \contentsline {section}{\numberline {3.2}Problems Encountered}{11}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Arthur Bigeard}{11}{subsection.3.2.1}
 \contentsline {subsection}{\numberline {3.2.2}Alexander Ferguson}{15}{subsection.3.2.2}
-\contentsline {subsection}{\numberline {3.2.3}Andrew Gibson}{15}{subsection.3.2.3}
-\contentsline {subsubsection}{The selection of a suitable animation framework}{15}{section*.3}
-\contentsline {subsubsection}{Development of Animated Linked Lists}{18}{section*.4}
-\contentsline {subsection}{\numberline {3.2.4}Gediminas Leikus}{20}{subsection.3.2.4}
-\contentsline {subsubsection}{Separating animations into steps and making continuous animations}{20}{section*.5}
-\contentsline {subsubsection}{Refactoring}{24}{section*.6}
-\contentsline {subsection}{\numberline {3.2.5}Liam Bell}{25}{subsection.3.2.5}
-\contentsline {chapter}{\numberline {4}Evaluation}{26}{chapter.4}
-\contentsline {chapter}{\numberline {5}Conclusion}{27}{chapter.5}
-\contentsline {section}{\numberline {5.1}Contributions}{27}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}Arthur Bigeard}{27}{subsection.5.1.1}
-\contentsline {subsection}{\numberline {5.1.2}Alexander Ferguson}{27}{subsection.5.1.2}
-\contentsline {subsection}{\numberline {5.1.3}Andrew Gibson}{27}{subsection.5.1.3}
-\contentsline {subsection}{\numberline {5.1.4}Gediminas Leikus}{27}{subsection.5.1.4}
-\contentsline {subsection}{\numberline {5.1.5}Liam Bell}{27}{subsection.5.1.5}
+\contentsline {subsection}{\numberline {3.2.3}Andrew Gibson}{16}{subsection.3.2.3}
+\contentsline {subsubsection}{The selection of a suitable animation framework}{16}{section*.3}
+\contentsline {subsubsection}{Development of Animated Linked Lists}{19}{section*.4}
+\contentsline {subsection}{\numberline {3.2.4}Gediminas Leikus}{22}{subsection.3.2.4}
+\contentsline {subsubsection}{Separating animations into steps and making continuous animations}{22}{section*.5}
+\contentsline {subsubsection}{Refactoring}{25}{section*.6}
+\contentsline {subsection}{\numberline {3.2.5}Liam Bell}{27}{subsection.3.2.5}
+\contentsline {chapter}{\numberline {4}Evaluation}{28}{chapter.4}
+\contentsline {chapter}{\numberline {5}Conclusion}{29}{chapter.5}
+\contentsline {section}{\numberline {5.1}Contributions}{29}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Arthur Bigeard}{29}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}Alexander Ferguson}{29}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.3}Andrew Gibson}{29}{subsection.5.1.3}
+\contentsline {subsection}{\numberline {5.1.4}Gediminas Leikus}{29}{subsection.5.1.4}
+\contentsline {subsection}{\numberline {5.1.5}Liam Bell}{29}{subsection.5.1.5}

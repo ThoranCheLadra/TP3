@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  12 MAR 2013 20:39
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  13 MAR 2013 00:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -260,8 +260,7 @@ put line 292.
 LaTeX Info: Redefining \today on input line 724.
 \dt@a=\toks16
 \dt@b=\toks17
-)
-No file example.aux.
+) (./example.aux)
 \openout1 = `example.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
@@ -279,6 +278,7 @@ LaTeX Font Info:    ... okay on input line 11.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 11.
 LaTeX Font Info:    ... okay on input line 11.
 LaTeX Font Info:    Try loading font information for OT1+ptm on input line 11.
+
 (/usr/local/texlive/2012/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
@@ -333,11 +333,13 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 11.
 LaTeX Info: Redefining \pageref on input line 11.
 LaTeX Info: Redefining \nameref on input line 11.
+
+(./example.out) (./example.out)
 \@outlinefile=\write3
 \openout3 = `example.out'.
 
 
-<images/CompSci_mono.pdf, id=4, 340.27126pt x 49.18375pt>
+<images/CompSci_mono.pdf, id=112, 340.27126pt x 49.18375pt>
 File: images/CompSci_mono.pdf Graphic file (type pdf)
 
 <use images/CompSci_mono.pdf>
@@ -373,81 +375,76 @@ l.28 \tableofcontents
                       [1]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24.88> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 28.
+ (./example.toc [2
+
+])
 \tf@toc=\write4
 \openout4 = `example.toc'.
 
- [2
-
-]
+ [3]
 Chapter 1.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20.74> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 30.
-(./figures/alice.tex <figures/alice.pdf, id=27, 646.415pt x 612.2875pt>
-File: figures/alice.pdf Graphic file (type pdf)
+[4
 
-<use figures/alice.pdf>
-Package pdftex.def Info: figures/alice.pdf used on input line 3.
-(pdftex.def)             Requested size: 199.16928pt x 188.64867pt.
-) [3
-
-] [4 <./figures/alice.pdf>]
+]
 Chapter 2.
-<images/useCases.png, id=45, 763.35187pt x 386.94562pt>
+<images/useCases.png, id=171, 763.35187pt x 386.94562pt>
 File: images/useCases.png Graphic file (type png)
 
 <use images/useCases.png>
-Package pdftex.def Info: images/useCases.png used on input line 49.
+Package pdftex.def Info: images/useCases.png used on input line 40.
 (pdftex.def)             Requested size: 327.20668pt x 165.85788pt.
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 54.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 45.
 
 (/usr/local/texlive/2012/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 54.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 45.
 
-<images/componentDiagram.png, id=46, 565.36218pt x 414.04688pt>
+<images/componentDiagram.png, id=172, 565.36218pt x 414.04688pt>
 File: images/componentDiagram.png Graphic file (type png)
 
 <use images/componentDiagram.png>
-Package pdftex.def Info: images/componentDiagram.png used on input line 60.
+Package pdftex.def Info: images/componentDiagram.png used on input line 51.
 (pdftex.def)             Requested size: 327.20668pt x 239.6356pt.
  [5
 
  <./images/useCases.png>]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 63.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 54.
 
-<images/animatedDataStructureDiagram.png, id=55, 539.01375pt x 362.85562pt>
+<images/animatedDataStructureDiagram.png, id=179, 539.01375pt x 362.85562pt>
 File: images/animatedDataStructureDiagram.png Graphic file (type png)
 
 <use images/animatedDataStructureDiagram.png>
 Package pdftex.def Info: images/animatedDataStructureDiagram.png used on input 
-line 64.
+line 55.
 (pdftex.def)             Requested size: 327.20668pt x 220.27301pt.
  [6 <./images/componentDiagram.png> <./images/animatedDataStructureDiagram.png>
 ]
-<images/arrayDiagram.png, id=63, 496.10344pt x 389.95688pt>
+<images/arrayDiagram.png, id=184, 496.10344pt x 389.95688pt>
 File: images/arrayDiagram.png Graphic file (type png)
 
 <use images/arrayDiagram.png>
-Package pdftex.def Info: images/arrayDiagram.png used on input line 73.
+Package pdftex.def Info: images/arrayDiagram.png used on input line 64.
 (pdftex.def)             Requested size: 327.20668pt x 257.19977pt.
 
-<images/linkedListDiagram.png, id=64, 452.4403pt x 416.30531pt>
+<images/linkedListDiagram.png, id=185, 452.4403pt x 416.30531pt>
 File: images/linkedListDiagram.png Graphic file (type png)
 
 <use images/linkedListDiagram.png>
-Package pdftex.def Info: images/linkedListDiagram.png used on input line 76.
+Package pdftex.def Info: images/linkedListDiagram.png used on input line 67.
 (pdftex.def)             Requested size: 327.20668pt x 301.07358pt.
 
-Overfull \hbox (7.26057pt too wide) in paragraph at lines 76--80
+Overfull \hbox (7.26057pt too wide) in paragraph at lines 67--71
 [] \OT1/ptm/m/n/10.95 The An-i-mat-edLinkedList
  []
 
 [7 <./images/arrayDiagram.png>]
 
-LaTeX Warning: File `images/heapDiagram.png' not found on input line 81.
+LaTeX Warning: File `images/heapDiagram.png' not found on input line 72.
 
 
 ! Package pdftex.def Error: File `images/heapDiagram.png' not found.
@@ -456,25 +453,25 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.81 ...phics[width=115mm]{images/heapDiagram.png}
+l.72 ...phics[width=115mm]{images/heapDiagram.png}
                                                   
 ? 
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 81.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 72.
 (/usr/local/texlive/2012/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 ) [8 <./images/linkedListDiagram.png>]
-<images/metaDataDiagram.png, id=75, 506.6428pt x 362.85562pt>
+<images/metaDataDiagram.png, id=194, 506.6428pt x 362.85562pt>
 File: images/metaDataDiagram.png Graphic file (type png)
 
 <use images/metaDataDiagram.png>
-Package pdftex.def Info: images/metaDataDiagram.png used on input line 83.
+Package pdftex.def Info: images/metaDataDiagram.png used on input line 74.
 (pdftex.def)             Requested size: 327.20668pt x 234.34737pt.
  [9 <./images/metaDataDiagram.png>]
-<images/UIDiagram.png, id=83, 428.35031pt x 242.40562pt>
+<images/UIDiagram.png, id=200, 428.35031pt x 242.40562pt>
 File: images/UIDiagram.png Graphic file (type png)
 
 <use images/UIDiagram.png>
-Package pdftex.def Info: images/UIDiagram.png used on input line 87.
+Package pdftex.def Info: images/UIDiagram.png used on input line 78.
 (pdftex.def)             Requested size: 327.20668pt x 185.16966pt.
  [10 <./images/UIDiagram.png>]
 Chapter 3.
@@ -637,18 +634,40 @@ Overfull \hbox (283.85915pt too wide) in paragraph at lines 36--36
 t.get(b).getRec().x, rect_list.get(b).getRec().y));[] 
  []
 
-)
+) [12] [13] [14]
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ú in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ù in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ô in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ò in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ô in font ptmr7t!
+ [15]
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ô in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ô in font ptmr7t!
+Missing character: There is no ‚ in font ptmr7t!
+Missing character: There is no Ä in font ptmr7t!
+Missing character: There is no ô in font ptmr7t!
+ [16]
 
-LaTeX Warning: Reference `fig:swap' on page 12 undefined on input line 143.
+LaTeX Warning: Citation `website:TimingFramework' on page 17 undefined on input
+ line 216.
 
-[12] [13] [14]
+[17]
 
-LaTeX Warning: Citation `website:TimingFramework' on page 15 undefined on input
- line 192.
-
-[15]
-
-LaTeX Warning: Citation `website:JavaFX' on page 16 undefined on input line 212
+LaTeX Warning: Citation `website:JavaFX' on page 18 undefined on input line 236
 .
 
 Missing character: There is no ‚ in font ptmr7t!
@@ -658,25 +677,20 @@ Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ô in font ptmr7t!
 
-LaTeX Warning: Citation `website:Trident' on page 16 undefined on input line 22
-8.
+LaTeX Warning: Citation `website:Trident' on page 18 undefined on input line 25
+2.
 
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ô in font ptmr7t!
-[16]
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ô in font ptmr7t!
- (./figures/frameworkExamples.tex)
-
-LaTeX Warning: Reference `fig:frameworkExamples' on page 17 undefined on input 
-line 245.
-
+(./figures/frameworkExamples.tex) [18]
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ô in font ptmr7t!
-[17] (./figures/linkedListsExample.tex
+ [19] (./figures/linkedListsExample.tex
 Overfull \hbox (40.76944pt too wide) in paragraph at lines 15--15
 []\OT1/pcr/m/n/10.95 while(node.getNext() != null && !(node.getData().getLabel(
 ).equals(i))){[] 
@@ -689,18 +703,10 @@ or the prev element after the to be deleted node[]
  []
 
 )
-
-LaTeX Warning: Reference `fig:linkedListsExample' on page 18 undefined on input
- line 259.
-
-
-LaTeX Warning: Reference `fig:linkedListsExample' on page 18 undefined on input
- line 261.
-
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ô in font ptmr7t!
-(./figures/linkedListsDeletion.tex
+ (./figures/linkedListsDeletion.tex
 Overfull \hbox (60.47942pt too wide) in paragraph at lines 8--8
 []\OT1/pcr/m/n/10.95 if (steps.get(currentStep).getChanges().get(0).getType() =
 = "deleteNode") {[] 
@@ -731,12 +737,7 @@ Missing character: There is no ú in font ptmr7t!
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ù in font ptmr7t!
-
-
-LaTeX Warning: Reference `fig:linkedListsDeletion' on page 18 undefined on inpu
-t line 267.
-
-[18]
+ [20]
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ò in font ptmr7t!
@@ -755,24 +756,19 @@ Missing character: There is no ¶ in font ptmr7t!
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ¶ in font ptmr7t!
- [19]
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ¶ in font ptmr7t!
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ¶ in font ptmr7t!
+ [21]
 
-
-LaTeX Warning: Citation `website:TimingFramework' on page 20 undefined on input
- line 302.
-
-
-LaTeX Warning: Reference `fig:firstPrototype' on page 20 undefined on input lin
-e 304.
+LaTeX Warning: Citation `website:TimingFramework' on page 22 undefined on input
+ line 326.
 
 (./figures/firstPrototype.tex
-<images/firstPrototype.png, id=140, 803.0pt x 502.87875pt>
+<images/firstPrototype.png, id=264, 803.0pt x 502.87875pt>
 File: images/firstPrototype.png Graphic file (type png)
 
 <use images/firstPrototype.png>
@@ -833,22 +829,17 @@ LaTeX Warning: Float too large for page by 16.3604pt on input line 56.
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ô in font ptmr7t!
-
-
-LaTeX Warning: Reference `fig:arthurPrototype' on page 20 undefined on input li
-ne 314.
-
+ [22 <./images/firstPrototype.png>] [23]
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ô in font ptmr7t!
-[20]
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ì in font ptmr7t!
 
 
-LaTeX Warning: Citation `website:TimingFrameworkDemo' on page 21 undefined on i
-nput line 325.
+LaTeX Warning: Citation `website:TimingFrameworkDemo' on page 24 undefined on i
+nput line 349.
 
 (./figures/gPrototype.tex
 Overfull \hbox (73.6194pt too wide) in paragraph at lines 9--9
@@ -869,90 +860,70 @@ getRec().x));}[]
  []
 
 )
-
-LaTeX Warning: Reference `fig:gPrototype' on page 21 undefined on input line 32
-9.
-
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ì in font ptmr7t!
 Missing character: There is no ‚ in font ptmr7t!
 Missing character: There is no Ä in font ptmr7t!
 Missing character: There is no ô in font ptmr7t!
-[21 <./images/firstPrototype.png>] [22]
-
-LaTeX Warning: Reference `fig:coupling' on page 23 undefined on input line 359.
-
-
-[23] (./figures/coupling.tex
-<images/coupling.png, id=167, 471.7625pt x 173.64874pt>
+ [24] (./figures/coupling.tex
+<images/coupling.png, id=285, 471.7625pt x 173.64874pt>
 File: images/coupling.png Graphic file (type png)
 
 <use images/coupling.png>
 Package pdftex.def Info: images/coupling.png used on input line 3.
 (pdftex.def)             Requested size: 432.26999pt x 159.1149pt.
-) (./figures/changeStructure.tex
-<images/changeStructure.png, id=168, 410.53375pt x 166.6225pt>
+) [25] (./figures/changeStructure.tex
+<images/changeStructure.png, id=296, 410.53375pt x 166.6225pt>
 File: images/changeStructure.png Graphic file (type png)
 
 <use images/changeStructure.png>
 Package pdftex.def Info: images/changeStructure.png used on input line 3.
 (pdftex.def)             Requested size: 432.26999pt x 175.44438pt.
-)
-
-LaTeX Warning: Reference `fig:changeStructure' on page 24 undefined on input li
-ne 378.
-
-[24 <./images/coupling.png>] [25 <./images/changeStructure.png>]
+) [26 <./images/coupling.png> <./images/changeStructure.png>] [27]
 Chapter 4.
-[26
+[28
 
 ]
 Chapter 5.
 No file example.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 405.
-[27
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 429.
+[29
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 405.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 429.
  (./example.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 405.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 405.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 429.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 429.
+Package rerunfilecheck Info: File `example.out' has not changed.
+(rerunfilecheck)             Checksum: 7AB18F2815A4B3A82BA7B275852583E9;1723.
 
-
-Package rerunfilecheck Warning: File `example.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `example.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  7AB18F2815A4B3A82BA7B275852583E9;1723.
 
 LaTeX Warning: There were undefined references.
 
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 405.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 429.
  ) 
 Here is how much of TeX's memory you used:
- 6229 strings out of 493488
- 95704 string characters out of 3141326
- 209237 words of memory out of 3000000
- 9339 multiletter control sequences out of 15000+200000
+ 6259 strings out of 493488
+ 96095 string characters out of 3141326
+ 209154 words of memory out of 3000000
+ 9363 multiletter control sequences out of 15000+200000
  24975 words of font info for 50 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
- 36i,7n,28p,1146b,385s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,7n,28p,1167b,443s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2012/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/te
 xlive/2012/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/20
 12/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2012/texmf-d
 ist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/
 type1/urw/times/utmri8a.pfb>
-Output written on example.pdf (29 pages, 336558 bytes).
+Output written on example.pdf (31 pages, 326196 bytes).
 PDF statistics:
- 234 PDF objects out of 1000 (max. 8388607)
- 182 compressed objects within 2 object streams
- 74 named destinations out of 1000 (max. 500000)
- 61 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 355 PDF objects out of 1000 (max. 8388607)
+ 302 compressed objects within 4 object streams
+ 75 named destinations out of 1000 (max. 500000)
+ 272 words of extra memory for PDF output out of 10000 (max. 10000000)
 
