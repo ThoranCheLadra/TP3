@@ -197,6 +197,30 @@ Flash exporting: Compiling versus file reading.
 	This solution completely erases all of the complexities in flash compiling, most notably getting it nullifies the project-affecting problems with releasing different software for each different operating system. The requirements for the user are also dramatically reduced, as the compiler alone requires 300+ megabytes of space for Adobe’s free flash compiler. This also reduces CPU usage for the java program. Assuming the .swf file would be compiled in the background once the steplist was finished, this could cause stuttering on older systems. 
 \end{itemize}
 
+\begin{itemize} 
+\item Array positioning
+ Once we had managed to successfully create an array of objects on the screen, I contributed with the basic display. Having created some early wireframes, I recreated them in java, with a simple formula to write 10 objects onto the screen to a window of fixed resolution. This was obviously suboptimal, since we required a way of displaying an array of any size, on any resolution. Looking at the different possibilities online, I found that the simplest way to be able to use the entire resolution of the screen was using a method I came across called getScreenSize() using java’s own java.awt.Toolkit. Using the screen width found, along with the number of array objects to be displayed, there was enough independent variables in the equation to determine the position and size attributes of the objects on screen. The size of the boxes, the size of the space between boxes and positioning of the array was determined by a short algorithm using the found screen size, number of objects and a fixed minimum spacing between objects of one pixel. This allows the user to enter an array of over 100 values, much more than would be required or useful. At this size, the text label on each object becomes unreadable on normal resolution screens, but is still fully functional as an animated array. 
+
+\item Screenshot system for exporting as slides.
+ One of the early permutations for exporting was to use a call to an external toolkit to save screen images that could be used in a slide show. Andrew had already started to add the functionality, but by separating it into its own class and using the java.awt.Robot toolkit, it was possible to create a new screenshot upon completion of every swap and colour change, store it in a folder and name it accordingly so that it can be iterated over and used as a slideshow if required. Andrew attempted to use the frame of the window to be the borders of the screenshot, but ran into problems with different screen sizes. To get around this, we reused the default toolkit that we had previously use to get the user’s screen resolution. This allowed us to capture the screen size of any system that the user is running the program on. Then, using another toolkit called Robot, we could call a method that would capture an image of the specified size:
+robot.createScreenCapture(Rectangle screen) . This had the downside of also capturing the edges of the screen, and the top bar of the java window, but we agreed that since it was not going to be our long term solution to exporting animations, we could cope with the extra pixels.
+
+\item Flash Exporting 
+ Once the main program was nearing completion, I volunteered to take responsibility for the Flash exportation. None of us had any real experience with creating Flash files, except Andrew who was still in the process of implementing linked lists. Although the language had been largely modified in the update from Actionscript 2.0 to Actionscript 3.0 since he last used it, he gave valuable help with learning the language.
+The initial plan was to incorporate an external compiler to trigger once the main java animation was created, compiling a .swf of the most recent animation that can be saved and reused as the java animation being displayed to the user. This plan was unanimously decided to be beyond the scope of the project, increasing the total complexity and requiring a lot of system redesign. The plan was scrapped when we discovered the difficulties in getting the data sharing between the programs, and automatic compilation of the .swf consistent between operating systems.
+ The final version of the Exporting component is as follows. The java application, upon completing its steplist, concurrently creates a code string then outputs it to a file. The code string is a descriptor of the array created, and the operations performed on them. This string has a specific syntax that I created to be easy to parse in actionscript, and is described as follows:
+“[instantiated values of AnimatedArray object]:[-operation]*”
+Operations are either a swap - two index arguments - or a colour change: an index value followed by three arguments for the object’s desired colour’s red, green and blue channels. For example, the following code creates an array of five objects, swaps the objects at index 1 and 3, then changes the colour of the middle element to Black: 
+0,1,2,3,4:-1,3-2,0,0,0
+
+The final state of the animation is shown below.
+
+\includegraphics[width=115mm]{images/flash1.png}
+
+
+Although it was an unfamiliar language to us, it became apparent that it would be possible to create an identical system, given enough time. The flash exporting component however was never intended to repeat the algorithmic functionality of the main program, so to prevent duplicating code and to save time, we decided to only implement a subset of the system. There is no functionality for a user to create their own algorithms in its current version, and there is only the ability to visualise AnimatedArray structures. Flash has its own built in resizing of the animation frame, but cannot scale as well as the java version of the implementation. Being a .swf file however, it comes with the added benefits of being able to be run on all current web browsers, embedded it in slide shows and applications, and can be referenced in html to be used in web pages.
+\end{itemize}
+
 \subsection{Andrew Gibson}
 \subsubsection{The selection of a suitable animation framework}
 
