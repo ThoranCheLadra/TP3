@@ -6,34 +6,23 @@ package AnimatedBinaryTree;
  *Authors: Liam Bell, and Gediminas Liekus
  *Version: 2.2*/
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridLayout;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
 	import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 	import org.jdesktop.core.animation.timing.Animator;
-import org.jdesktop.core.animation.timing.KeyFrames;
 import org.jdesktop.core.animation.timing.PropertySetter;
-import org.jdesktop.core.animation.timing.triggers.TimingTriggerEvent;
 import org.jdesktop.swing.animation.timing.sources.SwingTimerTimingSource;
-import org.jdesktop.swing.animation.timing.triggers.TriggerUtility;
 
 import AnimatedDataStructure.*;
 
@@ -506,99 +495,5 @@ public class AnimatedBinaryTree extends JPanel implements AnimatedDataStructure{
 		public void setScreenshot(boolean value) {
 			this.screenshot = value;
 		}
-
-		
-///////////////////////////////////////////////////////Graphical setup here/////////////////////////////////////////////
-//		
-//		public static void setupGUI() {
-//
-//			Toolkit toolkit =  Toolkit.getDefaultToolkit ();
-//			Fullscreen = toolkit.getScreenSize();
-//
-//			JFrame frame = new JFrame("Algorithm Animator");
-//			nextBtn = new JButton("Next Step");
-//			prevBtn = new JButton("Prev step");
-//			pauseBtn = new JButton("Play");
-//
-//			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//			frame.setLayout(new BorderLayout());
-//			JPanel buttonPanel = new JPanel(new GridLayout(1,3));
-//
-//			buttonPanel.add(nextBtn);
-//			buttonPanel.add(pauseBtn);
-//			buttonPanel.add(prevBtn);
-//
-//			pauseBtn.setEnabled(true);
-//			nextBtn.setEnabled(true);
-//			prevBtn.setEnabled(false);
-//
-//
-//			panel = new AnimatedBinaryTree(); /*main is represented as a component (extends JPanel) , and added to the frame */
-//			frame.add(panel, BorderLayout.CENTER);
-//			frame.add(buttonPanel,BorderLayout.SOUTH);
-//			
-//			anime_timer.init(); /*start animation timer */
-//
-//			pauseBtn.addActionListener(new ActionListener(){
-//				public void actionPerformed(ActionEvent e) {
-//					if (!continuousAnimation) {
-//						nextBtn.setEnabled(false);
-//						prevBtn.setEnabled(false);
-//						pauseBtn.setText("Pause");
-//						continuousAnimation = true;
-//						currentStep++;
-//						steps.get(currentStep).getList().get(0).start();
-//					} else {
-//						pauseBtn.setText("Play");
-//						continuousAnimation = false;
-//						nextBtn.setEnabled(true);
-//						if (currentStep == steps.size() - 1) {
-//							nextBtn.setEnabled(false);
-//						}
-//						prevBtn.setEnabled(true);
-//					}
-//				}
-//			});
-//
-//
-//			nextBtn.addActionListener(new ActionListener() {
-//				public void actionPerformed(ActionEvent e) {
-//					stepForward();
-//					
-//					nextBtn.setEnabled(true);
-//					pauseBtn.setEnabled(false);
-//					prevBtn.setEnabled(true);															// we're definitely not at the first step anymore, so enable prevBtn
-//				}
-//			});
-//
-//
-//			prevBtn.addActionListener(new ActionListener(){
-//				public void actionPerformed(ActionEvent e) {
-//					//setInfo(steps.get(currentStep).getInfo());
-//					setInfo("");
-//					for(Change tempChange: steps.get(currentStep).getChanges()) {						// in each Step we are storing the values before the animation, so we
-//						stepBack(tempChange);															// restore it all like it was before this step and then decrement the
-//					}																					// currentStep value, as well as call Main.panel.repaint() to redraw
-//					AnimatedBinaryTree.panel.repaint();																// the panel in order to show these changes
-//					currentStep--;
-//					if (currentStep == 0) {																// if we're at the first step, disable prevBtn
-//						prevBtn.setEnabled(false);
-//					}
-//					nextBtn.setEnabled(true);															// we're definitely not at the last step anymore, so enable nextBtn
-//					pauseBtn.setEnabled(true);
-//				}
-//			});
-//
-//			frame.addWindowListener(new WindowAdapter() {
-//				@Override
-//				public void windowClosed(WindowEvent e) {
-//					super.windowClosed(e);
-//				}
-//			});
-//
-//			frame.setSize(Fullscreen.width, Fullscreen.height);
-//			frame.validate();
-//			frame.setVisible(true);
-//		}
 
 	}

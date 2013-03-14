@@ -9,6 +9,8 @@ public class Change {
 	private Rect reference; // index of the object that was changed
 	private Node<Rect> nodeReference;
 	private Object old; // position before the change
+	private int oldIndex;
+	private int newIndex;
 	
 	/* Constructors for creating changes with position changes */
 	public Change(String type, Rect reference, Point position) {
@@ -22,6 +24,18 @@ public class Change {
 		this.reference = reference;
 		this.old = new Point(x, y);
 	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////
+	/*Added this function to be used by animatedBinaryTree, If it is seen as unnecessary then just delete it*/
+	public Change(String type, Rect reference, int x, int y, int oldIndex, int newIndex) {
+		this.type = type;
+		this.reference = reference;
+		this.old = new Point(x, y);
+		this.setOldIndex(oldIndex);
+		this.setNewIndex(newIndex);
+	}
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	
 	/* Constructors for creating changes with label changes */
 	public Change(String type, Rect reference, String label) {
@@ -73,5 +87,21 @@ public class Change {
 	
 	public String getLabel() {
 		return (String) old;
+	}
+
+	public int getOldIndex() {
+		return oldIndex;
+	}
+
+	public void setOldIndex(int oldIndex) {
+		this.oldIndex = oldIndex;
+	}
+
+	public int getNewIndex() {
+		return newIndex;
+	}
+
+	public void setNewIndex(int newIndex) {
+		this.newIndex = newIndex;
 	}
 }
