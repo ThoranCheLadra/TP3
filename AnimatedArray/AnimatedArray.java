@@ -46,7 +46,7 @@ public final class AnimatedArray extends JPanel implements AnimatedDataStructure
 	private int currentStep;																			// the currentStep
  	private boolean continuousAnimation = false; // variable to determine whether to run a continuous animation or not.
  	private int time;
- 	private boolean screenshot = true;
+ 	private boolean screenshot = false;
  	private List<Rect> rect_list;																// we could just REMOVE this																	// same as above															// this is where all the rectangles which will be drawn are stored
 	private String info = ""; 																// a string to display information at each step
 	private String flashList = "";															// string for creating flash animation

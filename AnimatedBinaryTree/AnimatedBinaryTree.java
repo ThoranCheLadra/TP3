@@ -34,7 +34,7 @@ public class AnimatedBinaryTree extends JPanel implements AnimatedDataStructure{
 	private static Rect r;																			// we could make this local in functions
 	private static Step s;																			// same as above
 	private static List<Rect> rect_list;															// this is where all the rectangles which will be drawn are stored
-	private boolean screenshot = true;
+	private boolean screenshot = false;
 	public final static LinkedList<Step> steps = new LinkedList<Step>();							// this is where all the steps of animation will be stored
 	static JButton nextBtn;																			// getting reference to the button
 	static JButton prevBtn;																			// same as above
