@@ -99,8 +99,7 @@ public class setupGUI {
 					anim.getPrevButton().setEnabled(false);
 					anim.getPauseButton().setText("Pause");
 					anim.setContinuousAnimation(true);
-					anim.setCurrentStep(anim.getCurrentStep()+1);
-					anim.getSteps().get(anim.getCurrentStep()).getList().get(0).start();
+					anim.stepForward();
 				} else {
 					anim.getPauseButton().setText("Play");
 					anim.setContinuousAnimation(false);

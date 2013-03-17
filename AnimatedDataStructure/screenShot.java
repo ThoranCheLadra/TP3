@@ -7,8 +7,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
-
 
 /*Simple class to take a screenshot of a given frame, most of the code taken from here:
  * http://binfalse.de/2011/01/shortcutimage-screenshooting-a-jpanel/

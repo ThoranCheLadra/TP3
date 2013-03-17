@@ -21,9 +21,10 @@ public class Main {
 		
 		//quicksort(arr, 0, arr.length-1, time);
 		//bubblesort(arr);
-	//	anim.addToHead(20);
-		anim.swap(1, 2, "");
-		anim.add(5);
+		//anim.addToHead(20);
+		//anim.findAndRemove("20", anim);
+		//anim.swap(1, 2, "");
+		//anim.add(5);
 	//	anim.findAndRemove("8", anim); //remove nodes with label = 20
 	//	System.out.println(anim.getSteps().toString());
         anim.endAnimation();

@@ -1,23 +1,16 @@
 package AnimatedLinkedList;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Toolkit;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
-
-import javax.swing.JButton;
-import javax.swing.JPanel;
 
 import org.jdesktop.core.animation.timing.Animator;
 import org.jdesktop.core.animation.timing.PropertySetter;
-import org.jdesktop.swing.animation.timing.sources.SwingTimerTimingSource;
 
-import AnimatedDataStructure.AnimatedDataStructure;
+import AnimatedDataStructure.AnimatedTemplate;
 import AnimatedDataStructure.Change;
 import AnimatedDataStructure.ChangeLabel;
 import AnimatedDataStructure.ContinuousAnimation;
@@ -30,26 +23,9 @@ import AnimatedDataStructure.setupGUI;
 //example template class that displays a linked list, some classes have been left in from AnimatedArray, whilst others
 //ommited that clashed. currently animation hasn't been implemented
 
-public final class AnimatedLinkedList extends JPanel implements AnimatedDataStructure {
-	//private int counter = 0; //counter for paintComponent
-	private static Toolkit toolkit =  Toolkit.getDefaultToolkit ();
-	public static Dimension Fullscreen = toolkit.getScreenSize();
-	private JButton nextBtn;																			// getting reference to the button
- 	private JButton prevBtn;																			// same as above
-	private JButton pauseBtn;
-        public static int windowWidth = (int) Fullscreen.getWidth();
-	public static int windowHeight = (int) Fullscreen.getHeight();
-	private LinkedList<Step> steps = new LinkedList<Step>();							// this is where all the steps of animation will be stored																			// we need to to have the reference to the drawing area to repaint it																		// could just REMOVE. Though keeping it with important variables might be a good idea as well. I don't like the fact that the minimum value is 1 second of each animation.
- 	private final SwingTimerTimingSource ani_timer = new SwingTimerTimingSource(); // this is for starting the animation
-	private int currentStep;																			// the currentStep
- 	private boolean continuousAnimation = false; // variable to determine whether to run a continuous animation or not.
- 	private int time;
- 	private boolean screenshot = false;
- 	
- 	private linkedList rect_list;																// we could just REMOVE this																	// same as above															// this is where all the rectangles which will be drawn are stored
-	private String info = ""; 																// a string to display information at each step
-	
-	private int arrayLeft;
+public final class AnimatedLinkedList extends AnimatedTemplate {
+	static final long serialVersionUID = 3L;
+ 	private linkedList rect_list;	// this is where all the rectangles which will be drawn are stored
 
 	public AnimatedLinkedList(int[] arr){
 		System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
@@ -118,24 +94,7 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 			x -= rectSpace(rs);
 		}
 		steps.add(s);
-	}
-
-	private int rectSpace() {	  	
-		return (int) rectSize()/arrayLeft + rectSize()+1;
-	}
-        
-        private int rectSpace(int rectSize) {	  	
-		return (int) rectSize/arrayLeft + rectSize+1;
-	}
-	
-	private int rectSize() {	  	
-		return (int) ((Fullscreen.getWidth()-(arrayLeft))/(arrayLeft+4)); 	
-	}
-	
-        private int rectSize(int width){
-            return (int) ((width-(arrayLeft))/(arrayLeft+4)); 	
-	}
-        
+	}   
         
 	//locates, identifies and removes the linked list element with String S
 	public void findAndRemove(String i, AnimatedLinkedList anim){
@@ -156,7 +115,7 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 		//check if the i == head, else examine the rest of the list
 		if(i.equals(rect_list.getHead().getData().getLabel())){
 			rect_list.removeFirst();
-			s.addChanges(new Change("deleteHead", prev, "Removing head of list"));
+			s.addChanges(new Change("deleteHead", prev.getData(), "Removing head of list"));
 		} else {
 			//check each other node, set colour to indicate change
 			while(node.getNext() != null && !(node.getData().getLabel().equals(i))){
@@ -178,17 +137,6 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 		s.getLastAnimator().addTarget(new ContinuousAnimation(currentStep+1, this));
 		
 		steps.add(s);
-	}
-        
-   
-     
-	public void swap (int a, int b, String message) {
-		//do nothing																																// add the new step to steps
-	}
-	
-
-	public void modifyLabel(int index, String dataValue, String info) {
-		//do nothing
 	}
 	
 	public void setColor(int index, Color c, String message) {
@@ -234,13 +182,10 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 		} else if (tempChange.getType() == "add") {
 			// remove the rectangle
 			rect_list.remove(tempChange.getReference());
+		} else if (tempChange.getType() == "deleteHead") {
+			rect_list.addFirst(tempChange.getReference());
 		}
 	}
-	
-	/* function for changing the information on what's happening */
-	public void setInfo(String info) {
-		this.info = info;
-	} 
 	
 	/* function to stepForward from one step to the next one.
 	 * Will have to be extended whenever we add another API command
@@ -359,90 +304,6 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 		g2g.setColor(Color.BLUE);
 		g2g.drawString(info,(int)(Fullscreen.width/4),(int)(Fullscreen.height*3/4));
                 * */
-	}
-	
-	/* Getters/Setters */
-	// Fullscreen
-	public Dimension getFullscreen() {
-		return Fullscreen;
-	}
-	
-	public void setFullscreen(Dimension dimension) {
-		Fullscreen = dimension;
-	}
-	// nextButton
-	public JButton getNextButton() {
-		return nextBtn;
-	}
-	
-	public void setNextButton(JButton button) {
-		nextBtn = button;
-	}
-	// prevButton
-	public JButton getPrevButton() {
-		return prevBtn;
-	}
-	
-	public void setPrevButton(JButton button) {
-		prevBtn = button;
-	}
-	// pauseButton
-	public JButton getPauseButton() {
-		return pauseBtn;
-	}
-	
-	public void setPauseButton(JButton button) {
-		pauseBtn = button;
-	}
-	// Steps
-	public LinkedList<Step> getSteps() {
-		return steps;
-	}
-	// Ani_timer
-	public SwingTimerTimingSource getAniTimer() {
-		return ani_timer;
-	}
-	// Current Step
-	public int getCurrentStep() {
-		return currentStep;
-	}
-	
-	public void setCurrentStep(int currentStep) {
-		this.currentStep = currentStep; 
-	}
-	// ContinuousAnimation
-	public boolean getContinuousAnimation() {
-		return continuousAnimation;
-	}
-	
-	public void setContinuousAnimation(boolean continuousAnimation) {
-		this.continuousAnimation = continuousAnimation;
-	}
-	// Time / Animations speed
-	public int getTime() {
-		return time;
-	}
-	
-	public void setTime(int time) {
-		this.time = time;
-	}
-	// Screenshot
-	public boolean getScreenshot() {
-		return screenshot;
-	}
-	
-	public void setScreenshot(boolean value) {
-		this.screenshot = value;
-	}
-
-    @Override
-    public int getWindowWidth() {
-        return windowWidth;
-    }
-
-    @Override
-    public int getWindowHeight() {
-        return windowHeight;
-    }
+	}	
 }
 
