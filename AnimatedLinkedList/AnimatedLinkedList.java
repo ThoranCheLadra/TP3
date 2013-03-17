@@ -184,6 +184,8 @@ public final class AnimatedLinkedList extends AnimatedTemplate {
 			rect_list.remove(tempChange.getReference());
 		} else if (tempChange.getType() == "deleteHead") {
 			rect_list.addFirst(tempChange.getReference());
+		} else if (tempChange.getType() == "pointerSwitch") {
+			rect_list.addFirst(tempChange.getNodeReference().getData());
 		}
 	}
 	
@@ -198,14 +200,12 @@ public final class AnimatedLinkedList extends AnimatedTemplate {
 		}
 		//catches the even when the pointers are switched
 		if (steps.get(currentStep).getChanges().get(0).getType() == "pointerSwitch") {
-			System.out.println("found pointer switch");
 			Node<Rect> p = steps.get(currentStep).getChanges().get(0).getNodeReference();
 			rect_list.removeNode(p, p.getNext(),rectSpace(rectSize()));
 			this.repaint();
 		}
 		//catches the event when the head is deleted
 		if (steps.get(currentStep).getChanges().get(0).getType() == "deleteHead") {
-			System.out.println("found delete head");
 			rect_list.removeFirst();
 			this.repaint();
 		}
