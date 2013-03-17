@@ -30,7 +30,37 @@ capture the animation in a form that can be viewed independently of your system,
 \chapter{Introduction}
 \label{intro}
 
-TODO
+\section{Motivation}
+Explaining complex algorithms or trying to understand them sometimes proves to be a difficult task even for experienced programmers, computer scientists and software engineers. Some of them are so huge and complicated, that it is hardly possible to remember and keep track of everything that is happening inside of it, therefore we often take a pen and a piece of paper and draw some sort of visualization of the algorithm and take notes in order to understand or explain them better. But what if you dont have a pen and/or a piece of paper? It often becomes messy as well and drawing, redrawing everything is rather time consuming. What if we are trying to develop a new and better algorithm and we want to see whether it is faster when compared to a conventional one? What if we want to visually see or show these differences? The motivation behind our project is a wish to solve all of these problems and to provide the student and the teacher a useful tool to both learn and teach. 
+
+During our first meeting with the client (Dr. Simon J. Gay) we decided that we would design and implement an API (application programming interface, which is a protocol intended to be used as an interface by software components to communicate with each other) for animations, so that an existing program could be animated by inserting calls to our API library. While this might seem dull, boring and possibly complex to an average computer user, we found this task to be creative (constructing animations and thinking of all the possible animations our users would require), interesting (we were drawing algorithms on paper ourselves or trying to visualize them in our heads, therefore seeing it being done automatically by a computer is quite satisfying) and challenging (which is usually just a really good motivator for us).
+\section{Aims}
+Our projects aim is to provide a tool, which would allow its users to easier visualize different, even unique or custom built algorithms and create animations out of them. We also want to make our system as general as possible in the sense of supporting a range of styles of algorithms, ability to export animations to different file formats, which could be easily viewed on different operating systems and devices.
+
+Even though this is not a direct aim of our project, this project is part of University of Glasgow teaching curriculum, which allows us, computing science students, to gain experience in working in teams and see various phases of software development. Therefore the aims of assigning this project to us are to give us an idea of how software is being developed, suggest ways of how it could be done better, help us out if there are any issues and encourage us to independently learn new material and both study from and teach our peers (team members).
+
+\section{Background}
+Since part of Team Project 3 course curriculum is to work on a team project, we, as a group, chose this project from a list of provided project proposals as one of 5 projects we would like to work on and we were assigned to work on it. The project itself was proposed by our group project supervisor, Simon Gay. The main reason described in the project proposal what this software would mostly be used for was teaching purposes, therefore it seems academics are no exception and are also constantly looking for different ways to explain material for their students.
+
+While our project does not build on any previous work and we are developing a solution from scratch, we have seen at least a few sorting algorithm animations during our ADS2 (Algorithms and Data Structures 2) course in second year (for example: \cite{website:Examples}). These animations were good examples and sources of ideas, which we are using in order to develop our software.
+
+\section{Preliminaries}
+While the report itself is hopefully going to be easy to read and understand to everyone, computing knowledge and experience (especially in Java programming language) is preferred, since our project involves developing an API and our end product will not be usable without having these skills. Also, parts of the report will also discuss Java (programming language) details or instructions on how to use a program written in Java and extend it to use our API to produce an animation.
+
+\section{Outline}
+The remainder of the report will cover:
+\begin{itemize}
+	\item Project requirements - what properties the software solution must have, including functionality,
+	response times, user interface, etc.
+	\item Software - the final source code of our project
+	\item Software documentation - instructions and details of the project, as well as design documentation
+	\item Maintenance document - summary of testing strategies used to test the end product
+	\item Summary log - abstract of the project log including all major contributions made by each individual
+	student to the project
+	\item Status report - summarization of the delivered software, identifying all major deficiencies (if
+	there are any)
+	\item Other documentation (for example: a user/reference manual or internal documentation)
+\end{itemize}
 
 %==============================================================================
 \chapter{Design}
@@ -408,13 +438,13 @@ The only issue left then, was the ability to have both step-by-step and continuo
 \subsection{Refactoring}
 \label{PE:refactoring}
 
-Our first common implementation that we were using for development was coupled too much with AnimatedArray data structure and was not flexible at all. This became obvious, when we started implementing our AnimatedLinkedList. When we wanted to make our API to animate an AnimatedLinkedList instead of AnimatedArray, we had to change multiple classes, including Rect, ContinuousAnimation and ChangeLabel \ref{fig:coupling}. This was due to no polymorphism in our design.
+Our first common implementation that we were using for development was coupled too much with AnimatedArray data structure (which was the first data structure we did) and was not flexible at all. This became obvious, when we started implementing our AnimatedLinkedList. When we wanted to make our API to animate an AnimatedLinkedList instead of AnimatedArray, we had to change multiple classes, including Rect, ContinuousAnimation and ChangeLabel \ref{fig:coupling}. This was due to no polymorphism in our implementation.
 
 \input{figures/coupling}
 
 After doing our Professional Software Development 3 (PSD3) D7 deliverable (which was implementation of an Internship Management System we were designing the entire first semester), we have learned how to structure software better and how we can split code into components in Java. Therefore it was time for refactoring.
 
-One of the first things we did was to create a separate package for each data structure. This lead to 4 additional packages being created:
+One of the first things we did was create a separate package for each data structure. This lead to 4 additional packages being created:
 \begin{itemize} 
 	\item AnimatedArray
 	\item AnimatedBinaryTree
@@ -427,7 +457,7 @@ We also completely separated the GUI from the rest of the code and created a cla
 
 \input{figures/changeStructure}
 
-The next thing we did was to create a public interface AnimatedDataStructure, which is how we solved the issue we mentioned in the first paragraph. Rect, ContinuousAnimation, ChangeLabel and setupGUI are all expecting an AnimatedDataStructure variable now and all data structures are just implementing this interface. Therefore it does not matter which data structure we use, the common classes (which are in AnimatedDataStructure package) work for all of them. The interface itself also brought common method names and some structure. Another good thing is that now, we only need to change 2 things in the Main class if we want to work with a different data structure: the data structure class name and then the constructor method call \ref{fig:changeStructure}. This did bring in some repetitive methods, like getNextButton(), which are being repeated in all data structures, but could be solved by introducing another abstract class, which would be implementing the AnimatedDataStructure interface and have all of these repetitive methods and then making all data structure classes extend this new abstract class.
+The next thing we did was create a public interface AnimatedDataStructure, which is how we solved the issue we mentioned in the first paragraph. Rect, ContinuousAnimation, ChangeLabel and setupGUI are all expecting an AnimatedDataStructure variable now and all data structures are just implementing this interface. Therefore it does not matter which data structure we use, the common classes (which are in AnimatedDataStructure package) work for all of them. The interface itself also brought common method names and some structure. Another good thing is that now, we only need to change 2 things in the Main class if we want to work with a different data structure: the data structure class name and then the constructor method call \ref{fig:changeStructure}. This did bring in some repetitive methods, like getNextButton(), which are being repeated in all data structures, but could be solved by introducing another abstract class, which would be implementing the AnimatedDataStructure interface and have all of these repetitive methods and then making all data structure classes extend this new abstract class.
 
 All of the above solutions introduced basic polymorphism to our software and solved quite a lot of development issues as well as made it easier to develop and manage the code for future developers (if there are going to be any). While doing all of the above, parts of unneccessary code were removed or changed as well.
 
@@ -471,7 +501,7 @@ and checking its integrity.
 	\item Managing the repository, reviewing changes or updates
 	\item Refactoring
 	\item Debugging issues encountered by other members and looking for solutions
-	\item Sections \ref{PE:steps}, \ref{PE:refactoring} and \ref{Gediminas:Con} of this document
+	\item Sections \ref{intro}, \ref{PE:steps}, \ref{PE:refactoring} and \ref{Gediminas:Con} of this document
 \end{itemize}
 \subsection{Liam Bell}
 
