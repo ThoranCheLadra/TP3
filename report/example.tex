@@ -1,4 +1,4 @@
-﻿% This example An LaTeX document showing how to use the l3proj class to
+% This example An LaTeX document showing how to use the l3proj class to
 % write your report. Use pdflatex and bibtex to process the file, creating 
 % a PDF file as output (there is no need to use dvips when using pdflatex).
 
@@ -223,6 +223,7 @@ Although it was an unfamiliar language to us, it became apparent that it would b
 
 \subsection{Andrew Gibson}
 \subsubsection{The selection of a suitable animation framework}
+\label{frameworkSelection}
 
 During the beginning of the project, several of my teammates and I were assigned to the research area where were to examine a suitable graphics framework that could assist the team in building a solid animation API for our end users. During the research, we found there were several popular graphics frameworks for assisting with animation alongside Java applications, typically integrated through the use of compiled classes within a Java archive (.jar).
 
@@ -346,21 +347,20 @@ The desired ordering is therefore S  = [...6,7,8,9]. To achieve this, the counte
 
 When the user steps through, step 6 will trigger the 7th element in the step list, the 8th will trigger the 9th animation and so on. Hence, the ordering is maintained and the application performs successfully.
 
-\subsection{Gediminas Leikus}
-\label{Gediminas:PE}
-\subsubsection{Separating animations into steps and making continuous animations}
+\subsection{Separating animations into steps and making continuous animations}
+\label{PE:steps}
 
-The group decided to use Java for our project, because we were all familiar with it and because it was the language our client suggested us to use. We had left the decision of choosing the animation tools to Andrew Gibson and Alexander Ferguson. For the reasons stated in this document (reference), they decided to choose the Timing Framework \cite{website:TimingFramework}.
+The group decided to use Java for our project, because we were all familiar with it and because it was the language our client suggested us to use. For the reasons stated in this document \ref{frameworkSelection}, we decided to choose the Timing Framework \cite{website:TimingFramework}.
 
-Andrew had an example (\ref{fig:firstPrototype}) ready, which had multiple rectangles created from an array moving back and forth, had buttons allowing us to stop the animation, resume it or delete one of the rectangles. He also added comments into the sample code, just so it would be easier for us to familiarize with the tool.
+Our first Timing Framework animation example (\ref{fig:firstPrototype}) had multiple rectangles created from an array moving back and forth, had buttons allowing us to stop the animation, resume it or delete one of the rectangles.
 
 \input{figures/firstPrototype}
 
-While this was a good initial step, we did not have any obvious way to implement Steps, in a sense where multiple Animations could be assigned to one step and we could navigate through these steps back and forth. Therefore both Andrew and Arthur Bigeard started looking into it.
+While this was a good initial step, we did not have any obvious way to implement Steps, in a sense where multiple Animations could be assigned to one step and we could navigate through these steps back and forth. Therefore we started looking into it.
 
 \input{figures/arthurPrototype}
 
-Andrew had no real suggestions and Arthur’s prototype implementation seemed: 
+Our first prototype implementation seemed: 
 \begin{itemize}
 	\item too complex (a swap of 2 rectangles was over 50 lines long \ref{fig:arthurPrototype})
 	\item impractical to use (it didn’t have any way to step back and forth through the animation) 
@@ -371,13 +371,13 @@ It had a few good points though:
 	\item it was done on a low level (so the how-to part was obvious if you understood the code) 
 	\item it was not storing too much information (thus it did not really have a memory overhead). 
 \end{itemize}
-But this was not what we wanted – the most important thing for us was the stepping back and forth functionality.  Therefore I started looking into it as well.
+But this was not what we wanted – the most important thing for us was the stepping back and forth functionality.  Therefore we looked into it again.
 
-During my research of the Timing Framework I found out that we could add triggers, which would start an animation, to a button or to another animation, which would start another animation when it stops or starts running \cite{website:TimingFrameworkDemo}. Thus, triggers seemed like a great tool for linking multiple animations into one Step, linking steps and making a continuous animation.
+During our research of the Timing Framework we found out that we could add triggers, which would start an animation, to a button or to another animation, which would start another animation when it stops or starts running \cite{website:TimingFrameworkDemo}. Thus, triggers seemed like a great tool for linking multiple animations into one Step, linking steps and making a continuous animation.
 
 \input{figures/gPrototype}
 
-I still wanted to find a way to make a change of a rectangle (or any other object) property easy to manage. Looking through the Demos I also found that I could use Targets and PropertySetters to do this in just a few lines of code \ref{fig:gPrototype}, which seemed great. But it only allowed us to change a property, which was numerical (like coordinates or colors) – it didn’t allow us to change all the properties of the object, like the labels of rectangles. To solve this issue, I researched further and found that we can create a class, which would implement a TimingTarget interface and its begin(), end(), repeat() and reverse() methods. Therefore, to solve the issue of changing the labels of rectangles I created a new class called ChangeLabel, which implemented a TimingTarget interface, its begin(), end(), repeat() and reverse() methods, and added a change of String variable just inside its begin method. This approach seemed great, because:
+We still wanted to find a way to make a change of a rectangle (or any other object) property easy to manage. Looking through the Demos we also found that we could use Targets and PropertySetters to do this in just a few lines of code \ref{fig:gPrototype}, which seemed great. But it only allowed us to change a property, which was numerical (like coordinates or colors) – it didn’t allow us to change all the properties of the object, like the labels of rectangles. To solve this issue, we researched further and found that we can create a class, which would implement a TimingTarget interface and its begin(), end(), repeat() and reverse() methods. Therefore, to solve the issue of for example changing the labels of rectangles, we created a new class called ChangeLabel, which implemented a TimingTarget interface, its begin(), end(), repeat() and reverse() methods, and added a change of String variable just inside its begin method. This approach seemed great, because:
 \begin{itemize}
 	\item we can change any property of an object or do pretty much anything when that TimingTarget is called
 	\item it is attached to each Animator object, so we do not have to worry about storing the TimingTargets anywhere
@@ -385,18 +385,18 @@ I still wanted to find a way to make a change of a rectangle (or any other objec
 	\item it is easy to use, implement and understand
 \end{itemize}
 
-Therefore, the end result of my prototype was:
+Therefore, the end result of our second prototype was:
 \begin{itemize}
 	\item a list of steps
 	\item an array of rectangles and their coordinates at each step
 	\item an ability to either step back and forth through the animation by using buttons or see a continuous animation (and it was either that or that)
 \end{itemize}
 
-After looking through both my and Arthurs prototypes, we decided to merge the good parts of each: we kept most of my prototype, but reduced the amount of data stored for each Step, in particular, we made it so it would only store the details of the changed object before the change, rather than the details of all the objects.
+After looking through both of our prototypes, we decided to merge the good parts of each: we kept most of second prototype, but reduced the amount of data stored for each Step, in particular, we made it so it would only store the details of the changed object before the change, rather than the details of all the objects.
 
-The only issue left then, was the ability to have both step-by-step and continuous animations and allow the user to switch between them at any point of time, but this was not a big issue, since I just used a similar approach I used with ChangeLabel class:
+The only issue left then, was the ability to have both step-by-step and continuous animations and allow the user to switch between them at any point of time, but this was not a big issue, since we just used a similar approach we used with ChangeLabel class:
 \begin{enumerate}
-	\item I created a new class, called ContinuousAnimation, which was also implementing the TimingTarget interface
+	\item We created a new class, called ContinuousAnimation, which was also implementing the TimingTarget interface
 	\item introduced a boolean variable called continuousAnimation, which was keeping record of whether the animation was in step-by-step or continuous mode
 	\item made it so that the begin method in ContinuousAnimation would execute different actions according to the boolean continuousAnimation variable value:
 	\begin{itemize}
@@ -405,15 +405,16 @@ The only issue left then, was the ability to have both step-by-step and continuo
 	\end{itemize}
 \end{enumerate}
 
-\subsubsection{Refactoring}
+\subsection{Refactoring}
+\label{PE:refactoring}
 
 Our first common implementation that we were using for development was coupled too much with AnimatedArray data structure and was not flexible at all. This became obvious, when we started implementing our AnimatedLinkedList. When we wanted to make our API to animate an AnimatedLinkedList instead of AnimatedArray, we had to change multiple classes, including Rect, ContinuousAnimation and ChangeLabel \ref{fig:coupling}. This was due to no polymorphism in our design.
 
 \input{figures/coupling}
 
-After doing our Professional Software Development 3 (PSD3) D7 deliverable (which was implementation of an Internship Management System we were designing the entire first semester), I have learned how to structure software better and how we can split code into components in Java. Therefore it was time for refactoring.
+After doing our Professional Software Development 3 (PSD3) D7 deliverable (which was implementation of an Internship Management System we were designing the entire first semester), we have learned how to structure software better and how we can split code into components in Java. Therefore it was time for refactoring.
 
-One of the first things I did was to create a separate package for each data structure. This lead to 4 additional packages being created:
+One of the first things we did was to create a separate package for each data structure. This lead to 4 additional packages being created:
 \begin{itemize} 
 	\item AnimatedArray
 	\item AnimatedBinaryTree
@@ -422,11 +423,11 @@ One of the first things I did was to create a separate package for each data str
 \end{itemize}
 Each package is supposed to keep classes relevant only to its data structure, apart from AnimatedDataStructure package, which keeps classes that are relevant to all data structures.
 
-I also completely separated the GUI from the rest of the code and created a class called setupGUI.
+We also completely separated the GUI from the rest of the code and created a class called setupGUI.
 
 \input{figures/changeStructure}
 
-The next thing I did was to create a public interface AnimatedDataStructure, which is how we solved the issue I mentioned in the first paragraph. Rect, ContinuousAnimation, ChangeLabel and setupGUI are all expecting an AnimatedDataStructure variable now and all data structures are just implementing this interface. Therefore it does not matter which data structure we use, the common classes (which are in AnimatedDataStructure package) work for all of them. The interface itself also brought common method names and some structure. Another good thing is that now, we only need to change 2 things in the Main class if we want to work with a different data structure: the data structure class name and then the constructor method call \ref{fig:changeStructure}. This did bring in some repetitive methods, like getNextButton(), which are being repeated in all data structures, but could be solved by introducing another abstract class, which would be implementing the AnimatedDataStructure interface and have all of these repetitive methods and then making all data structure classes extend this new abstract class.
+The next thing we did was to create a public interface AnimatedDataStructure, which is how we solved the issue we mentioned in the first paragraph. Rect, ContinuousAnimation, ChangeLabel and setupGUI are all expecting an AnimatedDataStructure variable now and all data structures are just implementing this interface. Therefore it does not matter which data structure we use, the common classes (which are in AnimatedDataStructure package) work for all of them. The interface itself also brought common method names and some structure. Another good thing is that now, we only need to change 2 things in the Main class if we want to work with a different data structure: the data structure class name and then the constructor method call \ref{fig:changeStructure}. This did bring in some repetitive methods, like getNextButton(), which are being repeated in all data structures, but could be solved by introducing another abstract class, which would be implementing the AnimatedDataStructure interface and have all of these repetitive methods and then making all data structure classes extend this new abstract class.
 
 All of the above solutions introduced basic polymorphism to our software and solved quite a lot of development issues as well as made it easier to develop and manage the code for future developers (if there are going to be any). While doing all of the above, parts of unneccessary code were removed or changed as well.
 
@@ -440,7 +441,7 @@ TODO
 %==============================================================================
 \chapter{Conclusion}
 To conclude, we feel that the experience of building our Algorithm Animator as a group has been incredibly interesting and engaging, but not without its challenges. The system we have built is able to produce a detailed visual animation for the algorithms that the user has built using our API. Our most successful development has been the step-based approach, which represents an animation as a series of steps, so that the user can step through each of their calls to our API as they are executed in turn, and watch them be successfully animated. Our implementation also allows the user to step back through their elapsed steps, should they require seeing part of the animation again.
-We felt that the system could be generalised to a higher degree for the AnimatedArray class we built, given that there is a wider range of algorithms applicable to arrays. For instance, our system is able to accommodate numerous user constructed non-recursive sorting algorithms with our API. In contrast to this are the animated linked list and binary trees, which have operations that are restricted to their own data structures. However, our users will be still be able to completely utilise their functionality with our data structure defined operations, and successfully animate them.
+We felt that the system could be generalised to a higher degree for the AnimatedArray class we built, given that there is a wider range of algorithms applicable to arrays. For instance, our system is able to accommodate numerous user constructed non-recursive sorting algorithms with our API. In contrast to this are the animated linked list and binary trees, which have operations that are restricted to their own data structures. However, our users will still be able to completely utilise their functionality with our data structure defined operations, and successfully animate them.
 
 For future development, we would consider broadening our range of data structures in order for our users to exercise a wider range of algorithms that they desire to animate. With this approach, the user will gain a deeper understanding into their own programmed algorithms and the data structures which perform them.
 Our system will also require some debugging to iron out issues and keep it fit for purpose. We believe these factors will increase the appreciation of our users, and serve as a more beneficial teaching tool for the visual analysis of algorithms.
@@ -470,7 +471,7 @@ and checking its integrity.
 	\item Managing the repository, reviewing changes or updates
 	\item Refactoring
 	\item Debugging issues encountered by other members and looking for solutions
-	\item Sections \ref{Gediminas:PE} and \ref{Gediminas:Con} in this document
+	\item Sections \ref{PE:steps}, \ref{PE:refactoring} and \ref{Gediminas:Con} of this document
 \end{itemize}
 \subsection{Liam Bell}
 
