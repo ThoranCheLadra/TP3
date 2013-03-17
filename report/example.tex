@@ -197,10 +197,10 @@ Two implementations can be suggested for this feature; they both have their own 
 \item Re-creating the data involved in window resizing. Practically, this solution requires a lot more coding. It is extremely unefficient for the same reasons explained on the dynamic animation speed changing. It would also require to restart the entire animation each time the window is resize.
 \end{itemize}
 
-The second solution can clearly be dropped due to its obvious disadvantages. In the process of coding, this is how I went about defining how I may implement dynamic window resizing.
+The second solution can clearly be dropped due to its obvious disadvantages. In the process of coding, this is how we went about defining how we may implement dynamic window resizing.
 
 The first solution was implemented; as expected, resizing resulted in unaligned elements. Usually, the scaling of the elements would be inconsistent from a range of 5 to 20 pixels.
-I have considered the eventuality of adding a scaling function to align the elements after the resizing process and after each step. Again, this fix has huge disadvantages: scaling elements would be done
+We have considered the eventuality of adding a scaling function to align the elements after the resizing process and after each step. Again, this fix has huge disadvantages: scaling elements would be done
 regardless to the position of the elements on the window, and multiple resizing may result in elements gradually moving up and down the window, and in the worst cases litterally working all their way up or down the window.
 Why? Simply because scaling the elements would require to move them all up or down the window. Elements would no longer be centered. 
 Again, performance-wise, this solution increases a lot the operations required to run steps on the animation.
