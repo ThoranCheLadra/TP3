@@ -30,15 +30,40 @@ Our project - an API approach using Java and TimingFramework to develop the Algo
 %==============================================================================
 \chapter{Introduction}
 \label{intro}
+Explaining complex algorithms or trying to understand them sometimes proves to be a difficult task even for experienced programmers, computer scientists and software engineers. Some of them are so huge and complicated, that it is hardly possible to remember and keep track of everything that is happening inside of it, therefore we often take a pen and a piece of paper and draw some sort of visualization of the algorithm and take notes in order to understand or explain them better. But what if you dont have a pen and/or a piece of paper? It often becomes messy as well and drawing, redrawing everything is rather time consuming. What if we are trying to develop a new and better algorithm and we want to see whether it is faster when compared to a conventional one? What if we want to visually see or show these differences?
+
+The algorithm animator is an application dedicated to showing graphically the functionalities of a wide range of algorithms using the most common programming data structures. Our approach of the project is such that a novice developper can create his own custom animation to illustrate his algorithms. The data structures supported by our project include arrays, heaps and linked lists.
+
+The project consists of an API providing object classes for each of those data structures and set of functions to instantiate an animation and add basic animation steps, such as object swaps and highlighting, which combined can provide a suitable graphic view of the running algorithm. Our project also provides solutions to run continuous or broken into step animations and backtracking of the steps taken. In order to emphasize the educational purpose of the application, it is also possible to display description sentences as each of the steps of the animation is running.
+
+It is made very simple for the user to create powerful animations as he just needs to instantiate the animation object matching the data structure his algorithm uses and implant a small set of functions in his code to synchronize an animation with his running algorithm.
 
 \section{Motivation}
-Explaining complex algorithms or trying to understand them sometimes proves to be a difficult task even for experienced programmers, computer scientists and software engineers. Some of them are so huge and complicated, that it is hardly possible to remember and keep track of everything that is happening inside of it, therefore we often take a pen and a piece of paper and draw some sort of visualization of the algorithm and take notes in order to understand or explain them better. But what if you dont have a pen and/or a piece of paper? It often becomes messy as well and drawing, redrawing everything is rather time consuming. What if we are trying to develop a new and better algorithm and we want to see whether it is faster when compared to a conventional one? What if we want to visually see or show these differences? The motivation behind our project is a wish to solve all of these problems and to provide the student and the teacher a useful tool to both learn and teach. 
 
-During our first meeting with the client (Dr. Simon J. Gay) we decided that we would design and implement an API for animations, so that an existing program could be animated by inserting calls to our API library. While this might seem dull, boring and possibly complex to an average computer user, we found this task to be creative (constructing animations and thinking of all the possible animations our users would require), interesting (we were drawing algorithms on paper ourselves or trying to visualize them in our heads, therefore seeing it being done automatically by a computer is quite satisfying) and challenging (which is usually just a really good motivator for us).
+Our project's main motivation is to provide developpers, lecturers an easy and comprehensive way to explain graphically educational algorithms or any of their own algorithms through the use of our API's animation functions, for the most common programming data structures. We know as students that learning from a pseudo-code or verbal explanations is often not the most efficient method and we wish to provide a simple to learn tool to increase developpers' teaching potential, and students' learning experience.
+
+This project is suitable for use for novice JAVA developpers and should encourage its users to reflect on the most efficient ways to introduce graphically their algorithms to an audience and explain their purpose and functionning.
+
 \section{Aims}
 Our projects aim is to provide a tool, which would allow its users to easier visualize different, even unique or custom built algorithms and create animations out of them. We also want to make our system as general as possible in the sense of supporting a range of styles of algorithms, ability to export animations to different file formats, which could be easily viewed on different operating systems and devices.
 
-Even though this is not a direct aim of our project, this project is part of University of Glasgow teaching curriculum, which allows us, computing science students, to gain experience in working in teams and see various phases of software development. Therefore the aims of assigning this project to us are to give us an idea of how software is being developed, suggest ways of how it could be done better, help us out if there are any issues and encourage us to independently learn new material and both study from and teach our peers (team members).
+The aim of this project is to create a complete, documented and well-built API to build animations in the most straight-forward way, while enabling the user to chose from a wide range of choice of animation and data structures. This includes the following tasks:
+\begin{enumerate}
+	\item Building graphically and animating:
+	\begin{itemize}
+		\item Arrays
+		\item Heaps
+		\item Linked Lists
+	\end{itemize}
+	\item Providing easily understandable functions to:
+	\begin{itemize}
+		\item Highlight elements
+		\item Swap elements
+		\item Display description messages
+	\end{itemize}
+	\item Creating an interface to control the displaying animation
+	\item Enabling the end-user to export his animation in an executable format
+\end{enumerate}
 
 \section{Background}
 Since part of Team Project 3 course curriculum is to work on a team project, we, as a group, chose this project from a list of provided project proposals as one of 5 projects we would like to work on and we were assigned to work on it. The project itself was proposed by our group project supervisor, Simon Gay. The main reason described in the project proposal what this software would mostly be used for was teaching purposes, therefore it seems academics are no exception and are also constantly looking for different ways to explain material for their students.
@@ -51,15 +76,12 @@ While the report itself is hopefully going to be easy to read and understand to 
 \section{Outline}
 The remainder of the report will cover:
 \begin{itemize}
-	\item Project requirements - what properties the software solution must have, including functionality,
-	response times, user interface, etc.
-	\item Software - the final source code of our project
-	\item Software documentation - instructions and details of the project, as well as design documentation
-	\item Maintenance document - summary of testing strategies used to test the end product
+	\item Design - Domain model diagrams to describe the classes of the project's API and explanation of the reason why the TimingFramework graphics framework was chose over the other existing JAVA graphics frameworks.
+	\item Implementation - this part will cover the tools and the methods use to code the API.
+	\item API documentation - a list of the API classes including attributes and functions full description to help the end-user manipulating the API.
+	\item Maintenance document - summarization of the delivered software, identifying all major deficiencies
 	\item Summary log - abstract of the project log including all major contributions made by each individual
 	student to the project
-	\item Status report - summarization of the delivered software, identifying all major deficiencies (if
-	there are any)
 	\item Other documentation (for example: a user/reference manual or internal documentation)
 \end{itemize}
 
