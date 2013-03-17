@@ -33,7 +33,7 @@ public class AnimatedBinaryTree extends JPanel implements AnimatedDataStructure{
 	private static int arrayLeft;																	// we could just REMOVE this
 	private static Rect r;																			// we could make this local in functions
 	private static Step s;																			// same as above
-	private static List<Rect> rect_list;															// this is where all the rectangles which will be drawn are stored
+	private List<Rect> rect_list;															// this is where all the rectangles which will be drawn are stored
 	private boolean screenshot = false;
 	public final static LinkedList<Step> steps = new LinkedList<Step>();							// this is where all the steps of animation will be stored
 	static JButton nextBtn;																			// getting reference to the button
@@ -43,7 +43,8 @@ public class AnimatedBinaryTree extends JPanel implements AnimatedDataStructure{
 	static int currentStep;																			// the currentStep
 	static int time=500;																					// could just REMOVE. Though keeping it with important variables might be a good idea as well. I don't like the fact that the minimum value is 1 second of each animation.
 	private static String info = ""; 																// a string to display information at each step
-	public static Dimension Fullscreen;
+	private static Toolkit toolkit =  Toolkit.getDefaultToolkit ();
+	public static Dimension Fullscreen = toolkit.getScreenSize();;
 	public static int windowWidth = (int) Fullscreen.getWidth();
 	public static int windowHeight = (int) Fullscreen.getHeight();
 	//private int counter = 0; //counter for paintComponent
@@ -58,8 +59,6 @@ public class AnimatedBinaryTree extends JPanel implements AnimatedDataStructure{
 	public AnimatedBinaryTree(){}
 
 	public AnimatedBinaryTree(int[] arrInt) {
-		Toolkit toolkit =  Toolkit.getDefaultToolkit ();
-	    Fullscreen = toolkit.getScreenSize();
 	    System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
 		Animator.setDefaultTimingSource(anime_timer);
 
@@ -108,7 +107,8 @@ public class AnimatedBinaryTree extends JPanel implements AnimatedDataStructure{
 				}
 			currentStep--;
 			}
-		}
+		new setupGUI(this);
+	}
 	
 	public void add(int i){
 		Rect r;
@@ -339,7 +339,7 @@ public class AnimatedBinaryTree extends JPanel implements AnimatedDataStructure{
 		/* function to stepBack from one step to a previous one.
 		 * Will have to be extended whenever we add another API command
 		 */
-		public static void stepBack(Change tempChange) {
+		public void stepBack(Change tempChange) {
 			if (tempChange.getType() == "swap") {
 				// just restore coordinates
 				rect_list.set(tempChange.getOldIndex(), tempChange.getReference());
