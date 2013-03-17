@@ -20,6 +20,7 @@
 \maketitle
 \begin{abstract}
 
+
 For teaching purposes it is useful to be able to animate algorithms and produce a visual representation of how they work. The basic idea is to use a diagrammatic representation of a data structure, for example an array or a tree, and illustrate the algorithm step by step, showing how the data structure is accessed and changed. The aim of this project is to design and implement a system for animating algorithms. There are at least two possible approaches. One is to design and implement a simple programming language in such a way that all programs are animated while being executed. Another is to design and implement an API for animations, so that an existing program (in Java, for example) can be animated by inserting calls to your library. The system should be as general as possible in the sense of supporting a range of styles of algorithm, and should be demonstrated by producing a range of animations of standard algorithms. It would also be useful to be able to 
 capture the animation in a form that can be viewed independently of your system, for example as a sequence of HTML pages or a Flash animation.
 
@@ -33,7 +34,7 @@ capture the animation in a form that can be viewed independently of your system,
 \section{Motivation}
 Explaining complex algorithms or trying to understand them sometimes proves to be a difficult task even for experienced programmers, computer scientists and software engineers. Some of them are so huge and complicated, that it is hardly possible to remember and keep track of everything that is happening inside of it, therefore we often take a pen and a piece of paper and draw some sort of visualization of the algorithm and take notes in order to understand or explain them better. But what if you dont have a pen and/or a piece of paper? It often becomes messy as well and drawing, redrawing everything is rather time consuming. What if we are trying to develop a new and better algorithm and we want to see whether it is faster when compared to a conventional one? What if we want to visually see or show these differences? The motivation behind our project is a wish to solve all of these problems and to provide the student and the teacher a useful tool to both learn and teach. 
 
-During our first meeting with the client (Dr. Simon J. Gay) we decided that we would design and implement an API (application programming interface, which is a protocol intended to be used as an interface by software components to communicate with each other) for animations, so that an existing program could be animated by inserting calls to our API library. While this might seem dull, boring and possibly complex to an average computer user, we found this task to be creative (constructing animations and thinking of all the possible animations our users would require), interesting (we were drawing algorithms on paper ourselves or trying to visualize them in our heads, therefore seeing it being done automatically by a computer is quite satisfying) and challenging (which is usually just a really good motivator for us).
+During our first meeting with the client (Dr. Simon J. Gay) we decided that we would design and implement an API for animations, so that an existing program could be animated by inserting calls to our API library. While this might seem dull, boring and possibly complex to an average computer user, we found this task to be creative (constructing animations and thinking of all the possible animations our users would require), interesting (we were drawing algorithms on paper ourselves or trying to visualize them in our heads, therefore seeing it being done automatically by a computer is quite satisfying) and challenging (which is usually just a really good motivator for us).
 \section{Aims}
 Our projects aim is to provide a tool, which would allow its users to easier visualize different, even unique or custom built algorithms and create animations out of them. We also want to make our system as general as possible in the sense of supporting a range of styles of algorithms, ability to export animations to different file formats, which could be easily viewed on different operating systems and devices.
 
@@ -506,6 +507,14 @@ and checking its integrity.
 \subsection{Liam Bell}
 
 %==============================================================================
+\appendix
+
+\chapter{Glossary}
+
+Including expansions of non-standard abbreviations, acronyms and other key definitions.
+\section{API}
+Application Programming Interface - is a protocol intended to be used as an interface by software components to communicate with each other.
+
 \bibliographystyle{plain}
 \bibliography{example}
 \end{document}
