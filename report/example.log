@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  17 MAR 2013 11:16
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  17 MAR 2013 14:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -397,74 +397,74 @@ LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10.95> not available
  [5]
 [6]
 Chapter 2.
-<images/useCases.png, id=223, 763.35187pt x 386.94562pt>
+<images/useCases.png, id=227, 763.35187pt x 386.94562pt>
 File: images/useCases.png Graphic file (type png)
 
 <use images/useCases.png>
-Package pdftex.def Info: images/useCases.png used on input line 71.
+Package pdftex.def Info: images/useCases.png used on input line 93.
 (pdftex.def)             Requested size: 327.20668pt x 165.85788pt.
 
-<images/componentDiagram.png, id=224, 565.36218pt x 414.04688pt>
+<images/componentDiagram.png, id=228, 565.36218pt x 414.04688pt>
 File: images/componentDiagram.png Graphic file (type png)
 
 <use images/componentDiagram.png>
-Package pdftex.def Info: images/componentDiagram.png used on input line 82.
+Package pdftex.def Info: images/componentDiagram.png used on input line 104.
 (pdftex.def)             Requested size: 327.20668pt x 239.6356pt.
  [7
 
  <./images/useCases.png>]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 85.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 107.
 
-<images/animatedDataStructureDiagram.png, id=229, 539.01375pt x 362.85562pt>
+<images/animatedDataStructureDiagram.png, id=233, 539.01375pt x 362.85562pt>
 File: images/animatedDataStructureDiagram.png Graphic file (type png)
 
 <use images/animatedDataStructureDiagram.png>
 Package pdftex.def Info: images/animatedDataStructureDiagram.png used on input 
-line 86.
+line 108.
 (pdftex.def)             Requested size: 327.20668pt x 220.27301pt.
  [8 <./images/componentDiagram.png> <./images/animatedDataStructureDiagram.png>
 ]
-<images/arrayDiagram.png, id=234, 496.10344pt x 389.95688pt>
+<images/arrayDiagram.png, id=238, 496.10344pt x 389.95688pt>
 File: images/arrayDiagram.png Graphic file (type png)
 
 <use images/arrayDiagram.png>
-Package pdftex.def Info: images/arrayDiagram.png used on input line 95.
+Package pdftex.def Info: images/arrayDiagram.png used on input line 117.
 (pdftex.def)             Requested size: 327.20668pt x 257.19977pt.
 
-<images/linkedListDiagram.png, id=235, 452.4403pt x 416.30531pt>
+<images/linkedListDiagram.png, id=239, 452.4403pt x 416.30531pt>
 File: images/linkedListDiagram.png Graphic file (type png)
 
 <use images/linkedListDiagram.png>
-Package pdftex.def Info: images/linkedListDiagram.png used on input line 98.
+Package pdftex.def Info: images/linkedListDiagram.png used on input line 120.
 (pdftex.def)             Requested size: 327.20668pt x 301.07358pt.
 
-Overfull \hbox (7.26057pt too wide) in paragraph at lines 98--102
+Overfull \hbox (7.26057pt too wide) in paragraph at lines 120--124
 [] \OT1/ptm/m/n/10.95 The An-i-mat-edLinkedList
  []
 
 [9 <./images/arrayDiagram.png>]
-<images/heapDiagram.png, id=240, 1.00375pt x 1.00375pt>
+<images/heapDiagram.png, id=244, 410.2828pt x 429.85594pt>
 File: images/heapDiagram.png Graphic file (type png)
 
 <use images/heapDiagram.png>
-Package pdftex.def Info: images/heapDiagram.png used on input line 103.
-(pdftex.def)             Requested size: 327.20668pt x 328.4299pt.
+Package pdftex.def Info: images/heapDiagram.png used on input line 125.
+(pdftex.def)             Requested size: 327.20668pt x 342.81609pt.
  [10 <./images/linkedListDiagram.png>]
-<images/metaDataDiagram.png, id=246, 506.6428pt x 362.85562pt>
+<images/metaDataDiagram.png, id=249, 506.6428pt x 362.85562pt>
 File: images/metaDataDiagram.png Graphic file (type png)
 
 <use images/metaDataDiagram.png>
-Package pdftex.def Info: images/metaDataDiagram.png used on input line 105.
+Package pdftex.def Info: images/metaDataDiagram.png used on input line 127.
 (pdftex.def)             Requested size: 327.20668pt x 234.34737pt.
- [11 <./images/heapDiagram.png> <./images/metaDataDiagram.png>] <images/UIDiagr
-am.png, id=253, 428.35031pt x 242.40562pt>
+ [11 <./images/heapDiagram.png>]
+<images/UIDiagram.png, id=255, 428.35031pt x 242.40562pt>
 File: images/UIDiagram.png Graphic file (type png)
 
 <use images/UIDiagram.png>
-Package pdftex.def Info: images/UIDiagram.png used on input line 109.
+Package pdftex.def Info: images/UIDiagram.png used on input line 131.
 (pdftex.def)             Requested size: 327.20668pt x 185.16966pt.
- [12 <./images/UIDiagram.png>]
+ [12 <./images/metaDataDiagram.png> <./images/UIDiagram.png>]
 Chapter 3.
 [13
 
@@ -676,10 +676,10 @@ Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
 
-<images/flash1.png, id=287, 589.20125pt x 388.45125pt>
+<images/flash1.png, id=289, 589.20125pt x 388.45125pt>
 File: images/flash1.png Graphic file (type png)
  <use images/flash1.png>
-Package pdftex.def Info: images/flash1.png used on input line 249.
+Package pdftex.def Info: images/flash1.png used on input line 271.
 (pdftex.def)             Requested size: 327.20668pt x 215.72339pt.
 
 [19] [20 <./images/flash1.png>]
@@ -780,7 +780,7 @@ Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ¦ in font ptmr7t!
  [25] (./figures/firstPrototype.tex
-<images/firstPrototype.png, id=336, 803.0pt x 502.87875pt>
+<images/firstPrototype.png, id=338, 803.0pt x 502.87875pt>
 File: images/firstPrototype.png Graphic file (type png)
 
 <use images/firstPrototype.png>
@@ -871,7 +871,7 @@ Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
  [28] (./figures/coupling.tex
-<images/coupling.png, id=357, 471.7625pt x 173.64874pt>
+<images/coupling.png, id=359, 471.7625pt x 173.64874pt>
 File: images/coupling.png Graphic file (type png)
 
 <use images/coupling.png>
@@ -879,7 +879,7 @@ Package pdftex.def Info: images/coupling.png used on input line 3.
 (pdftex.def)             Requested size: 432.26999pt x 159.1149pt.
 ) [29 <./images/coupling.png>]
 (./figures/changeStructure.tex
-<images/changeStructure.png, id=367, 410.53375pt x 166.6225pt>
+<images/changeStructure.png, id=369, 410.53375pt x 166.6225pt>
 File: images/changeStructure.png Graphic file (type png)
 
 <use images/changeStructure.png>
@@ -922,21 +922,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 31--37
  []
 
 )
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 520.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 542.
  [36
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 520.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 542.
  (./example.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 520.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 520.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 542.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 542.
 Package rerunfilecheck Info: File `example.out' has not changed.
 (rerunfilecheck)             Checksum: A1CADD5000B035555E2EB390F63C85A2;2212.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 520.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 542.
  ) 
 Here is how much of TeX's memory you used:
- 6301 strings out of 493488
- 96755 string characters out of 3141326
+ 6305 strings out of 493488
+ 96779 string characters out of 3141326
  210582 words of memory out of 3000000
  9383 multiletter control sequences out of 15000+200000
  24975 words of font info for 50 fonts, out of 3000000 for 9000
@@ -948,10 +948,10 @@ xlive/2012/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/20
 12/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2012/texmf-d
 ist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/
 type1/urw/times/utmri8a.pfb>
-Output written on example.pdf (38 pages, 342671 bytes).
+Output written on example.pdf (38 pages, 368679 bytes).
 PDF statistics:
- 458 PDF objects out of 1000 (max. 8388607)
- 395 compressed objects within 4 object streams
- 94 named destinations out of 1000 (max. 500000)
+ 461 PDF objects out of 1000 (max. 8388607)
+ 399 compressed objects within 4 object streams
+ 98 named destinations out of 1000 (max. 500000)
  346 words of extra memory for PDF output out of 10000 (max. 10000000)
 
