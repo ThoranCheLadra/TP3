@@ -44,6 +44,12 @@ public class Change {
 		this.old = label;
 	}
 	
+	/* AnimatedBinaryTree add method */
+	public Change(String type, Rect reference) {
+		this.type = type;
+		this.reference = reference;
+	}
+	
 	/* Constructors for creating changes with Color changes */
 	public Change(String type, Rect reference, Color c) {
 		this.type = type;

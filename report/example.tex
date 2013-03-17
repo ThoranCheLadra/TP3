@@ -1,4 +1,4 @@
-﻿% This example An LaTeX document showing how to use the l3proj class to
+% This example An LaTeX document showing how to use the l3proj class to
 % write your report. Use pdflatex and bibtex to process the file, creating 
 % a PDF file as output (there is no need to use dvips when using pdflatex).
 
@@ -20,8 +20,9 @@
 \maketitle
 \begin{abstract}
 
-For teaching purposes it is useful to be able to animate algorithms and produce a visual representation of how they work. The basic idea is to use a diagrammatic representation of a data structure, for example an array or a tree, and illustrate the algorithm step by step, showing how the data structure is accessed and changed. The aim of this project is to design and implement a system for animating algorithms. There are at least two possible approaches. One is to design and implement a simple programming language in such a way that all programs are animated while being executed. Another is to design and implement an API for animations, so that an existing program (in Java, for example) can be animated by inserting calls to your library. The system should be as general as possible in the sense of supporting a range of styles of algorithm, and should be demonstrated by producing a range of animations of standard algorithms. It would also be useful to be able to 
-capture the animation in a form that can be viewed independently of your system, for example as a sequence of HTML pages or a Flash animation.
+Algorithm Animator - a teaching and learning tool for both students and teachers. A piece of software, which animates algorithms and produces a visual representation of how they work.
+
+Our project - an API approach using Java and TimingFramework to develop the Algorithm Animator. Due to the fact that it is an API approach, the user of the software is required to know programming and Java, in particular, in order to use it. Animation of 3 common data structures - Arrays, Linked Lists and Binary Trees. Ability to export the animations to images or export Array animations to Flash.
 
 \end{abstract}
 \educationalconsent
@@ -29,8 +30,60 @@ capture the animation in a form that can be viewed independently of your system,
 %==============================================================================
 \chapter{Introduction}
 \label{intro}
+Explaining complex algorithms or trying to understand them sometimes proves to be a difficult task even for experienced programmers, computer scientists and software engineers. Some of them are so huge and complicated, that it is hardly possible to remember and keep track of everything that is happening inside of it, therefore we often take a pen and a piece of paper and draw some sort of visualization of the algorithm and take notes in order to understand or explain them better. But what if you dont have a pen and/or a piece of paper? It often becomes messy as well and drawing, redrawing everything is rather time consuming. What if we are trying to develop a new and better algorithm and we want to see whether it is faster when compared to a conventional one? What if we want to visually see or show these differences?
 
-TODO
+The algorithm animator is an application dedicated to showing graphically the functionalities of a wide range of algorithms using the most common programming data structures. Our approach of the project is such that a novice developper can create his own custom animation to illustrate his algorithms. The data structures supported by our project include arrays, heaps and linked lists.
+
+The project consists of an API providing object classes for each of those data structures and set of functions to instantiate an animation and add basic animation steps, such as object swaps and highlighting, which combined can provide a suitable graphic view of the running algorithm. Our project also provides solutions to run continuous or broken into step animations and backtracking of the steps taken. In order to emphasize the educational purpose of the application, it is also possible to display description sentences as each of the steps of the animation is running.
+
+It is made very simple for the user to create powerful animations as he just needs to instantiate the animation object matching the data structure his algorithm uses and implant a small set of functions in his code to synchronize an animation with his running algorithm.
+
+\section{Motivation}
+
+Our project's main motivation is to provide developpers, lecturers an easy and comprehensive way to explain graphically educational algorithms or any of their own algorithms through the use of our API's animation functions, for the most common programming data structures. We know as students that learning from a pseudo-code or verbal explanations is often not the most efficient method and we wish to provide a simple to learn tool to increase developpers' teaching potential, and students' learning experience.
+
+This project is suitable for use for novice JAVA developpers and should encourage its users to reflect on the most efficient ways to introduce graphically their algorithms to an audience and explain their purpose and functionning.
+
+\section{Aims}
+Our projects aim is to provide a tool, which would allow its users to easier visualize different, even unique or custom built algorithms and create animations out of them. We also want to make our system as general as possible in the sense of supporting a range of styles of algorithms, ability to export animations to different file formats, which could be easily viewed on different operating systems and devices.
+
+The aim of this project is to create a complete, documented and well-built API to build animations in the most straight-forward way, while enabling the user to chose from a wide range of choice of animation and data structures. This includes the following tasks:
+\begin{enumerate}
+	\item Building graphically and animating:
+	\begin{itemize}
+		\item Arrays
+		\item Heaps
+		\item Linked Lists
+	\end{itemize}
+	\item Providing easily understandable functions to:
+	\begin{itemize}
+		\item Highlight elements
+		\item Swap elements
+		\item Display description messages
+	\end{itemize}
+	\item Creating an interface to control the displaying animation
+	\item Enabling the end-user to export his animation in an executable format
+\end{enumerate}
+
+\section{Background}
+Since part of Team Project 3 course curriculum is to work on a team project, we, as a group, chose this project from a list of provided project proposals as one of 5 projects we would like to work on and we were assigned to work on it. The project itself was proposed by our group project supervisor, Simon Gay. The main reason described in the project proposal what this software would mostly be used for was teaching purposes, therefore it seems academics are no exception and are also constantly looking for different ways to explain material for their students.
+
+While our project does not build on any previous work and we are developing a solution from scratch, we have seen at least a few sorting algorithm animations during our ADS2 (Algorithms and Data Structures 2) course in second year (for example: \cite{website:Examples}). These animations were good examples and sources of ideas, which we are using in order to develop our software.
+
+\section{Preliminaries}
+While the report itself is hopefully going to be easy to read and understand to everyone, computing knowledge and experience (especially in Java programming language) is preferred, since our project involves developing an API and our end product will not be usable without having these skills. Also, parts of the report will also discuss Java (programming language) details or instructions on how to use a program written in Java and extend it to use our API to produce an animation.
+
+\section{Outline}
+The remainder of the report will cover:
+\begin{itemize}
+	\item Design - Domain model diagrams to describe the classes of the project's API and explanation of the reason why the TimingFramework graphics framework was chose over the other existing JAVA graphics frameworks.
+	\item Implementation - this part will cover the tools and the methods use to code the API.
+	\item API documentation - a list of the API classes including attributes and functions full description to help the end-user manipulating the API.
+	\item Maintenance document - summarization of the delivered software, identifying all major deficiencies
+	\item Summary log - abstract of the project log including all major contributions made by each individual
+	student to the project
+	\item Other documentation (for example: a user/reference manual or internal documentation)
+\end{itemize}
 
 %==============================================================================
 \chapter{Design}
@@ -221,10 +274,10 @@ Two implementations can be suggested for this feature; they both have their own 
 \item Re-creating the data involved in window resizing. Practically, this solution requires a lot more coding. It is extremely unefficient for the same reasons explained on the dynamic animation speed changing. It would also require to restart the entire animation each time the window is resize.
 \end{itemize}
 
-The second solution can clearly be dropped due to its obvious disadvantages. In the process of coding, this is how I went about defining how I may implement dynamic window resizing.
+The second solution can clearly be dropped due to its obvious disadvantages. In the process of coding, this is how we went about defining how we may implement dynamic window resizing.
 
 The first solution was implemented; as expected, resizing resulted in unaligned elements. Usually, the scaling of the elements would be inconsistent from a range of 5 to 20 pixels.
-I have considered the eventuality of adding a scaling function to align the elements after the resizing process and after each step. Again, this fix has huge disadvantages: scaling elements would be done
+We have considered the eventuality of adding a scaling function to align the elements after the resizing process and after each step. Again, this fix has huge disadvantages: scaling elements would be done
 regardless to the position of the elements on the window, and multiple resizing may result in elements gradually moving up and down the window, and in the worst cases litterally working all their way up or down the window.
 Why? Simply because scaling the elements would require to move them all up or down the window. Elements would no longer be centered. 
 Again, performance-wise, this solution increases a lot the operations required to run steps on the animation.
@@ -298,6 +351,84 @@ The final state of the animation is shown below.
 Although it was an unfamiliar language to us, it became apparent that it would be possible to create an identical system, given enough time. The flash exporting component however was never intended to repeat the algorithmic functionality of the main program, so to prevent duplicating code and to save time, we decided to only implement a subset of the system. There is no functionality for a user to create their own algorithms in its current version, and there is only the ability to visualise AnimatedArray structures. Flash has its own built in resizing of the animation frame, but cannot scale as well as the java version of the implementation. Being a .swf file however, it comes with the added benefits of being able to be run on all current web browsers, embedded it in slide shows and applications, and can be referenced in html to be used in web pages.
 \end{itemize}
 
+<<<<<<< HEAD
+=======
+\subsection{Andrew Gibson}
+\subsubsection{The selection of a suitable animation framework}
+\label{frameworkSelection}
+
+During the beginning of the project, several of my teammates and I were assigned to the research area where were to examine a suitable graphics framework that could assist the team in building a solid animation API for our end users. During the research, we found there were several popular graphics frameworks for assisting with animation alongside Java applications, typically integrated through the use of compiled classes within a Java archive (.jar).
+
+The range of frameworks proved problematic, given that it was most suitable to select a single framework to build with, otherwise there would be serious inconsistencies between developed applications (as they differ in their functionality) We established a simple set of fundamental criteria for selection as follows:
+\begin{itemize}
+	\item The framework should offer a fully functional API, of which can be accessed by our code in order to build animation.
+	\item It should provide some degree of control, so that our own API can display dynamic movement and precision.
+	\item It should be able to be in-cooperated into an integrated development environment (IDE) for group production during the implementation stage.
+\end{itemize}
+
+After careful research, we found three separate candidates for animation production with Java. In order to justify a suitable approach, each framework was considered separately to assess desirable characteristics and identify potential flaws. 
+
+\underline{\textbf{Timing-Framework:}}
+
+The Timing Framework was found on Java.net, a place for Java based libraries and extensions (\cite{website:TimingFramework}). It features controlled timing and ease of animation.
+
+\textit{Advantages:}
+\begin{itemize}
+	\item The library is multi-threaded and concurrently safe. This prevents us from having to worry about complex synchronization issues between multiple application threads (as our animation software will utilise several threads for handling graphical changes independently)
+	\item Uses less memory, putting a smaller load on systems with limited memory, allowing more applications to execute at once. 
+	\item Offers an extensive API, giving us the ability of more control and functionality over our animations.
+	\item Supportive of Swing and SWT development, for flexibility over a suitable distribution
+	\item Its functionality can produce smooth, complex and controlled animation, useful for providing sufficient detail to our users in an orderly fashion.
+	\item Can be in-cooperated easily into an existing Eclipse project (a solid Java development IDE, which all the team have good knowledge of)
+\end{itemize}
+
+\textit{Disadvantages:}
+\begin{itemize}
+	\item The API is detailed and complex in areas, which may invoke a steep learning curve.
+	\item Swing examples documented are rather vague, and information given in a relevant PDF chapter is out dated.
+\end{itemize}
+
+\underline{\textbf{Java-FX:}}
+
+Java-FX was found on the Oracle technology website (\cite{website:JavaFX}) it features UI based accelerated graphics. Its control is timeline based.
+
+\textit{Advantages:}
+\begin{itemize}
+	\item Like the Timing-Framework, it also uses concurrently safe libraries.
+	\item Potentially less complex to learn, given that Oracle have provided a more comprehensive set of documentation, including video tutorials.
+\end{itemize}
+
+\textit{Disadvantages:}
+\begin{itemize}
+	\item Newer libraries are not supported within Eclipse. This isn’t useful to us as a team as our preferred development environment is Eclipse. It is more suited to the Netbeans IDE, which we aren’t familiar with.
+	\item It is more oriented towards web-based user interface development, typically within business. The goal of our application does not support this business approach, and focuses on the aspects of animation rather than an interactive interface with less emphasis on complex animation techniques.
+\end{itemize}
+
+\underline{\textbf{Trident:}}
+
+Like the Timing-Framework, this was also found as part of a Java.net library development (\cite{website:Trident}) it’s focused entirely on timelines, namely duration and object changes across such durations represented by keyframes.
+
+\textit{Advantages:}
+\begin{itemize}
+	\item Supports Swing and SWT development
+	\item Allows multiple timeline events to be run and scheduled at any one time (multiple animations)
+	\item Conceptually, it is straight forward and approachable; timelines represent the course of the animation and the keyframes the alterations to animation objects.
+\end{itemize}
+
+\textit{Disadvantages:}
+\begin{itemize}
+	\item Little documentation and not completely approachable as a result.
+	\item It doesn’t seem to fully support concurrency as part of its API. To give an example, the code below taken from the documentation section on timelines demonstrates parallel timeline objects competing for shares properties(http://www.pushing-pixels.org/2009/06/25/trident-part-8-timeline-scenarios.html)
+\end{itemize}
+
+\input{figures/frameworkExamples}
+
+In both examples \ref{fig:frameworkExamples} it can be seen that intrinsic locking is needed because of shared properties between objects. This adds a considerable degree of complexity to the framework, and would inevitably increase development time through the bugs and issues raised from concurrent access. For instance, if two objects were competing for shared animation data, and writing to it simultaneously, this would create unexpected behaviour. We would have to consider thread safe concepts alongside our own application complexity.
+
+To conclude, we felt that the Timing-Framework offered the best and most approachable set of features. It provides multiple, dynamic animation techniques; with an emphasis on the animation itself as supposed to client designed web applications. It is also concurrent, which is hugely important as it draws a significant amount of complexity out the project. The animations we create will have their own threads delegated to tasks within the framework. The precision of control it offers is also an attractive trait, allowing us to build highly tweaked and well performing animations to our end users. 
+
+Of course, the Timing-Framework is probably the most complex, but the positives most certainly outweigh the negative aspects. The analysis of these separate frameworks proved to be very useful in that sense, standing out as an important design choice that most likely would of saved us more development time in comparison to the other frameworks.
+>>>>>>> 3c1387f48dfd089b6831db20c1c1e08ffba7d0b1
 
 \subsubsection{Development of Animated Linked Lists}
 
@@ -349,23 +480,28 @@ The desired ordering is therefore S  = [...6,7,8,9]. To achieve this, the counte
 
 When the user steps through, step 6 will trigger the 7th element in the step list, the 8th will trigger the 9th animation and so on. Hence, the ordering is maintained and the application performs successfully.
 
+<<<<<<< HEAD
 
 
 \subsection{Gediminas Leikus}
 \label{Gediminas:PE}
 \subsubsection{Separating animations into steps and making continuous animations}
+=======
+\subsection{Separating animations into steps and making continuous animations}
+\label{PE:steps}
+>>>>>>> 3c1387f48dfd089b6831db20c1c1e08ffba7d0b1
 
-The group decided to use Java for our project, because we were all familiar with it and because it was the language our client suggested us to use. We had left the decision of choosing the animation tools to Andrew Gibson and Alexander Ferguson. For the reasons stated in this document (reference), they decided to choose the Timing Framework \cite{website:TimingFramework}.
+The group decided to use Java for our project, because we were all familiar with it and because it was the language our client suggested us to use. For the reasons stated in this document \ref{frameworkSelection}, we decided to choose the Timing Framework \cite{website:TimingFramework}.
 
-Andrew had an example (\ref{fig:firstPrototype}) ready, which had multiple rectangles created from an array moving back and forth, had buttons allowing us to stop the animation, resume it or delete one of the rectangles. He also added comments into the sample code, just so it would be easier for us to familiarize with the tool.
+Our first Timing Framework animation example (\ref{fig:firstPrototype}) had multiple rectangles created from an array moving back and forth, had buttons allowing us to stop the animation, resume it or delete one of the rectangles.
 
 \input{figures/firstPrototype}
 
-While this was a good initial step, we did not have any obvious way to implement Steps, in a sense where multiple Animations could be assigned to one step and we could navigate through these steps back and forth. Therefore both Andrew and Arthur Bigeard started looking into it.
+While this was a good initial step, we did not have any obvious way to implement Steps, in a sense where multiple Animations could be assigned to one step and we could navigate through these steps back and forth. Therefore we started looking into it.
 
 \input{figures/arthurPrototype}
 
-Andrew had no real suggestions and Arthur’s prototype implementation seemed: 
+Our first prototype implementation seemed: 
 \begin{itemize}
 	\item too complex (a swap of 2 rectangles was over 50 lines long \ref{fig:arthurPrototype})
 	\item impractical to use (it didn’t have any way to step back and forth through the animation) 
@@ -376,13 +512,13 @@ It had a few good points though:
 	\item it was done on a low level (so the how-to part was obvious if you understood the code) 
 	\item it was not storing too much information (thus it did not really have a memory overhead). 
 \end{itemize}
-But this was not what we wanted – the most important thing for us was the stepping back and forth functionality.  Therefore I started looking into it as well.
+But this was not what we wanted – the most important thing for us was the stepping back and forth functionality.  Therefore we looked into it again.
 
-During my research of the Timing Framework I found out that we could add triggers, which would start an animation, to a button or to another animation, which would start another animation when it stops or starts running \cite{website:TimingFrameworkDemo}. Thus, triggers seemed like a great tool for linking multiple animations into one Step, linking steps and making a continuous animation.
+During our research of the Timing Framework we found out that we could add triggers, which would start an animation, to a button or to another animation, which would start another animation when it stops or starts running \cite{website:TimingFrameworkDemo}. Thus, triggers seemed like a great tool for linking multiple animations into one Step, linking steps and making a continuous animation.
 
 \input{figures/gPrototype}
 
-I still wanted to find a way to make a change of a rectangle (or any other object) property easy to manage. Looking through the Demos I also found that I could use Targets and PropertySetters to do this in just a few lines of code \ref{fig:gPrototype}, which seemed great. But it only allowed us to change a property, which was numerical (like coordinates or colors) – it didn’t allow us to change all the properties of the object, like the labels of rectangles. To solve this issue, I researched further and found that we can create a class, which would implement a TimingTarget interface and its begin(), end(), repeat() and reverse() methods. Therefore, to solve the issue of changing the labels of rectangles I created a new class called ChangeLabel, which implemented a TimingTarget interface, its begin(), end(), repeat() and reverse() methods, and added a change of String variable just inside its begin method. This approach seemed great, because:
+We still wanted to find a way to make a change of a rectangle (or any other object) property easy to manage. Looking through the Demos we also found that we could use Targets and PropertySetters to do this in just a few lines of code \ref{fig:gPrototype}, which seemed great. But it only allowed us to change a property, which was numerical (like coordinates or colors) – it didn’t allow us to change all the properties of the object, like the labels of rectangles. To solve this issue, we researched further and found that we can create a class, which would implement a TimingTarget interface and its begin(), end(), repeat() and reverse() methods. Therefore, to solve the issue of for example changing the labels of rectangles, we created a new class called ChangeLabel, which implemented a TimingTarget interface, its begin(), end(), repeat() and reverse() methods, and added a change of String variable just inside its begin method. This approach seemed great, because:
 \begin{itemize}
 	\item we can change any property of an object or do pretty much anything when that TimingTarget is called
 	\item it is attached to each Animator object, so we do not have to worry about storing the TimingTargets anywhere
@@ -390,18 +526,18 @@ I still wanted to find a way to make a change of a rectangle (or any other objec
 	\item it is easy to use, implement and understand
 \end{itemize}
 
-Therefore, the end result of my prototype was:
+Therefore, the end result of our second prototype was:
 \begin{itemize}
 	\item a list of steps
 	\item an array of rectangles and their coordinates at each step
 	\item an ability to either step back and forth through the animation by using buttons or see a continuous animation (and it was either that or that)
 \end{itemize}
 
-After looking through both my and Arthurs prototypes, we decided to merge the good parts of each: we kept most of my prototype, but reduced the amount of data stored for each Step, in particular, we made it so it would only store the details of the changed object before the change, rather than the details of all the objects.
+After looking through both of our prototypes, we decided to merge the good parts of each: we kept most of second prototype, but reduced the amount of data stored for each Step, in particular, we made it so it would only store the details of the changed object before the change, rather than the details of all the objects.
 
-The only issue left then, was the ability to have both step-by-step and continuous animations and allow the user to switch between them at any point of time, but this was not a big issue, since I just used a similar approach I used with ChangeLabel class:
+The only issue left then, was the ability to have both step-by-step and continuous animations and allow the user to switch between them at any point of time, but this was not a big issue, since we just used a similar approach we used with ChangeLabel class:
 \begin{enumerate}
-	\item I created a new class, called ContinuousAnimation, which was also implementing the TimingTarget interface
+	\item We created a new class, called ContinuousAnimation, which was also implementing the TimingTarget interface
 	\item introduced a boolean variable called continuousAnimation, which was keeping record of whether the animation was in step-by-step or continuous mode
 	\item made it so that the begin method in ContinuousAnimation would execute different actions according to the boolean continuousAnimation variable value:
 	\begin{itemize}
@@ -410,15 +546,16 @@ The only issue left then, was the ability to have both step-by-step and continuo
 	\end{itemize}
 \end{enumerate}
 
-\subsubsection{Refactoring}
+\subsection{Refactoring}
+\label{PE:refactoring}
 
-Our first common implementation that we were using for development was coupled too much with AnimatedArray data structure and was not flexible at all. This became obvious, when we started implementing our AnimatedLinkedList. When we wanted to make our API to animate an AnimatedLinkedList instead of AnimatedArray, we had to change multiple classes, including Rect, ContinuousAnimation and ChangeLabel \ref{fig:coupling}. This was due to no polymorphism in our design.
+Our first common implementation that we were using for development was coupled too much with AnimatedArray data structure (which was the first data structure we did) and was not flexible at all. This became obvious, when we started implementing our AnimatedLinkedList. When we wanted to make our API to animate an AnimatedLinkedList instead of AnimatedArray, we had to change multiple classes, including Rect, ContinuousAnimation and ChangeLabel \ref{fig:coupling}. This was due to no polymorphism in our implementation.
 
 \input{figures/coupling}
 
-After doing our Professional Software Development 3 (PSD3) D7 deliverable (which was implementation of an Internship Management System we were designing the entire first semester), I have learned how to structure software better and how we can split code into components in Java. Therefore it was time for refactoring.
+After doing our Professional Software Development 3 (PSD3) D7 deliverable (which was implementation of an Internship Management System we were designing the entire first semester), we have learned how to structure software better and how we can split code into components in Java. Therefore it was time for refactoring.
 
-One of the first things I did was to create a separate package for each data structure. This lead to 4 additional packages being created:
+One of the first things we did was create a separate package for each data structure. This lead to 4 additional packages being created:
 \begin{itemize} 
 	\item AnimatedArray
 	\item AnimatedBinaryTree
@@ -427,11 +564,11 @@ One of the first things I did was to create a separate package for each data str
 \end{itemize}
 Each package is supposed to keep classes relevant only to its data structure, apart from AnimatedDataStructure package, which keeps classes that are relevant to all data structures.
 
-I also completely separated the GUI from the rest of the code and created a class called setupGUI.
+We also completely separated the GUI from the rest of the code and created a class called setupGUI.
 
 \input{figures/changeStructure}
 
-The next thing I did was to create a public interface AnimatedDataStructure, which is how we solved the issue I mentioned in the first paragraph. Rect, ContinuousAnimation, ChangeLabel and setupGUI are all expecting an AnimatedDataStructure variable now and all data structures are just implementing this interface. Therefore it does not matter which data structure we use, the common classes (which are in AnimatedDataStructure package) work for all of them. The interface itself also brought common method names and some structure. Another good thing is that now, we only need to change 2 things in the Main class if we want to work with a different data structure: the data structure class name and then the constructor method call \ref{fig:changeStructure}. This did bring in some repetitive methods, like getNextButton(), which are being repeated in all data structures, but could be solved by introducing another abstract class, which would be implementing the AnimatedDataStructure interface and have all of these repetitive methods and then making all data structure classes extend this new abstract class.
+The next thing we did was create a public interface AnimatedDataStructure, which is how we solved the issue we mentioned in the first paragraph. Rect, ContinuousAnimation, ChangeLabel and setupGUI are all expecting an AnimatedDataStructure variable now and all data structures are just implementing this interface. Therefore it does not matter which data structure we use, the common methods (which are defined in the AnimatedDataStructure) work for all of them. The interface itself also brought some structure. Another good thing is that now, we only need to change 2 things in the Main class if we want to work with a different data structure: the data structure class name and then the constructor method call \ref{fig:changeStructure}. This did bring in some repetitive methods, like getNextButton(), which are being repeated in all data structures, but could be solved by introducing another abstract class, which would be implementing the AnimatedDataStructure interface and have all of these repetitive methods and then making all data structure classes extend this new abstract class.
 
 All of the above solutions introduced basic polymorphism to our software and solved quite a lot of development issues as well as made it easier to develop and manage the code for future developers (if there are going to be any). While doing all of the above, parts of unneccessary code were removed or changed as well.
 
@@ -445,7 +582,7 @@ TODO
 %==============================================================================
 \chapter{Conclusion}
 To conclude, we feel that the experience of building our Algorithm Animator as a group has been incredibly interesting and engaging, but not without its challenges. The system we have built is able to produce a detailed visual animation for the algorithms that the user has built using our API. Our most successful development has been the step-based approach, which represents an animation as a series of steps, so that the user can step through each of their calls to our API as they are executed in turn, and watch them be successfully animated. Our implementation also allows the user to step back through their elapsed steps, should they require seeing part of the animation again.
-We felt that the system could be generalised to a higher degree for the AnimatedArray class we built, given that there is a wider range of algorithms applicable to arrays. For instance, our system is able to accommodate numerous user constructed non-recursive sorting algorithms with our API. In contrast to this are the animated linked list and binary trees, which have operations that are restricted to their own data structures. However, our users will be still be able to completely utilise their functionality with our data structure defined operations, and successfully animate them.
+We felt that the system could be generalised to a higher degree for the AnimatedArray class we built, given that there is a wider range of algorithms applicable to arrays. For instance, our system is able to accommodate numerous user constructed non-recursive sorting algorithms with our API. In contrast to this are the animated linked list and binary trees, which have operations that are restricted to their own data structures. However, our users will still be able to completely utilise their functionality with our data structure defined operations, and successfully animate them.
 
 For future development, we would consider broadening our range of data structures in order for our users to exercise a wider range of algorithms that they desire to animate. With this approach, the user will gain a deeper understanding into their own programmed algorithms and the data structures which perform them.
 Our system will also require some debugging to iron out issues and keep it fit for purpose. We believe these factors will increase the appreciation of our users, and serve as a more beneficial teaching tool for the visual analysis of algorithms.
@@ -475,11 +612,29 @@ and checking its integrity.
 	\item Managing the repository, reviewing changes or updates
 	\item Refactoring
 	\item Debugging issues encountered by other members and looking for solutions
-	\item Sections \ref{Gediminas:PE} and \ref{Gediminas:Con} in this document
+	\item Sections or contributions to sections Abstract, \ref{intro}, \ref{PE:steps}, \ref{PE:refactoring} and \ref{Gediminas:Con} of this document
 \end{itemize}
 \subsection{Liam Bell}
 
 %==============================================================================
+\appendix
+
+\chapter{Glossary}
+
+Including expansions of non-standard abbreviations, acronyms and other key definitions.
+\section{API}
+Application Programming Interface - is a protocol intended to be used as an interface by software components to communicate with each other.
+
+\chapter{Maintenance document}
+
+TODO
+
+summarization of the delivered software, identifying all major deficiencies
+
+\chapter{User manual}
+
+TODO
+
 \bibliographystyle{plain}
 \bibliography{example}
 \end{document}
