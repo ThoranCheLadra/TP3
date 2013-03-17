@@ -128,7 +128,6 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 		return (int) rectSize/arrayLeft + rectSize+1;
 	}
 	
-
 	private int rectSize() {	  	
 		return (int) ((Fullscreen.getWidth()-(arrayLeft))/(arrayLeft+4)); 	
 	}
@@ -136,6 +135,7 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
         private int rectSize(int width){
             return (int) ((width-(arrayLeft))/(arrayLeft+4)); 	
 	}
+        
         
 	//locates, identifies and removes the linked list element with String S
 	public void findAndRemove(String i, AnimatedLinkedList anim){
@@ -147,41 +147,31 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), s.getFirstAnimator());																		// create an animator for this, which we could use to trigger this change
 		s.getLastAnimator().addTarget(new ChangeLabel(this, information, this));		
 
-		System.out.println("Attempting to remove string " + i);
-
 		//get first item
 		Node<Rect> node = rect_list.getHead();
 		//maintain a pointer to the previous node
 		Node<Rect> prev = rect_list.getHead();
 		int count = 0;
 
-		if(i == rect_list.getHead().getData().getLabel()) {
+		//check if the i == head, else examine the rest of the list
+		if(i.equals(rect_list.getHead().getData().getLabel())){
 			rect_list.removeFirst();
+			s.addChanges(new Change("deleteHead", prev, "Removing head of list"));
 		} else {
+			//check each other node, set colour to indicate change
 			while(node.getNext() != null && !(node.getData().getLabel().equals(i))){
-				prev = node; //pointer to previous node
+				prev = node;
 				setColor(count,Color.RED,"Changing color to red");
 				setColor(count,Color.BLUE,"Changing color to blue");
 				node = node.getNext();
 				count++;
 			}
+			//fade out the found node
 			anim.setColor(count,Color.GREEN,"Changing color to green");
 			anim.setColor(count,Color.WHITE,"Changing color to white");
-			//prev.setNext(node.getNext());   //joins the pointer for the prev element after the to be deleted node
-			//rect_list.removeNode(node); //removes this node
-	
-			//here I want to add the changes associated with the above commented lines, respectively.
-			//if the above lines are not commented out, they will not be represented as a step and 
-			//changes will be displayed to the user once the program is started
-			
-			//the changes i've added here don't reflect real changes in the code yet, but I'm trying
-			//to get stepForward() to retrieve them
-			
-			// Trigger for a continuous animation
 			s.addChanges(new Change("pointerSwitch", prev, "Assigning pointer from previous element"));
-			//s.addChanges(new Change("deleteNode", prev.getNext().getData(), "Removing node"));
-
 		}
+		//increment the current step
 		currentStep++;
 		// Trigger for a continuous animation
 		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
@@ -189,50 +179,17 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 		
 		steps.add(s);
 	}
-	
+        
+   
+     
 	public void swap (int a, int b, String message) {
-		currentStep++;																																					// increment currentStep
-		Step s = new Step();																																					// create a new step
-		// Create animation for showing information on what's happening
-		String information = "Swapping index " + a + " (" + rect_list.get(a).getLabel() + ") " + " with index " + b + " (" + rect_list.get(b).getLabel() + ")";			// create the string
-		s.setInfo(information);																																			// add it to the step
-		// Change information
-		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), s.getFirstAnimator());																		// create an animator for this, which we could use to trigger this change
-		s.getLastAnimator().addTarget(new ChangeLabel(this, information, this));																				// create a timing target to change the label when the animation starts	
-		// Create the Animators and PropertySetters (what should the animation change the property from what to what) for swapping rects
-		s.addAnimator(new Animator.Builder().setDuration(time, TimeUnit.MILLISECONDS).build(), s.getFirstAnimator());															// we want this Animator to start the same time the first Animator in the step does															
-		s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(a), "currentY", rect_list.get(a).getRec().y, rect_list.get(a).getRec().y+rectSpace()));
-		s.addAnimator(new Animator.Builder().setDuration(time, TimeUnit.MILLISECONDS).build(), nextBtn);																		// we want this Animator to start straight after the last Animator finishes. This is how it's done just now
-		s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(a), "currentX", rect_list.get(a).getRec().x, rect_list.get(b).getRec().x)); 
-		s.addAnimator(new Animator.Builder().setDuration(time, TimeUnit.MILLISECONDS).build(), nextBtn);
-		s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(a), "currentY", rect_list.get(a).getRec().y+rectSpace(), rect_list.get(a).getRec().y));		
-		//rect 2
-		s.addAnimator(new Animator.Builder().setDuration(time, TimeUnit.MILLISECONDS).build(), s.getFirstAnimator());															// we want this Animator to start the same time the first Animator in the step does
-		s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(b), "currentY", rect_list.get(b).getRec().y, rect_list.get(b).getRec().y-rectSpace()));
-		s.addAnimator(new Animator.Builder().setDuration(time, TimeUnit.MILLISECONDS).build(), nextBtn);
-		s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(b), "currentX", rect_list.get(b).getRec().x, rect_list.get(a).getRec().x));
-		s.addAnimator(new Animator.Builder().setDuration(time, TimeUnit.MILLISECONDS).build(), nextBtn);
-		s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(b), "currentY", rect_list.get(b).getRec().y-rectSpace(), rect_list.get(b).getRec().y));
-		// Trigger for a continuous animation
-		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
-		s.getLastAnimator().addTarget(new ContinuousAnimation(currentStep+1, this));
-		// Log the changes in the Step
-		s.addChanges(new Change("swap", rect_list.get(a), rect_list.get(a).getRec().x, rect_list.get(a).getRec().y));
-		s.addChanges(new Change("swap", rect_list.get(b), rect_list.get(b).getRec().x, rect_list.get(b).getRec().y));
-		// Apply the changes to rect_list
-			// We swap the position of 2 Rects in the animation, so we do this here
-		int x = rect_list.get(a).getRec().x;
-		rect_list.get(a).getRec().x = rect_list.get(b).getRec().x;
-		rect_list.get(b).getRec().x = x;
-			// We also want to swap the positions of Rects in our rect_list, so swapping would be according to current indexes, rather than initial ones
-		Rect tempRect = rect_list.get(b);
-		rect_list.set(b, rect_list.get(a));
-		rect_list.set(a, tempRect);
-		steps.add(s);																																					// add the new step to steps
+		//do nothing																																// add the new step to steps
 	}
 	
 
-	public void modifyLabel(int index, String dataValue, String info) {}
+	public void modifyLabel(int index, String dataValue, String info) {
+		//do nothing
+	}
 	
 	public void setColor(int index, Color c, String message) {
 		currentStep++;
@@ -294,20 +251,20 @@ public final class AnimatedLinkedList extends JPanel implements AnimatedDataStru
 			rect_list.addFirst(steps.get(currentStep).getChanges().get(0).getReference());
 			this.repaint();
 		}
-		//as a test, I attempted to get hold of one of the changes I made, so that I can handle 
-		//pointer changes.
-		//System.out.println("Next step: " + steps.get(currentStep+1).getChanges().get(0).getType());
+		//catches the even when the pointers are switched
 		if (steps.get(currentStep).getChanges().get(0).getType() == "pointerSwitch") {
 			System.out.println("found pointer switch");
 			Node<Rect> p = steps.get(currentStep).getChanges().get(0).getNodeReference();
 			rect_list.removeNode(p, p.getNext(),rectSpace(rectSize()));
 			this.repaint();
 		}
+		//catches the event when the head is deleted
+		if (steps.get(currentStep).getChanges().get(0).getType() == "deleteHead") {
+			System.out.println("found delete head");
+			rect_list.removeFirst();
+			this.repaint();
+		}
 
-		//here i'm printing out all changes, but "pointerSwitch" or "deleteNode" aren't listed
-		//System.out.println(steps.get(currentStep).getChanges().get(0).getType());
-
-		
 		if (steps.get(currentStep).getList().size() != 0) { // if there are any Animators inside the step, trigger the first one
 			steps.get(currentStep).getList().get(0).start();
 		}

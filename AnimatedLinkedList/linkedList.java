@@ -8,20 +8,23 @@ import AnimatedDataStructure.Rect;
 //a simple class to represent a LIFO linked-List stack of Rect objects 
 
 public class linkedList {
-	
+
 	private Node<Rect> head;
 	private int count; //keeping track of its size 
-	
+
+	//constructor
 	public linkedList(){
 		head = null;
 		count = 0;
 	}
-	
+
+	//add to head of list
 	public void addFirst(Rect data){
 		head = new Node<Rect>(data, head);
 		count++;
 	}
 	
+	//remove the first element, returns false if fails
 	public boolean removeFirst(){
 		if(head != null){
 			head = head.getNext();
@@ -30,12 +33,14 @@ public class linkedList {
 		}else
 			return false;
 	}
-	
+
+	//remove a specific node with the target supplied (here rect is the data)
 	public void remove(Rect target){
 		Node<Rect> pos = head;
 		Node<Rect> posOld = null;
 		Rect posData;
-		
+		//while a node exists, acquire its data and remove it
+		//maintains a pointer to the old (or prev) location, to point to the node succeeding it
 		while(pos != null) {
 			posData = pos.getData();
 			if(posData.equals(target))
@@ -48,64 +53,25 @@ public class linkedList {
 			pos = pos.getNext();
 		}
 	}
-	
-	
-	//removes a specific node
+
+
+	//removes the node from the linked list by the correct spacing
 	public void removeNode(Node<Rect> prev, Node<Rect> target, int spacing){
-		
+		//get the next node and set the previous node to point to it
 		Node<Rect> after = target.getNext();
 		prev.setNext(after);
 		target.setNext(null);
 		target = null;
 		
+		//shift n elements after the target node left 1 spacing
 		while(after != null){
 			Rectangle r = after.getData().getRec();
 			r.x -= spacing;
 			after = after.getNext();
 		}
-			
-	}
-	
-	
-	public Node<Rect> find(Rect target){
-		Node<Rect> pos = head;
-		Rect posData;
-		
-		while(pos != null){
-			posData = pos.getData();
-			if(posData.equals(target))
-				return pos;
-			pos = pos.getNext();
-		}
-		return null;
-	}
-	
-	public Rect get(int a) {
-		Node<Rect> pos = head;
-		int i = 0;
-		while (i < a) {
-			pos = pos.getNext();
-			i++;
-		}
-		return pos.getData();
-	}
-	
-	public void set(int a, Rect newRect) {
-		Node<Rect> pos = head;
-		int i = 0;
-		while (i < a) {
-			pos = pos.getNext();
-			i++;
-		}
-		pos.setData(newRect);
+
 	}
 
-	
-	public void replaceAll(){
-		
-	}
-	
-	
 	//helper function for printing the linked list
 	public void printList(){
 		Node<Rect> pos = head;
@@ -114,7 +80,7 @@ public class linkedList {
 			pos = pos.getNext();
 		}
 	}
-	
+
 	//translates the linked-list into an arraylist
 	public ArrayList<Rect> toArray(){
 		Node<Rect> pos = head;
@@ -126,8 +92,9 @@ public class linkedList {
 		}
 		return arr;
 	}
-	
-	
+
+
+	//check if the list is empty
 	public boolean isEmpty(){
 		return count == 0;
 	}
