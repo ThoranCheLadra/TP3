@@ -39,7 +39,6 @@ public class AnimatedBinaryTree extends JPanel implements AnimatedDataStructure{
 	static JButton nextBtn;																			// getting reference to the button
 	static JButton prevBtn;																			// same as above
 	static JButton pauseBtn;
-	static JPanel panel;																			// we need to to have the reference to the drawing area to repaint it
 	static int currentStep;																			// the currentStep
 	static int time=500;																					// could just REMOVE. Though keeping it with important variables might be a good idea as well. I don't like the fact that the minimum value is 1 second of each animation.
 	private static String info = ""; 																// a string to display information at each step
@@ -73,8 +72,6 @@ public class AnimatedBinaryTree extends JPanel implements AnimatedDataStructure{
 		time = 1;
 		currentStep = 0;
 		setOpaque(true);
-		
-		//setupGUI();
 			
 		rect_list.add(null);
 		s = new Step();																	// create a new step to store initial values and all. We wouldn't really need it if 
@@ -111,6 +108,16 @@ public class AnimatedBinaryTree extends JPanel implements AnimatedDataStructure{
 	}
 	
 	public void add(int i){
+		currentStep++;
+		s = new Step();
+		s.setInfo("Adding " + i);
+		// Change information
+		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), s.getFirstAnimator());																		// create an animator for this, which we could use to trigger this change
+		s.getLastAnimator().addTarget(new ChangeLabel(this, "Adding " + i,this));	
+		// Trigger for a continuous animation
+		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
+		s.getLastAnimator().addTarget(new ContinuousAnimation(currentStep+1, this));// create a timing target to change the label when the animation starts
+		//Apply the changes to rect_list
 		Rect r;
 		if (rect_list.size()%2==0) {
 			r = new Rect(rect_list.get(rect_list.size()/2).getRec().x-x-10, y, w, h, i+"", this);     // create all the Rectangle and add them to rect_list
@@ -118,7 +125,10 @@ public class AnimatedBinaryTree extends JPanel implements AnimatedDataStructure{
 			r = new Rect(rect_list.get(rect_list.size()/2).getRec().x+x+10, y, w, h, i+"", this);
 		}
 		rect_list.add(r);
-    	panel.repaint();
+		this.repaint();
+		// Log the changes in the Step
+		s.addChanges(new Change("add", r));
+		steps.add(s);
     }
 	        
 		private int rectSpace() {	  	
@@ -330,7 +340,10 @@ public class AnimatedBinaryTree extends JPanel implements AnimatedDataStructure{
 				for(Change tempChange : steps.get(currentStep).getChanges()) {
 					if (tempChange.getType() == "swap") {
 						rect_list.set(tempChange.getNewIndex(), tempChange.getReference());
-						panel.repaint();
+						this.repaint();
+					} else if (tempChange.getType() == "add") {
+						rect_list.add(tempChange.getReference());
+						this.repaint();
 					}
 				}
 		 }
@@ -351,6 +364,9 @@ public class AnimatedBinaryTree extends JPanel implements AnimatedDataStructure{
 			} else if (tempChange.getType() == "modifyLabel") {
 				// just restore the label
 				tempChange.getReference().setLabel(tempChange.getLabel());
+			} else if (tempChange.getType() == "add") {
+				// just restore coordinates
+				rect_list.remove(tempChange.getReference());
 			}
 		}
 		

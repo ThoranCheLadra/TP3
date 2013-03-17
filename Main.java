@@ -23,6 +23,7 @@ public class Main {
 		//bubblesort(arr);
 	//	anim.addToHead(20);
 		anim.swap(1, 2, "");
+		anim.add(5);
 	//	anim.findAndRemove("8", anim); //remove nodes with label = 20
 	//	System.out.println(anim.getSteps().toString());
         anim.endAnimation();
