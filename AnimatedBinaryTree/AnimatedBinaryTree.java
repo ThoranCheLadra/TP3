@@ -17,10 +17,10 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
-	import javax.swing.JButton;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
-	import org.jdesktop.core.animation.timing.Animator;
+import org.jdesktop.core.animation.timing.Animator;
 import org.jdesktop.core.animation.timing.PropertySetter;
 import org.jdesktop.swing.animation.timing.sources.SwingTimerTimingSource;
 
