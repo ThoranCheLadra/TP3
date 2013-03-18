@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  18 MAR 2013 14:07
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  18 MAR 2013 14:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -493,158 +493,174 @@ Chapter 3.
 [15
 
 ] (./figures/swap.tex
-Overfull \hbox (513.80887pt too wide) in paragraph at lines 36--36
-[]\OT1/pcr/m/n/10.95 information = "Swapping index " + a + " (" + rect_list.get
-(a).getLabel() + ") " + " with index " + b + " (" + rect_list.get(b).getLabel()
- + ")";
+Overfull \hbox (80.18939pt too wide) in paragraph at lines 46--46
+[]    \OT1/pcr/m/n/10.95 information = "Swapping index " + a + " (" + rect_list
+.get(a).getLabel() +[] 
  []
 
 
-Overfull \hbox (264.14917pt too wide) in paragraph at lines 36--36
+Overfull \hbox (211.58923pt too wide) in paragraph at lines 46--46
+[]        \OT1/pcr/m/n/10.95 ") " + " with index " + b + " (" + rect_list.get(b
+).getLabel() + ")"; // create the string[] 
+ []
+
+
+Overfull \hbox (53.90942pt too wide) in paragraph at lines 46--46
 []\OT1/pcr/m/n/10.95 s.addAnimator(new Animator.Builder().setDuration(1, TimeUn
-it.MILLISECONDS).build(), s.getFirstAnimator());
+it.MILLISECONDS)[] 
  []
 
 
-Overfull \hbox (47.33943pt too wide) in paragraph at lines 36--36
-\OT1/pcr/m/n/10.95 // create an animator for this, which we could use to trigge
-r this change[] 
+Overfull \hbox (53.90942pt too wide) in paragraph at lines 46--46
+[]    \OT1/pcr/m/n/10.95 .build(), s.getFirstAnimator()); // create an animator
+ for this, which[] 
  []
 
 
-Overfull \hbox (40.76944pt too wide) in paragraph at lines 36--36
+Overfull \hbox (53.90942pt too wide) in paragraph at lines 46--46
+[]                                     \OT1/pcr/m/n/10.95 //we could use to tri
+gger this change[] 
+ []
+
+
+Overfull \hbox (40.76944pt too wide) in paragraph at lines 46--46
 []\OT1/pcr/m/n/10.95 s.getLastAnimator().addTarget(new ChangeLabel(this, inform
-ation, this));
+ation, this));[] 
  []
 
 
-Overfull \hbox (34.19945pt too wide) in paragraph at lines 36--36
-\OT1/pcr/m/n/10.95 // create a timing target to change the label when the anima
-tion starts[] 
+Overfull \hbox (34.19945pt too wide) in paragraph at lines 46--46
+[]\OT1/pcr/m/n/10.95 // create a timing target to change the label when the ani
+mation starts[] 
  []
 
 
-Overfull \hbox (408.689pt too wide) in paragraph at lines 36--36
+Overfull \hbox (73.6194pt too wide) in paragraph at lines 46--46
 []\OT1/pcr/m/n/10.95 // Create the Animators and PropertySetters (what should t
-he animation change the property from what to what) for swapping rects[] 
+he animation change[] 
  []
 
 
-Overfull \hbox (283.85915pt too wide) in paragraph at lines 36--36
+Overfull \hbox (73.6194pt too wide) in paragraph at lines 46--46
 []\OT1/pcr/m/n/10.95 s.addAnimator(new Animator.Builder().setDuration(time, Tim
-eUnit.MILLISECONDS).build(), s.getFirstAnimator());
+eUnit.MILLISECONDS)[] 
  []
 
 
-Overfull \hbox (113.03935pt too wide) in paragraph at lines 36--36
-\OT1/pcr/m/n/10.95 // we want this Animator to start the same time the first An
-imator in the step does[] 
+Overfull \hbox (60.47942pt too wide) in paragraph at lines 46--46
+[]\OT1/pcr/m/n/10.95 .build(), s.getFirstAnimator()); // we want this Animator 
+to start the same[] 
  []
 
 
-Overfull \hbox (592.64877pt too wide) in paragraph at lines 36--36
+Overfull \hbox (40.76944pt too wide) in paragraph at lines 46--46
 []\OT1/pcr/m/n/10.95 s.getLastAnimator().addTarget(PropertySetter.getTarget(rec
-t_list.get(a), "currentY", rect_list.get(a).getRec().y, rect_list.get(a).getRec
-().y+rectSpace()));[] 
+t_list.get(a),[] 
  []
 
 
-Overfull \hbox (198.44925pt too wide) in paragraph at lines 36--36
+Overfull \hbox (113.03935pt too wide) in paragraph at lines 46--46
+[]\OT1/pcr/m/n/10.95 "currentY", rect_list.get(a).getRec().y, rect_list.get(a).
+getRec().y+rectSpace()));[] 
+ []
+
+
+Overfull \hbox (73.6194pt too wide) in paragraph at lines 46--46
 []\OT1/pcr/m/n/10.95 s.addAnimator(new Animator.Builder().setDuration(time, Tim
-eUnit.MILLISECONDS).build(), nextBtn);
+eUnit.MILLISECONDS)[] 
  []
 
 
-Overfull \hbox (270.71916pt too wide) in paragraph at lines 36--36
-\OT1/pcr/m/n/10.95 // we want this Animator to start straight after the last An
-imator finishes. This is how it's done just now[] 
+Overfull \hbox (40.76944pt too wide) in paragraph at lines 46--46
+[]\OT1/pcr/m/n/10.95 .build(), nextBtn); // we want this Animator to start stra
+ight after the[] 
  []
 
 
-Overfull \hbox (513.80887pt too wide) in paragraph at lines 36--36
+Overfull \hbox (513.80887pt too wide) in paragraph at lines 46--46
 []\OT1/pcr/m/n/10.95 s.getLastAnimator().addTarget(PropertySetter.getTarget(rec
 t_list.get(a), "currentX", rect_list.get(a).getRec().x, rect_list.get(b).getRec
 ().x));[] 
  []
 
 
-Overfull \hbox (198.44925pt too wide) in paragraph at lines 36--36
+Overfull \hbox (198.44925pt too wide) in paragraph at lines 46--46
 []\OT1/pcr/m/n/10.95 s.addAnimator(new Animator.Builder().setDuration(time, Tim
 eUnit.MILLISECONDS).build(), nextBtn);[] 
  []
 
 
-Overfull \hbox (592.64877pt too wide) in paragraph at lines 36--36
+Overfull \hbox (592.64877pt too wide) in paragraph at lines 46--46
 []\OT1/pcr/m/n/10.95 s.getLastAnimator().addTarget(PropertySetter.getTarget(rec
 t_list.get(a), "currentY", rect_list.get(a).getRec().y+rectSpace(), rect_list.g
 et(a).getRec().y));[] 
  []
 
 
-Overfull \hbox (283.85915pt too wide) in paragraph at lines 36--36
+Overfull \hbox (283.85915pt too wide) in paragraph at lines 46--46
 []\OT1/pcr/m/n/10.95 s.addAnimator(new Animator.Builder().setDuration(time, Tim
 eUnit.MILLISECONDS).build(), s.getFirstAnimator());
  []
 
 
-Overfull \hbox (113.03935pt too wide) in paragraph at lines 36--36
+Overfull \hbox (113.03935pt too wide) in paragraph at lines 46--46
 \OT1/pcr/m/n/10.95 // we want this Animator to start the same time the first An
 imator in the step does[] 
  []
 
 
-Overfull \hbox (592.64877pt too wide) in paragraph at lines 36--36
+Overfull \hbox (592.64877pt too wide) in paragraph at lines 46--46
 []\OT1/pcr/m/n/10.95 s.getLastAnimator().addTarget(PropertySetter.getTarget(rec
 t_list.get(b), "currentY", rect_list.get(b).getRec().y, rect_list.get(b).getRec
 ().y-rectSpace()));[] 
  []
 
 
-Overfull \hbox (198.44925pt too wide) in paragraph at lines 36--36
+Overfull \hbox (198.44925pt too wide) in paragraph at lines 46--46
 []\OT1/pcr/m/n/10.95 s.addAnimator(new Animator.Builder().setDuration(time, Tim
 eUnit.MILLISECONDS).build(), nextBtn);[] 
  []
 
 
-Overfull \hbox (513.80887pt too wide) in paragraph at lines 36--36
+Overfull \hbox (513.80887pt too wide) in paragraph at lines 46--46
 []\OT1/pcr/m/n/10.95 s.getLastAnimator().addTarget(PropertySetter.getTarget(rec
 t_list.get(b), "currentX", rect_list.get(b).getRec().x, rect_list.get(a).getRec
 ().x));[] 
  []
 
 
-Overfull \hbox (198.44925pt too wide) in paragraph at lines 36--36
+Overfull \hbox (198.44925pt too wide) in paragraph at lines 46--46
 []\OT1/pcr/m/n/10.95 s.addAnimator(new Animator.Builder().setDuration(time, Tim
 eUnit.MILLISECONDS).build(), nextBtn);[] 
  []
 
 
-Overfull \hbox (592.64877pt too wide) in paragraph at lines 36--36
+Overfull \hbox (592.64877pt too wide) in paragraph at lines 46--46
 []\OT1/pcr/m/n/10.95 s.getLastAnimator().addTarget(PropertySetter.getTarget(rec
 t_list.get(b), "currentY", rect_list.get(b).getRec().y-rectSpace(), rect_list.g
 et(b).getRec().y));[] 
  []
 
 
-Overfull \hbox (178.73927pt too wide) in paragraph at lines 36--36
+Overfull \hbox (178.73927pt too wide) in paragraph at lines 46--46
 []\OT1/pcr/m/n/10.95 s.addAnimator(new Animator.Builder().setDuration(1, TimeUn
 it.MILLISECONDS).build(), nextBtn);[] 
  []
 
 
-Overfull \hbox (67.04941pt too wide) in paragraph at lines 36--36
+Overfull \hbox (67.04941pt too wide) in paragraph at lines 46--46
 []\OT1/pcr/m/n/10.95 s.getLastAnimator().addTarget(new ContinuousAnimation(curr
 entStep+1, this));[] 
  []
 
 
-Overfull \hbox (283.85915pt too wide) in paragraph at lines 36--36
+Overfull \hbox (283.85915pt too wide) in paragraph at lines 46--46
 []\OT1/pcr/m/n/10.95 s.addChanges(new Change("swap", rect_list.get(a), rect_lis
 t.get(a).getRec().x, rect_list.get(a).getRec().y));[] 
  []
 
 
-Overfull \hbox (283.85915pt too wide) in paragraph at lines 36--36
+Overfull \hbox (283.85915pt too wide) in paragraph at lines 46--46
 []\OT1/pcr/m/n/10.95 s.addChanges(new Change("swap", rect_list.get(b), rect_lis
 t.get(b).getRec().x, rect_list.get(b).getRec().y));[] 
  []
@@ -695,7 +711,7 @@ Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
 
-<images/flash1.png, id=332, 589.20125pt x 388.45125pt>
+<images/flash1.png, id=333, 589.20125pt x 388.45125pt>
 File: images/flash1.png Graphic file (type png)
  <use images/flash1.png>
 Package pdftex.def Info: images/flash1.png used on input line 348.
@@ -802,7 +818,7 @@ Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ¦ in font ptmr7t!
  [27] (./figures/firstPrototype.tex
-<images/firstPrototype.png, id=376, 803.0pt x 502.87875pt>
+<images/firstPrototype.png, id=377, 803.0pt x 502.87875pt>
 File: images/firstPrototype.png Graphic file (type png)
 
 <use images/firstPrototype.png>
@@ -892,14 +908,14 @@ Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
  [29 <./images/firstPrototype.png>] [30] (./figures/coupling.tex
-<images/coupling.png, id=399, 471.7625pt x 173.64874pt>
+<images/coupling.png, id=400, 471.7625pt x 173.64874pt>
 File: images/coupling.png Graphic file (type png)
 
 <use images/coupling.png>
 Package pdftex.def Info: images/coupling.png used on input line 3.
 (pdftex.def)             Requested size: 432.26999pt x 159.1149pt.
 ) [31] (./figures/changeStructure.tex
-<images/changeStructure.png, id=408, 410.53375pt x 166.6225pt>
+<images/changeStructure.png, id=409, 410.53375pt x 166.6225pt>
 File: images/changeStructure.png Graphic file (type png)
 
 <use images/changeStructure.png>
@@ -907,7 +923,7 @@ Package pdftex.def Info: images/changeStructure.png used on input line 3.
 (pdftex.def)             Requested size: 432.26999pt x 175.44438pt.
 ) [32 <./images/coupling.png>]
 (./figures/refactoring.tex
-<images/refactoring.png, id=417, 871.255pt x 719.68875pt>
+<images/refactoring.png, id=418, 871.255pt x 719.68875pt>
 File: images/refactoring.png Graphic file (type png)
 
 <use images/refactoring.png>
@@ -953,11 +969,11 @@ hat's in it's place already.");[]
 
 ) [41] [42]
 Appendix D.
-<images/animationWindow.png, id=469, 1028.34187pt x 578.16pt>
+<images/animationWindow.png, id=470, 1028.34187pt x 578.16pt>
 File: images/animationWindow.png Graphic file (type png)
 
 <use images/animationWindow.png>
-Package pdftex.def Info: images/animationWindow.png used on input line 694.
+Package pdftex.def Info: images/animationWindow.png used on input line 711.
 (pdftex.def)             Requested size: 432.26999pt x 243.03726pt.
  [43
 
@@ -987,27 +1003,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 31--37
  []
 
 )
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 712.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 729.
  [45
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 712.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 729.
  (./example.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 712.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 712.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 729.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 729.
 Package rerunfilecheck Info: File `example.out' has not changed.
-(rerunfilecheck)             Checksum: 02217D2321A5BE65A1A141D3E630E312;2527.
+(rerunfilecheck)             Checksum: FBF63DC162DA540D07CC3C8E93D0D5FF;2533.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 712.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 729.
  ) 
 Here is how much of TeX's memory you used:
- 6353 strings out of 493488
- 97572 string characters out of 3141326
- 210896 words of memory out of 3000000
- 9400 multiletter control sequences out of 15000+200000
+ 6357 strings out of 493488
+ 97615 string characters out of 3141326
+ 211089 words of memory out of 3000000
+ 9404 multiletter control sequences out of 15000+200000
  24975 words of font info for 50 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
  36i,7n,28p,1306b,443s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1017,10 +1033,10 @@ xlive/2012/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/20
 12/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2012/texmf-d
 ist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/
 type1/urw/times/utmri8a.pfb>
-Output written on example.pdf (47 pages, 580542 bytes).
+Output written on example.pdf (47 pages, 581128 bytes).
 PDF statistics:
- 542 PDF objects out of 1000 (max. 8388607)
- 467 compressed objects within 5 object streams
+ 543 PDF objects out of 1000 (max. 8388607)
+ 468 compressed objects within 5 object streams
  117 named destinations out of 1000 (max. 500000)
  396 words of extra memory for PDF output out of 10000 (max. 10000000)
 

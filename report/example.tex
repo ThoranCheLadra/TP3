@@ -198,7 +198,7 @@ We can infer from this diagram the system architecture is a facade architecture,
 The AnimatedLinkedList data structure requires additional classes to store the Rect objects in a way that is coherent to the data structure.
 The Rect's are stored in a custom linked list data structure implemented such that manipulating the data stored in the list will also update the display of
 the linked list.
-\subsection{AnimatedHeap Component}
+\subsection{AnimatedBinaryTree Component}
 \includegraphics[width=115mm]{images/heapDiagram.png}
 \subsection{MetaDataManager Component}
 \includegraphics[width=115mm]{images/metaDataDiagram.png}
@@ -215,7 +215,7 @@ In this chapter, we describe how the implemented the system.
 %------------------------------------------------------------------------------
 \section{User Interface}
 
-TODO
+Look at Appendix \ref{ui}
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \section{Problems Encountered}
@@ -704,6 +704,7 @@ do some highlighting on elements. Here is a sample animation code for an array s
 \input{figures/animationAlgorithm}
 
 \chapter{User interface}
+\label{ui}
 
 The user interface is very simple and only consists in a few explicitely named button.
 

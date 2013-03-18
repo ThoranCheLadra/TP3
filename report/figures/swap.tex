@@ -1,22 +1,32 @@
 \begin{figure}
 \begin{center}
 \begin{verbatim}
-Step s = new Step();																																					// create a new step
+Step s = new Step(); // create a new step
 // Create animation for showing information on what's happening
 String information;
 if (info == "") {
-	information = "Swapping index " + a + " (" + rect_list.get(a).getLabel() + ") " + " with index " + b + " (" + rect_list.get(b).getLabel() + ")";			// create the string
+    information = "Swapping index " + a + " (" + rect_list.get(a).getLabel() + 
+        ") " + " with index " + b + " (" + rect_list.get(b).getLabel() + ")"; // create the string
 } else {
-	information = info;
+    information = info;
 }
-s.setInfo(information);																																			// add it to the step
+s.setInfo(information); // add it to the step
 // Change information
-s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), s.getFirstAnimator());																		// create an animator for this, which we could use to trigger this change
-s.getLastAnimator().addTarget(new ChangeLabel(this, information, this));																				// create a timing target to change the label when the animation starts	
-// Create the Animators and PropertySetters (what should the animation change the property from what to what) for swapping rects
-s.addAnimator(new Animator.Builder().setDuration(time, TimeUnit.MILLISECONDS).build(), s.getFirstAnimator());															// we want this Animator to start the same time the first Animator in the step does															
-s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(a), "currentY", rect_list.get(a).getRec().y, rect_list.get(a).getRec().y+rectSpace()));
-s.addAnimator(new Animator.Builder().setDuration(time, TimeUnit.MILLISECONDS).build(), nextBtn);																		// we want this Animator to start straight after the last Animator finishes. This is how it's done just now
+s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS)
+    .build(), s.getFirstAnimator()); // create an animator for this, which 
+                                     //we could use to trigger this change
+s.getLastAnimator().addTarget(new ChangeLabel(this, information, this));
+// create a timing target to change the label when the animation starts	
+// Create the Animators and PropertySetters (what should the animation change 
+// the property from what to what) for swapping rects
+s.addAnimator(new Animator.Builder().setDuration(time, TimeUnit.MILLISECONDS)
+	.build(), s.getFirstAnimator()); // we want this Animator to start the same
+// time the first Animator in the step does
+s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(a), 
+	"currentY", rect_list.get(a).getRec().y, rect_list.get(a).getRec().y+rectSpace()));
+s.addAnimator(new Animator.Builder().setDuration(time, TimeUnit.MILLISECONDS)
+	.build(), nextBtn); // we want this Animator to start straight after the 
+	// last Animator finishes. This is how it's done just now
 s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(a), "currentX", rect_list.get(a).getRec().x, rect_list.get(b).getRec().x)); 
 s.addAnimator(new Animator.Builder().setDuration(time, TimeUnit.MILLISECONDS).build(), nextBtn);
 s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(a), "currentY", rect_list.get(a).getRec().y+rectSpace(), rect_list.get(a).getRec().y));		
