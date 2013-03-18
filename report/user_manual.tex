@@ -28,6 +28,7 @@ This is the user manual to handle our API.
 \end{abstract}
 \educationalconsent
 
+\chapter{API}
 Our API consists of 3 data structure you can animate:
 \begin{itemize}
 \item Arrays
@@ -64,3 +65,28 @@ The Heap supports the following additional call:
 \begin{itemize}
 \item add : adds the integer value i to the heap; this function maintains the binary tree ordered structure
 \end{itemize}
+
+To animate your algorithm you have to inject the appropriate API calls into your code where you manipulate your data structure, or when you want
+do some highlighting on elements. Here is a sample animation code for an array sorting algorithm:
+
+\input{figures/animationAlgorithm}
+
+\chapter{User interface}
+
+The user interface is very simple and only consists in a few explicitely named button.
+
+\input{images/animationWindow}
+
+When running the animation, you may use the middle Play/Pause button to run or stop the animation. There's two distinct animation
+behaviours depending on wether the animation is running or not:
+\begin{itemize}
+\item If the animation is running, you won't be able to use the Prev/Next Step buttons
+\item If the animation is paused, you may run it step by step using the Prev/Next Step buttons
+\end{itemize}
+
+Please take note that the Prev Step button will not animate the rollback to the previous step, it will simply restore the state of the animation to its previous state.
+The Next Step Button on another hand will animate the change of state to the next step.
+
+There is a second window opened with every animation running. It contains the entire list of animation steps, identified by their step description. When the animation is paused,
+you may jump backward or forward in the animation by selecting the step you want to jump to and clicking the Go button. 
+Please note that you may only use this feature while the animation is paused.
