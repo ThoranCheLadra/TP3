@@ -568,9 +568,13 @@ We also completely separated the GUI from the rest of the code and created a cla
 
 \input{figures/changeStructure}
 
-The next thing we did was create a public interface AnimatedDataStructure, which is how we solved the issue we mentioned in the first paragraph. Rect, ContinuousAnimation, ChangeLabel and setupGUI are all expecting an AnimatedDataStructure variable now and all data structures are just implementing this interface. Therefore it does not matter which data structure we use, the common methods (which are defined in the AnimatedDataStructure) work for all of them. The interface itself also brought some structure. Another good thing is that now, we only need to change 2 things in the Main class if we want to work with a different data structure: the data structure class name and then the constructor method call \ref{fig:changeStructure}. This did bring in some repetitive methods, like getNextButton(), which are being repeated in all data structures, but could be solved by introducing another abstract class, which would be implementing the AnimatedDataStructure interface and have all of these repetitive methods and then making all data structure classes extend this new abstract class.
+The next thing we did was create a public interface AnimatedDataStructure, which is how we solved the issue we mentioned in the first paragraph. Rect, ContinuousAnimation, ChangeLabel and setupGUI are all expecting an AnimatedDataStructure variable now and all data structures are just implementing this interface. Therefore it does not matter which data structure we use, the common methods (which are defined in the AnimatedDataStructure) work for all of them. The interface itself also brought some structure. Another good thing is that now, we only need to change 2 things in the Main class if we want to work with a different data structure: the data structure class name and then the constructor method call \ref{fig:changeStructure}.
+
+The introduction of an interface brought in some repetitive methods, like getNextButton(), which were being repeated in all data structures. Therefore we created an abstract class, called AnimatedTemplate, which is implementing the AnimatedDataStructure interface and is being extended by all the animated data structures. This is also the design of our final deliverable (\ref{fig:refactoring})
 
 All of the above solutions introduced basic polymorphism to our software and solved quite a lot of development issues as well as made it easier to develop and manage the code for future developers (if there are going to be any). While doing all of the above, parts of unneccessary code were removed or changed as well.
+
+\input{figures/refactoring}
 
 \subsection{Liam Bell}
 
@@ -608,6 +612,7 @@ and checking its integrity.
 	\item Project planning
 	\item Steps in animations prototype
 	\item Continuous and step-by-step animation prototypes
+	\item AnimatedArray individual functions implementations
 	\item AnimatedArray animated algorithms examples
 	\item Managing the repository, reviewing changes or updates
 	\item Refactoring
