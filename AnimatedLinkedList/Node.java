@@ -11,20 +11,14 @@ public class Node<Rect> {
 	public Node(Rect data, Node<Rect> next){
 		this.data = data;
 		this.next = next;
-		
 	}
 	
+	//check to see if their data is equal, then they are equal
 	public boolean equals(Node<Rect> node){
-		if(node.data instanceof String){
-			return node.data.equals(this.data);
-		}else if(node.data instanceof Integer){
-			return node.data == this.data;
-		}else{
-			return false;
-		}
+		return node.data.equals(this.data);
 	}
 	
-
+	//return the node's string data
 	public String toString(){
 		return (String) this.data;
 	}

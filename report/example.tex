@@ -30,15 +30,40 @@ Our project - an API approach using Java and TimingFramework to develop the Algo
 %==============================================================================
 \chapter{Introduction}
 \label{intro}
+Explaining complex algorithms or trying to understand them sometimes proves to be a difficult task even for experienced programmers, computer scientists and software engineers. Some of them are so huge and complicated, that it is hardly possible to remember and keep track of everything that is happening inside of it, therefore we often take a pen and a piece of paper and draw some sort of visualization of the algorithm and take notes in order to understand or explain them better. But what if you dont have a pen and/or a piece of paper? It often becomes messy as well and drawing, redrawing everything is rather time consuming. What if we are trying to develop a new and better algorithm and we want to see whether it is faster when compared to a conventional one? What if we want to visually see or show these differences?
+
+The algorithm animator is an application dedicated to showing graphically the functionalities of a wide range of algorithms using the most common programming data structures. Our approach of the project is such that a novice developper can create his own custom animation to illustrate his algorithms. The data structures supported by our project include arrays, heaps and linked lists.
+
+The project consists of an API providing object classes for each of those data structures and set of functions to instantiate an animation and add basic animation steps, such as object swaps and highlighting, which combined can provide a suitable graphic view of the running algorithm. Our project also provides solutions to run continuous or broken into step animations and backtracking of the steps taken. In order to emphasize the educational purpose of the application, it is also possible to display description sentences as each of the steps of the animation is running.
+
+It is made very simple for the user to create powerful animations as he just needs to instantiate the animation object matching the data structure his algorithm uses and implant a small set of functions in his code to synchronize an animation with his running algorithm.
 
 \section{Motivation}
-Explaining complex algorithms or trying to understand them sometimes proves to be a difficult task even for experienced programmers, computer scientists and software engineers. Some of them are so huge and complicated, that it is hardly possible to remember and keep track of everything that is happening inside of it, therefore we often take a pen and a piece of paper and draw some sort of visualization of the algorithm and take notes in order to understand or explain them better. But what if you dont have a pen and/or a piece of paper? It often becomes messy as well and drawing, redrawing everything is rather time consuming. What if we are trying to develop a new and better algorithm and we want to see whether it is faster when compared to a conventional one? What if we want to visually see or show these differences? The motivation behind our project is a wish to solve all of these problems and to provide the student and the teacher a useful tool to both learn and teach. 
 
-During our first meeting with the client (Dr. Simon J. Gay) we decided that we would design and implement an API for animations, so that an existing program could be animated by inserting calls to our API library. While this might seem dull, boring and possibly complex to an average computer user, we found this task to be creative (constructing animations and thinking of all the possible animations our users would require), interesting (we were drawing algorithms on paper ourselves or trying to visualize them in our heads, therefore seeing it being done automatically by a computer is quite satisfying) and challenging (which is usually just a really good motivator for us).
+Our project's main motivation is to provide developpers, lecturers an easy and comprehensive way to explain graphically educational algorithms or any of their own algorithms through the use of our API's animation functions, for the most common programming data structures. We know as students that learning from a pseudo-code or verbal explanations is often not the most efficient method and we wish to provide a simple to learn tool to increase developpers' teaching potential, and students' learning experience.
+
+This project is suitable for use for novice JAVA developpers and should encourage its users to reflect on the most efficient ways to introduce graphically their algorithms to an audience and explain their purpose and functionning.
+
 \section{Aims}
 Our projects aim is to provide a tool, which would allow its users to easier visualize different, even unique or custom built algorithms and create animations out of them. We also want to make our system as general as possible in the sense of supporting a range of styles of algorithms, ability to export animations to different file formats, which could be easily viewed on different operating systems and devices.
 
-Even though this is not a direct aim of our project, this project is part of University of Glasgow teaching curriculum, which allows us, computing science students, to gain experience in working in teams and see various phases of software development. Therefore the aims of assigning this project to us are to give us an idea of how software is being developed, suggest ways of how it could be done better, help us out if there are any issues and encourage us to independently learn new material and both study from and teach our peers (team members).
+The aim of this project is to create a complete, documented and well-built API to build animations in the most straight-forward way, while enabling the user to chose from a wide range of choice of animation and data structures. This includes the following tasks:
+\begin{enumerate}
+	\item Building graphically and animating:
+	\begin{itemize}
+		\item Arrays
+		\item Heaps
+		\item Linked Lists
+	\end{itemize}
+	\item Providing easily understandable functions to:
+	\begin{itemize}
+		\item Highlight elements
+		\item Swap elements
+		\item Display description messages
+	\end{itemize}
+	\item Creating an interface to control the displaying animation
+	\item Enabling the end-user to export his animation in an executable format
+\end{enumerate}
 
 \section{Background}
 Since part of Team Project 3 course curriculum is to work on a team project, we, as a group, chose this project from a list of provided project proposals as one of 5 projects we would like to work on and we were assigned to work on it. The project itself was proposed by our group project supervisor, Simon Gay. The main reason described in the project proposal what this software would mostly be used for was teaching purposes, therefore it seems academics are no exception and are also constantly looking for different ways to explain material for their students.
@@ -51,21 +76,95 @@ While the report itself is hopefully going to be easy to read and understand to 
 \section{Outline}
 The remainder of the report will cover:
 \begin{itemize}
-	\item Project requirements - what properties the software solution must have, including functionality,
-	response times, user interface, etc.
-	\item Software - the final source code of our project
-	\item Software documentation - instructions and details of the project, as well as design documentation
-	\item Maintenance document - summary of testing strategies used to test the end product
+	\item Design - Domain model diagrams to describe the classes of the project's API and explanation of the reason why the TimingFramework graphics framework was chose over the other existing JAVA graphics frameworks.
+	\item Implementation - this part will cover the tools and the methods use to code the API.
+	\item API documentation - a list of the API classes including attributes and functions full description to help the end-user manipulating the API.
+	\item Maintenance document - summarization of the delivered software, identifying all major deficiencies
 	\item Summary log - abstract of the project log including all major contributions made by each individual
 	student to the project
-	\item Status report - summarization of the delivered software, identifying all major deficiencies (if
-	there are any)
 	\item Other documentation (for example: a user/reference manual or internal documentation)
 \end{itemize}
 
 %==============================================================================
 \chapter{Design}
 \label{design}
+
+\section{Selection of a suitable graphics framework}
+
+
+During the beginning of the project, several of my teammates and I were assigned to the research area where were to examine a suitable graphics framework that couldassist the team in building a solid animation API for our end users. During the research, we found there were several popular graphics frameworks for assisting with animation alongside Java applications, typically integrated through the use of compiled classes within a Java archive (.jar).
+
+The range of frameworks proved problematic, given that it was most suitable to select a single framework to build with, otherwise there would be serious inconsistencies between developed applications (as they differ in their functionality) We established a simple set of fundamental criteria for selection as follows:
+\begin{itemize}
+	\item The framework should offer a fully functional API, of which can be accessed by our code in order to build animation.
+	\item It should provide some degree of control, so that our own API can display dynamic movement and precision.
+	\item It should be able to be in-cooperated into an integrated development environment (IDE) for group production during the implementation stage.
+\end{itemize}
+
+After careful research, we found three separate candidates for animation production with Java. In order to justify a suitable approach, each framework was considered separately to assess desirable characteristics and identify potential flaws. 
+
+\underline{\textbf{Timing-Framework:}}
+
+The Timing Framework was found on Java.net, a place for Java based libraries and extensions (\cite{website:TimingFramework}). It features controlled timing and ease of animation.
+
+\textit{Advantages:}
+\begin{itemize}
+	\item The library is multi-threaded and concurrently safe. This prevents us from having to worry about complex synchronization issues between multiple application threads (as our animation software will utilise several threads for handling graphical changes independently)
+	\item Uses less memory, putting a smaller load on systems with limited memory, allowing more applications to execute at once. 
+	\item Offers an extensive API, giving us the ability of more control and functionality over our animations.
+	\item Supportive of Swing and SWT development, for flexibility over a suitable distribution
+	\item Its functionality can produce smooth, complex and controlled animation, useful for providing sufficient detail to our users in an orderly fashion.
+	\item Can be in-cooperated easily into an existing Eclipse project (a solid Java development IDE, which all the team have good knowledge of)
+\end{itemize}
+
+\textit{Disadvantages:}
+\begin{itemize}
+	\item The API is detailed and complex in areas, which may invoke a steep learning curve.
+	\item Swing examples documented are rather vague, and information given in a relevant PDF chapter is out dated.
+\end{itemize}
+
+\underline{\textbf{Java-FX:}}
+
+Java-FX was found on the Oracle technology website (\cite{website:JavaFX}) it features UI based accelerated graphics. Its control is timeline based.
+
+\textit{Advantages:}
+\begin{itemize}
+	\item Like the Timing-Framework, it also uses concurrently safe libraries.
+	\item Potentially less complex to learn, given that Oracle have provided a more comprehensive set of documentation, including video tutorials.
+\end{itemize}
+
+\textit{Disadvantages:}
+\begin{itemize}
+	\item Newer libraries are not supported within Eclipse. This isn’t useful to us as a team as our preferred development environment is Eclipse. It is more suited to the Netbeans IDE, which we aren’t familiar with.
+	\item It is more oriented towards web-based user interface development, typically within business. The goal of our application does not support this business approach, and focuses on the aspects of animation rather than an interactive interface with less emphasis on complex animation techniques.
+\end{itemize}
+
+\underline{\textbf{Trident:}}
+
+Like the Timing-Framework, this was also found as part of a Java.net library development (\cite{website:Trident}) it’s focused entirely on timelines, namely duration and object changes across such durations represented by keyframes.
+
+\textit{Advantages:}
+\begin{itemize}
+	\item Supports Swing and SWT development
+	\item Allows multiple timeline events to be run and scheduled at any one time (multiple animations)
+	\item Conceptually, it is straight forward and approachable; timelines represent the course of the animation and the keyframes the alterations to animation objects.
+\end{itemize}
+
+\textit{Disadvantages:}
+\begin{itemize}
+	\item Little documentation and not completely approachable as a result.
+	\item It doesn’t seem to fully support concurrency as part of its API. To give an example, the code below taken from the documentation section on timelines demonstrates parallel timeline objects competing for shares properties(http://www.pushing-pixels.org/2009/06/25/trident-part-8-timeline-scenarios.html)
+\end{itemize}
+
+\input{figures/frameworkExamples}
+
+In both examples \ref{fig:frameworkExamples} it can be seen that intrinsic locking is needed because of shared properties between objects. This adds a considerable degree of complexity to the framework, and would inevitably increase development time through the bugs and issues raised from concurrent access. For instance, if two objects were competing for shared animation data, and writing to it simultaneously, this would create unexpected behaviour. We would have to consider thread safe concepts alongside our own application complexity.
+
+To conclude, we felt that the Timing-Framework offered the best and most approachable set of features. It provides multiple, dynamic animation techniques; with an emphasis on the animation itself as supposed to client designed web applications. It is also concurrent, which is hugely important as it draws a significant amount of complexity out the project. The animations we create will have their own threads delegated to tasks within the framework. The precision of control it offers is also an attractive trait, allowing us to build highly tweaked and well performing animations to our end users. 
+
+Of course, the Timing-Framework is probably the most complex, but the positives most certainly outweigh the negative aspects. The analysis of these separate frameworks proved to be very useful in that sense, standing out as an important design choice that most likely would of saved us more development time in comparison to the other frameworks.
+
+%==============================================================================
 
 \section{Use cases}
 \includegraphics[width=115mm]{images/useCases.png}
@@ -252,6 +351,8 @@ The final state of the animation is shown below.
 Although it was an unfamiliar language to us, it became apparent that it would be possible to create an identical system, given enough time. The flash exporting component however was never intended to repeat the algorithmic functionality of the main program, so to prevent duplicating code and to save time, we decided to only implement a subset of the system. There is no functionality for a user to create their own algorithms in its current version, and there is only the ability to visualise AnimatedArray structures. Flash has its own built in resizing of the animation frame, but cannot scale as well as the java version of the implementation. Being a .swf file however, it comes with the added benefits of being able to be run on all current web browsers, embedded it in slide shows and applications, and can be referenced in html to be used in web pages.
 \end{itemize}
 
+<<<<<<< HEAD
+=======
 \subsection{Andrew Gibson}
 \subsubsection{The selection of a suitable animation framework}
 \label{frameworkSelection}
@@ -327,6 +428,7 @@ In both examples \ref{fig:frameworkExamples} it can be seen that intrinsic locki
 To conclude, we felt that the Timing-Framework offered the best and most approachable set of features. It provides multiple, dynamic animation techniques; with an emphasis on the animation itself as supposed to client designed web applications. It is also concurrent, which is hugely important as it draws a significant amount of complexity out the project. The animations we create will have their own threads delegated to tasks within the framework. The precision of control it offers is also an attractive trait, allowing us to build highly tweaked and well performing animations to our end users. 
 
 Of course, the Timing-Framework is probably the most complex, but the positives most certainly outweigh the negative aspects. The analysis of these separate frameworks proved to be very useful in that sense, standing out as an important design choice that most likely would of saved us more development time in comparison to the other frameworks.
+>>>>>>> 3c1387f48dfd089b6831db20c1c1e08ffba7d0b1
 
 \subsubsection{Development of Animated Linked Lists}
 
@@ -378,8 +480,16 @@ The desired ordering is therefore S  = [...6,7,8,9]. To achieve this, the counte
 
 When the user steps through, step 6 will trigger the 7th element in the step list, the 8th will trigger the 9th animation and so on. Hence, the ordering is maintained and the application performs successfully.
 
+<<<<<<< HEAD
+
+
+\subsection{Gediminas Leikus}
+\label{Gediminas:PE}
+\subsubsection{Separating animations into steps and making continuous animations}
+=======
 \subsection{Separating animations into steps and making continuous animations}
 \label{PE:steps}
+>>>>>>> 3c1387f48dfd089b6831db20c1c1e08ffba7d0b1
 
 The group decided to use Java for our project, because we were all familiar with it and because it was the language our client suggested us to use. For the reasons stated in this document \ref{frameworkSelection}, we decided to choose the Timing Framework \cite{website:TimingFramework}.
 
@@ -458,7 +568,7 @@ We also completely separated the GUI from the rest of the code and created a cla
 
 \input{figures/changeStructure}
 
-The next thing we did was create a public interface AnimatedDataStructure, which is how we solved the issue we mentioned in the first paragraph. Rect, ContinuousAnimation, ChangeLabel and setupGUI are all expecting an AnimatedDataStructure variable now and all data structures are just implementing this interface. Therefore it does not matter which data structure we use, the common classes (which are in AnimatedDataStructure package) work for all of them. The interface itself also brought common method names and some structure. Another good thing is that now, we only need to change 2 things in the Main class if we want to work with a different data structure: the data structure class name and then the constructor method call \ref{fig:changeStructure}. This did bring in some repetitive methods, like getNextButton(), which are being repeated in all data structures, but could be solved by introducing another abstract class, which would be implementing the AnimatedDataStructure interface and have all of these repetitive methods and then making all data structure classes extend this new abstract class.
+The next thing we did was create a public interface AnimatedDataStructure, which is how we solved the issue we mentioned in the first paragraph. Rect, ContinuousAnimation, ChangeLabel and setupGUI are all expecting an AnimatedDataStructure variable now and all data structures are just implementing this interface. Therefore it does not matter which data structure we use, the common methods (which are defined in the AnimatedDataStructure) work for all of them. The interface itself also brought some structure. Another good thing is that now, we only need to change 2 things in the Main class if we want to work with a different data structure: the data structure class name and then the constructor method call \ref{fig:changeStructure}. This did bring in some repetitive methods, like getNextButton(), which are being repeated in all data structures, but could be solved by introducing another abstract class, which would be implementing the AnimatedDataStructure interface and have all of these repetitive methods and then making all data structure classes extend this new abstract class.
 
 All of the above solutions introduced basic polymorphism to our software and solved quite a lot of development issues as well as made it easier to develop and manage the code for future developers (if there are going to be any). While doing all of the above, parts of unneccessary code were removed or changed as well.
 
@@ -514,6 +624,16 @@ and checking its integrity.
 Including expansions of non-standard abbreviations, acronyms and other key definitions.
 \section{API}
 Application Programming Interface - is a protocol intended to be used as an interface by software components to communicate with each other.
+
+\chapter{Maintenance document}
+
+TODO
+
+summarization of the delivered software, identifying all major deficiencies
+
+\chapter{User manual}
+
+TODO
 
 \bibliographystyle{plain}
 \bibliography{example}

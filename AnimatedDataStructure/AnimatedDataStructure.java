@@ -4,15 +4,10 @@ import java.awt.Dimension;
 import java.util.LinkedList;
 
 import javax.swing.JButton;
-import javax.swing.JPanel;
 
 import org.jdesktop.swing.animation.timing.sources.SwingTimerTimingSource;
 
 public abstract interface AnimatedDataStructure {
-    
-	void swap(int index1, int index2, String info);
-	
-	void modifyLabel(int index, String dataValue, String info);
 	
 	void setColor(int index, Color toColor, String info);
 	

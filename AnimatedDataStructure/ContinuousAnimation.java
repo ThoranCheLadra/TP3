@@ -39,8 +39,7 @@ public final class ContinuousAnimation implements TimingTarget{
     	}
     	if ((anim.getContinuousAnimation())&&(step <= anim.getSteps().size())) {
     		if (step < anim.getSteps().size()) {
-    			anim.getSteps().get(step).getList().get(0).start();
-    			anim.setCurrentStep(anim.getCurrentStep()+1);
+    			anim.stepForward();
     		}
     		if (anim.getCurrentStep() == anim.getSteps().size() - 1) {
     			anim.getPauseButton().setText("Play");

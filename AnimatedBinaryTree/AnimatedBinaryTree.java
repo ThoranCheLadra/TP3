@@ -7,47 +7,22 @@ package AnimatedBinaryTree;
  *Version: 2.2*/
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Toolkit;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 
-	import javax.swing.JButton;
-import javax.swing.JPanel;
-
-	import org.jdesktop.core.animation.timing.Animator;
+import org.jdesktop.core.animation.timing.Animator;
 import org.jdesktop.core.animation.timing.PropertySetter;
-import org.jdesktop.swing.animation.timing.sources.SwingTimerTimingSource;
 
 import AnimatedDataStructure.*;
 
 
-public class AnimatedBinaryTree extends JPanel implements AnimatedDataStructure{
-	
-	public static final SwingTimerTimingSource anime_timer = new SwingTimerTimingSource();			// no idea what this is for
-	private static int arrayLeft;																	// we could just REMOVE this
+public class AnimatedBinaryTree extends AnimatedTemplate{
+	static final long serialVersionUID = 4L;
 	private static Rect r;																			// we could make this local in functions
 	private static Step s;																			// same as above
-	private static List<Rect> rect_list;															// this is where all the rectangles which will be drawn are stored
-	private boolean screenshot = false;
-	public final static LinkedList<Step> steps = new LinkedList<Step>();							// this is where all the steps of animation will be stored
-	static JButton nextBtn;																			// getting reference to the button
-	static JButton prevBtn;																			// same as above
-	static JButton pauseBtn;
-	static JPanel panel;																			// we need to to have the reference to the drawing area to repaint it
-	static int currentStep;																			// the currentStep
-	static int time=500;																					// could just REMOVE. Though keeping it with important variables might be a good idea as well. I don't like the fact that the minimum value is 1 second of each animation.
-	private static String info = ""; 																// a string to display information at each step
-	public static Dimension Fullscreen;
-	public static int windowWidth = (int) Fullscreen.getWidth();
-	public static int windowHeight = (int) Fullscreen.getHeight();
-	//private int counter = 0; //counter for paintComponent
-	public static boolean continuousAnimation = false; // variable to determine whether to run a continuous animation or not.
 		
 	//integer variables to store attribute data for rect objects, used later
 	private int x, y, w, h;
@@ -58,24 +33,20 @@ public class AnimatedBinaryTree extends JPanel implements AnimatedDataStructure{
 	public AnimatedBinaryTree(){}
 
 	public AnimatedBinaryTree(int[] arrInt) {
-		Toolkit toolkit =  Toolkit.getDefaultToolkit ();
-	    Fullscreen = toolkit.getScreenSize();
 	    System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-		Animator.setDefaultTimingSource(anime_timer);
+		Animator.setDefaultTimingSource(ani_timer);
 
 		arrayLeft = arrInt.length;	//MAX = 85
 		rect_list = new ArrayList<Rect>(arrayLeft);
 		int rs = rectSize();
 		h = rs;
 		w = rs;
-		x= (int)(Fullscreen.getWidth()/2)-w/2;
+		x= (int)windowWidth/2-w/2;
 		y= 10;
-		int ymod=(int)((Fullscreen.getHeight()-(h+70))/(Math.log(arrayLeft)/Math.log(2)));
+		int ymod=(int)((windowHeight-(h+70))/(Math.log(arrayLeft)/Math.log(2)));
 		time = 1;
 		currentStep = 0;
 		setOpaque(true);
-		
-		//setupGUI();
 			
 		rect_list.add(null);
 		s = new Step();																	// create a new step to store initial values and all. We wouldn't really need it if 
@@ -108,9 +79,20 @@ public class AnimatedBinaryTree extends JPanel implements AnimatedDataStructure{
 				}
 			currentStep--;
 			}
-		}
+		new setupGUI(this);
+	}
 	
 	public void add(int i){
+		currentStep++;
+		s = new Step();
+		s.setInfo("Adding " + i);
+		// Change information
+		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), s.getFirstAnimator());																		// create an animator for this, which we could use to trigger this change
+		s.getLastAnimator().addTarget(new ChangeLabel(this, "Adding " + i,this));	
+		// Trigger for a continuous animation
+		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
+		s.getLastAnimator().addTarget(new ContinuousAnimation(currentStep+1, this));// create a timing target to change the label when the animation starts
+		//Apply the changes to rect_list
 		Rect r;
 		if (rect_list.size()%2==0) {
 			r = new Rect(rect_list.get(rect_list.size()/2).getRec().x-x-10, y, w, h, i+"", this);     // create all the Rectangle and add them to rect_list
@@ -118,20 +100,11 @@ public class AnimatedBinaryTree extends JPanel implements AnimatedDataStructure{
 			r = new Rect(rect_list.get(rect_list.size()/2).getRec().x+x+10, y, w, h, i+"", this);
 		}
 		rect_list.add(r);
-    	panel.repaint();
+		this.repaint();
+		// Log the changes in the Step
+		s.addChanges(new Change("add", r));
+		steps.add(s);
     }
-	        
-		private int rectSpace() {	  	
-			return (int) rectSize()/arrayLeft + rectSize()+1;
-		}
-			
-		private int rectSize() {	  	
-				return (int) ((Fullscreen.getWidth()-(arrayLeft))/(arrayLeft+4)); 	
-		}
-		
-		public List<Rect> getRectList() {
-			return rect_list;
-		}
 		
 		//a swap method where the user defines the timing of the animation.
 		public void swap(int a, int b, long t, String info){
@@ -330,7 +303,10 @@ public class AnimatedBinaryTree extends JPanel implements AnimatedDataStructure{
 				for(Change tempChange : steps.get(currentStep).getChanges()) {
 					if (tempChange.getType() == "swap") {
 						rect_list.set(tempChange.getNewIndex(), tempChange.getReference());
-						panel.repaint();
+						this.repaint();
+					} else if (tempChange.getType() == "add") {
+						rect_list.add(tempChange.getReference());
+						this.repaint();
 					}
 				}
 		 }
@@ -339,7 +315,7 @@ public class AnimatedBinaryTree extends JPanel implements AnimatedDataStructure{
 		/* function to stepBack from one step to a previous one.
 		 * Will have to be extended whenever we add another API command
 		 */
-		public static void stepBack(Change tempChange) {
+		public void stepBack(Change tempChange) {
 			if (tempChange.getType() == "swap") {
 				// just restore coordinates
 				rect_list.set(tempChange.getOldIndex(), tempChange.getReference());
@@ -351,13 +327,11 @@ public class AnimatedBinaryTree extends JPanel implements AnimatedDataStructure{
 			} else if (tempChange.getType() == "modifyLabel") {
 				// just restore the label
 				tempChange.getReference().setLabel(tempChange.getLabel());
+			} else if (tempChange.getType() == "add") {
+				// just restore coordinates
+				rect_list.remove(tempChange.getReference());
 			}
 		}
-		
-		/* function for changing the information on what's happening */
-		public void setInfo(String info) {
-			AnimatedBinaryTree.info = info;
-		} 
 
 		/*an overriden method from JFrame: paints the actual rectangle on the screen. It is called each time timingEvent calls repaint() */
 		protected void paintComponent(Graphics g){
@@ -395,105 +369,4 @@ public class AnimatedBinaryTree extends JPanel implements AnimatedDataStructure{
 			this.repaint();																// the panel in order to show these changes
 			currentStep--;
 		}
-
-		@Override
-		public Dimension getFullscreen() {
-			return Fullscreen;
-		}
-
-		@Override
-		public void setFullscreen(Dimension dimension) {
-			Fullscreen = dimension;
-		}
-
-		@Override
-		public JButton getNextButton() {
-			return nextBtn;
-		}
-
-		@Override
-		public void setNextButton(JButton button) {
-			nextBtn = button;
-		}
-
-		@Override
-		public JButton getPrevButton() {
-			return prevBtn;
-		}
-
-		@Override
-		public void setPrevButton(JButton button) {
-			prevBtn = button;
-		}
-
-		@Override
-		public JButton getPauseButton() {
-			return pauseBtn;
-		}
-
-		@Override
-		public void setPauseButton(JButton button) {
-			pauseBtn = button;
-		}
-
-		@Override
-		public LinkedList<Step> getSteps() {
-			return steps;
-		}
-
-		@Override
-		public SwingTimerTimingSource getAniTimer() {
-			return anime_timer;
-		}
-
-		@Override
-		public int getCurrentStep() {
-			return currentStep;
-		}
-
-		@Override
-		public int getWindowWidth() {
-			return windowWidth;
-		}
-
-		@Override
-		public int getWindowHeight() {
-			return windowHeight;
-		}
-
-		@Override
-		public void setCurrentStep(int currentStep) {
-			this.currentStep = currentStep;
-		}
-
-		@Override
-		public boolean getContinuousAnimation() {
-			return continuousAnimation;
-		}
-
-		@Override
-		public void setContinuousAnimation(boolean continuousAnimation) {
-			this.continuousAnimation = continuousAnimation;
-		}
-
-		@Override
-		public int getTime() {
-			return time;
-		}
-
-		@Override
-		public void setTime(int time) {
-			this.time = time;
-		}
-
-		@Override
-		public boolean getScreenshot() {
-			return screenshot;
-		}
-
-		@Override
-		public void setScreenshot(boolean value) {
-			this.screenshot = value;
-		}
-
 	}
