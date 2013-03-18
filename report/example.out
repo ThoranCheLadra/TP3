@@ -12,7 +12,7 @@
 \BOOKMARK [2][-]{subsection.2.4.1}{AnimatedDataStructure Component}{section.2.4}% 12
 \BOOKMARK [2][-]{subsection.2.4.2}{AnimatedArray Component}{section.2.4}% 13
 \BOOKMARK [2][-]{subsection.2.4.3}{AnimatedLinkedList Component}{section.2.4}% 14
-\BOOKMARK [2][-]{subsection.2.4.4}{AnimatedHeap Component}{section.2.4}% 15
+\BOOKMARK [2][-]{subsection.2.4.4}{AnimatedBinaryTree Component}{section.2.4}% 15
 \BOOKMARK [2][-]{subsection.2.4.5}{MetaDataManager Component}{section.2.4}% 16
 \BOOKMARK [2][-]{subsection.2.4.6}{UI Component}{section.2.4}% 17
 \BOOKMARK [0][-]{chapter.3}{Implementation}{}% 18
@@ -37,3 +37,4 @@
 \BOOKMARK [1][-]{section.A.1}{API}{appendix.A}% 37
 \BOOKMARK [0][-]{appendix.B}{Maintenance document}{}% 38
 \BOOKMARK [0][-]{appendix.C}{User manual}{}% 39
+\BOOKMARK [0][-]{appendix.D}{User interface}{}% 40
