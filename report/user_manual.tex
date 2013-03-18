@@ -50,20 +50,27 @@ each animated data structure from which you can choose:
 Each data structure has different animation calls which you can use to create your animation steps within your algorithm.
 Every structure support the following calls:
 \begin{itemize}
-\item swap: takes the indexes of two elements to swap and an optional int to specify the duration of the animation in milliseconds
-\item setColor: takes the index of the element changing color and a Color ENUM value
+\item swap: takes the indexes of two elements to swap and a String to label the step
+\item setColor: takes the index of the element changing color, a Color ENUM value and a String to label the step
 \item setInfo: takes a parameter String to display as an animation information
+\item setTime: takes a parameter Integer (expressing milliseconds) to set the speed of the next step created
+\end{itemize}
+
+The Array supports the following additional calls:
+\begin{itemize}
+\item add : takes 3 parameter: the index position to add the element to, the integer value of the element and a String to label the step
+\item delete : removes the element at the Integer index i, and takes a String to label the step
 \end{itemize}
 
 The LinkedList supports the following additional calls:
 \begin{itemize}
-\item findAndRemove: Find and removes the elements equal to a String s in a parameter AnimatedLinkedList
-\item addToHead : adds the integer value i at the head of the LinkedList
+\item findAndRemove: Find and removes the elements equal to a String s in a parameter AnimatedLinkedList and a String to label the step
+\item addToHead : adds the integer value i at the head of the LinkedList and a String to label the step
 \end{itemize}
 
 The Heap supports the following additional call:
 \begin{itemize}
-\item add : adds the integer value i to the heap; this function maintains the binary tree ordered structure
+\item add : adds the integer value i to the heap; this function maintains the binary tree ordered structure. It also takes a second String parameter to label the step
 \end{itemize}
 
 To animate your algorithm you have to inject the appropriate API calls into your code where you manipulate your data structure, or when you want
