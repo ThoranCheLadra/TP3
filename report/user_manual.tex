@@ -1,0 +1,66 @@
+% This example An LaTeX document showing how to use the l3proj class to
+% write your report. Use pdflatex and bibtex to process the file, creating 
+% a PDF file as output (there is no need to use dvips when using pdflatex).
+
+% Modified 
+
+\documentclass{l3proj}
+\usepackage{datetime}
+\usepackage{graphicx}
+
+\begin{document}
+\title{Algorithm Animator}
+\author{Arthur Bigeard \\
+		Alexander Ferguson \\
+		Andrew Gibson \\
+		Gediminas Leikus \\
+		Liam Bell}
+\usdate
+\date{\today}
+\maketitle
+\begin{abstract}
+
+Algorithm Animator - a teaching and learning tool for both students and teachers. A piece of software, which animates algorithms and produces a visual representation of how they work.
+
+Our project - an API approach using Java and TimingFramework to develop the Algorithm Animator. Due to the fact that it is an API approach, the user of the software is required to know programming and Java, in particular, in order to use it. Animation of 3 common data structures - Arrays, Linked Lists and Binary Trees. Ability to export the animations to images or export Array animations to Flash.
+
+This is the user manual to handle our API.
+\end{abstract}
+\educationalconsent
+
+Our API consists of 3 data structure you can animate:
+\begin{itemize}
+\item Arrays
+\item Heaps
+\item LinkedLists
+\end{itemize}
+
+To begin with the API you are provided a simple Main class with a few lines of required code to run the animation.
+
+\input{figures/main}
+
+The first thing you will need to do is instanciate an Animation object of the data structure you want to animate. There are two constructors for
+each animated data structure from which you can choose:
+\begin{itemize}
+\item The default constructor which only requires you to pass an array of data
+\item The custom window size constructor which takes 3 parameters: the array of data, the window width and window height
+\end{itemize}
+
+Each data structure has different animation calls which you can use to create your animation steps within your algorithm.
+Every structure support the following calls:
+\begin{itemize}
+\item swap: takes the indexes of two elements to swap and an optional int to specify the duration of the animation in milliseconds
+\item setColor: takes the index of the element changing color and a Color ENUM value
+\item setInfo: takes a parameter String to display as an animation information
+\end{itemize}
+
+The LinkedList supports the following additional calls:
+\begin{itemize}
+\item findAndRemove: Find and removes the elements equal to a String s in a parameter AnimatedLinkedList
+\item addToHead : adds the integer value i at the head of the LinkedList
+\end{itemize}
+
+The Heap supports the following additional call:
+\begin{itemize}
+\item add : adds the integer value i to the heap; this function maintains the binary tree ordered structure
+\end{itemize}
