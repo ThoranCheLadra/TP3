@@ -11,19 +11,20 @@ import java.util.Random;
 
 public class Main {
     
-    private static AnimatedLinkedList anim;
+    private static AnimatedArray anim;
     public static int time = 200;
     
 	public static void main(String[] args) {
 		int[] arr = {1,2,3,4,5,6,7,8,9,0,1,2,3,4};
-		anim = new AnimatedLinkedList(arr);
+		anim = new AnimatedArray(arr);
 		/*setup thread for creating GUI */
 		
 		//quicksort(arr, 0, arr.length-1, time);
 		//bubblesort(arr);
-		anim.addToHead(20);
-		anim.findAndRemove("0", anim);
-		//anim.swap(1, 2, "");
+		//anim.addToHead(20);
+		//anim.findAndRemove("4", anim);
+		anim.swap(1, 2, "");
+		anim.delete(2, "");
 		//anim.add(5);
 	//	anim.findAndRemove("8", anim); //remove nodes with label = 20
 	//	System.out.println(anim.getSteps().toString());
@@ -78,8 +79,8 @@ public class Main {
 	
 	public static void bubblesort(int[] arr) {
 		int i, j,t=0;
-		for(i = 0; i < arr.length; i++){
-			for(j = 1; j < (arr.length-i); j++){
+		for(i = 1; i < arr.length; i++){
+			for(j = 2; j < (arr.length-i); j++){
 				anim.setColor(j, Color.RED, "");
 				anim.setColor(j-1, Color.RED, "");
 					if(arr[j-1] > arr[j]){

@@ -41,9 +41,9 @@ public class AnimatedBinaryTree extends AnimatedTemplate{
 		int rs = rectSize();
 		h = rs;
 		w = rs;
-		x= (int)(Fullscreen.getWidth()/2)-w/2;
+		x= (int)windowWidth/2-w/2;
 		y= 10;
-		int ymod=(int)((Fullscreen.getHeight()-(h+70))/(Math.log(arrayLeft)/Math.log(2)));
+		int ymod=(int)((windowHeight-(h+70))/(Math.log(arrayLeft)/Math.log(2)));
 		time = 1;
 		currentStep = 0;
 		setOpaque(true);

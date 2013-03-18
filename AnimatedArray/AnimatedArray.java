@@ -137,6 +137,63 @@ public final class AnimatedArray extends AnimatedTemplate {
 
 	} 
 	
+	public void add(int index, int element, String info) {
+		currentStep++;
+		Step s = new Step();
+		// Animate information
+		String information;
+		if (info == "") {
+			information = "Adding " + element + " at position " + index;
+		} else {
+			information = info;
+		}
+		s.setInfo(information);
+		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
+		s.getLastAnimator().addTarget(new ChangeLabel(this, information, this));
+		// Trigger for a continuous animation
+		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
+		s.getLastAnimator().addTarget(new ContinuousAnimation(currentStep+1, this));
+		// Log the Changes in Step
+		Rect r = new Rect(rect_list.get(index).getRec().x, rect_list.get(index).getRec().y, rect_list.get(index).getRec().width, rect_list.get(index).getRec().height, element+"", this);								// create all the Rectangle and add them to rect_list
+		s.addChanges(new Change("add", r, index));
+		// Apply the changes to rect_list
+		int i = index;
+		while (i < rect_list.size()) {
+			rect_list.get(i).getRec().x = rect_list.get(i).getRec().x + rectSpace();
+			i++;
+		}
+		rect_list.add(index, r);
+		steps.add(s);	  
+	 }
+	
+	public void delete(int index, String info) {
+		currentStep++;
+		Step s = new Step();
+		// Animate information
+		String information;
+		if (info == "") {
+			information = "Deleting element at position " + index;
+		} else {
+			information = info;
+		}
+		s.setInfo(information);
+		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
+		s.getLastAnimator().addTarget(new ChangeLabel(this, information, this));
+		// Trigger for a continuous animation
+		s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
+		s.getLastAnimator().addTarget(new ContinuousAnimation(currentStep+1, this));
+		// Log the Changes in Step
+		s.addChanges(new Change("delete", rect_list.get(index), index));
+		// Apply the changes to rect_list
+		int i = index+1;
+		while (i < rect_list.size()) {
+			rect_list.get(i).getRec().x = rect_list.get(i).getRec().x - rectSpace();
+			i++;
+		}
+		rect_list.remove(index);
+		steps.add(s);	  
+	 }
+	
 	public void modifyLabel(int n, String d, String info) {
 		currentStep++;
 		Step s = new Step();
@@ -240,6 +297,22 @@ public final class AnimatedArray extends AnimatedTemplate {
 		} else if (tempChange.getType() == "modifyLabel") {
 			// just restore the label
 			tempChange.getReference().setLabel(tempChange.getLabel());
+		} else if (tempChange.getType() == "add") {
+			// just restore the label
+			int i = tempChange.getNewIndex() + 1;
+			while (i < rect_list.size()) {
+				rect_list.get(i).getRec().x = rect_list.get(i).getRec().x - rectSpace();
+				i++;
+			}
+			rect_list.remove(tempChange.getNewIndex());
+		} else if (tempChange.getType() == "delete") {
+			// just restore the label
+			int i = tempChange.getNewIndex();
+			while (i < rect_list.size()) {
+				rect_list.get(i).getRec().x = rect_list.get(i).getRec().x + rectSpace();
+				i++;
+			}
+			rect_list.add(tempChange.getNewIndex(), tempChange.getReference());
 		}
 	}
 	
@@ -248,6 +321,25 @@ public final class AnimatedArray extends AnimatedTemplate {
 	 */
 	public void stepForward() {
 		currentStep++; // increment the currentStep (because we're moving to the next one)
+
+		if (steps.get(currentStep).getChanges().get(0).getType() == "add") {
+			int i = steps.get(currentStep).getChanges().get(0).getNewIndex();
+			while (i < rect_list.size()) {
+				rect_list.get(i).getRec().x = rect_list.get(i).getRec().x + rectSpace();
+				i++;
+			}
+			rect_list.add(steps.get(currentStep).getChanges().get(0).getNewIndex(), steps.get(currentStep).getChanges().get(0).getReference());
+			this.repaint();
+		} else if (steps.get(currentStep).getChanges().get(0).getType() == "delete") {
+			int i = steps.get(currentStep).getChanges().get(0).getNewIndex()+1;
+			while (i < rect_list.size()) {
+				rect_list.get(i).getRec().x = rect_list.get(i).getRec().x - rectSpace();
+				i++;
+			}
+			rect_list.remove(steps.get(currentStep).getChanges().get(0).getNewIndex());
+			this.repaint();
+		}
+		
 		if (steps.get(currentStep).getList().size() != 0) { // if there are any Animators inside the step, trigger the first one
 			steps.get(currentStep).getList().get(0).start();
 		}

@@ -50,6 +50,13 @@ public class Change {
 		this.reference = reference;
 	}
 	
+	/* AnimatedArray add method */
+	public Change(String type, Rect reference, int position) {
+		this.type = type;
+		this.reference = reference;
+		this.newIndex = position;
+	}
+	
 	/* Constructors for creating changes with Color changes */
 	public Change(String type, Rect reference, Color c) {
 		this.type = type;

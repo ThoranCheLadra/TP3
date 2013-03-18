@@ -184,8 +184,6 @@ public final class AnimatedLinkedList extends AnimatedTemplate {
 			rect_list.remove(tempChange.getReference());
 		} else if (tempChange.getType() == "deleteHead") {
 			rect_list.addFirst(tempChange.getReference());
-		} else if (tempChange.getType() == "pointerSwitch") {
-			rect_list.addFirst(tempChange.getNodeReference().getData());
 		}
 	}
 	

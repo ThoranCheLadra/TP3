@@ -40,7 +40,7 @@ public abstract class AnimatedTemplate extends JPanel implements AnimatedDataStr
 	}
 		
 	protected int rectSize() {	  	
-		return (int) ((Fullscreen.getWidth()-(arrayLeft))/(arrayLeft+4)); 	
+		return (int) ((windowWidth-(arrayLeft))/(arrayLeft+4)); 	
 	}
 	
 	protected int rectSize(int width){
