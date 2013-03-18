@@ -638,7 +638,74 @@ summarization of the delivered software, identifying all major deficiencies
 
 \chapter{User manual}
 
-TODO
+Our API consists of 3 data structure you can animate:
+\begin{itemize}
+\item Arrays
+\item Heaps
+\item LinkedLists
+\end{itemize}
+
+To begin with the API you are provided a simple Main class with a few lines of required code to run the animation.
+
+\input{figures/main}
+
+The first thing you will need to do is instanciate an Animation object of the data structure you want to animate. There are two constructors for
+each animated data structure from which you can choose:
+\begin{itemize}
+\item The default constructor which only requires you to pass an array of data
+\item The custom window size constructor which takes 3 parameters: the array of data, the window width and window height
+\end{itemize}
+
+Each data structure has different animation calls which you can use to create your animation steps within your algorithm.
+Every structure support the following calls:
+\begin{itemize}
+\item swap: takes the indexes of two elements to swap and a String to label the step
+\item setColor: takes the index of the element changing color, a Color ENUM value and a String to label the step
+\item setInfo: takes a parameter String to display as an animation information
+\item setTime: takes a parameter Integer (expressing milliseconds) to set the speed of the next step created
+\end{itemize}
+
+The Array supports the following additional calls:
+\begin{itemize}
+\item add : takes 3 parameter: the index position to add the element to, the integer value of the element and a String to label the step
+\item delete : removes the element at the Integer index i, and takes a String to label the step
+\end{itemize}
+
+The LinkedList supports the following additional calls:
+\begin{itemize}
+\item findAndRemove: Find and removes the elements equal to a String s in a parameter AnimatedLinkedList and a String to label the step
+\item addToHead : adds the integer value i at the head of the LinkedList and a String to label the step
+\end{itemize}
+
+The Heap supports the following additional call:
+\begin{itemize}
+\item add : adds the integer value i to the heap; this function maintains the binary tree ordered structure. It also takes a second String parameter to label the step
+\end{itemize}
+
+To animate your algorithm you have to inject the appropriate API calls into your code where you manipulate your data structure, or when you want
+do some highlighting on elements. Here is a sample animation code for an array sorting algorithm:
+
+\input{figures/animationAlgorithm}
+
+\chapter{User interface}
+
+The user interface is very simple and only consists in a few explicitely named button.
+
+\includegraphics[width=\textwidth]{images/animationWindow.png}
+
+When running the animation, you may use the middle Play/Pause button to run or stop the animation. There's two distinct animation
+behaviours depending on wether the animation is running or not:
+\begin{itemize}
+\item If the animation is running, you won't be able to use the Prev/Next Step buttons
+\item If the animation is paused, you may run it step by step using the Prev/Next Step buttons
+\end{itemize}
+
+Please take note that the Prev Step button will not animate the rollback to the previous step, it will simply restore the state of the animation to its previous state.
+The Next Step Button on another hand will animate the change of state to the next step.
+
+There is a second window opened with every animation running. It contains the entire list of animation steps, identified by their step description. When the animation is paused,
+you may jump backward or forward in the animation by selecting the step you want to jump to and clicking the Go button. 
+Please note that you may only use this feature while the animation is paused.
 
 \bibliographystyle{plain}
 \bibliography{example}

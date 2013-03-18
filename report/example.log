@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  18 MAR 2013 13:50
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  18 MAR 2013 14:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -342,7 +342,7 @@ LaTeX Info: Redefining \nameref on input line 11.
 \openout3 = `example.out'.
 
 
-<images/CompSci_mono.pdf, id=160, 340.27126pt x 49.18375pt>
+<images/CompSci_mono.pdf, id=164, 340.27126pt x 49.18375pt>
 File: images/CompSci_mono.pdf Graphic file (type pdf)
 
 <use images/CompSci_mono.pdf>
@@ -422,24 +422,24 @@ LaTeX Font Info:    Try loading font information for OT1+pcr on input line 3.
 (/usr/local/texlive/2012/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )) [9]
-<images/useCases.png, id=270, 763.35187pt x 386.94562pt>
+<images/useCases.png, id=275, 763.35187pt x 386.94562pt>
 File: images/useCases.png Graphic file (type png)
 
 <use images/useCases.png>
 Package pdftex.def Info: images/useCases.png used on input line 170.
 (pdftex.def)             Requested size: 327.20668pt x 165.85788pt.
 
-<images/componentDiagram.png, id=271, 565.36218pt x 414.04688pt>
+<images/componentDiagram.png, id=276, 582.67688pt x 414.79968pt>
 File: images/componentDiagram.png Graphic file (type png)
 
 <use images/componentDiagram.png>
 Package pdftex.def Info: images/componentDiagram.png used on input line 181.
-(pdftex.def)             Requested size: 327.20668pt x 239.6356pt.
+(pdftex.def)             Requested size: 327.20668pt x 232.93816pt.
  [10 <./images/useCases.png>]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 184.
 
-<images/animatedDataStructureDiagram.png, id=276, 556.32843pt x 414.79968pt>
+<images/animatedDataStructureDiagram.png, id=281, 556.32843pt x 414.79968pt>
 File: images/animatedDataStructureDiagram.png Graphic file (type png)
 
 <use images/animatedDataStructureDiagram.png>
@@ -448,14 +448,14 @@ line 185.
 (pdftex.def)             Requested size: 327.20668pt x 243.97017pt.
  [11 <./images/componentDiagram.png> <./images/animatedDataStructureDiagram.png
 >]
-<images/arrayDiagram.png, id=282, 545.03625pt x 335.75438pt>
+<images/arrayDiagram.png, id=287, 548.80031pt x 333.49594pt>
 File: images/arrayDiagram.png Graphic file (type png)
 
 <use images/arrayDiagram.png>
 Package pdftex.def Info: images/arrayDiagram.png used on input line 194.
-(pdftex.def)             Requested size: 327.20668pt x 201.56688pt.
+(pdftex.def)             Requested size: 327.20668pt x 198.84218pt.
 
-<images/linkedListDiagram.png, id=283, 538.26094pt x 427.5975pt>
+<images/linkedListDiagram.png, id=288, 538.26094pt x 427.5975pt>
 File: images/linkedListDiagram.png Graphic file (type png)
 
 <use images/linkedListDiagram.png>
@@ -467,21 +467,21 @@ Overfull \hbox (7.26057pt too wide) in paragraph at lines 197--201
  []
 
 [12 <./images/arrayDiagram.png> <./images/linkedListDiagram.png>]
-<images/heapDiagram.png, id=288, 539.76656pt x 301.8778pt>
+<images/heapDiagram.png, id=293, 539.76656pt x 301.8778pt>
 File: images/heapDiagram.png Graphic file (type png)
 
 <use images/heapDiagram.png>
 Package pdftex.def Info: images/heapDiagram.png used on input line 202.
 (pdftex.def)             Requested size: 327.20668pt x 183.00282pt.
 
-<images/metaDataDiagram.png, id=289, 506.6428pt x 362.85562pt>
+<images/metaDataDiagram.png, id=294, 506.6428pt x 362.85562pt>
 File: images/metaDataDiagram.png Graphic file (type png)
 
 <use images/metaDataDiagram.png>
 Package pdftex.def Info: images/metaDataDiagram.png used on input line 204.
 (pdftex.def)             Requested size: 327.20668pt x 234.34737pt.
 
-<images/UIDiagram.png, id=290, 428.35031pt x 242.40562pt>
+<images/UIDiagram.png, id=295, 428.35031pt x 242.40562pt>
 File: images/UIDiagram.png Graphic file (type png)
 
 <use images/UIDiagram.png>
@@ -695,7 +695,7 @@ Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
 
-<images/flash1.png, id=327, 589.20125pt x 388.45125pt>
+<images/flash1.png, id=332, 589.20125pt x 388.45125pt>
 File: images/flash1.png Graphic file (type png)
  <use images/flash1.png>
 Package pdftex.def Info: images/flash1.png used on input line 348.
@@ -802,7 +802,7 @@ Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ¦ in font ptmr7t!
  [27] (./figures/firstPrototype.tex
-<images/firstPrototype.png, id=371, 803.0pt x 502.87875pt>
+<images/firstPrototype.png, id=376, 803.0pt x 502.87875pt>
 File: images/firstPrototype.png Graphic file (type png)
 
 <use images/firstPrototype.png>
@@ -892,14 +892,14 @@ Missing character: There is no â in font ptmr7t!
 Missing character: There is no € in font ptmr7t!
 Missing character: There is no ™ in font ptmr7t!
  [29 <./images/firstPrototype.png>] [30] (./figures/coupling.tex
-<images/coupling.png, id=394, 471.7625pt x 173.64874pt>
+<images/coupling.png, id=399, 471.7625pt x 173.64874pt>
 File: images/coupling.png Graphic file (type png)
 
 <use images/coupling.png>
 Package pdftex.def Info: images/coupling.png used on input line 3.
 (pdftex.def)             Requested size: 432.26999pt x 159.1149pt.
 ) [31] (./figures/changeStructure.tex
-<images/changeStructure.png, id=403, 410.53375pt x 166.6225pt>
+<images/changeStructure.png, id=408, 410.53375pt x 166.6225pt>
 File: images/changeStructure.png Graphic file (type png)
 
 <use images/changeStructure.png>
@@ -907,7 +907,7 @@ Package pdftex.def Info: images/changeStructure.png used on input line 3.
 (pdftex.def)             Requested size: 432.26999pt x 175.44438pt.
 ) [32 <./images/coupling.png>]
 (./figures/refactoring.tex
-<images/refactoring.png, id=412, 871.255pt x 719.68875pt>
+<images/refactoring.png, id=417, 871.255pt x 719.68875pt>
 File: images/refactoring.png Graphic file (type png)
 
 <use images/refactoring.png>
@@ -931,9 +931,38 @@ Appendix B.
 
 ]
 Appendix C.
-(./example.bbl [40
+(./figures/main.tex
+Overfull \hbox (165.59929pt too wide) in paragraph at lines 26--26
+[]    \OT1/pcr/m/n/10.95 private static AnimatedDataStructure anim; //Declare t
+he AnimatedDataStructure you want[] 
+ []
 
-]
+) [40
+
+] (./figures/animationAlgorithm.tex
+Overfull \hbox (93.32938pt too wide) in paragraph at lines 44--44
+[]    \OT1/pcr/m/n/10.95 private static AnimatedArray anim;//We're creating an 
+animation on an array,[] 
+ []
+
+
+Overfull \hbox (152.4593pt too wide) in paragraph at lines 44--44
+[]\OT1/pcr/m/n/10.95 anim.setColor(j-1, Color.DARK_GRAY, "Gray out an element t
+hat's in it's place already.");[] 
+ []
+
+) [41] [42]
+Appendix D.
+<images/animationWindow.png, id=469, 1028.34187pt x 578.16pt>
+File: images/animationWindow.png Graphic file (type png)
+
+<use images/animationWindow.png>
+Package pdftex.def Info: images/animationWindow.png used on input line 694.
+(pdftex.def)             Requested size: 432.26999pt x 243.03726pt.
+ [43
+
+ <./images/animationWindow.png>]
+(./example.bbl [44]
 Underfull \hbox (badness 3271) in paragraph at lines 11--15
 []\OT1/ptm/m/n/10.95 Java.net.  Tim-ing frame-work of-fi-cial web-site.  [][]$\
 OT1/pcr/m/n/10.95 http : / / java . net / projects /
@@ -958,27 +987,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 31--37
  []
 
 )
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 645.
- [41
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 712.
+ [45
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 645.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 712.
  (./example.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 645.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 645.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 712.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 712.
 Package rerunfilecheck Info: File `example.out' has not changed.
-(rerunfilecheck)             Checksum: D813A03C7AB65B301513F53C4866D09E;2476.
+(rerunfilecheck)             Checksum: 02217D2321A5BE65A1A141D3E630E312;2527.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 645.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 712.
  ) 
 Here is how much of TeX's memory you used:
- 6332 strings out of 493488
- 97208 string characters out of 3141326
- 210775 words of memory out of 3000000
- 9393 multiletter control sequences out of 15000+200000
+ 6353 strings out of 493488
+ 97572 string characters out of 3141326
+ 210896 words of memory out of 3000000
+ 9400 multiletter control sequences out of 15000+200000
  24975 words of font info for 50 fonts, out of 3000000 for 9000
  957 hyphenation exceptions out of 8191
  36i,7n,28p,1306b,443s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -988,10 +1017,10 @@ xlive/2012/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/20
 12/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2012/texmf-d
 ist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2012/texmf-dist/fonts/
 type1/urw/times/utmri8a.pfb>
-Output written on example.pdf (43 pages, 439508 bytes).
+Output written on example.pdf (47 pages, 580542 bytes).
 PDF statistics:
- 517 PDF objects out of 1000 (max. 8388607)
- 447 compressed objects within 5 object streams
- 110 named destinations out of 1000 (max. 500000)
- 383 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 542 PDF objects out of 1000 (max. 8388607)
+ 467 compressed objects within 5 object streams
+ 117 named destinations out of 1000 (max. 500000)
+ 396 words of extra memory for PDF output out of 10000 (max. 10000000)
 

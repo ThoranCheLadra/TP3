@@ -40,3 +40,4 @@
 \contentsline {section}{\numberline {A.1}API}{38}{section.A.1}
 \contentsline {chapter}{\numberline {B}Maintenance document}{39}{appendix.B}
 \contentsline {chapter}{\numberline {C}User manual}{40}{appendix.C}
+\contentsline {chapter}{\numberline {D}User interface}{43}{appendix.D}
