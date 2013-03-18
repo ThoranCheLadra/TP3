@@ -12,7 +12,6 @@ import java.util.Random;
 public class Main {
     
     private static AnimatedArray anim;
-    public static int time = 200;
     
 	public static void main(String[] args) {
 		int[] arr = {1,2,3,4,5,6,7,8,9,0,1,2,3,4};
@@ -25,6 +24,8 @@ public class Main {
 		//anim.findAndRemove("4", anim);
 		anim.swap(1, 2, "");
 		anim.delete(2, "");
+		int[] arr1 = {1, 2, 3};
+		anim.setColor(arr1, Color.GREEN, "");
 		//anim.add(5);
 	//	anim.findAndRemove("8", anim); //remove nodes with label = 20
 	//	System.out.println(anim.getSteps().toString());

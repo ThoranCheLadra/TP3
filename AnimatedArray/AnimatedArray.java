@@ -247,13 +247,17 @@ public final class AnimatedArray extends AnimatedTemplate {
 		steps.add(s);
 	 }
 	 
-	 public void setColor(int index, int index1, Color c, String info) {
+	 public void setColor(int[] index, Color c, String info) {
 			currentStep++;
 			Step s = new Step();
 			// Animate information
 			String information;
 			if (info == "") {
-				information = "Changing index " + index + " color from " + rect_list.get(index).getColor() + " to " + c;
+				information = "Changing indexes ";
+				for(int i = 0; i < index.length; i++) {
+					information += index[i] + ", ";
+				}
+				information += "colors to " + c;
 			} else {
 				information = info;
 			}
@@ -261,24 +265,15 @@ public final class AnimatedArray extends AnimatedTemplate {
 			s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
 			s.getLastAnimator().addTarget(new ChangeLabel(this, information, this));
 			// Animate change of color
-			s.addAnimator(new Animator.Builder().setDuration(time, TimeUnit.MILLISECONDS).build(), s.getFirstAnimator());
-			s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(index), "colorDraw", rect_list.get(index).getColor(), c));
-			// Log the Changes in Step
-			s.addChanges(new Change("color", rect_list.get(index), rect_list.get(index).getColor()));
-			// Apply the changes to rect_list
-			rect_list.get(index).setColor(c);
-			
-			// Animate change of color
-			s.addAnimator(new Animator.Builder().setDuration(time, TimeUnit.MILLISECONDS).build(), s.getFirstAnimator());
-			s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(index1), "colorDraw", rect_list.get(index1).getColor(), c));
-			// Trigger for a continuous animation
-			s.addAnimator(new Animator.Builder().setDuration(1, TimeUnit.MILLISECONDS).build(), nextBtn);
-			s.getLastAnimator().addTarget(new ContinuousAnimation(currentStep+1, this));
-			// Log the Changes in Step
-			s.addChanges(new Change("color", rect_list.get(index1), rect_list.get(index1).getColor()));
-			// Apply the changes to rect_list
-			rect_list.get(index1).setColor(c);
-			flashList+="-"+index+","+c.getRed()+","+c.getGreen()+","+c.getBlue();	//i,R,G,B
+			for(int i = 0; i < index.length; i++) {
+				s.addAnimator(new Animator.Builder().setDuration(time, TimeUnit.MILLISECONDS).build(), s.getFirstAnimator());
+				s.getLastAnimator().addTarget(PropertySetter.getTarget(rect_list.get(index[i]), "colorDraw", rect_list.get(index[i]).getColor(), c));
+				// Log the Changes in Step
+				s.addChanges(new Change("color", rect_list.get(index[i]), rect_list.get(index[i]).getColor()));
+				// Apply the changes to rect_list
+				rect_list.get(index[i]).setColor(c);
+				flashList+="-"+i+","+c.getRed()+","+c.getGreen()+","+c.getBlue();	//i,R,G,B
+			}
 			steps.add(s);
 		}
 	 
