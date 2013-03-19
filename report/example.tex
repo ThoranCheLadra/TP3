@@ -32,7 +32,7 @@ Our project - an API approach using Java and TimingFramework to develop the Algo
 \label{intro}
 Explaining complex algorithms or trying to understand them sometimes proves to be a difficult task even for experienced programmers, computer scientists and software engineers. Some of them are so huge and complicated, that it is hardly possible to remember and keep track of everything that is happening inside of it, therefore we often take a pen and a piece of paper and draw some sort of visualization of the algorithm and take notes in order to understand or explain them better. But what if you dont have a pen and/or a piece of paper? It often becomes messy as well and drawing, redrawing everything is rather time consuming. What if we are trying to develop a new and better algorithm and we want to see whether it is faster when compared to a conventional one? What if we want to visually see or show these differences?
 
-The algorithm animator is an application dedicated to showing graphically the functionalities of a wide range of algorithms using the most common programming data structures. Our approach of the project is such that a novice developper can create his own custom animation to illustrate his algorithms. The data structures supported by our project include arrays, heaps and linked lists.
+The algorithm animator is an application dedicated to showing graphically the functionalities of a wide range of algorithms using the most common programming data structures. Our approach of the project is such that a novice developper can create his own custom animation to illustrate his algorithms. The data structures supported by our project include arrays, binary trees and linked lists.
 
 The project consists of an API providing object classes for each of those data structures and set of functions to instantiate an animation and add basic animation steps, such as object swaps and highlighting, which combined can provide a suitable graphic view of the running algorithm. Our project also provides solutions to run continuous or broken into step animations and backtracking of the steps taken. In order to emphasize the educational purpose of the application, it is also possible to display description sentences as each of the steps of the animation is running.
 
@@ -52,7 +52,7 @@ The aim of this project is to create a complete, documented and well-built API t
 	\item Building graphically and animating:
 	\begin{itemize}
 		\item Arrays
-		\item Heaps
+		\item Binary Trees
 		\item Linked Lists
 	\end{itemize}
 	\item Providing easily understandable functions to:
@@ -172,7 +172,7 @@ Of course, the Timing-Framework is probably the most complex, but the positives 
 Our use cases are meant to illustrate the main functionalities of our system. Using our API's, users will
 be able to:
 \begin{itemize}
-\item Create custom algorithm animations on Linked Lists, Arrays and Heaps data structures
+\item Create custom algorithm animations on Linked Lists, Arrays and Binary Trees data structures
 \item Display descriptions of the various steps of the animation as it processes
 \item Navigate freely between the different steps of the animation backwards or forwards
 \item Export animations in an executable format
@@ -511,9 +511,13 @@ TODO
 %==============================================================================
 \chapter{Conclusion}
 To conclude, we feel that the experience of building our Algorithm Animator as a group has been incredibly interesting and engaging, but not without its challenges. The system we have built is able to produce a detailed visual animation for the algorithms that the user has built using our API. Our most successful development has been the step-based approach, which represents an animation as a series of steps, so that the user can step through each of their calls to our API as they are executed in turn, and watch them be successfully animated. Our implementation also allows the user to step back through their elapsed steps, should they require seeing part of the animation again.
-We felt that the system could be generalised to a higher degree for the AnimatedArray class we built, given that there is a wider range of algorithms applicable to arrays. For instance, our system is able to accommodate numerous user constructed non-recursive sorting algorithms with our API. In contrast to this are the animated linked list and binary trees, which have operations that are restricted to their own data structures. However, our users will still be able to completely utilise their functionality with our data structure defined operations, and successfully animate them.
+
+We feel that the system could be generalised to a higher degree for the AnimatedArray class we built, given that there is a wider range of algorithms applicable to arrays. For instance, our system is able to accommodate numerous user constructed non-recursive sorting algorithms with our API. In contrast to this are the animated linked list and binary trees, which have operations that are restricted to their own data structures. However, our users will still be able to completely utilise their functionality with our data structure defined operations, and successfully animate them.
+
+The project itself has also been a great learning experience. During the course of the development we have learned the importance of planning, designing in advance and what happens when you actually do not do it. We have also improved our designing skills and understanding of various designing techniques (like polymorphism).
 
 For future development, we would consider broadening our range of data structures in order for our users to exercise a wider range of algorithms that they desire to animate. With this approach, the user will gain a deeper understanding into their own programmed algorithms and the data structures which perform them.
+
 Our system will also require some debugging to iron out issues and keep it fit for purpose. We believe these factors will increase the appreciation of our users, and serve as a more beneficial teaching tool for the visual analysis of algorithms.
 
 
@@ -620,7 +624,7 @@ summarization of the delivered software, identifying all major deficiencies
 Our API consists of 3 data structure you can animate:
 \begin{itemize}
 \item Arrays
-\item Heaps
+\item Binary Trees
 \item LinkedLists
 \end{itemize}
 
@@ -656,7 +660,7 @@ The LinkedList supports the following additional calls:
 \item addToHead : adds the integer value i at the head of the LinkedList and a String to label the step
 \end{itemize}
 
-The Heap supports the following additional call:
+The BinaryTree supports the following additional call:
 \begin{itemize}
 \item add : adds the integer value i to the heap; this function maintains the binary tree ordered structure. It also takes a second String parameter to label the step
 \end{itemize}
