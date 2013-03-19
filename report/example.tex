@@ -500,8 +500,6 @@ All of the above solutions introduced basic polymorphism to our software and sol
 
 \input{figures/refactoring}
 
-\subsection{Liam Bell}
-
 %==============================================================================
 \chapter{Evaluation}
 
@@ -561,37 +559,12 @@ and checking its integrity.
 	\item Sections or contributions to sections Abstract, \ref{intro}, \ref{PE:steps}, \ref{PE:refactoring} and \ref{Gediminas:Con} of this document
 \end{itemize}
 \subsection{Liam Bell}
-
-\subsection{Animated Binary Tree}
-
-\subsubsection{Current Status}
-
-In it's present state, the class responsible for the binary tree animation is fully complete, with respect to the desired functionality. The binary tree animation class extends an abstract parent class (AnimatedDataStructure), providing animation functionality for a binary tree structure, and allowing animation of algorithms that rely on this structure such as heap algorithms or binary search algorithms. The primary methods the AnimatedBinaryTree class supports are:
-
-\begin{itemize} 
-	\item AnimatedBinaryTree(int[] arrInt), which is a constructor which takes an array of integers as a parameter and constructs an arraylist of Rect objects (rect\textunderscore list), each value in arrInt would be used as a label for a Rect object in rect\textunderscore list.
-	\item AnimatedBinaryTree(int size), which is another constructor method which initialises an empty AnimatedBinaryTree, with it's initial capacity set to match the input size parameter.
-	\item setColor(int index, Color c, String info), which is used to animate a change of colour for the Rect object at index position in rect\textunderscore list. It will also use the String parameter info to pass to the stepForward method as the stepInfo parameter, as will all methods which take a String parameter info.
-	\item swap(int a, int b, String info), which will swap the objects in index a, and index b, in both the rect\textunderscore list and the graphical display.
-	\item swap(int a, int b, long t, String info), which will swap the objects in index a, and index b just as with the previous swap, however the user defines the length of time the animation takes with parameter t.
-	\item add(int i), which adds the integer value i, as a Rect object, to the end of the AnimatedBinaryTree rect\textunderscore list, and adds the Rect object to the graphical display.
-	\item delete(int i), which removes the Rect object in index i from the rect\textunderscore list and the graphical display, by first swapping the Rect object with the object in the last index of rect\textunderscore list, and then removing it.
-	\item modifyLabel(int n, String d, String info), which will change the label field of the Rect object at index n in rect\textunderscore list, to the String parameter d.
-	\item stepForward(), which makes the animation perform the next instruction in the list of steps.
-	\item stepBack(Change tempChange), which makes the animation undo an instruction in the list of steps, taking the instruction as a parameter.
-	\item stepBack(), which makes the animation undo the last instruction in the list of steps.
-\end{itemize}
-
-\subsubsection{Development}
-
-The initial plan for the AnimatedBinaryTree class was to utilise the functionality from the AnimatedArray class, which had already been developed, within a heap structure. We started with the implementation of a Heap class, which would implement the functionality to support a heap structure of Rect objects. We then attempted to implement a class to provide the functionality to animate a heap. This however lead to difficulties as the animation classes structure which we had implemented, was too dependant on the AnimatedArray class for the data it required. As a result a restructure and refactoring of the animation implementation was required. During this refactoring, we decided it was unneccessary for there to be a heap implementation involved with the AnimatedBinaryTree class, and so we removed dependencies between the Heap and AnimatedBinaryTree classes. We also created a new animation structure which was dependant on the AnimatedBinaryTree class instead of the AnimatedArray, which allowed for us to progress with the animation implementation within the AnimatedBinaryTree.
-
-Once the interdependencies between the animation classes and the AnimatedArray class were removed, the AnimatedBinaryTree class required refactoring also, in order to update it to utilise the new animation classes. This was achieved mostly through changes to the AnimatedBinaryTree implementation, mostly simple data values had to be changed, however the methods inherrited from the parent class had to be implemented. These included: swap(int a, int b, String info), and stepBack(). Additions had to be made to other classes aswell, namely Change(String type, Rect reference, int x, int y, int oldIndex, int newIndex) needed to be added within the Change class to allow the AnimatedBinaryTree swap method to function correctly. 
-
-\subsubsection{Future Development}
-what could be done to the animated binary tree to make it more useable in future?
-what functionality could be added?
-what expansions could be implemented?
+\label{Liam:Con}
+\begin{itemize}
+	\item Graphics framework research
+	\item Assisting other members with issues and proposing solutions
+	\item Implementation of AnimatedBinaryTree class using existing step prototype
+	\item Continuous development of AnimatedBinaryTree class to keep it in tune with the structure of the project
 
 %==============================================================================
 \appendix
