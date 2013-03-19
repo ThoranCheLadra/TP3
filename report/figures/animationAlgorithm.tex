@@ -14,30 +14,30 @@ import java.util.Random;
 public class Main {
     
     private static AnimatedArray anim;//We're creating an animation on an array,
-	//hence using the AnimatedArray AnimatedDataStructure
+    //hence using the AnimatedArray AnimatedDataStructure
     public static int time = 200;
-    
-	public static void main(String[] args) {
-		int[] arr = {1,2,3,4,5,6,7,8,9,0,1,2,3,4};
-		anim = new AnimatedArray(arr);
-		int i, j,t=0;
-		for(i = 0; i < arr.length; i++){
-			for(j = 1; j < (arr.length-i); j++){
-				anim.setColor(j, Color.RED, "");
-				anim.setColor(j-1, Color.RED, "");
-					if(arr[j-1] > arr[j]){
-					t = arr[j-1];
-					arr[j-1]=arr[j];
-					arr[j]=t;
-					anim.swap(j, j-1, "Swapping");
-				}
-				anim.setColor(j, Color.BLUE, "");
-				anim.setColor(j-1, Color.BLUE, "");
-			}
-			anim.setColor(j-1, Color.DARK_GRAY, "Gray out an element that's in it's place already.");
-		}
+
+    public static void main(String[] args) {
+        int[] arr = {1,2,3,4,5,6,7,8,9,0,1,2,3,4};
+        anim = new AnimatedArray(arr);
+        int i, j,t=0;
+        for(i = 0; i < arr.length; i++){
+            for(j = 1; j < (arr.length-i); j++){
+                anim.setColor(j, Color.RED, "");
+                anim.setColor(j-1, Color.RED, "");
+                if(arr[j-1] > arr[j]){
+                    t = arr[j-1];
+                    arr[j-1]=arr[j];
+                    arr[j]=t;
+                    anim.swap(j, j-1, "Swapping");
+                }
+                anim.setColor(j, Color.BLUE, "");
+                anim.setColor(j-1, Color.BLUE, "");
+            }
+            anim.setColor(j-1, Color.DARK_GRAY, "Gray out an element that's in it's place already.");
+        }
         anim.endAnimation();
-	}
+    }
 	
 }
 
