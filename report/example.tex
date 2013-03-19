@@ -167,7 +167,7 @@ Of course, the Timing-Framework is probably the most complex, but the positives 
 %==============================================================================
 
 \section{Use cases}
-\includegraphics[width=115mm]{images/useCases.png}
+\includegraphics[width=\textwidth]{images/useCases.png}
 
 Our use cases are meant to illustrate the main functionalities of our system. Using our API's, users will
 be able to:
@@ -178,11 +178,7 @@ be able to:
 \item Export animations in an executable format
 \end{itemize}
 \section{Components}
-\includegraphics[width=115mm]{images/componentDiagram.png}
-
-\section{Classes}
-\subsection{AnimatedDataStructure Component}
-\includegraphics[width=115mm]{images/animatedDataStructureDiagram.png}
+\includegraphics[width=\textwidth]{images/componentDiagram.png}
 
 This diagram shows the component design of the system and their dependencies. The core of the system is the DataAnimation component,
 which is relying on the Animation creating TimingFramework API, provided by a component labeled AnimationCreator.
@@ -190,22 +186,38 @@ The DataAnimation component is an aggregate of the components required to create
 resulting from the use of the first two components. Our animations are called by the UI component to enable displaying them.
 We can infer from this diagram the system architecture is a facade architecture, where the UI component is the facade component.
 
+\section{Classes}
+\subsection{AnimatedDataStructure Component}
+\includegraphics[width=\textwidth]{images/animatedDataStructureDiagram.png}
+
+This diagram shows the structure of AnimatedDataStructure component. This component is basically responsible for:
+\begin{itemize}
+	\item providing a public interface AnimatedDataStructure with all the common data structures method headers, which allows us to make the code to be a lot more flexible
+	\item an abstract class AnimatedTemplate, which creates the common variables and implements common functionality of all the data structures, which reduces the amount of repetitive code and makes it easier to maintain and further develop the software
+\end{itemize}
+
 \subsection{AnimatedArray Component}
-\includegraphics[width=115mm]{images/arrayDiagram.png}
+\includegraphics[width=\textwidth]{images/arrayDiagram.png}
+The above diagram just shows that AnimatedArray class is extending the abstract AnimatedTemplate class in order to provide it's own unique and different methods and implementations of it.
+
 \subsection{AnimatedLinkedList Component}
 
-\includegraphics[width=115mm]{images/linkedListDiagram.png}
-The AnimatedLinkedList data structure requires additional classes to store the Rect objects in a way that is coherent to the data structure.
-The Rect's are stored in a custom linked list data structure implemented such that manipulating the data stored in the list will also update the display of
+\includegraphics[width=\textwidth]{images/linkedListDiagram.png}
+The above diagram just shows that AnimatedLinkedList class is extending the abstract AnimatedTemplate class in order to provide it's own unique and different methods and implementations of it.
+
+The AnimatedLinkedList data structure requires additional classes to store the Rect objects in a way that is coherent to the data structure. The Rect's are stored in a custom linked list data structure implemented such that manipulating the data stored in the list will also update the display of
 the linked list.
 \subsection{AnimatedBinaryTree Component}
-\includegraphics[width=115mm]{images/heapDiagram.png}
+\includegraphics[width=\textwidth]{images/heapDiagram.png}
+The above diagram just shows that AnimatedBinaryTree class is extending the abstract AnimatedTemplate class in order to provide it's own unique and different methods and implementations of it.
+
 \subsection{MetaDataManager Component}
-\includegraphics[width=115mm]{images/metaDataDiagram.png}
+\includegraphics[width=\textwidth]{images/metaDataDiagram.png}
 The MetaDataManager component provides a set of classes and functions meant to store the steps and step informations of the animations. The user manipulates
 those data through the public animating calls made in the different data structures' classes.
 \subsection{UI Component}
-\includegraphics[width=115mm]{images/UIDiagram.png}
+\includegraphics[width=\textwidth]{images/UIDiagram.png}
+The UI component only consists of one class - setupGUI, which basically creates the whole UI of the built animation. We are using Swing for it.
 %==============================================================================
 \chapter{Implementation}
 \label{impl}
@@ -539,17 +551,54 @@ and checking its integrity.
 \subsection{Gediminas Leikus}
 \label{Gediminas:Con}
 \begin{itemize}
-	\item Project planning
-	\item Steps in animations prototype
-	\item Continuous and step-by-step animation prototypes
-	\item AnimatedArray individual functions implementations
-	\item AnimatedArray animated algorithms examples
-	\item Managing the repository, reviewing changes or updates
-	\item Refactoring
-	\item Debugging issues encountered by other members and looking for solutions
-	\item Sections or contributions to sections Abstract, \ref{intro}, \ref{PE:steps}, \ref{PE:refactoring} and \ref{Gediminas:Con} of this document
+	\item Organisational:
+	\begin{itemize}
+		\item Project planning
+		\item Managing the repository, reviewing changes or updates
+	\end{itemize}
+	\item Implementations:
+	\begin{itemize}
+		\item Steps in animations prototype
+		\item Continuous and step-by-step animation prototypes
+		\item AnimatedArray individual functions implementations
+		\item AnimatedArray animated algorithms examples for demonstration purposes
+		\item Refactoring
+		\item Debugging issues encountered by other members and looking for solutions
+	\end{itemize}
+	\item Sections or contributions to sections Abstract, \ref{intro}, \ref{design}, \ref{PE:steps}, \ref{PE:refactoring} and \ref{Gediminas:Con} of this document
 \end{itemize}
 \subsection{Liam Bell}
+
+\subsection{Animated Binary Tree}
+
+\subsubsection{Current Status}
+
+In it's present state, the class responsible for the binary tree animation is fully complete, with respect to the desired functionality. The binary tree animation class extends an abstract parent class (AnimatedDataStructure), providing animation functionality for a binary tree structure, and allowing animation of algorithms that rely on this structure such as heap algorithms or binary search algorithms. The primary methods the AnimatedBinaryTree class supports are:
+
+\begin{itemize} 
+	\item AnimatedBinaryTree(int[] arrInt), which is a constructor which takes an array of integers as a parameter and constructs an arraylist of Rect objects (rect\textunderscore list), each value in arrInt would be used as a label for a Rect object in rect\textunderscore list.
+	\item AnimatedBinaryTree(int size), which is another constructor method which initialises an empty AnimatedBinaryTree, with it's initial capacity set to match the input size parameter.
+	\item setColor(int index, Color c, String info), which is used to animate a change of colour for the Rect object at index position in rect\textunderscore list. It will also use the String parameter info to pass to the stepForward method as the stepInfo parameter, as will all methods which take a String parameter info.
+	\item swap(int a, int b, String info), which will swap the objects in index a, and index b, in both the rect\textunderscore list and the graphical display.
+	\item swap(int a, int b, long t, String info), which will swap the objects in index a, and index b just as with the previous swap, however the user defines the length of time the animation takes with parameter t.
+	\item add(int i), which adds the integer value i, as a Rect object, to the end of the AnimatedBinaryTree rect\textunderscore list, and adds the Rect object to the graphical display.
+	\item delete(int i), which removes the Rect object in index i from the rect\textunderscore list and the graphical display, by first swapping the Rect object with the object in the last index of rect\textunderscore list, and then removing it.
+	\item modifyLabel(int n, String d, String info), which will change the label field of the Rect object at index n in rect\textunderscore list, to the String parameter d.
+	\item stepForward(), which makes the animation perform the next instruction in the list of steps.
+	\item stepBack(Change tempChange), which makes the animation undo an instruction in the list of steps, taking the instruction as a parameter.
+	\item stepBack(), which makes the animation undo the last instruction in the list of steps.
+\end{itemize}
+
+\subsubsection{Development}
+
+The initial plan for the AnimatedBinaryTree class was to utilise the functionality from the AnimatedArray class, which had already been developed, within a heap structure. We started with the implementation of a Heap class, which would implement the functionality to support a heap structure of Rect objects. We then attempted to implement a class to provide the functionality to animate a heap. This however lead to difficulties as the animation classes structure which we had implemented, was too dependant on the AnimatedArray class for the data it required. As a result a restructure and refactoring of the animation implementation was required. During this refactoring, we decided it was unneccessary for there to be a heap implementation involved with the AnimatedBinaryTree class, and so we removed dependencies between the Heap and AnimatedBinaryTree classes. We also created a new animation structure which was dependant on the AnimatedBinaryTree class instead of the AnimatedArray, which allowed for us to progress with the animation implementation within the AnimatedBinaryTree.
+
+Once the interdependencies between the animation classes and the AnimatedArray class were removed, the AnimatedBinaryTree class required refactoring also, in order to update it to utilise the new animation classes. This was achieved mostly through changes to the AnimatedBinaryTree implementation, mostly simple data values had to be changed, however the methods inherrited from the parent class had to be implemented. These included: swap(int a, int b, String info), and stepBack(). Additions had to be made to other classes aswell, namely Change(String type, Rect reference, int x, int y, int oldIndex, int newIndex) needed to be added within the Change class to allow the AnimatedBinaryTree swap method to function correctly. 
+
+\subsubsection{Future Development}
+what could be done to the animated binary tree to make it more useable in future?
+what functionality could be added?
+what expansions could be implemented?
 
 %==============================================================================
 \appendix
