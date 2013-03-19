@@ -11,21 +11,21 @@ import java.util.Random;
 
 public class Main {
     
-    private static AnimatedArray anim;
+    private static AnimatedLinkedList anim;
     
 	public static void main(String[] args) {
 		int[] arr = {1,2,3,4,5,6,7,8,9,0,1,2,3,4};
-		anim = new AnimatedArray(arr);
+		anim = new AnimatedLinkedList(arr);
 		/*setup thread for creating GUI */
 		
 		//quicksort(arr, 0, arr.length-1, time);
 		//bubblesort(arr);
 		//anim.addToHead(20);
-		//anim.findAndRemove("4", anim);
-		anim.swap(1, 2, "");
-		anim.delete(2, "");
-		int[] arr1 = {1, 2, 3};
-		anim.setColor(arr1, Color.GREEN, "");
+		anim.findAndRemove("2", anim);
+		//anim.swap(1, 2, "");
+		//anim.delete(2, "");
+		//int[] arr1 = {1, 2, 3};
+		//anim.setColor(arr1, Color.GREEN, "");
 		//anim.add(5);
 	//	anim.findAndRemove("8", anim); //remove nodes with label = 20
 	//	System.out.println(anim.getSteps().toString());

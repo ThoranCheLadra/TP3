@@ -29,8 +29,6 @@ public class AnimatedBinaryTree extends AnimatedTemplate{
 	
 	//integer to keep track of the number of elements allowed without modifying the y integer
 	private int n;
-		
-	public AnimatedBinaryTree(){}
 
 	public AnimatedBinaryTree(int[] arrInt) {
 	    System.setProperty("swing.defaultlaf", "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");

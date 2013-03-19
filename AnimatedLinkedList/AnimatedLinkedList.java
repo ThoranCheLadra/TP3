@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -128,7 +129,8 @@ public final class AnimatedLinkedList extends AnimatedTemplate {
 			//fade out the found node
 			anim.setColor(count,Color.GREEN,"Changing color to green");
 			anim.setColor(count,Color.WHITE,"Changing color to white");
-			s.addChanges(new Change("pointerSwitch", prev, "Assigning pointer from previous element"));
+			s.addChanges(new Change("pointerSwitch", prev, node));
+			rect_list.removeNode(prev, node,rectSpace(rectSize()));
 		}
 		//increment the current step
 		currentStep++;
@@ -184,6 +186,16 @@ public final class AnimatedLinkedList extends AnimatedTemplate {
 			rect_list.remove(tempChange.getReference());
 		} else if (tempChange.getType() == "deleteHead") {
 			rect_list.addFirst(tempChange.getReference());
+		} else if (tempChange.getType() == "pointerSwitch") {
+			tempChange.getNodeReference().setNext(tempChange.getCurNodeReference());
+			Node<Rect> after = tempChange.getCurNodeReference().getNext();
+			
+			//shift n elements after the target node left 1 spacing
+			while(after != null){
+				Rectangle r = after.getData().getRec();
+				r.x -= rectSpace(rectSize());
+				after = after.getNext();
+			}
 		}
 	}
 	
@@ -198,7 +210,7 @@ public final class AnimatedLinkedList extends AnimatedTemplate {
 		}
 		//catches the even when the pointers are switched
 		if (steps.get(currentStep).getChanges().get(0).getType() == "pointerSwitch") {
-			Node<Rect> p = steps.get(currentStep).getChanges().get(0).getNodeReference();
+			Node<Rect> p = steps.get(currentStep).getChanges().get(0).getCurNodeReference();
 			rect_list.removeNode(p, p.getNext(),rectSpace(rectSize()));
 			this.repaint();
 		}

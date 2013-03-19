@@ -76,13 +76,13 @@ While the report itself is hopefully going to be easy to read and understand to 
 \section{Outline}
 The remainder of the report will cover:
 \begin{itemize}
-	\item Design - Domain model diagrams to describe the classes of the project's API and explanation of the reason why the TimingFramework graphics framework was chose over the other existing JAVA graphics frameworks.
-	\item Implementation - this part will cover the tools and the methods use to code the API.
+	\item Design - Domain model diagrams to describe the components and classes of the project's API and explanation of the reason why the TimingFramework graphics framework was chosen over the other existing JAVA graphics frameworks.
+	\item Implementation - this part will cover the tools and the methods used to code the API and issues encountered while doing it.
 	\item API documentation - a list of the API classes including attributes and functions full description to help the end-user manipulating the API.
 	\item Maintenance document - summarization of the delivered software, identifying all major deficiencies
 	\item Summary log - abstract of the project log including all major contributions made by each individual
 	student to the project
-	\item Other documentation (for example: a user/reference manual or internal documentation)
+	\item A user/reference manual documentation
 \end{itemize}
 
 %==============================================================================
@@ -222,12 +222,14 @@ The UI component only consists of one class - setupGUI, which basically creates 
 \chapter{Implementation}
 \label{impl}
 
-In this chapter, we describe how the implemented the system.
+In this chapter, we describe the implementation of the system.
 
 %------------------------------------------------------------------------------
 \section{User Interface}
 
-Look at Appendix \ref{}
+Since we chose the API approach to build our Animated Algorithm, we do not really have a User Interface for building our animation. It is entirely up to the user of our deliverable to choose his own editor or programming environment.
+
+We do have a Animation User Interface, which you can see at Appendix \ref{ui}.
 
 % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 \section{Problems Encountered}
@@ -508,6 +510,8 @@ TODO
 
 %==============================================================================
 \chapter{Conclusion}
+\label{conclusion}
+
 To conclude, we feel that the experience of building our Algorithm Animator as a group has been incredibly interesting and engaging, but not without its challenges. The system we have built is able to produce a detailed visual animation for the algorithms that the user has built using our API. Our most successful development has been the step-based approach, which represents an animation as a series of steps, so that the user can step through each of their calls to our API as they are executed in turn, and watch them be successfully animated. Our implementation also allows the user to step back through their elapsed steps, should they require seeing part of the animation again.
 
 We feel that the system could be generalised to a higher degree for the AnimatedArray class we built, given that there is a wider range of algorithms applicable to arrays. For instance, our system is able to accommodate numerous user constructed non-recursive sorting algorithms with our API. In contrast to this are the animated linked list and binary trees, which have operations that are restricted to their own data structures. However, our users will still be able to completely utilise their functionality with our data structure defined operations, and successfully animate them.
@@ -567,7 +571,7 @@ and checking its integrity.
 		\item Refactoring
 		\item Debugging issues encountered by other members and looking for solutions
 	\end{itemize}
-	\item Sections or contributions to sections Abstract, \ref{intro}, \ref{design}, \ref{PE:steps}, \ref{PE:refactoring} and \ref{Gediminas:Con} of this document
+	\item Sections or contributions to sections Abstract, \ref{intro}, \ref{design}, \ref{PE:steps}, \ref{PE:refactoring}, \ref{conclusion}, \ref{Gediminas:Con} and \ref{maintenance} of this document
 \end{itemize}
 \subsection{Liam Bell}
 \label{Liam:Con}
@@ -576,6 +580,7 @@ and checking its integrity.
 	\item Assisting other members with issues and proposing solutions
 	\item Implementation of AnimatedBinaryTree class using existing step prototype
 	\item Continuous development of AnimatedBinaryTree class to keep it in tune with the structure of the project
+\end{itemize}
 
 %==============================================================================
 \appendix
@@ -587,10 +592,21 @@ Including expansions of non-standard abbreviations, acronyms and other key defin
 Application Programming Interface - is a protocol intended to be used as an interface by software components to communicate with each other.
 
 \chapter{Maintenance document}
+\label{maintenance}
 
-TODO
+The delivered software implements and fulfills its main purpose and goal.
 
-summarization of the delivered software, identifying all major deficiencies
+AnimatedArray data structure works fully as expected and described.
+
+AnimatedLinkedList works as intended with a few deficiencies:
+TODO list of deficiences
+
+AnimatedBinaryTree works as intended with a few deficiencies:
+TODO list of deficiencies
+
+Flash exporting currently works only for AnimatedArray.
+
+Defining the window of the built animation does not work for AnimatedBinaryTree.
 
 \chapter{User manual}
 
@@ -623,7 +639,7 @@ Every structure support the following calls:
 
 The Array supports the following additional calls:
 \begin{itemize}
-\item add : takes 3 parameter: the index position to add the element to, the integer value of the element and a String to label the step
+\item add : takes 3 parameters: the index position to add the element to, the integer value of the element and a String to label the step
 \item delete : removes the element at the Integer index i, and takes a String to label the step
 \end{itemize}
 

@@ -65,10 +65,10 @@ public class Change {
 	}
 	
 	/* Constructors for creating changes with label changes, and NODE references */
-	public Change(String type, Node<Rect> reference, String label) {
+	public Change(String type, Node<Rect> prevNode, Node<Rect> curNode) {
 		this.type = type;
-		this.nodeReference = reference;
-		this.old = label;
+		this.nodeReference = curNode;
+		this.old = prevNode;
 	}
 	
 	/* getters only. We don't want any setters */
@@ -87,6 +87,10 @@ public class Change {
 
 	public void setNodeReference(Node<Rect> nodeReference) {
 		this.nodeReference = nodeReference;
+	}
+	
+	public Node<Rect> getCurNodeReference() {
+		return (Node<Rect>) old;
 	}
 
 	/* getters with type casts. If you're using one of these, you be aware of what you'll get */

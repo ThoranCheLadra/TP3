@@ -60,8 +60,8 @@ public class linkedList {
 		//get the next node and set the previous node to point to it
 		Node<Rect> after = target.getNext();
 		prev.setNext(after);
-		target.setNext(null);
-		target = null;
+		//target.setNext(null);
+		//target = null;
 		
 		//shift n elements after the target node left 1 spacing
 		while(after != null){
