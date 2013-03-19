@@ -180,26 +180,37 @@ be able to:
 \section{Components}
 \includegraphics[width=115mm]{images/componentDiagram.png}
 
-\section{Classes}
-\subsection{AnimatedDataStructure Component}
-\includegraphics[width=115mm]{images/animatedDataStructureDiagram.png}
-
 This diagram shows the component design of the system and their dependencies. The core of the system is the DataAnimation component,
 which is relying on the Animation creating TimingFramework API, provided by a component labeled AnimationCreator.
 The DataAnimation component is an aggregate of the components required to create a complete data animation, AnimatedDataStructure and MetaDataManager, and the data structure animation components
 resulting from the use of the first two components. Our animations are called by the UI component to enable displaying them.
 We can infer from this diagram the system architecture is a facade architecture, where the UI component is the facade component.
 
+\section{Classes}
+\subsection{AnimatedDataStructure Component}
+\includegraphics[width=115mm]{images/animatedDataStructureDiagram.png}
+
+This diagram shows the structure of AnimatedDataStructure component. This component is basically responsible for:
+\begin{itemize}
+	\item providing a public interface AnimatedDataStructure with all the common data structures method headers, which allows us to make the code to be a lot more flexible
+	\item an abstract class AnimatedTemplate, which creates the common variables and implements common functionality of all the data structures, which reduces the amount of repetitive code and makes it easier to maintain and further develop the software
+\end{itemize}
+
 \subsection{AnimatedArray Component}
 \includegraphics[width=115mm]{images/arrayDiagram.png}
+The above diagram just shows that AnimatedArray class is extending the abstract AnimatedTemplate class in order to provide it's own unique and different methods and implementations of it.
+
 \subsection{AnimatedLinkedList Component}
 
 \includegraphics[width=115mm]{images/linkedListDiagram.png}
-The AnimatedLinkedList data structure requires additional classes to store the Rect objects in a way that is coherent to the data structure.
-The Rect's are stored in a custom linked list data structure implemented such that manipulating the data stored in the list will also update the display of
+The above diagram just shows that AnimatedLinkedList class is extending the abstract AnimatedTemplate class in order to provide it's own unique and different methods and implementations of it.
+
+The AnimatedLinkedList data structure requires additional classes to store the Rect objects in a way that is coherent to the data structure. The Rect's are stored in a custom linked list data structure implemented such that manipulating the data stored in the list will also update the display of
 the linked list.
 \subsection{AnimatedBinaryTree Component}
 \includegraphics[width=115mm]{images/heapDiagram.png}
+The above diagram just shows that AnimatedBinaryTree class is extending the abstract AnimatedTemplate class in order to provide it's own unique and different methods and implementations of it.
+
 \subsection{MetaDataManager Component}
 \includegraphics[width=115mm]{images/metaDataDiagram.png}
 The MetaDataManager component provides a set of classes and functions meant to store the steps and step informations of the animations. The user manipulates
