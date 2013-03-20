@@ -44,14 +44,14 @@ public class Main {
 	    int temp = array[pivotIndex];
 	    array[pivotIndex] = array[right];
 	    array[right] = temp;
-	    anim.swap(pivotIndex, right, "");
+	    //anim.swap(pivotIndex, right, "");
 	    int storeIndex = left;
 	    for(int i = left; i < right; i++) { // left <= i <= right
 	    	if (array[i] < pivotValue) {
 	    		temp = array[i];
 	    		array[i] = array[storeIndex];
 	    		array[storeIndex] = temp;
-	    		anim.swap(i, storeIndex, "");
+	    		//anim.swap(i, storeIndex, "");
 	    		storeIndex = storeIndex + 1;
 	    	}
 	    }
@@ -59,7 +59,7 @@ public class Main {
 	    temp = array[storeIndex];
 	    array[storeIndex] = array[right];
 	    array[right] = temp;
-	    anim.swap(storeIndex, right, "");
+	    //anim.swap(storeIndex, right, "");
 	    return storeIndex;
 	}
 	
@@ -88,7 +88,7 @@ public class Main {
 					t = arr[j-1];
 					arr[j-1]=arr[j];
 					arr[j]=t;
-					anim.swap(j, j-1, "Swapping");
+					//anim.swap(j, j-1, "Swapping");
 				}
 				anim.setColor(j, Color.BLUE, "");
 				anim.setColor(j-1, Color.BLUE, "");

@@ -16,10 +16,11 @@ public class testAnimatedLinkedList {
 	public static void main(String[] args) {
 		int[] arr = {12,18,99,2};
 		list = new AnimatedLinkedList(arr);
-		list.addToHead(2);
 		list.findAndRemove("99", list);
-		list.findAndRemove("2", list);
-		list.addToHead(66);
+		list.addToHead(25);
+		list.findAndRemove("12", list);
+		list.addToHead(16);
+		
 		list.endAnimation();
 	}
 

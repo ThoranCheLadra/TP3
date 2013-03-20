@@ -115,7 +115,7 @@ public final class AnimatedLinkedList extends AnimatedTemplate {
 
 		//check if the i == head, else examine the rest of the list
 		if(i.equals(rect_list.getHead().getData().getLabel())){
-			rect_list.removeFirst();
+			//rect_list.removeFirst();
 			s.addChanges(new Change("deleteHead", prev.getData(), "Removing head of list"));
 		} else {
 			//check each other node, set colour to indicate change
@@ -130,7 +130,7 @@ public final class AnimatedLinkedList extends AnimatedTemplate {
 			anim.setColor(count,Color.GREEN,"Changing color to green");
 			anim.setColor(count,Color.WHITE,"Changing color to white");
 			s.addChanges(new Change("pointerSwitch", prev, node));
-			rect_list.removeNode(prev, node,rectSpace(rectSize()));
+			//rect_list.removeNode(prev, node,rectSpace(rectSize()));
 		}
 		//increment the current step
 		currentStep++;
@@ -187,15 +187,15 @@ public final class AnimatedLinkedList extends AnimatedTemplate {
 		} else if (tempChange.getType() == "deleteHead") {
 			rect_list.addFirst(tempChange.getReference());
 		} else if (tempChange.getType() == "pointerSwitch") {
-			tempChange.getNodeReference().setNext(tempChange.getCurNodeReference());
-			Node<Rect> after = tempChange.getCurNodeReference().getNext();
+			//tempChange.getNodeReference().setNext(tempChange.getCurNodeReference());
+			//Node<Rect> after = tempChange.getCurNodeReference().getNext();
 			
-			//shift n elements after the target node left 1 spacing
+			/*shift n elements after the target node left 1 spacing
 			while(after != null){
 				Rectangle r = after.getData().getRec();
 				r.x -= rectSpace(rectSize());
 				after = after.getNext();
-			}
+			}*/
 		}
 	}
 	
